@@ -1,31 +1,17 @@
 package librarysystem.gui;
 
-import java.awt.EventQueue;
-//import javax.persistence.InheritanceType;
-//import librarysystem.managers;
-
-import javax.swing.JFrame;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JLabel;
-import javax.swing.ImageIcon;
-import javax.swing.JMenuBar;
-import javax.swing.JOptionPane;
-
-import java.awt.TextField;
-import javax.swing.JTextField;
-
 import librarysystem.LibrarySystem;
 import librarysystem.users.User;
 import librarysystem.users.UserType;
 
-import javax.swing.JTextArea;
-import java.awt.Button;
-import javax.swing.JButton;
+import javax.swing.*;
+import javax.swing.GroupLayout.Alignment;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.JList;
-import javax.swing.JPasswordField;
+
+//import javax.persistence.InheritanceType;
+//import librarysystem.managers;
 
 public class LoginScreen {
 	
@@ -53,7 +39,6 @@ public class LoginScreen {
 	 * Create the application.
 	 */
 	public LoginScreen(LibrarySystem LS) {
-		
 		initialize(LS);
 	}
 	
@@ -63,21 +48,19 @@ public class LoginScreen {
 	 * @param
 	 */
 	private void initialize(LibrarySystem LS) {
-		
-		//LibrarySystem librarySystem = LS;
-		frame = new JFrame();
-		frame.setBounds(100, 100, 742, 606);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.frame = new JFrame();
+		this.frame.setBounds(100, 100, LibrarySystem.WIDTH, LibrarySystem.HEIGHT);
+		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		userName = new JTextField();
 		userName.setColumns(10);
 		
-		JLabel lblUsername = new JLabel("username");
+		JLabel lblUsername = new JLabel("Username:");
 		
 		pass = new JPasswordField();
 		pass.setColumns(10);
 		
-		JLabel lblPassword = new JLabel("password");
+		JLabel lblPassword = new JLabel("Password:");
 		
 		JButton btnLogin = new JButton("Login");
 		btnLogin.addMouseListener(new MouseAdapter() {
