@@ -6,7 +6,7 @@ public class Book extends Material {
 		super(title, author, id, edition, barcode, materialStatus, MaterialType.BOOK);
 	}
 	
-	public Book(String title, String author, String id, int edition, int barcode, MaterialStatus materialStatus, Long takeoutDate) {
-		super(title, author, id, edition, barcode, materialStatus, MaterialType.BOOK, takeoutDate);
+	public Book(String title, String author, String id, int edition, int barcode, MaterialStatus materialStatus, Long takeoutDate, Long renewDate) {
+		super(title, author, id, edition, barcode, materialStatus, MaterialType.BOOK, takeoutDate, renewDate);
 	}
 }
