@@ -1,9 +1,9 @@
 package librarysystem.gui;
 
+import librarysystem.LibrarySystem;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class MenuGUI {
 	private JButton homeButton;
@@ -12,7 +12,9 @@ public class MenuGUI {
 	private JButton manageButton;
 	private JButton returnedMaterialButton;
 	private JButton orderMaterialButton;
+	private JPanel panel;
 	
+<<<<<<< HEAD
 	public MenuGUI() {
 		
 		
@@ -22,6 +24,9 @@ public class MenuGUI {
 				// TODO: Open account GUI
 			}
 		});
+=======
+	public MenuGUI(LibrarySystem librarySystem) {
+>>>>>>> 6d84dda8323f09ebdfcca3af13617e901814d1e2
 	}
 	
 	{
@@ -61,5 +66,13 @@ public class MenuGUI {
 		orderMaterialButton = new JButton();
 		orderMaterialButton.setText("Order Material");
 		panel1.add(orderMaterialButton, new com.intellij.uiDesigner.core.GridConstraints(0, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+	}
+	
+	private void createUIComponents() {
+		// TODO: place custom component creation code here
+	}
+	
+	public JPanel getPanel() {
+		return panel;
 	}
 }
