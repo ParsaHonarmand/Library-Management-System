@@ -3,6 +3,7 @@ package librarysystem;
 import librarysystem.database.TextDatabase;
 import librarysystem.gui.HoldGUIScreen;
 import librarysystem.gui.LoginScreen;
+import librarysystem.gui.MenuGUI;
 import librarysystem.gui.StudentScreen;
 import librarysystem.managers.MaterialManager;
 import librarysystem.managers.UserManager;
@@ -31,7 +32,7 @@ public class LibrarySystem {
 		librarySystem.getMaterialManager().addMaterial(new Book("Java 101 - 3rd Edition", "Tyler Welty", "JAVA-101", 3, librarySystem.getMaterialManager().getNextBarcode(), MaterialStatus.AVAILABLE));
 	*/
 		
-		LoginScreen.main(librarySystem);
+		new MenuGUI();
 		
 		System.out.println("printing users");
 		for (User user : librarySystem.getUserManager().getUsers()) {

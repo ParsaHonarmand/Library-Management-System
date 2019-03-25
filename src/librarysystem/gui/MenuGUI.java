@@ -14,6 +14,8 @@ public class MenuGUI {
 	private JButton orderMaterialButton;
 	
 	public MenuGUI() {
+		
+		
 		accountButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent mouseEvent) {
