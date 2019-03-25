@@ -14,7 +14,7 @@ import javax.swing.*;
 public class LibrarySystem {
 	
 	public final static int WIDTH = 1280, HEIGHT = 720;
-	//1
+	
 	private MaterialManager materialManager;
 	private UserManager userManager;
 	private JFrame frame;
