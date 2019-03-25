@@ -29,7 +29,6 @@ public class LibrarySystem {
 		MenuGUI menuGUI = new MenuGUI(librarySystem);
 		librarySystem.updateGUI(menuGUI.getPanel());
 		librarySystem.frame.setVisible(true);
-		//new MenuGUI(librarySystem);
 	}
 	
 	public void updateGUI(JPanel panel) {
