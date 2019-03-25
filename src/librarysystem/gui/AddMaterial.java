@@ -93,7 +93,7 @@ public class AddMaterial {
 				}
 				
 				
-				Material M = new Material(Title.getText(), Auther.getText(), Id.getText(), intEdition, LS.getMaterialManager().getNextBarcode(), MaterialStatus.AVAILABLE, (MaterialType)comboBoxMaterialType.getSelectedItem(), -1L);
+				Material M = new Material(Title.getText(), Auther.getText(), Id.getText(), intEdition, LS.getMaterialManager().getNextBarcode(), MaterialStatus.AVAILABLE, (MaterialType)comboBoxMaterialType.getSelectedItem(), -1L, -1L);
 				LS.getMaterialManager().addMaterial(M);
 				System.out.println("database updated");
 			}

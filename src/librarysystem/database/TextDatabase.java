@@ -60,9 +60,9 @@ public class TextDatabase {
 					String[] reservationInfo = userInfo[9].split(",");
 					if (!reservationInfo[0].equals("NONE")) {
 						for (int i = 0; i < onHoldInfo.length; i++) {
-							String[] reservationValues = reservationInfo[i].split("\\+");
-							Reservation reservation = new Reservation(materialManager.getMaterial(reservationValues[0]), Integer.valueOf(reservationValues[1]), Boolean.valueOf(reservationValues[2]));
-							reservations.add(reservation);
+							//String[] reservationValues = reservationInfo[i].split("\\+");
+							//Reservation reservation = new Reservation(materialManager.getMaterial(reservationValues[0]), Integer.valueOf(reservationValues[1]), Boolean.valueOf(reservationValues[2]));
+							//reservations.add(reservation);
 						}
 					}
 					
@@ -142,15 +142,15 @@ public class TextDatabase {
 				
 				Material material = null;
 				if (materialType == MaterialType.BOOK)
-					material = new Book(title, author, id, edition, barcode, materialStatus, takeoutDate);
+					material = new Book(title, author, id, edition, barcode, materialStatus, takeoutDate, -1L);
 				else if (materialType == MaterialType.CD)
-					material = new CD(title, author, id, edition, barcode, materialStatus, takeoutDate);
+					material = new CD(title, author, id, edition, barcode, materialStatus, takeoutDate, -1L);
 				else if (materialType == MaterialType.DVD)
-					material = new DVD(title, author, id, edition, barcode, materialStatus, takeoutDate);
+					material = new DVD(title, author, id, edition, barcode, materialStatus, takeoutDate, -1L);
 				else if (materialType == MaterialType.EBOOK)
-					material = new eBook(title, author, id, edition, barcode, materialStatus, takeoutDate);
+					material = new eBook(title, author, id, edition, barcode, materialStatus, takeoutDate, -1L);
 				else if (materialType == MaterialType.MAGAZINE)
-					material = new Magazine(title, author, id, edition, barcode, materialStatus, takeoutDate);
+					material = new Magazine(title, author, id, edition, barcode, materialStatus, takeoutDate, -1L);
 				
 				if (material != null) {
 					materialMap.get(materialStatus).add(material);

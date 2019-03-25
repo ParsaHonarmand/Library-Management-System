@@ -31,8 +31,7 @@ public class LibrarySystem {
 	public static void main(String args[]) {
 		LibrarySystem librarySystem = new LibrarySystem();
 		
-		MenuGUI menuGUI = new MenuGUI(librarySystem);
-		librarySystem.updateGUI(menuGUI.getPanel());
+		MenuGUI menuGUI = new MenuGUI();
 		librarySystem.frame.setVisible(true);
 	}
 	
