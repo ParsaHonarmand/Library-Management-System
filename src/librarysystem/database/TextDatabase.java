@@ -30,11 +30,11 @@ public class TextDatabase {
 				String[] userInfo = line.split("\\|");
 				UserType userType = UserType.valueOf(userInfo[0]);
 				int id = Integer.valueOf(userInfo[1]);
-				String username = userInfo[2], email = userInfo[3], password = userInfo[4];
-				boolean blacklisted = Boolean.valueOf(userInfo[5]);
-				double overdueFee = Double.valueOf(userInfo[6]);
+				String username = userInfo[2], email = userInfo[3], name = userInfo[4], password = userInfo[5];
+				boolean blacklisted = Boolean.valueOf(userInfo[6]);
+				double overdueFee = Double.valueOf(userInfo[7]);
 				List<Material> borrowedMaterials = new ArrayList<>(), onHoldMaterials = new ArrayList<>();
-				String[] borrowedInfo = userInfo[7].split(",");
+				String[] borrowedInfo = userInfo[8].split(",");
 				if (!borrowedInfo[0].equals("NONE")) {
 					for (int i = 0; i < borrowedInfo.length; i++) {
 						Material material = materialManager.getMaterial(Integer.valueOf(borrowedInfo[i]));
@@ -104,6 +104,7 @@ public class TextDatabase {
 						+ user.getId() + "|"
 						+ user.getUsername() + "|"
 						+ user.getEmail() + "|"
+						+ user.getName() + "|"
 						+ user.getPassword() + "|"
 						+ user.isBlacklisted() + "|"
 						+ user.getOverdueFee() + "|"

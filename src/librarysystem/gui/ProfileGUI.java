@@ -36,13 +36,13 @@ public class ProfileGUI extends JPanel {
 
 	public ProfileGUI() {
 		UserManager user = new UserManager(librarySystem);
-		//String name = user.getCurrentUser().getName();
+		String name = user.getCurrentUser().getName();
 		String username = user.getCurrentUser().getUsername();
 		String email = user.getCurrentUser().getEmail();
 		int idInt = user.getCurrentUser().getId();
 		String id = Integer.toString(idInt);
 		
-		//JLabel nameLabel = new JLabel(name);
+		JLabel nameLabel = new JLabel(name);
 		
 		JLabel nameText = new JLabel("Name:");
 		
