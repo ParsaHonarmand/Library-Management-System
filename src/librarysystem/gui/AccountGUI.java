@@ -27,6 +27,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import java.awt.Panel;
+import javax.swing.JToolBar;
 
 public class AccountGUI extends JPanel {
 	
@@ -75,31 +76,38 @@ public class AccountGUI extends JPanel {
 		});
 		
 		JPanel profilePanel = new JPanel();
+		
+		JToolBar toolBar = new JToolBar();
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(profile)
-						.addComponent(changePassword)
-						.addComponent(payFee)
-						.addComponent(materials)
-						.addComponent(reservations)
-						.addComponent(logout))
-					.addGap(58)
-					.addComponent(profilePanel, GroupLayout.DEFAULT_SIZE, 858, Short.MAX_VALUE)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(changePassword)
+								.addComponent(payFee)
+								.addComponent(materials)
+								.addComponent(logout)
+								.addComponent(reservations)
+								.addComponent(profile))
+							.addGap(58)
+							.addComponent(profilePanel, GroupLayout.DEFAULT_SIZE, 858, Short.MAX_VALUE))
+						.addComponent(toolBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(50)
+					.addGap(25)
+					.addComponent(toolBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(profilePanel, GroupLayout.DEFAULT_SIZE, 684, Short.MAX_VALUE)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(profile)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGap(13)
 							.addComponent(changePassword)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(payFee)
