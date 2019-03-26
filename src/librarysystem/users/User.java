@@ -9,6 +9,7 @@ import java.util.List;
 public abstract class User {
 	
 	private final String username, email;
+	//private final String name;
 	private final int id;
 	private String password;
 	private UserType userType;
@@ -17,10 +18,11 @@ public abstract class User {
 	private boolean blacklisted;
 	
 	public User(String username, String email, String password, int id, UserType userType) {
-		this(username, email, password, id, new ArrayList<Material>(), new ArrayList<Material>(), 0, false, userType);
+		this(/*name, */username, email, password, id, new ArrayList<Material>(), new ArrayList<Material>(), 0, false, userType);
 	}
 	
 	public User(String username, String email, String password, int id, List<Material> borrowed, List<Material> onHold, double overdueFee, boolean blacklisted, UserType userType) {
+		//this.name = name;
 		this.username = username;
 		this.email = email;
 		this.password = password;
@@ -31,6 +33,10 @@ public abstract class User {
 		this.blacklisted = blacklisted;
 		this.userType = userType;
 	}
+	
+	/*public String getName() {
+		return name;
+	}*/
 	
 	public String getUsername() {
 		return username;
