@@ -36,6 +36,13 @@ public class Reservation {
 	
 	@Override
 	public String toString() {
-		return this.getMaterials().get(0).toString() + "+" + this.getAmount() + "+" + this.isApproved();
+		String materialsString = "";
+		for (Material material : this.getMaterials()) {
+			materialsString += material.getBarcode() + "-";
+		}
+		if (materialsString.length() > 0) {
+			materialsString = materialsString.substring(0, materialsString.length() - 1);
+		}
+		return materialsString + "+" + this.isApproved();
 	}
 }

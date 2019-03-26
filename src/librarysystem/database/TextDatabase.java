@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class TextDatabase {
-	//test
+	
 	private static File usersFile = new File("users.txt"), materialsFile = new File("materials.txt");
 	
 	public static List<User> loadUsers(MaterialManager materialManager) {
@@ -57,12 +57,16 @@ public class TextDatabase {
 				User user = null;
 				if (userType == UserType.INSTRUCTOR) {
 					List<Reservation> reservations = new ArrayList<>();
-					String[] reservationInfo = userInfo[9].split(",");
+					String[] reservationInfo = userInfo[9].split("\\,");
 					if (!reservationInfo[0].equals("NONE")) {
 						for (int i = 0; i < onHoldInfo.length; i++) {
-							//String[] reservationValues = reservationInfo[i].split("\\+");
-							//Reservation reservation = new Reservation(materialManager.getMaterial(reservationValues[0]), Integer.valueOf(reservationValues[1]), Boolean.valueOf(reservationValues[2]));
-							//reservations.add(reservation);
+							String[] reservationValues = reservationInfo[i].split("\\+");
+							List<Material> materials = new ArrayList<>();
+							for (String barcode : reservationValues[0].split(",")) {
+								materials.add(materialManager.getMaterial(MaterialStatus.RESERVED, Integer.valueOf(barcode)));
+							}
+							Reservation reservation = new Reservation(materials, Boolean.valueOf(reservationValues[1]));
+							reservations.add(reservation);
 						}
 					}
 					
@@ -139,18 +143,19 @@ public class TextDatabase {
 				int barcode = Integer.valueOf(materialInfo[2]), edition = Integer.valueOf(materialInfo[6]);
 				String id = materialInfo[3], title = materialInfo[4], author = materialInfo[5];
 				Long takeoutDate = Long.valueOf(materialInfo[7]);
+				Long renewDate = Long.valueOf(materialInfo[8]);
 				
 				Material material = null;
 				if (materialType == MaterialType.BOOK)
-					material = new Book(title, author, id, edition, barcode, materialStatus, takeoutDate, -1L);
+					material = new Book(title, author, id, edition, barcode, materialStatus, takeoutDate, renewDate);
 				else if (materialType == MaterialType.CD)
-					material = new CD(title, author, id, edition, barcode, materialStatus, takeoutDate, -1L);
+					material = new CD(title, author, id, edition, barcode, materialStatus, takeoutDate, renewDate);
 				else if (materialType == MaterialType.DVD)
-					material = new DVD(title, author, id, edition, barcode, materialStatus, takeoutDate, -1L);
+					material = new DVD(title, author, id, edition, barcode, materialStatus, takeoutDate, renewDate);
 				else if (materialType == MaterialType.EBOOK)
-					material = new eBook(title, author, id, edition, barcode, materialStatus, takeoutDate, -1L);
+					material = new eBook(title, author, id, edition, barcode, materialStatus, takeoutDate, renewDate);
 				else if (materialType == MaterialType.MAGAZINE)
-					material = new Magazine(title, author, id, edition, barcode, materialStatus, takeoutDate, -1L);
+					material = new Magazine(title, author, id, edition, barcode, materialStatus, takeoutDate, renewDate);
 				
 				if (material != null) {
 					materialMap.get(materialStatus).add(material);
@@ -172,15 +177,7 @@ public class TextDatabase {
 			for (MaterialStatus materialStatus : materialMap.keySet()) {
 				List<Material> materials = materialMap.get(materialStatus);
 				for (Material material : materials) {
-					String line = material.getMaterialStatus().name() + "|"
-							+ material.getMaterialType().name() + "|"
-							+ material.getBarcode() + "|"
-							+ material.getId() + "|"
-							+ material.getTitle() + "|"
-							+ material.getAuthor() + "|"
-							+ material.getEdition() + "|"
-							+ material.getTakeoutDate();
-					fileWriter.write(line + "\n");
+					fileWriter.write(material.toString() + "\n");
 				}
 			}
 			fileWriter.close();
@@ -194,17 +191,61 @@ public class TextDatabase {
 		System.out.println("adding material:" + material.toString());
 		try {
 			FileWriter fileWriter = new FileWriter(TextDatabase.getMaterialsFile(), true);
+			fileWriter.write(material.toString() + "\n");
+			fileWriter.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void updateMaterial(Material material) {
+		int barcode = material.getBarcode();
+		
+		TextDatabase.checkFileExistence(TextDatabase.getMaterialsFile());
+		try {
+			FileReader fileReader = new FileReader(TextDatabase.getMaterialsFile());
+			BufferedReader bufferedReader = new BufferedReader(fileReader);
+			String line, fileText = "";
+			while ((line = bufferedReader.readLine()) != null && !line.equals("")) {
+				String[] materialInfo = line.split("\\|");
+				if (Integer.valueOf(materialInfo[2]) == barcode) {
+					fileText += material.toString() + "\n";
+				} else {
+					fileText += line + "\n";
+				}
+			}
+			bufferedReader.close();
+			fileReader.close();
 			
-			String line = material.getMaterialStatus().name() + "|"
-					+ material.getMaterialType().name() + "|"
-					+ material.getBarcode() + "|"
-					+ material.getId() + "|"
-					+ material.getTitle() + "|"
-					+ material.getAuthor() + "|"
-					+ material.getEdition() + "|"
-					+ material.getTakeoutDate();
-			fileWriter.write(line + "\n");
+			FileWriter fileWriter = new FileWriter(TextDatabase.getMaterialsFile());
+			fileWriter.write(fileText);
+			fileWriter.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void updateUser(User user) {
+		String username = user.getUsername();
+		
+		TextDatabase.checkFileExistence(TextDatabase.getUsersFile());
+		try {
+			FileReader fileReader = new FileReader(TextDatabase.getUsersFile());
+			BufferedReader bufferedReader = new BufferedReader(fileReader);
+			String line, fileText = "";
+			while ((line = bufferedReader.readLine()) != null && !line.equals("")) {
+				String[] userInfo = line.split("\\|");
+				if (userInfo[2].equals(username)) {
+					fileText += user.toString() + "\n";
+				} else {
+					fileText += line + "\n";
+				}
+			}
+			bufferedReader.close();
+			fileReader.close();
 			
+			FileWriter fileWriter = new FileWriter(TextDatabase.getUsersFile());
+			fileWriter.write(fileText);
 			fileWriter.close();
 		} catch (IOException e) {
 			e.printStackTrace();

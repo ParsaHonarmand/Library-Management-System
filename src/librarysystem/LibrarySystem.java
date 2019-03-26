@@ -22,6 +22,7 @@ public class LibrarySystem {
 	public LibrarySystem() {
 		this.materialManager = new MaterialManager(this);
 		this.userManager = new UserManager(this);
+		
 		this.frame = new JFrame();
 		this.frame.setBounds(100, 100, WIDTH, HEIGHT);
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -30,9 +31,6 @@ public class LibrarySystem {
 	
 	public static void main(String args[]) {
 		LibrarySystem librarySystem = new LibrarySystem();
-		
-		MenuGUI menuGUI = new MenuGUI();
-		librarySystem.frame.setVisible(true);
 	}
 	
 	public void updateGUI(JPanel panel) {

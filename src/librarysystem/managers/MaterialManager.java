@@ -6,30 +6,27 @@ import librarysystem.materials.Material;
 import librarysystem.materials.MaterialStatus;
 import librarysystem.users.User;
 
+import javax.xml.soap.Text;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class MaterialManager {
 	
-	private HashMap<MaterialStatus, List<Material>> materialLists = new HashMap<>();
+	private LibrarySystem librarySystem;
+	
+	private HashMap<MaterialStatus, List<Material>> materialLists;
 	
 	public MaterialManager(LibrarySystem librarySystem) {
+		this.librarySystem = librarySystem;
 		this.materialLists = TextDatabase.loadMaterials();
-	}
-	
-	public void loadMaterials() {
-		this.materialLists.clear();
-		
-		for (MaterialStatus materialStatus : MaterialStatus.values()) {
-			this.materialLists.put(materialStatus, new ArrayList<Material>());
-		}
 	}
 	
 	public void updateStatus(Material material, MaterialStatus newStatus) {
 		this.getMaterials(material.getMaterialStatus()).remove(material);
 		this.getMaterials(newStatus).add(material);
 		material.setMaterialStatus(newStatus);
+		TextDatabase.updateMaterial(material);
 	}
 	
 	public List<Material> getMaterials(MaterialStatus materialStatus) {

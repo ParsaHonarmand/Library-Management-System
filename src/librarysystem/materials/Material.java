@@ -82,6 +82,18 @@ public class Material {
 	
 	@Override
 	public String toString() {
+		return this.getMaterialStatus().name() + "|"
+				+ this.getMaterialType().name() + "|"
+				+ this.getBarcode() + "|"
+				+ this.getId() + "|"
+				+ this.getTitle() + "|"
+				+ this.getAuthor() + "|"
+				+ this.getEdition() + "|"
+				+ this.getTakeoutDate() + "|"
+				+ this.getRenewDate();
+	}
+	
+	public String getNiceName() {
 		return this.getTitle() + " - " + this.getAuthor() + " (" + this.getId() + ")";
 	}
 }
