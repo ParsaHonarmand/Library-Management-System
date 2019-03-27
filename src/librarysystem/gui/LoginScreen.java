@@ -92,7 +92,8 @@ public class LoginScreen {
 					LibrarianScreen.main(LS);
 					frame.setVisible(false);
 				} else if (user.getUserType() == UserType.STUDENT) {
-					StudentScreen.StudentGUI(LS);
+					//StudentScreen.StudentGUI(LS);
+					LS.updateGUI(new HomeGUI(LS));
 					frame.setVisible(false);
 				} else if (user.getUserType() == UserType.ADMINISTRATOR) {
 					//open administratorScreenSwing

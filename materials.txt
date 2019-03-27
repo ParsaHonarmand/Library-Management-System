@@ -4,3 +4,4 @@ AVAILABLE|BOOK|3|JAVA-101|Java 101 - 3rd Edition|Tyler Welty|3|-1
 AVAILABLE|BOOK|4|ID|Title|Auther|0|-1
 ON_ORDER|BOOK|5|ID|Title|Auther|0|-1
 ON_ORDER|MAGAZINE|6|ID|Library Journal||5|-1
+AVAILABLE|EBOOK|7|ID|Title|Author|0|-1
