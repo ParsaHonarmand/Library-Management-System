@@ -6,6 +6,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JList;
+import javax.swing.JPanel;
 
 import librarysystem.LibrarySystem;
 import librarysystem.materials.Material;
@@ -20,19 +21,20 @@ import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class AddMaterial {
+public class AddMaterial extends JPanel {
 
 	private JFrame frame;
+	private LibrarySystem LS;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(LibrarySystem LS) {
+	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AddMaterial window = new AddMaterial(LS);
-					window.frame.setVisible(true);
+					//test window = new test(this.LS);
+					//window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -44,16 +46,20 @@ public class AddMaterial {
 	 * Create the application.
 	 */
 	public AddMaterial(LibrarySystem LS) {
-		initialize(LS);
+		this.LS = LS;
+		initialize();
+		LS.updateGUI(this);
+		frame.setVisible(true);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize(LibrarySystem LS) {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 856, 423);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	void initialize() {
+		frame.setVisible(true);
+		//frame = new JFrame();
+		//frame.setBounds(100, 100, 856, 423);
+		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		//JComboBox<MaterialType> materialType= new JComboBox<MaterialType>(MaterialType.values());
 		
@@ -138,4 +144,5 @@ public class AddMaterial {
 		frame.getContentPane().setLayout(groupLayout);
 		
 	}
+
 }

@@ -31,6 +31,7 @@ public class LibrarySystem {
 	
 	public static void main(String args[]) {
 		LibrarySystem librarySystem = new LibrarySystem();
+		LoginScreen.main(librarySystem);
 	}
 	
 	public void updateGUI(JPanel panel) {

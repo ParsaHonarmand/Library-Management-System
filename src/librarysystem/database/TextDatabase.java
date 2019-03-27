@@ -143,7 +143,7 @@ public class TextDatabase {
 				int barcode = Integer.valueOf(materialInfo[2]), edition = Integer.valueOf(materialInfo[6]);
 				String id = materialInfo[3], title = materialInfo[4], author = materialInfo[5];
 				Long takeoutDate = Long.valueOf(materialInfo[7]);
-				Long renewDate = Long.valueOf(materialInfo[8]);
+				Long renewDate = (long) -1; //Long.valueOf(materialInfo[8]);
 				
 				Material material = null;
 				if (materialType == MaterialType.BOOK)

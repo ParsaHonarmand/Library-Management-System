@@ -42,7 +42,7 @@ public class ProfileGUI extends JPanel {
 		int idInt = user.getCurrentUser().getId();
 		String id = Integer.toString(idInt);
 		
-		//JLabel nameLabel = new JLabel(name);
+		JLabel nameLabel = new JLabel(getName());
 		
 		JLabel nameText = new JLabel("Name:");
 		
