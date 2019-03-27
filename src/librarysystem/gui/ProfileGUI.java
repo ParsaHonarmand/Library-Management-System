@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.ImageIcon;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import librarysystem.LibrarySystem;
@@ -35,70 +36,138 @@ public class ProfileGUI extends JPanel {
 	}
 
 	public ProfileGUI() {
+		this.setBackground(Color.WHITE);
+		this.setBounds(0, 0, 1075, 747);
+		
+		JButton changePassword = new JButton("Change Password");
+		
+		JButton payFee = new JButton("Pay Fees");
+		payFee.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		
+		JButton materials = new JButton("Materials");
+		materials.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		
+		JButton reservations = new JButton("Reservations");
+		
+		JButton logout = new JButton("Logout");
+		logout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		
 		UserManager user = new UserManager(librarySystem);
-		//String name = user.getCurrentUser().getName();
-		String username = user.getCurrentUser().getUsername();
-		String email = user.getCurrentUser().getEmail();
-		int idInt = user.getCurrentUser().getId();
-		String id = Integer.toString(idInt);
+		String id = Integer.toString(user.getCurrentUser().getId());
 		
-		JLabel nameLabel = new JLabel(getName());
+		JButton home = new JButton("Home"); //Fake button will be deleted later, show purpose 
 		
-		JLabel nameText = new JLabel("Name:");
+		JButton browse = new JButton("Browse"); //Fake button will be deleted later, show purpose
 		
-		JLabel emailText = new JLabel("Email:");
+		JButton account = new JButton("Account");
 		
-		JLabel emailLabel = new JLabel(email);
+		JButton profile = new JButton("Profile");
 		
-		JLabel idText = new JLabel("ID:");
+		JLabel name = new JLabel("Your Name:");
 		
-		JLabel usernameText = new JLabel("Username:");
+		JLabel nameDisplay = new JLabel(user.getCurrentUser().getName());
 		
-		JLabel IDLabel = new JLabel(id);
+		JLabel ID = new JLabel("Your ID:");
 		
-		JLabel usernameLabel = new JLabel(username);
+		JLabel email = new JLabel("Your Email:");
 		
+		JLabel emailDisplay = new JLabel(user.getCurrentUser().getEmail());
 		
+		JLabel IDDisplay = new JLabel(id);
+		
+		JLabel username = new JLabel("Your Username:");
+		
+		JLabel usernameDisplay = new JLabel(user.getCurrentUser().getUsername());
+		
+		JLabel profilePic = new JLabel();
+		profilePic.setIcon(new ImageIcon("C:\\Users\\Prit Patel\\git\\library-system"));
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(309)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(nameText)
-						.addComponent(idText))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(IDLabel)
-						.addComponent(nameLabel, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE))
-					.addGap(51)
+					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(emailText)
-							.addGap(18)
-							.addComponent(emailLabel))
+							.addComponent(home, GroupLayout.PREFERRED_SIZE, 377, GroupLayout.PREFERRED_SIZE)
+							.addGap(2)
+							.addComponent(browse, GroupLayout.PREFERRED_SIZE, 367, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(account, GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(usernameText)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(usernameLabel)))
-					.addContainerGap(363, Short.MAX_VALUE))
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+								.addComponent(profile, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(changePassword, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(logout, Alignment.LEADING)
+								.addComponent(payFee, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(materials, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(reservations, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(306)
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+										.addComponent(name)
+										.addComponent(ID)
+										.addComponent(email)
+										.addComponent(username))
+									.addGap(47)
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+										.addComponent(emailDisplay)
+										.addComponent(nameDisplay)
+										.addComponent(IDDisplay)
+										.addComponent(usernameDisplay)))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(112)
+									.addComponent(profilePic)))
+							.addGap(469)))
+					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(44)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(nameLabel, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-						.addComponent(nameText)
-						.addComponent(emailText)
-						.addComponent(emailLabel))
-					.addGap(85)
+						.addComponent(home)
+						.addComponent(browse)
+						.addComponent(account))
+					.addGap(18)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(profile)
+						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+							.addComponent(name)
+							.addComponent(nameDisplay)))
+					.addGap(13)
+					.addComponent(changePassword)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(idText)
-						.addComponent(usernameText)
-						.addComponent(IDLabel)
-						.addComponent(usernameLabel))
-					.addContainerGap(558, Short.MAX_VALUE))
+						.addComponent(payFee)
+						.addComponent(profilePic))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(materials)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(reservations)
+					.addGap(41)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(ID)
+						.addComponent(IDDisplay))
+					.addGap(167)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(emailDisplay)
+						.addComponent(email))
+					.addPreferredGap(ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(username)
+						.addComponent(usernameDisplay))
+					.addGap(59)
+					.addComponent(logout)
+					.addContainerGap())
 		);
 		setLayout(groupLayout);
 		

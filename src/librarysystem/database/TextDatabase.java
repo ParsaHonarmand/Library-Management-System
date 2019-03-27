@@ -30,11 +30,11 @@ public class TextDatabase {
 				String[] userInfo = line.split("\\|");
 				UserType userType = UserType.valueOf(userInfo[0]);
 				int id = Integer.valueOf(userInfo[1]);
-				String username = userInfo[2], email = userInfo[3], password = userInfo[4];
-				boolean blacklisted = Boolean.valueOf(userInfo[5]);
-				double overdueFee = Double.valueOf(userInfo[6]);
+				String username = userInfo[2], email = userInfo[3], name = userInfo[4], password = userInfo[5];
+				boolean blacklisted = Boolean.valueOf(userInfo[6]);
+				double overdueFee = Double.valueOf(userInfo[7]);
 				List<Material> borrowedMaterials = new ArrayList<>(), onHoldMaterials = new ArrayList<>();
-				String[] borrowedInfo = userInfo[7].split(",");
+				String[] borrowedInfo = userInfo[8].split(",");
 				if (!borrowedInfo[0].equals("NONE")) {
 					for (int i = 0; i < borrowedInfo.length; i++) {
 						Material material = materialManager.getMaterial(Integer.valueOf(borrowedInfo[i]));
@@ -70,17 +70,17 @@ public class TextDatabase {
 						}
 					}
 					
-					user = new Instructor(username, email, password, id, borrowedMaterials, onHoldMaterials, overdueFee, blacklisted, reservations);
+					user = new Instructor(username, email, name, password, id, borrowedMaterials, onHoldMaterials, overdueFee, blacklisted, reservations);
 				} else if (userType == UserType.STUDENT) {
-					user = new Student(username, email, password, id, borrowedMaterials, onHoldMaterials, overdueFee, blacklisted);
+					user = new Student(username, email, name, password, id, borrowedMaterials, onHoldMaterials, overdueFee, blacklisted);
 				} else if (userType == UserType.ADMINISTRATOR) {
-					user = new Administrator(username, email, password, id, borrowedMaterials, onHoldMaterials, overdueFee, blacklisted);
+					user = new Administrator(username, email, name, password, id, borrowedMaterials, onHoldMaterials, overdueFee, blacklisted);
 				} else if (userType == UserType.CLERK) {
-					user = new Clerk(username, email, password, id, borrowedMaterials, onHoldMaterials, overdueFee, blacklisted);
+					user = new Clerk(username, email, name, password, id, borrowedMaterials, onHoldMaterials, overdueFee, blacklisted);
 				} else if (userType == UserType.LIBRARIAN) {
-					user = new Librarian(username, email, password, id, borrowedMaterials, onHoldMaterials, overdueFee, blacklisted);
+					user = new Librarian(username, email, name, password, id, borrowedMaterials, onHoldMaterials, overdueFee, blacklisted);
 				} else if (userType == UserType.TEACHING_ASSISTANT) {
-					user = new TeachingAssistant(username, email, password, id, borrowedMaterials, onHoldMaterials, overdueFee, blacklisted);
+					user = new TeachingAssistant(username, email, name, password, id, borrowedMaterials, onHoldMaterials, overdueFee, blacklisted);
 				}
 				
 				if (user != null) {
@@ -104,6 +104,7 @@ public class TextDatabase {
 						+ user.getId() + "|"
 						+ user.getUsername() + "|"
 						+ user.getEmail() + "|"
+						+ user.getName() + "|"
 						+ user.getPassword() + "|"
 						+ user.isBlacklisted() + "|"
 						+ user.getOverdueFee() + "|"
