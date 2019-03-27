@@ -70,17 +70,17 @@ public class TextDatabase {
 						}
 					}
 					
-					user = new Instructor(username, email, password, id, borrowedMaterials, onHoldMaterials, overdueFee, blacklisted, reservations);
+					user = new Instructor(username, email, name, password, id, borrowedMaterials, onHoldMaterials, overdueFee, blacklisted, reservations);
 				} else if (userType == UserType.STUDENT) {
-					user = new Student(username, email, password, id, borrowedMaterials, onHoldMaterials, overdueFee, blacklisted);
+					user = new Student(username, email, name, password, id, borrowedMaterials, onHoldMaterials, overdueFee, blacklisted);
 				} else if (userType == UserType.ADMINISTRATOR) {
-					user = new Administrator(username, email, password, id, borrowedMaterials, onHoldMaterials, overdueFee, blacklisted);
+					user = new Administrator(username, email, name, password, id, borrowedMaterials, onHoldMaterials, overdueFee, blacklisted);
 				} else if (userType == UserType.CLERK) {
-					user = new Clerk(username, email, password, id, borrowedMaterials, onHoldMaterials, overdueFee, blacklisted);
+					user = new Clerk(username, email, name, password, id, borrowedMaterials, onHoldMaterials, overdueFee, blacklisted);
 				} else if (userType == UserType.LIBRARIAN) {
-					user = new Librarian(username, email, password, id, borrowedMaterials, onHoldMaterials, overdueFee, blacklisted);
+					user = new Librarian(username, email, name, password, id, borrowedMaterials, onHoldMaterials, overdueFee, blacklisted);
 				} else if (userType == UserType.TEACHING_ASSISTANT) {
-					user = new TeachingAssistant(username, email, password, id, borrowedMaterials, onHoldMaterials, overdueFee, blacklisted);
+					user = new TeachingAssistant(username, email, name, password, id, borrowedMaterials, onHoldMaterials, overdueFee, blacklisted);
 				}
 				
 				if (user != null) {
