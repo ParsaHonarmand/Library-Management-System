@@ -38,9 +38,12 @@ public class LibrarySystem {
 	}
 	
 	public void updateGUI(JPanel panel) {
-		this.frame.setVisible(true);
 		this.frame.setContentPane(panel);
+		this.frame.setVisible(true);
+		LoginScreen.main(this);
 	}
+	
+
 	
 	public UserManager getUserManager() {
 		return userManager;

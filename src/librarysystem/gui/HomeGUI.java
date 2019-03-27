@@ -50,7 +50,7 @@ public class HomeGUI extends JPanel {
 		
 		JLabel lblHours = new JLabel("");
 		lblHours.setBounds(6, 138, 814, 78);
-		lblHours.setIcon(new ImageIcon("resource:picHours.png"));
+		lblHours.setIcon(new ImageIcon("/Users/zobiaasad/Desktop/picHours.png"));
 		
 		JLabel lblContact = new JLabel("Contact Us");
 		lblContact.setBounds(6, 400, 90, 16);

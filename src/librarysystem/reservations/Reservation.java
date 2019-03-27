@@ -2,28 +2,28 @@ package librarysystem.reservations;
 
 import librarysystem.materials.Material;
 
+import java.util.List;
+
 public class Reservation {
 	
-	private final Material material;
-	private int amount;
+	private List<Material> materials;
 	private boolean approved;
 	
-	public Reservation(Material material, int amount, boolean approved) {
-		this.material = material;
-		this.amount = amount;
+	public Reservation(List<Material> materials, boolean approved) {
+		this.materials = materials;
 		this.approved = approved;
 	}
 	
-	public Material getMaterial() {
-		return material;
+	public List<Material> getMaterials() {
+		return materials;
 	}
 	
 	public int getAmount() {
-		return amount;
+		return this.materials.size();
 	}
 	
-	public void setAmount(int amount) {
-		this.amount = amount;
+	public void addMaterial(Material material) {
+		this.materials.add(material);
 	}
 	
 	public boolean isApproved() {
@@ -36,6 +36,13 @@ public class Reservation {
 	
 	@Override
 	public String toString() {
-		return this.getMaterial().getId() + "+" + this.getAmount() + "+" + this.isApproved();
+		String materialsString = "";
+		for (Material material : this.getMaterials()) {
+			materialsString += material.getBarcode() + "-";
+		}
+		if (materialsString.length() > 0) {
+			materialsString = materialsString.substring(0, materialsString.length() - 1);
+		}
+		return materialsString + "+" + this.isApproved();
 	}
 }

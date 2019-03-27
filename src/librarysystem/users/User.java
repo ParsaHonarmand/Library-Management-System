@@ -10,17 +10,19 @@ public abstract class User {
 	
 	private final String username, email;
 	private final int id;
+	private final String name;
 	private String password;
 	private UserType userType;
 	private List<Material> borrowed, onHold;
 	private double overdueFee;
 	private boolean blacklisted;
 	
-	public User(String username, String email, String password, int id, UserType userType) {
-		this(username, email, password, id, new ArrayList<Material>(), new ArrayList<Material>(), 0, false, userType);
+	public User(String username, String email, String name, String password, int id, UserType userType) {
+		this(username, email, name, password, id, new ArrayList<Material>(), new ArrayList<Material>(), 0, false, userType);
 	}
 	
-	public User(String username, String email, String password, int id, List<Material> borrowed, List<Material> onHold, double overdueFee, boolean blacklisted, UserType userType) {
+	public User(String username, String email, String name, String password, int id, List<Material> borrowed, List<Material> onHold, double overdueFee, boolean blacklisted, UserType userType) {
+		this.name = name;
 		this.username = username;
 		this.email = email;
 		this.password = password;
@@ -30,6 +32,10 @@ public abstract class User {
 		this.overdueFee = overdueFee;
 		this.blacklisted = blacklisted;
 		this.userType = userType;
+	}
+	
+	public String getName() {
+		return name;
 	}
 	
 	public String getUsername() {

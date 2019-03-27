@@ -53,7 +53,7 @@ public class LibrarianScreen {
 		btnAddMaterial.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				AddMaterial.main(LS);
+				LS.updateGUI(new AddMaterial(LS));
 				frame.setVisible(false);
 			}
 		});
@@ -61,7 +61,7 @@ public class LibrarianScreen {
 		JButton btnOrderMaterial = new JButton("Order Material");
 		btnOrderMaterial.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				OrderMaterial.main(LS);
+				new OrderGUI(LS);
 			}
 		});
 		

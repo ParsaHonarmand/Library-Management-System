@@ -54,7 +54,7 @@ public class RecieveMaterialScreen {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 861, 601);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		ArrayList<Material> materials = new ArrayList<Material>(LS.getMaterialManager().getMaterial(MaterialStatus.ON_ORDER));
+		ArrayList<Material> materials = new ArrayList<Material>(LS.getMaterialManager().getMaterials(MaterialStatus.ON_ORDER));
 		String[] materialNames =  new String[materials.size()];
 		int i = 0;
 		for (Material M : materials) {

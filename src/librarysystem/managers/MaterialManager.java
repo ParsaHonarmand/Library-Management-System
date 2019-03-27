@@ -6,24 +6,27 @@ import librarysystem.materials.Material;
 import librarysystem.materials.MaterialStatus;
 import librarysystem.users.User;
 
+//import javax.xml.soap.Text;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class MaterialManager {
 	
-	private HashMap<MaterialStatus, List<Material>> materialLists = new HashMap<>();
+	private LibrarySystem librarySystem;
+	
+	private HashMap<MaterialStatus, List<Material>> materialLists;
 	
 	public MaterialManager(LibrarySystem librarySystem) {
+		this.librarySystem = librarySystem;
 		this.materialLists = TextDatabase.loadMaterials();
 	}
 	
-	public void loadMaterials() {
-		this.materialLists.clear();
-		
-		for (MaterialStatus materialStatus : MaterialStatus.values()) {
-			this.materialLists.put(materialStatus, new ArrayList<Material>());
-		}
+	public void updateStatus(Material material, MaterialStatus newStatus) {
+		this.getMaterials(material.getMaterialStatus()).remove(material);
+		this.getMaterials(newStatus).add(material);
+		material.setMaterialStatus(newStatus);
+		TextDatabase.updateMaterial(material);
 	}
 	
 	public List<Material> getMaterials(MaterialStatus materialStatus) {
@@ -31,32 +34,19 @@ public class MaterialManager {
 	}
 	
 	public void putOnHold(User user, Material material) {
-		if (material.getMaterialStatus() == MaterialStatus.AVAILABLE) {
-			user.addHold(material);
-			this.getMaterials(MaterialStatus.AVAILABLE).remove(material);
-		}
-		this.getMaterials(MaterialStatus.ON_HOLD).add(material);
+		this.updateStatus(material, MaterialStatus.ON_HOLD);
+		user.addHold(material);
 	}
 	
 	public void borrowMaterial(User user, Material material) {
-		if (material.getMaterialStatus() == MaterialStatus.AVAILABLE) {
-			user.addBorrowedMaterial(material);
-			this.getMaterials(MaterialStatus.AVAILABLE).remove(material);
-		}
-		this.getMaterials(MaterialStatus.BORROWED).add(material);
-		
+		this.updateStatus(material, MaterialStatus.BORROWED);
+		user.addBorrowedMaterial(material);
 	}
 	
 	public void returnMaterial(User user, Material material) {
-		if (material.getMaterialStatus() == MaterialStatus.BORROWED) {
-			user.removeBorrowedMaterial(material);
-			this.getMaterials(MaterialStatus.BORROWED).remove(material);
-		} else if (material.getMaterialStatus() == MaterialStatus.ON_HOLD) {
-			user.removeHold(material);
-			this.getMaterials(MaterialStatus.ON_HOLD).remove(material);
-		}
-		
-		this.getMaterials(material.getMaterialStatus()).add(material);
+		user.removeBorrowedMaterial(material);
+		user.removeHold(material);
+		this.updateStatus(material, MaterialStatus.RETURNED);
 	}
 	
 	public Material getMaterial(String id) {
@@ -97,14 +87,6 @@ public class MaterialManager {
 		return null;
 	}
 	
-	public ArrayList<Material> getMaterial(MaterialStatus materialStatus) {
-		ArrayList<Material> mat = new ArrayList<Material>();
-		for (Material material : this.getMaterials(materialStatus)) {
-				mat.add(material);
-		}
-		return mat;
-	}
-	
 	
 	public HashMap<MaterialStatus, List<Material>> getMaterialLists() {
 		return materialLists;
@@ -113,6 +95,26 @@ public class MaterialManager {
 	public void addMaterial(Material material) {
 		this.getMaterials(material.getMaterialStatus()).add(material);
 		TextDatabase.addMaterial(material);
+	}
+	
+	public void reshelveMaterial() {
+		for (Material material : this.getMaterials(MaterialStatus.RETURNED)) {
+			this.reshelveMaterial(material);
+		}
+	}
+	
+	public void reshelveMaterial(Material material) {
+		this.updateStatus(material, MaterialStatus.AVAILABLE);
+	}
+	
+	public void receiveMaterial() {
+		for (Material material : this.getMaterials(MaterialStatus.ON_ORDER)) {
+			this.receiveMaterial(material);
+		}
+	}
+	
+	public void receiveMaterial(Material material) {
+		this.updateStatus(material, MaterialStatus.AVAILABLE);
 	}
 	
 	public int getNextBarcode() {
