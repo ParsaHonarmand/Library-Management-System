@@ -44,14 +44,14 @@ import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import librarysystem.LibrarySystem;
 
-public class Materials extends JPanel {
+public class MaterialsGUI extends JPanel {
 	
 	private LibrarySystem librarySystem;
 
 	/**
 	 * Create the panel.
 	 */
-	public Materials() {
+	public MaterialsGUI() {
 		this.setBackground(Color.WHITE);
 		this.setBounds(0, 0, 1075, 747);
 		
@@ -168,7 +168,7 @@ public class Materials extends JPanel {
 	}
 
 	
-	public Materials(LibrarySystem librarySystem) {
+	public MaterialsGUI(LibrarySystem librarySystem) {
 		this();
 		
 		this.librarySystem = librarySystem;
