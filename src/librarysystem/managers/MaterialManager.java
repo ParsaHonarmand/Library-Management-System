@@ -4,6 +4,7 @@ import librarysystem.LibrarySystem;
 import librarysystem.database.TextDatabase;
 import librarysystem.materials.Material;
 import librarysystem.materials.MaterialStatus;
+import librarysystem.materials.MaterialType;
 import librarysystem.users.User;
 
 //import javax.xml.soap.Text;
@@ -31,6 +32,46 @@ public class MaterialManager {
 	
 	public List<Material> getMaterials(MaterialStatus materialStatus) {
 		return this.materialLists.get(materialStatus);
+	}
+	
+	public List<Material> getUniqueMaterials(MaterialStatus materialStatus) {
+		List<Material> materials = new ArrayList<Material>(), loopMaterials = this.getMaterials(materialStatus);
+		for (Material material : loopMaterials) {
+				String id = material.getId();
+				boolean addMaterial = true;
+				for (Material loopMaterial : materials) {
+					if (loopMaterial.getId().equals(id)) {
+						addMaterial = false;
+						break;
+					}
+				}
+				if (addMaterial) {
+					materials.add(material);
+				}
+		}
+		
+		return materials;
+	}
+	
+	public List<Material> getUniqueMaterials(MaterialStatus materialStatus, MaterialType materialType) {
+		List<Material> materials = new ArrayList<Material>(), loopMaterials = this.getMaterials(materialStatus);
+		for (Material material : loopMaterials) {
+			if (material.getMaterialType() == materialType) {
+				String id = material.getId();
+				boolean addMaterial = true;
+				for (Material loopMaterial : materials) {
+					if (loopMaterial.getId().equals(id)) {
+						addMaterial = false;
+						break;
+					}
+				}
+				if (addMaterial) {
+					materials.add(material);
+				}
+			}
+		}
+		
+		return materials;
 	}
 	
 	public void putOnHold(User user, Material material) {

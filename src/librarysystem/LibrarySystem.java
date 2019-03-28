@@ -1,6 +1,7 @@
 package librarysystem;
 
 import librarysystem.database.TextDatabase;
+import librarysystem.gui.BrowseGUI;
 import librarysystem.gui.HoldGUIScreen;
 import librarysystem.gui.LoginScreen;
 import librarysystem.gui.MenuGUI;
@@ -31,10 +32,6 @@ public class LibrarySystem {
 	
 	public static void main(String args[]) {
 		LibrarySystem librarySystem = new LibrarySystem();
-		
-		MenuGUI menuGUI = new MenuGUI();
-		LoginScreen.main(librarySystem);
-
 	}
 	
 	public void updateGUI(JPanel panel) {
