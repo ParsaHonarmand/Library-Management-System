@@ -65,8 +65,10 @@ public class AccountGUI extends JPanel {
 		});
 		
 		JButton materials = new JButton("Materials");
-		materials.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		materials.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				new MaterialsGUI(librarySystem);
 			}
 		});
 		
