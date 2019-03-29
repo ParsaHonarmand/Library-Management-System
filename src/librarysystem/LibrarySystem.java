@@ -3,6 +3,7 @@ package librarysystem;
 import librarysystem.gui.LoginGUI;
 import librarysystem.managers.MaterialManager;
 import librarysystem.managers.UserManager;
+import librarysystem.users.faculty.Instructor;
 
 import javax.swing.*;
 
@@ -17,6 +18,8 @@ public class LibrarySystem {
 	public LibrarySystem() {
 		this.materialManager = new MaterialManager(this);
 		this.userManager = new UserManager(this);
+		
+		//this.userManager.addUser(new Instructor("sohaib", "sohaib@mru.ca", "Sohaib", "password", 100));
 		
 		this.frame = new JFrame();
 		this.frame.setBounds(100, 100, WIDTH, HEIGHT);
