@@ -17,122 +17,287 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.SystemColor;
 
 public class PasswordGUI extends JPanel {
 	private JTextField currPswrdTextField;
 	private JTextField newPswrdTextField;
 	private JTextField confirmPswrdTextField;
 	private LibrarySystem librarySystem;
+	//Upper Tab Buttons Settings
+			int BUTTONS_Y=20;
+			int BUTTONS_W=120;
+			int BUTTONS_H=30;
+			int BUTTONS_D=BUTTONS_W+80;
 
 
 	/**
 	 * Create the panel.
 	 */
 	public PasswordGUI() {
+		setBackground(new Color(255, 255, 255));
+		setForeground(Color.WHITE);;;;
+		setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(102, 153, 204));
+		panel.setBounds(219, 66, 1185, 781);
+		add(panel);
+		panel.setLayout(null);
+
+		
 		// JPasswordFields
 		
 
-		currPswrdTextField = new JPasswordField();;
+		currPswrdTextField = new JPasswordField();
+		currPswrdTextField.setBounds(560, 151, 187, 38);
+		panel.add(currPswrdTextField);
 		currPswrdTextField.setColumns(10);
 		
-		newPswrdTextField = new JPasswordField();;
-		newPswrdTextField.setColumns(10);
-		
-		confirmPswrdTextField = new JPasswordField();;
+		confirmPswrdTextField = new JPasswordField();
+		confirmPswrdTextField.setBounds(560, 237, 187, 38);
+		panel.add(confirmPswrdTextField);
 		confirmPswrdTextField.setColumns(10);
 		
+		newPswrdTextField = new JPasswordField();
+		newPswrdTextField.setBounds(560, 322, 187, 38);
+		panel.add(newPswrdTextField);
+		newPswrdTextField.setColumns(10);
+		
 		// Jlabels
-		JLabel lblCurrentPassword = new JLabel("Current Password *");
-		JLabel lblNewPassword = new JLabel("New Password*");
-		JLabel lblConfirmPassword = new JLabel("Confirm Password*");
 		
-		JLabel lblIncorrectPassword = new JLabel("Incorrect Password");
-		lblIncorrectPassword.setFont(new Font("Dialog", Font.BOLD, 10));
-		lblIncorrectPassword.setForeground(Color.RED);
-		lblIncorrectPassword.setVisible(false);
 		
-		JLabel lblNonMatchingPswrd = new JLabel("The confirm password does not match ");
+		JLabel lblNonMatchingPswrd = new JLabel("New password and confirm password do not match");
+		lblNonMatchingPswrd.setBounds(564, 295, 371, 15);
+		panel.add(lblNonMatchingPswrd);
 		lblNonMatchingPswrd.setForeground(Color.RED);
-		lblNonMatchingPswrd.setFont(new Font("Dialog", Font.BOLD, 10));
+		lblNonMatchingPswrd.setFont(new Font("Dialog", Font.BOLD, 12));
 		lblNonMatchingPswrd.setVisible(false);
 		
-		// Changing Password 
+		JLabel lblIncorrectPswrd = new JLabel("Incorrect Password");
+		lblIncorrectPswrd.setBounds(560, 132, 158, 16);
+		panel.add(lblIncorrectPswrd);
+		lblIncorrectPswrd.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblIncorrectPswrd.setForeground(Color.RED);
+		lblIncorrectPswrd.setVisible(false);
+		
+		JLabel btnChangePswrd = new JLabel("Current Password *");
+		btnChangePswrd.setBounds(305, 158, 158, 21);
+		panel.add(btnChangePswrd);
+		btnChangePswrd.setForeground(new Color(0, 0, 128));
+		btnChangePswrd.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		
+		
+		JLabel lblNewPswrd = new JLabel("New Password*");
+		lblNewPswrd.setBounds(338, 244, 125, 21);
+		panel.add(lblNewPswrd);
+		lblNewPswrd.setForeground(new Color(0, 0, 128));
+		lblNewPswrd.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		
+		JLabel lblConfirmPswrd = new JLabel("Confirm Password*");
+		lblConfirmPswrd.setBounds(306, 329, 157, 21);
+		panel.add(lblConfirmPswrd);
+		lblConfirmPswrd.setForeground(new Color(0, 0, 128));
+		lblConfirmPswrd.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		
+		JLabel lblMissingPswrd = new JLabel("Failed, please fill in all required fields*");
+		lblMissingPswrd.setBounds(147, 511, 267, 30);
+		panel.add(lblMissingPswrd);
+		lblMissingPswrd.setFont(new Font("Lucida Grande", Font.PLAIN, 12));
+		lblMissingPswrd.setForeground(Color.RED);
+		lblMissingPswrd.setVisible(false);
+		
+		
+		JLabel lblSucessChangePswrd = new JLabel("Your Password has been changed succcessfully");
+		lblSucessChangePswrd.setForeground(new Color(204, 255, 204));
+		lblSucessChangePswrd.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		lblSucessChangePswrd.setToolTipText("yug");
+		lblSucessChangePswrd.setBounds(147, 453, 463, 50);
+		panel.add(lblSucessChangePswrd);
+		lblSucessChangePswrd.setVisible(false);
+		
+		JLabel lblUnchangedpswrd = new JLabel("Please enter a new password");
+		lblUnchangedpswrd.setBounds(564, 108, 183, 31);
+		panel.add(lblUnchangedpswrd);
+		lblUnchangedpswrd.setForeground(Color.RED);
+		lblUnchangedpswrd.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblUnchangedpswrd.setVisible(false);		
+		//JButtons
+
+
+		JButton btnHome = new JButton("Home");
+		btnHome.setBounds(80 , BUTTONS_Y, BUTTONS_W, BUTTONS_H);
+		btnHome.setForeground(new Color(0, 0, 128));
+		add(btnHome);
+		
+		JButton btnReturned = new JButton("Returned");
+		btnReturned.setBounds(80+BUTTONS_D, BUTTONS_Y, BUTTONS_W, BUTTONS_H);
+		btnReturned.setForeground(new Color(0, 0, 128));
+		add(btnReturned);
+		
+		JButton btnBrowse = new JButton("Browse");
+		btnBrowse.setBounds(80+BUTTONS_D*2, BUTTONS_Y, BUTTONS_W, BUTTONS_H);
+		btnBrowse.setForeground(new Color(0, 0, 128));
+		add(btnBrowse);
+		
+		JButton btnReceived = new JButton("Received");
+		btnReceived.setBounds(80+BUTTONS_D*3, BUTTONS_Y, BUTTONS_W, BUTTONS_H);
+		btnReceived.setForeground(new Color(0, 0, 128));
+		add(btnReceived);
+		
+		JButton btnOrder = new JButton("Order");
+		btnOrder.setBounds(80+BUTTONS_D*4, BUTTONS_Y, BUTTONS_W, BUTTONS_H);
+		btnOrder.setForeground(new Color(0, 0, 128));
+		add(btnOrder);
+		
+		JButton btnAccount = new JButton("Account");
+		btnAccount.setBounds(80+BUTTONS_D*5, BUTTONS_Y, BUTTONS_W, BUTTONS_H);
+		btnAccount.setForeground(new Color(0, 0, 128));
+		add(btnAccount);
+		
+		JButton btnProfile = new JButton("Profile");
+		btnProfile.setBounds(36, 139, 158, 60);
+		add(btnProfile);
+		
+		JButton btnChanPswrdLeft = new JButton("Change Password");
+		btnChanPswrdLeft.setBounds(36, 238, 158, 60);
+		add(btnChanPswrdLeft);
+		
+		JButton btnPayFees = new JButton("Pay Fees");
+		btnPayFees.setBounds(36, 336, 158, 60);
+		add(btnPayFees);
+		
+		JButton btnMaterials = new JButton("Materials");
+		btnMaterials.setBounds(36, 427, 158, 60);
+		add(btnMaterials);
+		
+		JButton btnReservations = new JButton("Reservations");
+		btnReservations.setBounds(36, 527, 158, 60);
+		add(btnReservations);
+		
+		JButton btnLogOut = new JButton("Logout");
+		btnLogOut.setBounds(97, 641, 110, 43);
+		add(btnLogOut);
+		
 		JButton btnChangePassword = new JButton("Change Password");
+		btnChangePassword.setBounds(722, 473, 167, 43);
+		panel.add(btnChangePassword);
+		btnChangePassword.setForeground(new Color(0, 0, 128));
+		btnChangePassword.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		
+		// Buttons Action Listeners
+		
 		btnChangePassword.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String currPswrd=currPswrdTextField.getText();
-				if(currPswrd.equals(librarySystem.getUserManager().getCurrentUser().getPassword())) {
-					String newPswrd =newPswrdTextField.getText();
-					String confirmPswrd =confirmPswrdTextField.getText();
-					if (newPswrd.equals(confirmPswrd)) {
-						librarySystem.getUserManager().getCurrentUser().setPassword(newPswrd);
+				String newPswrd =newPswrdTextField.getText();
+				String confirmPswrd =confirmPswrdTextField.getText();
+				// reset/hide error Jlabels
+				lblUnchangedpswrd.setVisible(false);
+				lblSucessChangePswrd.setVisible(false);
+				lblNonMatchingPswrd.setVisible(false);
+				lblIncorrectPswrd.setVisible(false);
+				if(!( currPswrd.length()==0 || newPswrd.length()==0 ||confirmPswrd.length()==0 )) {
+
+					if(currPswrd.equals(librarySystem.getUserManager().getCurrentUser().getPassword())) {
+
+						 if(newPswrd.equals(confirmPswrd)) {
+							 if (newPswrd.equals(currPswrd)) 
+									// new password and current password are the same 
+									lblUnchangedpswrd.setVisible(true);
+							 else {
+									// successful password Change
+									librarySystem.getUserManager().getCurrentUser().setPassword(newPswrd);
+									btnChangePassword.setVisible(false);
+									lblSucessChangePswrd.setVisible(true);
+							 }
+						 }else {
+							// new and confirm does not match
+							lblNonMatchingPswrd.setVisible(true);
+						}
+					}else {
+						// incorrect current password
+						lblIncorrectPswrd.setVisible(true);
 					}
-					else {
-						// new and confirm does not match
-						lblNonMatchingPswrd.setVisible(true);
-						
-					}
+				}else {
+					// missing Blank Field
+					lblUnchangedpswrd.setVisible(true);
 				}
-				else {
-					// incorrect current password
-					lblIncorrectPassword.setVisible(true);
-				}
-				
+
 			}
 		});
 		
 		
+		
+		btnHome.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				librarySystem.updateGUI(new HomeGUI(librarySystem));
+			}
+		});
+		btnReturned.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//librarySystem.updateGUI(new ReturnedGUI(librarySystem));
+				librarySystem.updateGUI(new PasswordGUI(librarySystem));
+			}
+		});
+		
+		btnBrowse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				librarySystem.updateGUI(new BrowseGUI(librarySystem));
+			}
+		});
+		
+		btnReceived.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//librarySystem.updateGUI(new ReceiveGUI(librarySystem));
+			}
+		});
+		
+		btnOrder.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				librarySystem.updateGUI(new OrderGUI(librarySystem));
+			}
+		});
+		
+		btnAccount.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AccountGUI ac= new AccountGUI();
+				librarySystem.updateGUI(ac);
+			}
+		});
+		
+		btnPayFees.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				librarySystem.updateGUI(new PayGUI(librarySystem));
+			}
+		});
+		
+		btnChanPswrdLeft.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				librarySystem.updateGUI(new PasswordGUI(librarySystem));
+			}
+		});
+		btnMaterials.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				librarySystem.updateGUI(new MaterialsGUI(librarySystem));
+			}
+		});
+		
+		btnReservations.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				librarySystem.updateGUI(new ReservationsGUI(librarySystem));
+			}
+		});
+		btnLogOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//librarySystem.updateGUI(new LogOutGUI(librarySystem));
+			}
+		});
+
+
+
 
 		
-		
-		// positioning JPanel components 
-		btnChangePassword.setHorizontalAlignment(SwingConstants.LEFT);
-		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(262, Short.MAX_VALUE)
-					.addComponent(btnChangePassword)
-					.addGap(26))
-				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
-					.addGap(69)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(lblCurrentPassword)
-						.addComponent(lblNewPassword)
-						.addComponent(lblConfirmPassword))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblNonMatchingPswrd)
-						.addComponent(lblIncorrectPassword)
-						.addComponent(confirmPswrdTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(newPswrdTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(currPswrdTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(127, Short.MAX_VALUE))
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(66)
-					.addComponent(lblIncorrectPassword)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(currPswrdTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblCurrentPassword))
-					.addGap(28)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(newPswrdTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewPassword))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(lblNonMatchingPswrd)
-					.addGap(2)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(confirmPswrdTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblConfirmPassword))
-					.addGap(33)
-					.addComponent(btnChangePassword)
-					.addContainerGap(41, Short.MAX_VALUE))
-		);
-		setLayout(groupLayout);
 
 	}
 	public PasswordGUI(LibrarySystem librarySystem) {
@@ -141,5 +306,4 @@ public class PasswordGUI extends JPanel {
 		librarySystem.updateGUI(this);
 		
 	}
-
 }

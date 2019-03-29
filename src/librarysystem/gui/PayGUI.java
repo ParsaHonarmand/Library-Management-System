@@ -59,7 +59,7 @@ public class PayGUI extends JPanel {
 	}
 
 	public PayGUI() {
-		this.setBackground(Color.WHITE);
+		this.setBackground(new Color(204, 204, 204));
 		this.setBounds(0, 0, 1075, 747);
 		
 		JButton profile = new JButton("Profile");
@@ -93,6 +93,7 @@ public class PayGUI extends JPanel {
 		});
 		
 		JPanel profilePanel = new JPanel();
+		profilePanel.setBackground(new Color(102, 153, 204));
 		
 		JButton btnNewButton = new JButton("Home"); //Fake button will be deleted later, show purpose 
 		

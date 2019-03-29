@@ -2,6 +2,7 @@ package librarysystem.gui;
 
 import javax.swing.JPanel;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 
@@ -19,6 +20,8 @@ import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Color;
+import javax.swing.SwingConstants;
 
 public class LoginGUI extends JPanel {
 	
@@ -32,29 +35,61 @@ public class LoginGUI extends JPanel {
 	 */
 	public LoginGUI(LibrarySystem librarySystem) {
 		this.librarySystem = librarySystem;
+		Dimension dimension = new Dimension(541, 40);
+
+		this.librarySystem.updateGUI(this);
+		setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(245, 245, 245));
+		panel.setBounds(259, 230, 724, 315);
+		add(panel);
+		panel.setLayout(null);
 		
 		JLabel lblUsername = new JLabel("Username:");
-		lblUsername.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		
-		usernameField = new JTextField();
-		Dimension dimension = new Dimension(541, 40);
-		usernameField.setMinimumSize(dimension);
-		usernameField.setMaximumSize(dimension);
-		usernameField.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		usernameField.setColumns(10);
+		lblUsername.setBounds(110, 80, 105, 29);
+		panel.add(lblUsername);
+		lblUsername.setForeground(new Color(0, 102, 204));
+		lblUsername.setFont(new Font("Times New Roman", Font.PLAIN, 24));
 		
 		JLabel lblPassword = new JLabel("Password:");
-		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblPassword.setBounds(116, 147, 110, 44);
+		panel.add(lblPassword);
+		lblPassword.setForeground(new Color(0, 102, 204));
+		lblPassword.setFont(new Font("Times New Roman", Font.PLAIN, 24));
 		
-		JButton btnRegister = new JButton("Register");
-		btnRegister.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		JLabel lblRegister = new JLabel("No account ? Register Now !");
+		lblRegister.setBounds(141, 226, 267, 32);
+		panel.add(lblRegister);
+		lblRegister.setForeground(new Color(51, 102, 102));
+		lblRegister.setFont(new Font("Times New Roman", Font.PLAIN, 17));
+		
+		usernameField = new JTextField();
+		usernameField.setHorizontalAlignment(SwingConstants.CENTER);
+		usernameField.setForeground(new Color(51, 102, 102));
+		usernameField.setBounds(238, 73, 378, 40);
+		panel.add(usernameField);
+		usernameField.setMinimumSize(dimension);
+		usernameField.setMaximumSize(dimension);
+		usernameField.setFont(new Font("Times New Roman", Font.PLAIN, 17));
+		usernameField.setColumns(10);
 		
 		passwordField = new JPasswordField();
+		passwordField.setHorizontalAlignment(SwingConstants.CENTER);
+		passwordField.setForeground(new Color(51, 102, 102));
+		passwordField.setFont(new Font("Times New Roman", Font.PLAIN, 17));
+		passwordField.setBounds(238, 152, 378, 40);
+		panel.add(passwordField);
 		passwordField.setMinimumSize(dimension);
 		passwordField.setMaximumSize(dimension);
 		
+
+		
 		
 		JButton btnLogin = new JButton("Login");
+		btnLogin.setBounds(423, 220, 175, 46);
+		panel.add(btnLogin);
+		btnLogin.setForeground(new Color(0, 102, 204));
 		btnLogin.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -66,47 +101,13 @@ public class LoginGUI extends JPanel {
 				}
 			}
 		});
-		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(138, Short.MAX_VALUE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblUsername)
-								.addComponent(lblPassword, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE))
-							.addGap(36)
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-								.addComponent(passwordField, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(usernameField, GroupLayout.DEFAULT_SIZE, 612, Short.MAX_VALUE)))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(260)
-							.addComponent(btnLogin, GroupLayout.PREFERRED_SIZE, 175, GroupLayout.PREFERRED_SIZE)
-							.addGap(49)
-							.addComponent(btnRegister, GroupLayout.PREFERRED_SIZE, 175, GroupLayout.PREFERRED_SIZE)))
-					.addGap(178))
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(234)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(usernameField, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblUsername, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE))
-					.addGap(57)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblPassword, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE))
-					.addGap(55)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnRegister, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnLogin, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(219, Short.MAX_VALUE))
-		);
-		setLayout(groupLayout);
-
-		this.librarySystem.updateGUI(this);
+		btnLogin.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		
+		
+		
+		JLabel bckgGifImg = new JLabel("");
+		bckgGifImg.setBounds(0, 0, 1280, 720);
+		add(bckgGifImg);
+		bckgGifImg.setIcon(new ImageIcon("resources/libwall.jpg"));
 	}
 }

@@ -1,8 +1,13 @@
 package librarysystem.users;
 
+import librarysystem.database.TextDatabase;
 import librarysystem.materials.Material;
 import librarysystem.materials.MaterialStatus;
 
+import java.io.BufferedReader;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +39,8 @@ public abstract class User {
 		this.userType = userType;
 	}
 	
+	//Getters
+	
 	public String getName() {
 		return name;
 	}
@@ -50,70 +57,26 @@ public abstract class User {
 		return password;
 	}
 	
-	public void setPassword(String password) {
-		this.password = password;
-	}
 	
 	public int getId() {
 		return id;
-	}
-	
-	public List<Material> getBorrowed() {
-		return borrowed;
-	}
-	
-	public void addBorrowedMaterial(Material borrowed) {
-		this.onHold.remove(borrowed);
-		this.borrowed.add(borrowed);
-		borrowed.setMaterialStatus(MaterialStatus.BORROWED);
-	}
-	
-	public void removeBorrowedMaterial(Material borrowed) {
-		this.borrowed.remove(borrowed);
-		borrowed.setMaterialStatus(MaterialStatus.RETURNED);
-		if ((System.currentTimeMillis() - borrowed.getTakeoutDate())/1000L > 604800) {
-			// TODO: Update overdueFee
-		}
-	}
-	
-	public List<Material> getOnHold() {
-		return onHold;
-	}
-	
-	public void addHold(Material hold) {
-		this.onHold.add(hold);
-		hold.setMaterialStatus(MaterialStatus.ON_HOLD);
-	}
-	
-	public void removeHold(Material hold) {
-		this.onHold.remove(hold);
-		hold.setMaterialStatus(MaterialStatus.AVAILABLE);
-	}
-	
-	public double getOverdueFee() {
-		return overdueFee;
-	}
-	
-	public void setOverdueFee(double overdueFee) {
-		this.overdueFee = overdueFee;
-	}
-	
-	public boolean isBlacklisted() {
-		return blacklisted;
-	}
-	
-	public void setBlacklisted(boolean blacklisted) {
-		this.blacklisted = blacklisted;
 	}
 	
 	public UserType getUserType() {
 		return userType;
 	}
 	
-	public void setUserType(UserType userType) {
-		this.userType = userType;
+	public List<Material> getOnHold() {
+		return onHold;
 	}
 	
+	public List<Material> getBorrowed() {
+		return borrowed;
+	}
+	
+	public double getOverdueFee() {
+		return overdueFee;
+	}
 	public String getBorrowedMaterialString() {
 		String borrowed = "";
 		for (Material borrowedMat : this.borrowed) {
@@ -135,5 +98,77 @@ public abstract class User {
 		}
 		return "NONE";
 	}
+	
+	//Setters
+	
+	public void setPassword(String password) {
+		this.password = password;
+		System.out.println(this.getUsername()+"'s Password is changed");
+		TextDatabase.updateUser( this);
+
+		
+	}
+	
+	
+	public void setOverdueFee(double overdueFee) {
+		System.out.println(this.getUsername()+"'s OverdueFee is updated");
+		this.overdueFee = overdueFee;
+	}
+	
+	public void setBlacklisted(boolean blacklisted) {
+		System.out.println(this.getUsername()+" is Blacklisted");
+		this.blacklisted = blacklisted;
+	}
+	
+	
+	public void setUserType(UserType userType) {
+		System.out.println(this.getUsername()+"'s type is changed");
+		this.userType = userType;
+	}
+	
+	// Other Methods 
+	
+	public void addBorrowedMaterial(Material borrowed) {
+		this.onHold.remove(borrowed);
+		this.borrowed.add(borrowed);
+		borrowed.setMaterialStatus(MaterialStatus.BORROWED);
+	}
+	
+	public void removeBorrowedMaterial(Material borrowed) {
+		this.borrowed.remove(borrowed);
+		borrowed.setMaterialStatus(MaterialStatus.RETURNED);
+		if ((System.currentTimeMillis() - borrowed.getTakeoutDate())/1000L > 604800) {
+			// TODO: Update overdueFee
+		}
+	}
+	
+	public void addHold(Material hold) {
+		this.onHold.add(hold);
+		hold.setMaterialStatus(MaterialStatus.ON_HOLD);
+	}
+	
+	public void removeHold(Material hold) {
+		this.onHold.remove(hold);
+		hold.setMaterialStatus(MaterialStatus.AVAILABLE);
+	}
+	
+	public boolean isBlacklisted() {
+		return blacklisted;
+	}
+	public String toString(){
+		String userInfo=this.getUserType().name() + "|"
+				+ this.getId() + "|"
+				+ this.getUsername() + "|"
+				+ this.getEmail() + "|"
+				+ this.getName() + "|"
+				+ this.getPassword() + "|"
+				+ this.isBlacklisted() + "|"
+				+ this.getOverdueFee() + "|"
+				+ this.getBorrowedMaterialString() + "|"
+				+ this.getOnHoldMaterialString();
+		return userInfo;
+		
+	}
+	
 	
 }

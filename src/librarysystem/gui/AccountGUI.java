@@ -54,8 +54,7 @@ public class AccountGUI extends JPanel {
 		
 		JButton changePassword = new JButton("Change Password");
 		changePassword.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
+			public void actionPerformed(ActionEvent arg0) {
 				librarySystem.updateGUI(new PasswordGUI(librarySystem));
 			}
 		});
