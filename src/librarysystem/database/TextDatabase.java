@@ -94,22 +94,14 @@ public class TextDatabase {
 		}
 		return users;
 	}
+
 	
 	public static void saveUsers(List<User> users) {
 		TextDatabase.checkFileExistence(TextDatabase.getUsersFile());
 		try {
 			FileWriter fileWriter = new FileWriter(TextDatabase.usersFile);
 			for (User user : users) {
-				String userInfo = user.getUserType().name() + "|"
-						+ user.getId() + "|"
-						+ user.getUsername() + "|"
-						+ user.getEmail() + "|"
-						+ user.getName() + "|"
-						+ user.getPassword() + "|"
-						+ user.isBlacklisted() + "|"
-						+ user.getOverdueFee() + "|"
-						+ user.getBorrowedMaterialString() + "|"
-						+ user.getOnHoldMaterialString();
+				String userInfo = user.toString();
 				UserType userType = user.getUserType();
 				if (userType == UserType.INSTRUCTOR) {
 					Instructor instructor = (Instructor) user;
@@ -228,7 +220,6 @@ public class TextDatabase {
 	
 	public static void updateUser(User user) {
 		String username = user.getUsername();
-		
 		TextDatabase.checkFileExistence(TextDatabase.getUsersFile());
 		try {
 			FileReader fileReader = new FileReader(TextDatabase.getUsersFile());
@@ -241,18 +232,20 @@ public class TextDatabase {
 				} else {
 					fileText += line + "\n";
 				}
+				
 			}
 			bufferedReader.close();
 			fileReader.close();
-			
 			FileWriter fileWriter = new FileWriter(TextDatabase.getUsersFile());
 			fileWriter.write(fileText);
+			System.out.println(fileText);
 			fileWriter.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
+
 	public static File getUsersFile() {
 		return TextDatabase.usersFile;
 	}

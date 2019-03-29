@@ -22,13 +22,13 @@ public class UserManager {
 		return currentUser;
 	}
 	
-	public void setCurrentUser(User currentUser) {
-		this.currentUser = currentUser;
-	}
-	
 	public List<User> getUsers() {
 		return users;
 	}
+	
+	public void setCurrentUser(User currentUser) {
+		this.currentUser = currentUser;
+	}	
 	
 	public void addUser(User user) {
 		this.users.add(user);

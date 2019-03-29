@@ -28,10 +28,11 @@ public class ProfileGUI extends JPanel {
 	 */
 
 	public ProfileGUI(LibrarySystem librarySystem) {
+		setForeground(new Color(51, 102, 153));
 		this.librarySystem = librarySystem;
 		
-		this.setBackground(Color.WHITE);
-		this.setBounds(0, 0, 1075, 747);
+		this.setBackground(new Color(102, 153, 204));
+		this.setBounds(0, 0, 1280, 720);
 		
 		JButton changePassword = new JButton("Change Password");
 		
