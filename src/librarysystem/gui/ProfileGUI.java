@@ -26,16 +26,10 @@ public class ProfileGUI extends JPanel {
 	/**
 	 * Create the panel.
 	 */
+
 	public ProfileGUI(LibrarySystem librarySystem) {
-		this();
-		
 		this.librarySystem = librarySystem;
-		librarySystem.updateGUI(this);
 		
-
-	}
-
-	public ProfileGUI() {
 		this.setBackground(Color.WHITE);
 		this.setBounds(0, 0, 1075, 747);
 		
@@ -61,8 +55,8 @@ public class ProfileGUI extends JPanel {
 			}
 		});
 		
-		UserManager user = new UserManager(librarySystem);
-		String id = Integer.toString(user.getCurrentUser().getId());
+		UserManager user = librarySystem.getUserManager();
+		String id = "" + user.getCurrentUser().getId();
 		
 		JButton home = new JButton("Home"); //Fake button will be deleted later, show purpose 
 		
@@ -170,6 +164,7 @@ public class ProfileGUI extends JPanel {
 					.addContainerGap())
 		);
 		setLayout(groupLayout);
-		
+
+		this.librarySystem.updateGUI(this);
 	}
 }
