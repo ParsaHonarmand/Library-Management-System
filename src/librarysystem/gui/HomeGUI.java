@@ -22,6 +22,8 @@ import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Panel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class HomeGUI extends JPanel {
 	private LibrarySystem librarySystem;
@@ -78,6 +80,12 @@ public class HomeGUI extends JPanel {
 		btnReturn.setForeground(new Color(0, 0, 128));
 		
 		JButton btnBrowse = new JButton("Browse");
+		btnBrowse.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				new BrowseGUI(librarySystem);
+			}
+		});
 		btnBrowse.setBounds(270, 103, 88, 29);
 		btnBrowse.setForeground(new Color(0, 0, 128));
 		
@@ -90,6 +98,12 @@ public class HomeGUI extends JPanel {
 		btnOrder.setForeground(new Color(0, 0, 128));
 		
 		JButton btnAccount = new JButton("Account");
+		btnAccount.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				new ProfileGUI(librarySystem);
+			}
+		});
 		btnAccount.setBounds(690, 103, 96, 29);
 		btnAccount.setForeground(new Color(0, 0, 128));
 		setLayout(null);

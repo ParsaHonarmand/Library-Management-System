@@ -1,12 +1,6 @@
 package librarysystem;
 
-import librarysystem.database.TextDatabase;
-import librarysystem.gui.BrowseGUI;
-import librarysystem.gui.HoldGUIScreen;
-import librarysystem.gui.LoginScreen;
-import librarysystem.gui.MenuGUI;
-import librarysystem.gui.StudentScreen;
-import librarysystem.gui.MenuGUI;
+import librarysystem.gui.LoginGUI;
 import librarysystem.managers.MaterialManager;
 import librarysystem.managers.UserManager;
 
@@ -32,6 +26,8 @@ public class LibrarySystem {
 	
 	public static void main(String args[]) {
 		LibrarySystem librarySystem = new LibrarySystem();
+		
+		new LoginGUI(librarySystem);
 	}
 	
 	public void updateGUI(JPanel panel) {
@@ -40,14 +36,16 @@ public class LibrarySystem {
 		//LoginScreen.main(this);
 	}
 	
-
-	
 	public UserManager getUserManager() {
 		return userManager;
 	}
 	
 	public MaterialManager getMaterialManager() {
 		return materialManager;
+	}
+	
+	public JFrame getFrame() {
+		return this.frame;
 	}
 	
 }
