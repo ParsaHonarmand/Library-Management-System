@@ -135,8 +135,7 @@ public class HomeGUI extends JPanel {
 		});
 		btnReturned.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//librarySystem.updateGUI(new ReturnedGUI(librarySystem));
-				librarySystem.updateGUI(new PasswordGUI(librarySystem));
+				librarySystem.updateGUI(new ReturnedGUI(librarySystem));
 			}
 		});
 		
@@ -148,7 +147,7 @@ public class HomeGUI extends JPanel {
 		
 		btnReceived.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//librarySystem.updateGUI(new ReceiveGUI(librarySystem));
+				librarySystem.updateGUI(new ReceiveGUI(librarySystem));
 			}
 		});
 		
