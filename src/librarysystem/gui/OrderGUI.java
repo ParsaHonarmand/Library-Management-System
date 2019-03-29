@@ -83,6 +83,10 @@ public class OrderGUI extends JPanel {
 		   comboBox.setModel(new DefaultComboBoxModel<MaterialType > (MaterialType.values()));
 		
 			JButton btnPlaceOrder = new JButton("Place Order");
+			btnPlaceOrder.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
 			btnPlaceOrder.addMouseListener(new MouseAdapter() {
 				@Override
 				
@@ -91,12 +95,12 @@ public class OrderGUI extends JPanel {
 					try
 					{
 					    intEdition = Integer.parseInt(txtpnEdition.getText());
-					    txtIdWarning.setEnabled(false);
+					    txtIdWarning.setVisible(false);
 
 					}
 					catch (NumberFormatException exept)
 					{
-						txtIdWarning.setEnabled(true);
+						txtIdWarning.setVisible(true);
 					    System.out.println("Edition must be a number");
 					}
 					
@@ -111,6 +115,7 @@ public class OrderGUI extends JPanel {
 		txtIdWarning.setBackground(Color.RED);
 		txtIdWarning.setEnabled(false);
 		txtIdWarning.setEditable(false);
+		txtIdWarning.setVisible(false);
 		txtIdWarning.setText("Warning: Edition must be a number");
 		txtIdWarning.setColumns(10);
 		GroupLayout groupLayout = new GroupLayout(this);
