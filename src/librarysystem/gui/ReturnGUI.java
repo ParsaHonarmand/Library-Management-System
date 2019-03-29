@@ -42,7 +42,7 @@ public class ReturnGUI extends JPanel {
 				if (column == 1)
 					return String.class;
 				if (column == 2)
-					return paramString().getClass();
+					return String.class;
 				if (column == 3)
 					return Boolean.class;
 				return String.class;
@@ -76,10 +76,10 @@ public class ReturnGUI extends JPanel {
 				DefaultTableModel model = (DefaultTableModel) table.getModel();
 				for (int i = model.getRowCount() - 1; i >= 0; i--) {
 					if ((boolean) model.getValueAt(i, 3) == true){
-						librarySystem.getMaterialManager().getMaterial((String) model.getValueAt(i, 2)).setMaterialStatus(MaterialStatus.RETURNED);
+						librarySystem.getMaterialManager().updateStatus(librarySystem.getMaterialManager().getMaterial((String) model.getValueAt(i, 2)), MaterialStatus.RETURNED);
+						model.removeRow(i);
 					}
 				}
-				
 			}
 		});
 		
