@@ -75,7 +75,7 @@ public class LoginScreen {
 							"Username and password are not valid. Try again.");
 				} else if (user.getUserType() == UserType.LIBRARIAN) {
 					System.out.println("librarian");
-					LibrarianScreen.main(LS);
+					//LibrarianScreen.main(LS);
 					frame.setVisible(false);
 				} else if (user.getUserType() == UserType.STUDENT) {
 					//StudentScreen.StudentGUI(LS);

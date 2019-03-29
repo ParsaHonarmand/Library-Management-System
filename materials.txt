@@ -5,3 +5,6 @@ AVAILABLE|BOOK|4|ID|Title|Auther|0|-1|-1
 ON_ORDER|BOOK|5|ID|Title|Auther|0|-1|-1
 ON_ORDER|MAGAZINE|6|ID|Library Journal||5|-1|-1
 AVAILABLE|EBOOK|7|ID|Title|Author|0|-1|-1
+ON_ORDER|BOOK|8|ID|Title|Author|0|-1|-1
+ON_ORDER|ALL|9|ID|Title|Author|0|-1|-1
+ON_ORDER|ALL|9|adfg|Title|Author|0|-1|-1

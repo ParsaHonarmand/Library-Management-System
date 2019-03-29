@@ -121,6 +121,10 @@ public class BrowseGUI extends JPanel {
 		lblSortBy.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 		JButton btnNewButton = new JButton("Sort");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -254,5 +258,6 @@ public class BrowseGUI extends JPanel {
 		for (int i = 0; i < this.tableContents.size(); i++) {
 			model.addRow(new Object[] { null, this.tableContents.get(i).getNiceName() });
 		}
+
 	}
 }

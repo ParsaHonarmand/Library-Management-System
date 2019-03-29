@@ -101,14 +101,29 @@ public class HomeGUI extends JPanel {
 		btnReturn.setForeground(new Color(0, 0, 128));
 		
 		JButton btnBrowse = new JButton("Browse");
+		btnBrowse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				librarySystem.updateGUI(new BrowseGUI(librarySystem));
+			}
+		});
 		btnBrowse.setBounds(80+BUTTONS_D*2, BUTTONS_Y, BUTTONS_W, BUTTONS_H);
 		btnBrowse.setForeground(new Color(0, 0, 128));
 		
 		JButton btnReceive = new JButton("Received");
+		btnReceive.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				librarySystem.updateGUI(new ReceivedGUI(librarySystem));
+			}
+		});
 		btnReceive.setBounds(80+BUTTONS_D*3, BUTTONS_Y, BUTTONS_W, BUTTONS_H);
 		btnReceive.setForeground(new Color(0, 0, 128));
 		
 		JButton btnOrder = new JButton("Order");
+		btnOrder.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				librarySystem.updateGUI(new OrderGUI(librarySystem));
+			}
+		});
 		btnOrder.setBounds(80+BUTTONS_D*4, BUTTONS_Y, BUTTONS_W, BUTTONS_H);
 		btnOrder.setForeground(new Color(0, 0, 128));
 		
