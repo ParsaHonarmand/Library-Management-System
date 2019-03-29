@@ -104,26 +104,27 @@ public abstract class User {
 	public void setPassword(String password) {
 		this.password = password;
 		System.out.println(this.getUsername()+"'s Password is changed");
-		TextDatabase.updateUser( this);
-
-		
+		TextDatabase.updateUser(this);
 	}
 	
 	
 	public void setOverdueFee(double overdueFee) {
 		System.out.println(this.getUsername()+"'s OverdueFee is updated");
 		this.overdueFee = overdueFee;
+		TextDatabase.updateUser(this);
 	}
 	
 	public void setBlacklisted(boolean blacklisted) {
 		System.out.println(this.getUsername()+" is Blacklisted");
 		this.blacklisted = blacklisted;
+		TextDatabase.updateUser(this);
 	}
 	
 	
 	public void setUserType(UserType userType) {
 		System.out.println(this.getUsername()+"'s type is changed");
 		this.userType = userType;
+		TextDatabase.updateUser(this);
 	}
 	
 	// Other Methods 

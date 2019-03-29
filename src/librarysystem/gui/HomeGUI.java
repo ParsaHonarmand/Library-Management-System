@@ -160,8 +160,7 @@ public class HomeGUI extends JPanel {
 		
 		btnAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AccountGUI ac= new AccountGUI();
-				librarySystem.updateGUI(ac);
+				librarySystem.updateGUI(new ProfileGUI(librarySystem));
 			}
 		});
 		add(lblHours);
@@ -186,9 +185,7 @@ public class HomeGUI extends JPanel {
 		
 		
 		
-		//Panel panel = new Panel();
-		//panel.setBounds(16, 228, 474, 160);
-		//add(panel);
+		librarySystem.updateGUI(this);
 
 	}
 }
