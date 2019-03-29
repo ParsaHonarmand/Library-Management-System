@@ -1,6 +1,7 @@
 package librarysystem.gui;
 
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextField;
@@ -28,14 +29,16 @@ public class PasswordGUI extends JPanel {
 	 * Create the panel.
 	 */
 	public PasswordGUI() {
-		// TextFields
-		currPswrdTextField = new JTextField();
+		// JPasswordFields
+		
+
+		currPswrdTextField = new JPasswordField();;
 		currPswrdTextField.setColumns(10);
 		
-		newPswrdTextField = new JTextField();
+		newPswrdTextField = new JPasswordField();;
 		newPswrdTextField.setColumns(10);
 		
-		confirmPswrdTextField = new JTextField();
+		confirmPswrdTextField = new JPasswordField();;
 		confirmPswrdTextField.setColumns(10);
 		
 		// Jlabels

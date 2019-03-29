@@ -44,54 +44,78 @@ public class HomeGUI extends JPanel {
 	 * Create the panel.
 	 */
 	public HomeGUI(LibrarySystem librarySystem) {
+		
+		int BUTTONS_Y=240;
+		int BUTTONS_W=120;
+		int BUTTONS_H=30;
+		int BUTTONS_D=BUTTONS_W+80;
+		int INFOS_W=70;
 		this.librarySystem = librarySystem;
 		setBackground(new Color(220, 220, 220));
 	
-		
+		// JLabels
 		JLabel lblHours = new JLabel("");
-		lblHours.setBounds(6, 138, 814, 78);
-		lblHours.setIcon(new ImageIcon("/Users/zobiaasad/Desktop/picHours.png"));
+		lblHours.setBounds(260, BUTTONS_Y+BUTTONS_H+15, 814, 78);
+		lblHours.setIcon(new ImageIcon("resources/picHours.png"));
 		
 		JLabel lblContact = new JLabel("Contact Us");
-		lblContact.setBounds(6, 400, 90, 16);
+		lblContact.setBounds(INFOS_W, 600, 90, 16);
 		lblContact.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		
 		JLabel lblGeneralInfo = new JLabel("General Information   403.222.3333");
-		lblGeneralInfo.setBounds(6, 422, 239, 16);
+		lblGeneralInfo.setBounds(INFOS_W, 622, 239, 16);
 		
 		JLabel lblService = new JLabel("Library Service Desk   403.333.4444");
-		lblService.setBounds(6, 444, 251, 16);
+		lblService.setBounds(INFOS_W,644, 251, 16);
 		
 		JLabel lblEmail = new JLabel("Email Address     library@mtroyal.ca");
-		lblEmail.setBounds(6, 466, 226, 16);
+		lblEmail.setBounds(INFOS_W, 666, 226, 16);
 		
 		JLabel lblBanner = new JLabel("");
-		lblBanner.setBounds(0, 0, 791, 97);
-		lblBanner.setIcon(new ImageIcon("/Users/zobiaasad/Desktop/Banner.png"));
+		lblBanner.setBounds(40, 0, 1197, 233);
+		lblBanner.setIcon(new ImageIcon("resources/b.png"));
 		
+		JLabel lblPicture = new JLabel("");
+		lblPicture.setIcon(new ImageIcon("resources/pic1.png"));
+		lblPicture.setBounds(INFOS_W,  BUTTONS_Y+BUTTONS_H+110, 474, 160);
+		add(lblPicture);
+		
+		JLabel lblAccountInfo = new JLabel("Account Informations");
+		lblAccountInfo.setBounds(650,  BUTTONS_Y+BUTTONS_H+110, 239, 46);
+		add(lblAccountInfo); 
+		
+		JLabel accountInfo = new JLabel("");
+		User CurrentUser=librarySystem.getUserManager().getCurrentUser();
+		String accountInfoTxt=CurrentUser.getUsername()+ " \r\n "+CurrentUser.getOverdueFee()+ " \r\n " + CurrentUser.getBorrowedMaterialString();
+		accountInfo.setText(accountInfoTxt);
+		accountInfo.setBounds(650,  BUTTONS_Y+BUTTONS_H+150, 266, 107);
+		add(accountInfo);
+		
+		//JButtons
 		JButton btnHome = new JButton("Home");
-		btnHome.setBounds(6, 103, 91, 29);
+		btnHome.setBounds(80 , BUTTONS_Y, BUTTONS_W, BUTTONS_H);
 		btnHome.setForeground(new Color(0, 0, 128));
 		
 		JButton btnReturn = new JButton("Returned");
-		btnReturn.setBounds(136, 103, 100, 29);
+		btnReturn.setBounds(80+BUTTONS_D, BUTTONS_Y, BUTTONS_W, BUTTONS_H);
 		btnReturn.setForeground(new Color(0, 0, 128));
 		
 		JButton btnBrowse = new JButton("Browse");
-		btnBrowse.setBounds(270, 103, 88, 29);
+		btnBrowse.setBounds(80+BUTTONS_D*2, BUTTONS_Y, BUTTONS_W, BUTTONS_H);
 		btnBrowse.setForeground(new Color(0, 0, 128));
 		
 		JButton btnReceive = new JButton("Received");
-		btnReceive.setBounds(406, 103, 99, 29);
+		btnReceive.setBounds(80+BUTTONS_D*3, BUTTONS_Y, BUTTONS_W, BUTTONS_H);
 		btnReceive.setForeground(new Color(0, 0, 128));
 		
 		JButton btnOrder = new JButton("Order");
-		btnOrder.setBounds(553, 103, 88, 29);
+		btnOrder.setBounds(80+BUTTONS_D*4, BUTTONS_Y, BUTTONS_W, BUTTONS_H);
 		btnOrder.setForeground(new Color(0, 0, 128));
 		
 		JButton btnAccount = new JButton("Account");
-		btnAccount.setBounds(690, 103, 96, 29);
+		btnAccount.setBounds(80+BUTTONS_D*5, BUTTONS_Y, BUTTONS_W, BUTTONS_H);
 		btnAccount.setForeground(new Color(0, 0, 128));
+		
 		setLayout(null);
 		add(lblHours);
 		add(lblEmail);
@@ -106,21 +130,17 @@ public class HomeGUI extends JPanel {
 		add(lblGeneralInfo);
 		add(lblBanner);
 		
-		JLabel lblPicture = new JLabel("");
-		lblPicture.setIcon(new ImageIcon("/Users/zobiaasad/Desktop/pic1.png"));
-		lblPicture.setBounds(16, 228, 474, 160);
-		add(lblPicture);
+		// Buttons Action Listeners
+		btnAccount.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AccountGUI ac= new AccountGUI();
+				//librarySystem.updateGUI(ac);
+				librarySystem.updateGUI(new PasswordGUI(librarySystem));
+			}
+		});
+
 		
-		JLabel accountInfo = new JLabel("");
-		User CurrentUser=librarySystem.getUserManager().getCurrentUser();
-		String accountInfoTxt=CurrentUser.getUsername()+ " \r\n "+CurrentUser.getOverdueFee()+ " \r\n " + CurrentUser.getBorrowedMaterialString();
-		accountInfo.setText(accountInfoTxt);
-		accountInfo.setBounds(503, 281, 266, 107);
-		add(accountInfo);
 		
-		JLabel lblAccountInfo = new JLabel("Account info here");
-		lblAccountInfo.setBounds(502, 228, 239, 46);
-		add(lblAccountInfo);
 		//Panel panel = new Panel();
 		//panel.setBounds(16, 228, 474, 160);
 		//add(panel);

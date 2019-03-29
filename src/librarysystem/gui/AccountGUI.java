@@ -53,7 +53,12 @@ public class AccountGUI extends JPanel {
 		profile.setBounds(0,0,100,100);
 		
 		JButton changePassword = new JButton("Change Password");
-		
+		changePassword.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				librarySystem.updateGUI(new PasswordGUI(librarySystem));
+			}
+		});
 		JButton payFee = new JButton("Pay Fees");
 		payFee.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
