@@ -14,9 +14,9 @@ import java.util.HashMap;
 import java.util.List;
 
 public class TextDatabase {
-	
+
 	private static File usersFile = new File("users.txt"), materialsFile = new File("materials.txt");
-	
+
 	public static List<User> loadUsers(MaterialManager materialManager) {
 		List<User> users = new ArrayList<User>();
 		TextDatabase.checkFileExistence(TextDatabase.getUsersFile());
@@ -43,8 +43,8 @@ public class TextDatabase {
 						}
 					}
 				}
-				
-				String[] onHoldInfo = userInfo[8].split(",");
+
+				String[] onHoldInfo = userInfo[9].split(",");
 				if (!onHoldInfo[0].equals("NONE")) {
 					for (int i = 0; i < onHoldInfo.length; i++) {
 						Material material = materialManager.getMaterial(Integer.valueOf(onHoldInfo[i]));
@@ -53,11 +53,12 @@ public class TextDatabase {
 						}
 					}
 				}
-				
+
 				User user = null;
 				if (userType == UserType.INSTRUCTOR) {
 					List<Reservation> reservations = new ArrayList<>();
-					String[] reservationInfo = userInfo[9].split("\\,");
+					String[] reservationInfo = userInfo[10].split("\\,");
+					System.out.println("reservation info: " + userInfo[10]);
 					if (!reservationInfo[0].equals("NONE")) {
 						for (int i = 0; i < onHoldInfo.length; i++) {
 							String[] reservationValues = reservationInfo[i].split("\\+");
@@ -69,7 +70,7 @@ public class TextDatabase {
 							reservations.add(reservation);
 						}
 					}
-					
+
 					user = new Instructor(username, email, name, password, id, borrowedMaterials, onHoldMaterials, overdueFee, blacklisted, reservations);
 				} else if (userType == UserType.STUDENT) {
 					user = new Student(username, email, name, password, id, borrowedMaterials, onHoldMaterials, overdueFee, blacklisted);
@@ -82,7 +83,7 @@ public class TextDatabase {
 				} else if (userType == UserType.TEACHING_ASSISTANT) {
 					user = new TeachingAssistant(username, email, name, password, id, borrowedMaterials, onHoldMaterials, overdueFee, blacklisted);
 				}
-				
+
 				if (user != null) {
 					users.add(user);
 				}
@@ -94,7 +95,6 @@ public class TextDatabase {
 		}
 		return users;
 	}
-
 
 	public static void saveUsers(List<User> users) {
 		TextDatabase.checkFileExistence(TextDatabase.getUsersFile());
@@ -115,33 +115,33 @@ public class TextDatabase {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void addUser(User user) {
 		TextDatabase.checkFileExistence(TextDatabase.getUsersFile());
 		try {
 			FileWriter fileWriter = new FileWriter(TextDatabase.usersFile, true);
-				String userInfo = user.toString();
-				UserType userType = user.getUserType();
-				if (userType == UserType.INSTRUCTOR) {
-					Instructor instructor = (Instructor) user;
-					userInfo += "|" + instructor.getReservationsString();
-				}
-				userInfo += "\n";
-				fileWriter.write(userInfo);
+			String userInfo = user.toString();
+			UserType userType = user.getUserType();
+			if (userType == UserType.INSTRUCTOR) {
+				Instructor instructor = (Instructor) user;
+				userInfo += "|" + instructor.getReservationsString();
+			}
+			userInfo += "\n";
+			fileWriter.write(userInfo);
 			fileWriter.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static HashMap<MaterialStatus, List<Material>> loadMaterials() {
 		HashMap<MaterialStatus, List<Material>> materialMap = new HashMap<>();
 		for (MaterialStatus materialStatus : MaterialStatus.values()) {
 			materialMap.put(materialStatus, new ArrayList<>());
 		}
-		
+
 		TextDatabase.checkFileExistence(TextDatabase.getMaterialsFile());
-		
+
 		try {
 			FileReader fileReader = new FileReader(TextDatabase.getMaterialsFile());
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -155,7 +155,7 @@ public class TextDatabase {
 				String id = materialInfo[3], title = materialInfo[4], author = materialInfo[5];
 				Long takeoutDate = Long.valueOf(materialInfo[7]);
 				Long renewDate = (long) -1; //Long.valueOf(materialInfo[8]);
-				
+
 				Material material = null;
 				if (materialType == MaterialType.BOOK)
 					material = new Book(title, author, id, edition, barcode, materialStatus, takeoutDate, renewDate);
@@ -167,7 +167,7 @@ public class TextDatabase {
 					material = new eBook(title, author, id, edition, barcode, materialStatus, takeoutDate, renewDate);
 				else if (materialType == MaterialType.MAGAZINE)
 					material = new Magazine(title, author, id, edition, barcode, materialStatus, takeoutDate, renewDate);
-				
+
 				if (material != null) {
 					materialMap.get(materialStatus).add(material);
 				}
@@ -175,16 +175,16 @@ public class TextDatabase {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		return materialMap;
 	}
-	
+
 	public static void saveMaterials(HashMap<MaterialStatus, List<Material>> materialMap) {
 		TextDatabase.checkFileExistence(TextDatabase.getMaterialsFile());
-		
+
 		try {
 			FileWriter fileWriter = new FileWriter(TextDatabase.getMaterialsFile());
-			
+
 			for (MaterialStatus materialStatus : materialMap.keySet()) {
 				List<Material> materials = materialMap.get(materialStatus);
 				for (Material material : materials) {
@@ -196,7 +196,7 @@ public class TextDatabase {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void addMaterial(Material material) {
 		TextDatabase.checkFileExistence(TextDatabase.getMaterialsFile());
 		System.out.println("adding material:" + material.toString());
@@ -208,10 +208,10 @@ public class TextDatabase {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void updateMaterial(Material material) {
 		int barcode = material.getBarcode();
-		
+
 		TextDatabase.checkFileExistence(TextDatabase.getMaterialsFile());
 		try {
 			FileReader fileReader = new FileReader(TextDatabase.getMaterialsFile());
@@ -227,7 +227,7 @@ public class TextDatabase {
 			}
 			bufferedReader.close();
 			fileReader.close();
-			
+
 			FileWriter fileWriter = new FileWriter(TextDatabase.getMaterialsFile());
 			fileWriter.write(fileText);
 			fileWriter.close();
@@ -235,7 +235,7 @@ public class TextDatabase {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void updateUser(User user) {
 		String username = user.getUsername();
 		TextDatabase.checkFileExistence(TextDatabase.getUsersFile());
@@ -246,32 +246,31 @@ public class TextDatabase {
 			while ((line = bufferedReader.readLine()) != null && !line.equals("")) {
 				String[] userInfo = line.split("\\|");
 				if (userInfo[2].equals(username)) {
+					System.out.println("found old user data");
 					fileText += user.toString() + "\n";
 				} else {
 					fileText += line + "\n";
 				}
-				
+
 			}
 			bufferedReader.close();
 			fileReader.close();
 			FileWriter fileWriter = new FileWriter(TextDatabase.getUsersFile());
 			fileWriter.write(fileText);
-			System.out.println(fileText);
 			fileWriter.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-
 	public static File getUsersFile() {
 		return TextDatabase.usersFile;
 	}
-	
+
 	public static File getMaterialsFile() {
 		return TextDatabase.materialsFile;
 	}
-	
+
 	private static void checkFileExistence(File file) {
 		if (!file.exists()) {
 			try {
@@ -281,5 +280,5 @@ public class TextDatabase {
 			}
 		}
 	}
-	
+
 }

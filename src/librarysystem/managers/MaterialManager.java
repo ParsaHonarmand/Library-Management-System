@@ -34,7 +34,6 @@ public class MaterialManager {
 	}
 	
 	public List<Material> getMaterials(MaterialStatus materialStatus) {
-		System.out.append("ici********");
 		return this.materialLists.get(materialStatus);
 	}
 	
@@ -101,8 +100,16 @@ public class MaterialManager {
 	}
 	
 	public void reserveMaterial(Instructor user, Material material, int amount) {
-		int loopAmount = 0;
 		String id = material.getId();
+		Reservation reservation = null;
+		for (Reservation loopReservation : user.getReservations()) {
+			if (loopReservation.getMaterials().get(0).getId().equals(id)) {
+				reservation = loopReservation;
+				break;
+			}
+		}
+		
+		int loopAmount = 0;
 		List<Material> toBeReserved = new ArrayList<Material>();
 		for (Material availableMaterial : this.getMaterials(MaterialStatus.AVAILABLE)) {
 			if (availableMaterial.getId().equals(id)) {
@@ -113,11 +120,19 @@ public class MaterialManager {
 			}
 		}
 		
-		user.addReservation(new Reservation(toBeReserved, true));
+		if (reservation == null) {
+			user.addReservation(new Reservation(toBeReserved, true));
+		}
 		
 		for (Material reservationMaterial : toBeReserved) {
+			if (reservation != null) {
+				reservation.addMaterial(material);
+			}
 			updateStatus(reservationMaterial, MaterialStatus.RESERVED);
 		}
+		
+		System.out.println("update user");
+		TextDatabase.updateUser(user);
 	}
 	
 	public Material getMaterial(String id) {

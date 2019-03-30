@@ -1,5 +1,6 @@
 package librarysystem;
 
+import librarysystem.gui.JSpinnerInTables;
 import librarysystem.gui.LoginGUI;
 import librarysystem.managers.MaterialManager;
 import librarysystem.managers.UserManager;

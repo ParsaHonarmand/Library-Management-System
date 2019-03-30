@@ -42,5 +42,9 @@ public class Instructor extends Faculty {
 		}
 		return "NONE";
 	}
+
+	public String toString() {
+		return super.toString() + "|" + this.getReservationsString();
+	}
 	
 }
