@@ -36,6 +36,7 @@ import searching.TitleComparator;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 
+import java.awt.Color;
 import java.awt.Font;
 
 public class BrowseGUI extends JPanel {
@@ -45,6 +46,11 @@ public class BrowseGUI extends JPanel {
 	private JTable table;
 	private List<Material> tableContents = new ArrayList<>();
 	private Material selectedMaterial = null;
+	//Upper Tab Buttons Settings
+	int BUTTONS_Y=20;
+	int BUTTONS_W=120;
+	int BUTTONS_H=30;
+	int BUTTONS_D=BUTTONS_W+80;
 
 	/**
 	 * Create the panel.
@@ -52,56 +58,8 @@ public class BrowseGUI extends JPanel {
 	public BrowseGUI(LibrarySystem librarySystem) {
 		this.librarySystem = librarySystem;
 
-		JButton home = new JButton("Home");
-		home.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		home.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent arg0) {
-				new HomeGUI(librarySystem);
-			}
-		});
-
-		JButton btnReturned = new JButton("Returned");
-		btnReturned.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		btnReturned.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent e) {
-			}
-		});
-		btnReturned.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-
-		JButton btnBrowse = new JButton("Browse");
-		btnBrowse.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		btnBrowse.setBackground(SystemColor.activeCaption);
-
-		JButton btnOrder = new JButton("Order");
-		btnOrder.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		btnOrder.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent e) {
-			}
-		});
-
-		JButton btnReceived = new JButton("Received");
-		btnReceived.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		btnReceived.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent e) {
-			}
-		});
-
-		JButton btnAccount = new JButton("Account");
-		btnAccount.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		btnAccount.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent e) {
-			}
-		});
-
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(94, 90, 697, 552);
 		scrollPane.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -109,19 +67,92 @@ public class BrowseGUI extends JPanel {
 		});
 
 		JComboBox materialTypeSortBox = new JComboBox();
+		materialTypeSortBox.setBounds(882, 208, 363, 44);
 		materialTypeSortBox.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		materialTypeSortBox.setToolTipText("Select Material Type");
 		materialTypeSortBox.setModel(new DefaultComboBoxModel(MaterialType.values()));
 
 		JComboBox stringSortBox = new JComboBox();
+		stringSortBox.setBounds(882, 152, 363, 44);
 		stringSortBox.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		stringSortBox.setModel(new DefaultComboBoxModel(new String[] { "Title", "Author" }));
 
 		JLabel lblSortBy = new JLabel("Sort by:");
+		lblSortBy.setBounds(1050, 91, 50, 17);
 		lblSortBy.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		JButton btnNewButton = new JButton("Sort");
-		btnNewButton.addMouseListener(new MouseAdapter() {
+		JButton btnSort = new JButton("Sort");
+		btnSort.setBounds(1022, 264, 75, 29);
+
+		//JButtons
+
+
+		JButton btnHome = new JButton("Home");
+		btnHome.setBounds(80 , BUTTONS_Y, BUTTONS_W, BUTTONS_H);
+		btnHome.setForeground(new Color(0, 0, 128));
+		add(btnHome);
+
+		JButton btnReturned = new JButton("Returned");
+		btnReturned.setBounds(80+BUTTONS_D, BUTTONS_Y, BUTTONS_W, BUTTONS_H);
+		btnReturned.setForeground(new Color(0, 0, 128));
+		add(btnReturned);
+
+		JButton btnBrowse = new JButton("Browse");
+		btnBrowse.setBounds(80+BUTTONS_D*2, BUTTONS_Y, BUTTONS_W, BUTTONS_H);
+		btnBrowse.setForeground(new Color(0, 0, 128));
+		add(btnBrowse);
+
+		JButton btnReceived = new JButton("Received");
+		btnReceived.setBounds(80+BUTTONS_D*3, BUTTONS_Y, BUTTONS_W, BUTTONS_H);
+		btnReceived.setForeground(new Color(0, 0, 128));
+		add(btnReceived);
+
+		JButton btnOrder = new JButton("Order");
+		btnOrder.setBounds(80+BUTTONS_D*4, BUTTONS_Y, BUTTONS_W, BUTTONS_H);
+		btnOrder.setForeground(new Color(0, 0, 128));
+		add(btnOrder);
+
+		JButton btnAccount = new JButton("Account");
+		btnAccount.setBounds(80+BUTTONS_D*5, BUTTONS_Y, BUTTONS_W, BUTTONS_H);
+		btnAccount.setForeground(new Color(0, 0, 128));
+		add(btnAccount);
+		btnHome.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				librarySystem.updateGUI(new HomeGUI(librarySystem));
+			}
+		});
+		btnReturned.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//librarySystem.updateGUI(new ReturnedGUI(librarySystem));
+			}
+		});
+
+		btnBrowse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				librarySystem.updateGUI(new BrowseGUI(librarySystem));
+			}
+		});
+
+		btnReceived.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//librarySystem.updateGUI(new ReceiveGUI(librarySystem));
+			}
+		});
+
+		btnOrder.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				librarySystem.updateGUI(new OrderGUI(librarySystem));
+			}
+		});
+
+		btnAccount.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AccountGUI ac= new AccountGUI();
+				librarySystem.updateGUI(ac);
+			}
+		});	
+
+		btnSort.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				String stringSort = (String) stringSortBox.getSelectedItem();
@@ -130,53 +161,7 @@ public class BrowseGUI extends JPanel {
 				sort(stringSort, materialType);
 			}
 		});
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
-
-		JLabel lblTes = new JLabel("");
-		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout
-				.setHorizontalGroup(
-						groupLayout.createParallelGroup(Alignment.LEADING).addGroup(
-								groupLayout
-										.createSequentialGroup().addGap(
-												0)
-										.addGroup(
-												groupLayout.createParallelGroup(Alignment.TRAILING)
-														.addGroup(groupLayout.createSequentialGroup().addPreferredGap(ComponentPlacement.RELATED, 10, Short.MAX_VALUE).addComponent(scrollPane,
-																GroupLayout.PREFERRED_SIZE, 699, GroupLayout.PREFERRED_SIZE))
-														.addGroup(
-																groupLayout.createSequentialGroup().addComponent(home, GroupLayout.PREFERRED_SIZE, 174, GroupLayout.PREFERRED_SIZE)
-																		.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnReturned, GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
-																		.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnBrowse, GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
-																		.addPreferredGap(
-																				ComponentPlacement.RELATED)
-																		.addComponent(btnOrder, GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)))
-										.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING).addGroup(groupLayout.createSequentialGroup().addGap(163).addComponent(btnNewButton).addGap(149))
-												.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup().addGap(18).addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-														.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-																.addGroup(groupLayout.createSequentialGroup().addComponent(btnReceived, GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
-																		.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(btnAccount, GroupLayout.PREFERRED_SIZE, 174, GroupLayout.PREFERRED_SIZE)
-																		.addGap(2))
-																.addGroup(groupLayout.createSequentialGroup()
-																		.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING).addComponent(stringSortBox, Alignment.LEADING, 0, 343, Short.MAX_VALUE)
-																				.addComponent(materialTypeSortBox, 0, 343, Short.MAX_VALUE))
-																		.addContainerGap())
-																.addGroup(Alignment.LEADING,
-																		groupLayout.createSequentialGroup().addComponent(lblTes, GroupLayout.PREFERRED_SIZE, 343, GroupLayout.PREFERRED_SIZE).addContainerGap()))
-														.addGroup(groupLayout.createSequentialGroup().addComponent(lblSortBy).addGap(157)))))));
-		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(home, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE).addComponent(btnReturned,
-										GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
-								.addComponent(btnBrowse, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE).addComponent(btnOrder, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnReceived, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE).addComponent(btnAccount, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-								.addGroup(groupLayout.createSequentialGroup().addPreferredGap(ComponentPlacement.RELATED).addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 658, GroupLayout.PREFERRED_SIZE))
-								.addGroup(groupLayout.createSequentialGroup().addGap(23).addComponent(lblSortBy).addGap(18).addComponent(stringSortBox, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
-										.addGap(31).addComponent(materialTypeSortBox, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE).addGap(18).addComponent(btnNewButton).addGap(36).addComponent(lblTes,
-												GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE)))
-						.addContainerGap()));
+		btnSort.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 		//Icon aboutIcon = new ImageIcon("about16.gif");
 
@@ -228,9 +213,14 @@ public class BrowseGUI extends JPanel {
 		});
 
 		scrollPane.setViewportView(this.table);
-		setLayout(groupLayout);
 
 		this.librarySystem.updateGUI(this);
+		setLayout(null);
+		add(scrollPane);
+		add(btnSort);
+		add(stringSortBox);
+		add(materialTypeSortBox);
+		add(lblSortBy);
 	}
 
 	public void sort(String stringSort, MaterialType materialType) {

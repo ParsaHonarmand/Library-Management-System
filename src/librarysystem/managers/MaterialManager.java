@@ -20,6 +20,7 @@ public class MaterialManager {
 	
 	public MaterialManager(LibrarySystem librarySystem) {
 		this.librarySystem = librarySystem;
+		
 		this.materialLists = TextDatabase.loadMaterials();
 	}
 	
@@ -31,6 +32,7 @@ public class MaterialManager {
 	}
 	
 	public List<Material> getMaterials(MaterialStatus materialStatus) {
+		System.out.append("ici********");
 		return this.materialLists.get(materialStatus);
 	}
 	
