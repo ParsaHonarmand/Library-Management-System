@@ -89,7 +89,7 @@ public class ProfileGUI extends JPanel {
 		JLabel usernameDisplay = new JLabel(user.getCurrentUser().getUsername());
 		
 		JLabel profilePic = new JLabel();
-		profilePic.setIcon(new ImageIcon("C:\\Users\\Prit Patel\\git\\library-system"));
+		profilePic.setIcon(new ImageIcon("profile pic.jpg"));
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
