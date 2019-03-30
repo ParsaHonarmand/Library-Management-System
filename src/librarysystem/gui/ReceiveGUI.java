@@ -56,7 +56,7 @@ public class ReceiveGUI extends JPanel {
 				if (column == 1)
 					return String.class;
 				if (column == 2)
-					return paramString().getClass();
+					return String.class;
 				if (column == 3)
 					return Boolean.class;
 				return String.class;
@@ -94,7 +94,11 @@ public class ReceiveGUI extends JPanel {
 				DefaultTableModel model = (DefaultTableModel) table.getModel();
 				for (int i = model.getRowCount() - 1; i >= 0; i--) {
 					if ((boolean) model.getValueAt(i, 3) == true){
-						librarySystem.getMaterialManager().getMaterial((String) model.getValueAt(i, 2)).setMaterialStatus(MaterialStatus.AVAILABLE);
+						System.out.println("status changed");
+						librarySystem.getMaterialManager().updateStatus(librarySystem.getMaterialManager().getMaterial((String)
+								model.getValueAt(i, 2)), MaterialStatus.AVAILABLE);					
+						System.out.println(librarySystem.getMaterialManager().getMaterials(MaterialStatus.ON_ORDER).toString());
+						model.removeRow(i);
 					}
 				}
 				

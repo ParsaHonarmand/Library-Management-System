@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 
 import librarysystem.LibrarySystem;
 import librarysystem.users.User;
+import librarysystem.managers.*;
 
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
@@ -41,21 +42,19 @@ public class PayGUI extends JPanel {
 	private JTextField textField_4;
 	private JTextField textField_5;
 	
-	private User currentUser = librarySystem.getUserManager().getCurrentUser();
-	private double fee = currentUser.getOverdueFee();
-	private String feeString = Double.toString(fee);
-	private JLabel lblOutStandingFees = new JLabel(feeString);
+//	private User currentUser;
+//	private double fee;
+//	private String feeString = Double.toString(fee);
+	private JLabel lblOutStandingFees = new JLabel("23.0");
 	
 
 	/**
 	 * Create the panel.
 	 */
-	public PayGUI(LibrarySystem librarySystem) {
+	public PayGUI(LibrarySystem librarySystem) {		
 		this();
-		
 		this.librarySystem = librarySystem;
 		librarySystem.updateGUI(this);
-
 	}
 
 	public PayGUI() {
@@ -63,43 +62,82 @@ public class PayGUI extends JPanel {
 		this.setBounds(0, 0, 1075, 747);
 		
 		JButton profile = new JButton("Profile");
-		profile.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		profile.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				new ProfileGUI(librarySystem);
 			}
 		});
 		profile.setHorizontalAlignment(SwingConstants.LEFT);
 		profile.setBounds(0,0,100,100);
 		
 		JButton changePassword = new JButton("Change Password");
+		changePassword.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				new PasswordGUI(librarySystem);
+			}
+		});
 		
 		JButton payFee = new JButton("Pay Fees");
-		payFee.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		payFee.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				new PayGUI(librarySystem);
 			}
 		});
 		
 		JButton materials = new JButton("Materials");
-		materials.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		materials.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				new MaterialsGUI(librarySystem);
 			}
 		});
 		
 		JButton reservations = new JButton("Reservations");
+		reservations.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				new ReservationsGUI(librarySystem);
+			}
+		});
 		
 		JButton logout = new JButton("Logout");
-		logout.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		logout.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				new LoginGUI(librarySystem);
 			}
 		});
 		
 		JPanel profilePanel = new JPanel();
 		profilePanel.setBackground(new Color(102, 153, 204));
 		
-		JButton btnNewButton = new JButton("Home"); //Fake button will be deleted later, show purpose 
+		JButton btnNewButton = new JButton("Home");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				new HomeGUI(librarySystem);
+			}
+		});
 		
-		JButton btnNewButton_1 = new JButton("Browse"); //Fake button will be deleted later, show purpose
+		JButton btnNewButton_1 = new JButton("Browse");
+		btnNewButton_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				new BrowseGUI(librarySystem);
+			}
+		});
 		
-		JButton btnNewButton_2 = new JButton("Account"); //Fake button will be deleted later, show purpose
+		JButton btnNewButton_2 = new JButton("Account"); 
+		btnNewButton_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				new AccountGUI(librarySystem);
+			}
+		});
+		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -181,19 +219,23 @@ public class PayGUI extends JPanel {
 		JLabel lblError = new JLabel("Please enter all your info");
 		lblError.setVisible(false);
 		
+//		this.currentUser = librarySystem.getUserManager().getCurrentUser();	
+//		this.fee = currentUser.getOverdueFee();	
+		
 		JButton btnPay = new JButton("Pay");
 		btnPay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (!(textField_1.getText() != "") && !(textField_2.getText() != "") && !(textField_3.getText() != "") && !(textField_4.getText() != "") && !(textField_5.getText() != "")) {
-					currentUser.setOverdueFee(0.00);
+
+				if (!(textField_1.getText().equals(null)) && !(textField_2.getText().equals(null)) && !(textField_3.getText().equals(null)) && !(textField_4.getText().equals(null)) && !(textField_5.getText().equals(null))) {
+					//currentUser.setOverdueFee(0.00);
 					lblOutStandingFees.setText("0.00");
 					lblError.setText("Thank you!");
 					lblError.setVisible(true);
 				}
-				else if (currentUser.getOverdueFee() == 0.0) {
-					lblError.setText("You have no outstanding Fees!");
-					lblError.setVisible(true);
-				}
+				//else if (currentUser.getOverdueFee() == 0.0) {
+				//	lblError.setText("You have no outstanding Fees!");
+				//	lblError.setVisible(true);
+				//}
 				else {
 					lblError.setText("Please enter all your info!");
 					lblError.setVisible(true);
@@ -265,6 +307,7 @@ public class PayGUI extends JPanel {
 		profilePanel.setLayout(gl_profilePanel);
 		setLayout(groupLayout);
 		
+		//this.librarySystem.updateGUI(this);
 
 	}
 }

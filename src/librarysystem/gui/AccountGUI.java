@@ -59,8 +59,10 @@ public class AccountGUI extends JPanel {
 			}
 		});
 		JButton payFee = new JButton("Pay Fees");
-		payFee.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		payFee.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				new PayGUI(librarySystem);
 			}
 		});
 		
