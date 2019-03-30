@@ -1,3 +1,4 @@
+
 package librarysystem.gui;
 
 import javax.swing.JPanel;
@@ -135,8 +136,7 @@ public class HomeGUI extends JPanel {
 		});
 		btnReturned.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//librarySystem.updateGUI(new ReturnedGUI(librarySystem));
-				librarySystem.updateGUI(new PasswordGUI(librarySystem));
+				librarySystem.updateGUI(new ReturnGUI(librarySystem));
 			}
 		});
 		
@@ -148,7 +148,7 @@ public class HomeGUI extends JPanel {
 		
 		btnReceived.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//librarySystem.updateGUI(new ReceiveGUI(librarySystem));
+				librarySystem.updateGUI(new ReceiveGUI(librarySystem));
 			}
 		});
 		
@@ -160,7 +160,6 @@ public class HomeGUI extends JPanel {
 		
 		btnAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
 				librarySystem.updateGUI(new ProfileGUI(librarySystem));
 			}
 		});
@@ -179,16 +178,13 @@ public class HomeGUI extends JPanel {
 		
 		
 		add(panel);
-		// JLabels
 		
 
 				
 		
 		
 		
-		//Panel panel = new Panel();
-		//panel.setBounds(16, 228, 474, 160);
-		//add(panel);
+		librarySystem.updateGUI(this);
 
 	}
 }

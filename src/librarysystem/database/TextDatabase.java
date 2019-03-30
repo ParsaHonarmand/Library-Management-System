@@ -95,7 +95,7 @@ public class TextDatabase {
 		return users;
 	}
 
-	
+
 	public static void saveUsers(List<User> users) {
 		TextDatabase.checkFileExistence(TextDatabase.getUsersFile());
 		try {
@@ -110,6 +110,24 @@ public class TextDatabase {
 				userInfo += "\n";
 				fileWriter.write(userInfo);
 			}
+			fileWriter.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void addUser(User user) {
+		TextDatabase.checkFileExistence(TextDatabase.getUsersFile());
+		try {
+			FileWriter fileWriter = new FileWriter(TextDatabase.usersFile, true);
+				String userInfo = user.toString();
+				UserType userType = user.getUserType();
+				if (userType == UserType.INSTRUCTOR) {
+					Instructor instructor = (Instructor) user;
+					userInfo += "|" + instructor.getReservationsString();
+				}
+				userInfo += "\n";
+				fileWriter.write(userInfo);
 			fileWriter.close();
 		} catch (IOException e) {
 			e.printStackTrace();
