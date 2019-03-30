@@ -368,6 +368,16 @@ public class BrowseGUI extends JPanel {
 					selectedRow = table.rowAtPoint(e.getPoint());
 					System.out.println("row: " + selectedRow);
 					selectedMaterial = tableContents.get(selectedRow);
+					menu = new JPopupMenu();
+					menu.add(holdMenuItem);
+					menu.add(borrowMenuItem);
+					UserType userType = librarySystem.getUserManager().getCurrentUser().getUserType();
+					if (userType == UserType.INSTRUCTOR) {
+						menu.add(reserveMenuItem);
+					} else if (userType == UserType.LIBRARIAN) {
+						menu.add(orderMenuItem);
+					}
+
 					menu.show(table, e.getX(), e.getY());
 				}
 			}
