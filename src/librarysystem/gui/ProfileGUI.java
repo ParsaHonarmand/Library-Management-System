@@ -153,8 +153,7 @@ public class ProfileGUI extends JPanel {
 		
 		btnAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AccountGUI ac= new AccountGUI();
-				librarySystem.updateGUI(ac);
+				librarySystem.updateGUI(new ProfileGUI(librarySystem));
 			}
 		});
 		
