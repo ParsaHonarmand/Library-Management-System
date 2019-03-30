@@ -63,42 +63,43 @@ public class ProfileGUI extends JPanel {
 		JLabel profilePic = new JLabel();
 		profilePic.setBounds(272, 130, 0, 0);
 		profilePic.setIcon(new ImageIcon("C:\\Users\\Prit Patel\\git\\library-system"));
+		setLayout(null);
 		
 		//JButtons
 
 
 		JButton btnHome = new JButton("Home");
-		btnHome.setBounds(80 , BUTTONS_Y, BUTTONS_W, BUTTONS_H);
+		btnHome.setBounds(80, 20, 120, 30);
 		btnHome.setForeground(new Color(0, 0, 128));
 		add(btnHome);
 		
 		JButton btnReturned = new JButton("Returned");
-		btnReturned.setBounds(80+BUTTONS_D, BUTTONS_Y, BUTTONS_W, BUTTONS_H);
+		btnReturned.setBounds(280, 20, 120, 30);
 		btnReturned.setForeground(new Color(0, 0, 128));
 		add(btnReturned);
 		
 		JButton btnBrowse = new JButton("Browse");
-		btnBrowse.setBounds(80+BUTTONS_D*2, BUTTONS_Y, BUTTONS_W, BUTTONS_H);
+		btnBrowse.setBounds(480, 20, 120, 30);
 		btnBrowse.setForeground(new Color(0, 0, 128));
 		add(btnBrowse);
 		
 		JButton btnReceived = new JButton("Received");
-		btnReceived.setBounds(80+BUTTONS_D*3, BUTTONS_Y, BUTTONS_W, BUTTONS_H);
+		btnReceived.setBounds(680, 20, 120, 30);
 		btnReceived.setForeground(new Color(0, 0, 128));
 		add(btnReceived);
 		
 		JButton btnOrder = new JButton("Order");
-		btnOrder.setBounds(80+BUTTONS_D*4, BUTTONS_Y, BUTTONS_W, BUTTONS_H);
+		btnOrder.setBounds(880, 20, 120, 30);
 		btnOrder.setForeground(new Color(0, 0, 128));
 		add(btnOrder);
 		
 		JButton btnAccount = new JButton("Account");
-		btnAccount.setBounds(80+BUTTONS_D*5, BUTTONS_Y, BUTTONS_W, BUTTONS_H);
+		btnAccount.setBounds(1080, 20, 120, 30);
 		btnAccount.setForeground(new Color(0, 0, 128));
 		add(btnAccount);
 		
 		JButton btnProfile = new JButton("Profile");
-		btnProfile.setBounds(36, 139, 158, 60);
+		btnProfile.setBounds(36, 131, 158, 60);
 		add(btnProfile);
 		
 		JButton btnChanPswrdLeft = new JButton("Change Password");
@@ -106,11 +107,11 @@ public class ProfileGUI extends JPanel {
 		add(btnChanPswrdLeft);
 		
 		JButton btnPayFees = new JButton("Pay Fees");
-		btnPayFees.setBounds(36, 336, 158, 60);
+		btnPayFees.setBounds(36, 334, 158, 60);
 		add(btnPayFees);
 		
 		JButton btnMaterials = new JButton("Materials");
-		btnMaterials.setBounds(36, 427, 158, 60);
+		btnMaterials.setBounds(36, 428, 158, 60);
 		add(btnMaterials);
 		
 		JButton btnReservations = new JButton("Reservations");
@@ -186,7 +187,6 @@ public class ProfileGUI extends JPanel {
 		});
 
 		this.librarySystem.updateGUI(this);
-		setLayout(null);
 		add(ID);
 		add(email);
 		add(username);
@@ -196,8 +196,8 @@ public class ProfileGUI extends JPanel {
 		add(profilePic);
 		
 		JPanel panel = new JPanel();
+		panel.setBounds(272, 111, 1003, 604);
 		panel.setBackground(new Color(102, 153, 204));
-		panel.setBounds(252, 66, 1152, 781);
 		add(panel);
 		panel.setLayout(null);
 		
