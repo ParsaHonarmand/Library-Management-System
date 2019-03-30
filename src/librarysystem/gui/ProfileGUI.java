@@ -124,36 +124,36 @@ public class ProfileGUI extends JPanel {
 		
 		btnHome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				librarySystem.updateGUI(new HomeGUI(librarySystem));
+				new HomeGUI(librarySystem);
 			}
 		});
 		btnReturned.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//librarySystem.updateGUI(new ReturnedGUI(librarySystem));
+				new ReturnGUI(librarySystem);
 			}
 		});
 		
 		btnBrowse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				librarySystem.updateGUI(new BrowseGUI(librarySystem));
+				new BrowseGUI(librarySystem);
 			}
 		});
 		
 		btnReceived.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//librarySystem.updateGUI(new ReceiveGUI(librarySystem));
+				new ReceiveGUI(librarySystem);
 			}
 		});
 		
 		btnOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				librarySystem.updateGUI(new OrderGUI(librarySystem));
+				new OrderGUI(librarySystem);
 			}
 		});
 		
 		btnAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				librarySystem.updateGUI(new ProfileGUI(librarySystem));
+				new ProfileGUI(librarySystem);
 			}
 		});
 		
@@ -165,27 +165,27 @@ public class ProfileGUI extends JPanel {
 		
 		btnChanPswrdLeft.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				librarySystem.updateGUI(new PasswordGUI(librarySystem));
+				new PasswordGUI(librarySystem);
 			}
 		});
 		btnMaterials.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				librarySystem.updateGUI(new MaterialsGUI(librarySystem));
+				new MaterialsGUI(librarySystem);
 			}
 		});
 		
 		btnReservations.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				librarySystem.updateGUI(new ReservationsGUI(librarySystem));
+				new ReservationsGUI(librarySystem);
 			}
 		});
 		btnLogOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//librarySystem.updateGUI(new LogOutGUI(librarySystem));
+				librarySystem.getUserManager().logout();
+				new LoginGUI(librarySystem);
 			}
 		});
 
-		this.librarySystem.updateGUI(this);
 		add(ID);
 		add(email);
 		add(username);
@@ -207,5 +207,7 @@ public class ProfileGUI extends JPanel {
 		JLabel nameDisplay = new JLabel(user.getCurrentUser().getName());
 		nameDisplay.setBounds(361, 63, 73, 16);
 		panel.add(nameDisplay);
+		
+		this.librarySystem.updateGUI(this);
 	}
 }

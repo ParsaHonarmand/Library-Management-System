@@ -80,10 +80,7 @@ public class BrowseGUI extends JPanel {
 		btnReturned.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
-			}
-		});
-		btnReturned.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+				new ReturnGUI(librarySystem);
 			}
 		});
 
@@ -105,6 +102,7 @@ public class BrowseGUI extends JPanel {
 		btnReceived.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
+				new ReceiveGUI(librarySystem);
 			}
 		});
 

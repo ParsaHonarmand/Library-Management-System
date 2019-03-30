@@ -165,13 +165,7 @@ public class HomeGUI extends JPanel {
 		add(lblGeneralInfo);
 		add(lblBanner);
 		
-		
 		add(panel);
-		
-
-				
-		
-		
 		
 		librarySystem.updateGUI(this);
 

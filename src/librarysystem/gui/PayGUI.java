@@ -41,26 +41,21 @@ public class PayGUI extends JPanel {
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private JTextField textField_5;
-	
-//	private User currentUser;
-//	private double fee;
-//	private String feeString = Double.toString(fee);
+
+	//	private User currentUser;
+	//	private double fee;
+	//	private String feeString = Double.toString(fee);
 	private JLabel lblOutStandingFees = new JLabel("23.0");
-	
 
 	/**
 	 * Create the panel.
 	 */
-	public PayGUI(LibrarySystem librarySystem) {		
-		this();
+	public PayGUI(LibrarySystem librarySystem) {
 		this.librarySystem = librarySystem;
-		librarySystem.updateGUI(this);
-	}
-
-	public PayGUI() {
+		
 		this.setBackground(new Color(204, 204, 204));
 		this.setBounds(0, 0, 1075, 747);
-		
+
 		JButton profile = new JButton("Profile");
 		profile.addMouseListener(new MouseAdapter() {
 			@Override
@@ -69,8 +64,8 @@ public class PayGUI extends JPanel {
 			}
 		});
 		profile.setHorizontalAlignment(SwingConstants.LEFT);
-		profile.setBounds(0,0,100,100);
-		
+		profile.setBounds(0, 0, 100, 100);
+
 		JButton changePassword = new JButton("Change Password");
 		changePassword.addMouseListener(new MouseAdapter() {
 			@Override
@@ -78,15 +73,9 @@ public class PayGUI extends JPanel {
 				new PasswordGUI(librarySystem);
 			}
 		});
-		
+
 		JButton payFee = new JButton("Pay Fees");
-		payFee.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				new PayGUI(librarySystem);
-			}
-		});
-		
+
 		JButton materials = new JButton("Materials");
 		materials.addMouseListener(new MouseAdapter() {
 			@Override
@@ -94,7 +83,7 @@ public class PayGUI extends JPanel {
 				new MaterialsGUI(librarySystem);
 			}
 		});
-		
+
 		JButton reservations = new JButton("Reservations");
 		reservations.addMouseListener(new MouseAdapter() {
 			@Override
@@ -102,7 +91,7 @@ public class PayGUI extends JPanel {
 				new ReservationsGUI(librarySystem);
 			}
 		});
-		
+
 		JButton logout = new JButton("Logout");
 		logout.addMouseListener(new MouseAdapter() {
 			@Override
@@ -110,10 +99,10 @@ public class PayGUI extends JPanel {
 				new LoginGUI(librarySystem);
 			}
 		});
-		
+
 		JPanel profilePanel = new JPanel();
 		profilePanel.setBackground(new Color(102, 153, 204));
-		
+
 		JButton btnNewButton = new JButton("Home");
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
@@ -121,7 +110,7 @@ public class PayGUI extends JPanel {
 				new HomeGUI(librarySystem);
 			}
 		});
-		
+
 		JButton btnNewButton_1 = new JButton("Browse");
 		btnNewButton_1.addMouseListener(new MouseAdapter() {
 			@Override
@@ -129,114 +118,78 @@ public class PayGUI extends JPanel {
 				new BrowseGUI(librarySystem);
 			}
 		});
-		
-		JButton btnNewButton_2 = new JButton("Account"); 
-		btnNewButton_2.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				new AccountGUI(librarySystem);
-			}
-		});
-		
+
+		JButton btnNewButton_2 = new JButton("Account");
+
 		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(changePassword, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(logout)
-								.addComponent(profile, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(payFee, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup().addContainerGap().addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout.createSequentialGroup()
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false).addComponent(changePassword, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(logout)
+								.addComponent(profile, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addComponent(payFee, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 								.addComponent(materials, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 								.addComponent(reservations, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-							.addGap(58)
-							.addComponent(profilePanel, GroupLayout.DEFAULT_SIZE, 851, Short.MAX_VALUE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 377, GroupLayout.PREFERRED_SIZE)
-							.addGap(2)
-							.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 367, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnNewButton_2, GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)))
-					.addContainerGap())
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnNewButton)
-						.addComponent(btnNewButton_1)
-						.addComponent(btnNewButton_2))
-					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(profile)
-							.addGap(13)
-							.addComponent(changePassword)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(payFee)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(materials)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(reservations)
-							.addPreferredGap(ComponentPlacement.RELATED, 471, Short.MAX_VALUE)
-							.addComponent(logout))
-						.addComponent(profilePanel, GroupLayout.DEFAULT_SIZE, 694, Short.MAX_VALUE))
-					.addContainerGap())
-		);
-		
+						.addGap(58).addComponent(profilePanel, GroupLayout.DEFAULT_SIZE, 851, Short.MAX_VALUE))
+						.addGroup(groupLayout.createSequentialGroup().addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 377, GroupLayout.PREFERRED_SIZE).addGap(2)
+								.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 367, GroupLayout.PREFERRED_SIZE).addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(btnNewButton_2, GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)))
+						.addContainerGap()));
+		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup().addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(btnNewButton).addComponent(btnNewButton_1).addComponent(btnNewButton_2))
+						.addGap(18)
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup().addComponent(profile).addGap(13).addComponent(changePassword).addPreferredGap(ComponentPlacement.UNRELATED).addComponent(payFee)
+										.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(materials).addPreferredGap(ComponentPlacement.UNRELATED).addComponent(reservations)
+										.addPreferredGap(ComponentPlacement.RELATED, 471, Short.MAX_VALUE).addComponent(logout))
+								.addComponent(profilePanel, GroupLayout.DEFAULT_SIZE, 694, Short.MAX_VALUE))
+						.addContainerGap()));
+
 		JLabel lblOutstandingFees = new JLabel("Outstanding Fees:");
-		
+
 		JLabel lblCard = new JLabel("Card #");
-		
+
 		JLabel lblExpiryDate = new JLabel("Expiry date;");
-		
+
 		JLabel lblCvc = new JLabel("CVC:");
-		
+
 		JLabel lblFirstName = new JLabel("First name:");
-		
+
 		JLabel lblLastName = new JLabel("Last name:");
-		
 
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
-		
+
 		textField_2 = new JTextField();
 		textField_2.setColumns(10);
-		
+
 		textField_3 = new JTextField();
 		textField_3.setColumns(10);
-		
+
 		textField_4 = new JTextField();
 		textField_4.setColumns(10);
-		
+
 		textField_5 = new JTextField();
 		textField_5.setColumns(10);
-		
-		
+
 		JLabel lblError = new JLabel("Please enter all your info");
 		lblError.setVisible(false);
-		
-//		this.currentUser = librarySystem.getUserManager().getCurrentUser();	
-//		this.fee = currentUser.getOverdueFee();	
-		
+
+		User currentUser = librarySystem.getUserManager().getCurrentUser();
+		double fee = currentUser.getOverdueFee();
+
 		JButton btnPay = new JButton("Pay");
 		btnPay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				if (!(textField_1.getText().equals(null)) && !(textField_2.getText().equals(null)) && !(textField_3.getText().equals(null)) && !(textField_4.getText().equals(null)) && !(textField_5.getText().equals(null))) {
-					//currentUser.setOverdueFee(0.00);
+				String text1 = textField_1.getText(), text2 = textField_2.getText(), text3 = textField_3.getText(), text4 = textField_4.getText(), text5 = textField_5.getText();
+				if (fee == 0) {
+					lblError.setText("You have no outstanding Fees!");
+					lblError.setVisible(true);
+				} else if (text1 == null || text1.equals("") || text2 == null || text2.equals("") || text3 == null || text3.equals("") || text4 == null || text4.equals("") || text5 == null || text5.equals("")) {
+					currentUser.setOverdueFee(0.00);
 					lblOutStandingFees.setText("0.00");
 					lblError.setText("Thank you!");
 					lblError.setVisible(true);
-				}
-				//else if (currentUser.getOverdueFee() == 0.0) {
-				//	lblError.setText("You have no outstanding Fees!");
-				//	lblError.setVisible(true);
-				//}
-				else {
+				} else {
 					lblError.setText("Please enter all your info!");
 					lblError.setVisible(true);
 				}
@@ -244,70 +197,33 @@ public class PayGUI extends JPanel {
 		});
 
 		GroupLayout gl_profilePanel = new GroupLayout(profilePanel);
-		gl_profilePanel.setHorizontalGroup(
-			gl_profilePanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_profilePanel.createSequentialGroup()
-					.addGroup(gl_profilePanel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_profilePanel.createSequentialGroup()
-							.addGap(90)
-							.addGroup(gl_profilePanel.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblLastName)
-								.addComponent(lblFirstName)
-								.addComponent(lblCvc)
-								.addComponent(lblExpiryDate)
-								.addComponent(lblCard)
-								.addComponent(lblOutstandingFees))
-							.addGap(76)
-							.addGroup(gl_profilePanel.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(lblOutStandingFees)
-								.addComponent(textField_1)
-								.addComponent(textField_2)
-								.addComponent(textField_3)
-								.addComponent(textField_4)
-								.addComponent(textField_5)
-								.addComponent(lblError, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-						.addGroup(gl_profilePanel.createSequentialGroup()
-							.addGap(308)
-							.addComponent(btnPay)))
-					.addContainerGap(416, Short.MAX_VALUE))
-		);
-		gl_profilePanel.setVerticalGroup(
-			gl_profilePanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_profilePanel.createSequentialGroup()
-					.addGap(64)
-					.addGroup(gl_profilePanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblOutstandingFees)
-						.addComponent(lblOutStandingFees))
-					.addGap(18)
-					.addGroup(gl_profilePanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblCard)
-						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(gl_profilePanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblExpiryDate)
-						.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(gl_profilePanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblCvc)
-						.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(gl_profilePanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblFirstName)
-						.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(gl_profilePanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblLastName)
-						.addComponent(textField_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addComponent(btnPay)
-					.addGap(18)
-					.addComponent(lblError)
-					.addContainerGap(313, Short.MAX_VALUE))
-		);
+		gl_profilePanel
+				.setHorizontalGroup(gl_profilePanel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_profilePanel.createSequentialGroup().addGroup(gl_profilePanel.createParallelGroup(Alignment.LEADING).addGroup(gl_profilePanel.createSequentialGroup().addGap(90)
+								.addGroup(gl_profilePanel.createParallelGroup(Alignment.LEADING).addComponent(lblLastName).addComponent(lblFirstName).addComponent(lblCvc).addComponent(lblExpiryDate)
+										.addComponent(lblCard).addComponent(lblOutstandingFees))
+								.addGap(76)
+								.addGroup(gl_profilePanel.createParallelGroup(Alignment.LEADING, false).addComponent(lblOutStandingFees).addComponent(textField_1).addComponent(textField_2).addComponent(textField_3)
+										.addComponent(textField_4).addComponent(textField_5).addComponent(lblError, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+								.addGroup(gl_profilePanel.createSequentialGroup().addGap(308).addComponent(btnPay))).addContainerGap(416, Short.MAX_VALUE)));
+		gl_profilePanel.setVerticalGroup(gl_profilePanel.createParallelGroup(Alignment.LEADING).addGroup(gl_profilePanel.createSequentialGroup().addGap(64)
+				.addGroup(gl_profilePanel.createParallelGroup(Alignment.BASELINE).addComponent(lblOutstandingFees).addComponent(lblOutStandingFees)).addGap(18)
+				.addGroup(gl_profilePanel.createParallelGroup(Alignment.BASELINE).addComponent(lblCard).addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+				.addGap(18)
+				.addGroup(gl_profilePanel.createParallelGroup(Alignment.BASELINE).addComponent(lblExpiryDate).addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+						GroupLayout.PREFERRED_SIZE))
+				.addGap(18)
+				.addGroup(gl_profilePanel.createParallelGroup(Alignment.BASELINE).addComponent(lblCvc).addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+				.addGap(18)
+				.addGroup(
+						gl_profilePanel.createParallelGroup(Alignment.BASELINE).addComponent(lblFirstName).addComponent(textField_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+				.addGap(18)
+				.addGroup(
+						gl_profilePanel.createParallelGroup(Alignment.BASELINE).addComponent(lblLastName).addComponent(textField_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+				.addGap(18).addComponent(btnPay).addGap(18).addComponent(lblError).addContainerGap(313, Short.MAX_VALUE)));
 		profilePanel.setLayout(gl_profilePanel);
 		setLayout(groupLayout);
-		
-		//this.librarySystem.updateGUI(this);
 
+		this.librarySystem.updateGUI(this);
 	}
 }

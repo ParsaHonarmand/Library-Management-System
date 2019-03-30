@@ -19,6 +19,8 @@ public class ExampleGUI extends JPanel {
 		JButton btnNewButton = new JButton("s");
 		add(btnNewButton);
 
+		// update gui after setup
+		this.librarySystem.updateGUI(this);
 	}
 
 }

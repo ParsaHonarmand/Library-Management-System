@@ -140,75 +140,69 @@ public class ReservationsGUI extends JPanel {
 		// action listeners
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				librarySystem.updateGUI(new HomeGUI(librarySystem));
+				new HomeGUI(librarySystem);
 			}
 		});
 		btnHome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				librarySystem.updateGUI(new HomeGUI(librarySystem));
+				new HomeGUI(librarySystem);
 			}
 		});
 		btnReturned.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//librarySystem.updateGUI(new ReturnedGUI(librarySystem));
+				new ReturnGUI(librarySystem);
 			}
 		});
 		
 		btnBrowse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				librarySystem.updateGUI(new BrowseGUI(librarySystem));
+				new BrowseGUI(librarySystem);
 			}
 		});
 		
 		btnReceived.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//librarySystem.updateGUI(new ReceiveGUI(librarySystem));
+				new ReceiveGUI(librarySystem);
 			}
 		});
 		
 		btnOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				librarySystem.updateGUI(new OrderGUI(librarySystem));
-			}
-		});
-		
-		btnAccount.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				librarySystem.updateGUI(new ProfileGUI(librarySystem));
+				new OrderGUI(librarySystem);
 			}
 		});
 		
 		btnProfile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				librarySystem.updateGUI(new ProfileGUI(librarySystem));
+				new ProfileGUI(librarySystem);
 			}
 		}); 
 		btnPayFees.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				librarySystem.updateGUI(new PayGUI(librarySystem));
+				new PayGUI(librarySystem);
 			}
 		});
 		
 		btnChanPswrdLeft.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				librarySystem.updateGUI(new PasswordGUI(librarySystem));
+				new PasswordGUI(librarySystem);
 			}
 		});
 		btnMaterials.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				librarySystem.updateGUI(new MaterialsGUI(librarySystem));
+				new MaterialsGUI(librarySystem);
 			}
 		});
 		
 		btnReservations.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				librarySystem.updateGUI(new ReservationsGUI(librarySystem));
+				new ReservationsGUI(librarySystem);
 			}
 		});
 		btnLogOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//librarySystem.updateGUI(new LogOutGUI(librarySystem));
+				librarySystem.getUserManager().logout();
+				new LoginGUI(librarySystem);
 			}
 		});
 
@@ -238,12 +232,6 @@ public class ReservationsGUI extends JPanel {
         tc.setCellEditor(new SpinnerEditor());
         tcm.getColumn(0).setCellRenderer(new IconRenderer());
 		
-		
-
-		//String
-
-        //table.setSurrendersFocusOnKeystroke(true);
-		//this.table = new JTable(model);
 		this.table.setPreferredScrollableViewportSize(table.getPreferredSize());
 		this.table.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		this.table.getColumnModel().getColumn(0).setMaxWidth(100);
@@ -266,6 +254,8 @@ public class ReservationsGUI extends JPanel {
 		});
 
 		scrollPane.setViewportView(this.table);
+		
+		this.librarySystem.updateGUI(this);
 	}
 	
 	/*

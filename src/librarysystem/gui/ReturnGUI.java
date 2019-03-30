@@ -155,5 +155,6 @@ public class ReturnGUI extends JPanel {
 		scrollPane.setRowHeaderView(scrollBar);
 		setLayout(groupLayout);
 
+		this. librarySystem.updateGUI(this);
 	}
 }

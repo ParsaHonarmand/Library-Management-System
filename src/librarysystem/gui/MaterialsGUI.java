@@ -39,6 +39,7 @@ import javax.swing.JMenuItem;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Dimension;
+import javax.swing.UIManager;
 
 public class MaterialsGUI extends JPanel {
 
@@ -99,6 +100,7 @@ public class MaterialsGUI extends JPanel {
 		reservations.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
+				new ReservationsGUI(librarySystem);
 			}
 		});
 		
@@ -128,13 +130,14 @@ public class MaterialsGUI extends JPanel {
 		btnReturned.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
+				new ReturnGUI(librarySystem);
 			}
 		});
 		
 		JButton btnBrowse = new JButton("Browse");
 		btnBrowse.setBounds(522, 0, 170, 45);
 		btnBrowse.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		btnBrowse.setBackground(Color.WHITE);
+		btnBrowse.setBackground(UIManager.getColor("Button.background"));
 		btnBrowse.setBackground(SystemColor.activeCaption);
 		btnBrowse.addMouseListener(new MouseAdapter() {
 			@Override
@@ -159,6 +162,7 @@ public class MaterialsGUI extends JPanel {
 		btnReceived.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
+				new ReceiveGUI(librarySystem);
 			}
 		});
 		
@@ -168,25 +172,15 @@ public class MaterialsGUI extends JPanel {
 		btnAccount.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				new AccountGUI(librarySystem);
+				new ProfileGUI(librarySystem);
 			}
 		});
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(0, 115, 342, 545);
-		scrollPane.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent e) {
-			}
-		});
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(360, 115, 387, 545);
-		scrollPane_1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent e) {
-			}
-		});
 		
 
 		JComboBox stringSortBox = new JComboBox();
@@ -288,11 +282,8 @@ public class MaterialsGUI extends JPanel {
 		this.tableHold = new JTable (model1);
 		this.tableHold.setPreferredScrollableViewportSize(new Dimension(150, 0));
 		this.tableHold.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		scrollPane.setColumnHeaderView(tableHold);
 		scrollPane_1.setViewportView(tableHold);
 		
-		this.tableHold.setPreferredScrollableViewportSize(tableHold.getPreferredSize());
-		this.tableHold.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		this.tableHold.getColumnModel().getColumn(0).setMaxWidth(100);
 		sort("Title", MaterialType.ALL);
 
