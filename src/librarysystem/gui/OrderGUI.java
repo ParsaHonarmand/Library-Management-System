@@ -36,34 +36,46 @@ public class OrderGUI extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public OrderGUI(LibrarySystem LS) {
-		this();
-		this.LS = LS;
-		LS.updateGUI(this);
-	}
-	public OrderGUI() {
+	public OrderGUI(LibrarySystem librarySystem) {
 		
 		JButton btnHome = new JButton("Home");
+		btnHome.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				new HomeGUI(librarySystem);
+			}
+		});
 		
 		JButton btnReturn = new JButton("Return");
 		btnReturn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				new ReturnGUI(librarySystem);
 			}
 		});
 		
 		JButton btnBrowse = new JButton("Browse");
+		btnBrowse.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				new BrowseGUI(librarySystem);
+			}
+		});
 		
 		JButton btnOrder = new JButton("Order");
 		
 		JButton btnAccount = new JButton("Account");
-		btnAccount.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnAccount.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				new ProfileGUI(librarySystem);
 			}
 		});
 		
 		JButton btnReceived = new JButton("Received");
-		btnReceived.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		btnReceived.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				new ReceiveGUI(librarySystem);
 			}
 		});
 		

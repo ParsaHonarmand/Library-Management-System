@@ -259,14 +259,7 @@ public class ReservationsGUI extends JPanel {
 					System.out.println("row: " + row);
 					selectedReservation = tableReservations.get(row);
 					JPopupMenu menu = new JPopupMenu();
-					menu.add(new JMenuItem("Hold"));
-					menu.add(new JMenuItem("Borrow"));
-					UserType userType = librarySystem.getUserManager().getCurrentUser().getUserType();
-					if (userType == UserType.INSTRUCTOR) {
-						menu.add(new JMenuItem("Reserve"));
-					} else if (userType == UserType.LIBRARIAN) {
-						menu.add(new JMenuItem("Order"));
-					}
+					menu.add(new JMenuItem("Cancel"));
 					menu.show(table, e.getX(), e.getY());
 				}
 			}
@@ -275,6 +268,9 @@ public class ReservationsGUI extends JPanel {
 		scrollPane.setViewportView(this.table);
 	}
 	
+	/*
+	 * Credits to 'bsm' + 'mKorbel': https://stackoverflow.com/questions/5614875/how-to-set-icon-in-a-column-of-jtable
+	 * */
 	public class IconRenderer extends DefaultTableCellRenderer{
 	    public Component getTableCellRendererComponent(JTable table,Object obj,boolean isSelected,boolean hasFocus,int row,int column){
 	        if(obj instanceof ImageIcon)

@@ -31,10 +31,10 @@ import java.awt.SystemColor;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import librarysystem.materials.MaterialType;
+import librarysystem.searching.AuthorComparator;
+import librarysystem.searching.TitleComparator;
 import librarysystem.users.UserType;
 import librarysystem.users.faculty.Instructor;
-import searching.AuthorComparator;
-import searching.TitleComparator;
 
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
