@@ -70,7 +70,7 @@ public class PasswordGUI extends JPanel {
 		JLabel lblNonMatchingPswrd = new JLabel("New password and confirm password do not match");
 		lblNonMatchingPswrd.setBounds(564, 295, 371, 15);
 		panel.add(lblNonMatchingPswrd);
-		lblNonMatchingPswrd.setForeground(Color.RED);
+		lblNonMatchingPswrd.setForeground(new Color(153, 0, 0));
 		lblNonMatchingPswrd.setFont(new Font("Dialog", Font.BOLD, 12));
 		lblNonMatchingPswrd.setVisible(false);
 		
@@ -78,33 +78,36 @@ public class PasswordGUI extends JPanel {
 		lblIncorrectPswrd.setBounds(560, 132, 158, 16);
 		panel.add(lblIncorrectPswrd);
 		lblIncorrectPswrd.setFont(new Font("Dialog", Font.BOLD, 12));
-		lblIncorrectPswrd.setForeground(Color.RED);
+		lblIncorrectPswrd.setForeground(new Color(153, 0, 0));
 		lblIncorrectPswrd.setVisible(false);
 		
 		JLabel btnChangePswrd = new JLabel("Current Password *");
+		btnChangePswrd.setHorizontalAlignment(SwingConstants.RIGHT);
 		btnChangePswrd.setBounds(305, 158, 158, 21);
 		panel.add(btnChangePswrd);
 		btnChangePswrd.setForeground(new Color(0, 0, 128));
-		btnChangePswrd.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		btnChangePswrd.setFont(new Font("Times New Roman", Font.PLAIN, 17));
 		
 		
 		JLabel lblNewPswrd = new JLabel("New Password*");
-		lblNewPswrd.setBounds(338, 244, 125, 21);
+		lblNewPswrd.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewPswrd.setBounds(338, 245, 125, 21);
 		panel.add(lblNewPswrd);
 		lblNewPswrd.setForeground(new Color(0, 0, 128));
-		lblNewPswrd.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblNewPswrd.setFont(new Font("Times New Roman", Font.PLAIN, 17));
 		
 		JLabel lblConfirmPswrd = new JLabel("Confirm Password*");
-		lblConfirmPswrd.setBounds(306, 329, 157, 21);
+		lblConfirmPswrd.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblConfirmPswrd.setBounds(305, 330, 157, 21);
 		panel.add(lblConfirmPswrd);
 		lblConfirmPswrd.setForeground(new Color(0, 0, 128));
-		lblConfirmPswrd.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblConfirmPswrd.setFont(new Font("Times New Roman", Font.PLAIN, 17));
 		
 		JLabel lblMissingPswrd = new JLabel("Failed, please fill in all required fields*");
 		lblMissingPswrd.setBounds(147, 511, 267, 30);
 		panel.add(lblMissingPswrd);
 		lblMissingPswrd.setFont(new Font("Lucida Grande", Font.PLAIN, 12));
-		lblMissingPswrd.setForeground(Color.RED);
+		lblMissingPswrd.setForeground(new Color(153, 0, 0));
 		lblMissingPswrd.setVisible(false);
 		
 		
@@ -119,7 +122,7 @@ public class PasswordGUI extends JPanel {
 		JLabel lblUnchangedpswrd = new JLabel("Please enter a new password");
 		lblUnchangedpswrd.setBounds(564, 108, 183, 31);
 		panel.add(lblUnchangedpswrd);
-		lblUnchangedpswrd.setForeground(Color.RED);
+		lblUnchangedpswrd.setForeground(new Color(153, 0, 0));
 		lblUnchangedpswrd.setFont(new Font("Dialog", Font.BOLD, 12));
 		lblUnchangedpswrd.setVisible(false);		
 		//JButtons
@@ -180,10 +183,10 @@ public class PasswordGUI extends JPanel {
 		add(btnLogOut);
 		
 		JButton btnChangePassword = new JButton("Change Password");
-		btnChangePassword.setBounds(722, 473, 167, 43);
+		btnChangePassword.setBounds(713, 410, 167, 43);
 		panel.add(btnChangePassword);
 		btnChangePassword.setForeground(new Color(0, 0, 128));
-		btnChangePassword.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		btnChangePassword.setFont(new Font("Times New Roman", Font.PLAIN, 17));
 		
 		// Buttons Action Listeners
 		
@@ -237,7 +240,6 @@ public class PasswordGUI extends JPanel {
 		btnReturned.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//librarySystem.updateGUI(new ReturnedGUI(librarySystem));
-				librarySystem.updateGUI(new PasswordGUI(librarySystem));
 			}
 		});
 		
@@ -261,8 +263,8 @@ public class PasswordGUI extends JPanel {
 		
 		btnAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AccountGUI ac= new AccountGUI();
-				librarySystem.updateGUI(ac);
+				
+				librarySystem.updateGUI(new ProfileGUI(librarySystem));
 			}
 		});
 		

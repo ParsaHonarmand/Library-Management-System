@@ -22,6 +22,11 @@ import javax.swing.JLabel;
 public class ProfileGUI extends JPanel {
 
 	private LibrarySystem librarySystem;
+	//Upper Tab Buttons Settings
+	int BUTTONS_Y=20;
+	int BUTTONS_W=120;
+	int BUTTONS_H=30;
+	int BUTTONS_D=BUTTONS_W+80;
 
 	/**
 	 * Create the panel.
@@ -31,141 +36,176 @@ public class ProfileGUI extends JPanel {
 		setForeground(new Color(51, 102, 153));
 		this.librarySystem = librarySystem;
 		
-		this.setBackground(new Color(102, 153, 204));
-		this.setBounds(0, 0, 1280, 720);
-		
-		JButton changePassword = new JButton("Change Password");
-		
-		JButton payFee = new JButton("Pay Fees");
-		payFee.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		
-		JButton materials = new JButton("Materials");
-		materials.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		
-		JButton reservations = new JButton("Reservations");
-		
-		JButton logout = new JButton("Logout");
-		logout.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		this.setBackground(new Color(255, 255, 255));
+		this.setBounds(0, 0, 1281, 721);
 		
 		UserManager user = librarySystem.getUserManager();
 		String id = "" + user.getCurrentUser().getId();
 		
-		JButton home = new JButton("Home"); //Fake button will be deleted later, show purpose 
-		
-		JButton browse = new JButton("Browse"); //Fake button will be deleted later, show purpose
-		
-		JButton account = new JButton("Account");
-		
-		JButton profile = new JButton("Profile");
-		
-		JLabel name = new JLabel("Your Name:");
-		
-		JLabel nameDisplay = new JLabel(user.getCurrentUser().getName());
-		
 		JLabel ID = new JLabel("Your ID:");
+		ID.setBounds(466, 282, 51, 16);
 		
 		JLabel email = new JLabel("Your Email:");
+		email.setBounds(466, 465, 71, 16);
 		
 		JLabel emailDisplay = new JLabel(user.getCurrentUser().getEmail());
+		emailDisplay.setBounds(612, 465, 73, 16);
 		
 		JLabel IDDisplay = new JLabel(id);
+		IDDisplay.setBounds(612, 282, 8, 16);
 		
 		JLabel username = new JLabel("Your Username:");
+		username.setBounds(466, 610, 99, 16);
 		
 		JLabel usernameDisplay = new JLabel(user.getCurrentUser().getUsername());
+		usernameDisplay.setBounds(612, 610, 73, 16);
 		
 		JLabel profilePic = new JLabel();
+		profilePic.setBounds(272, 130, 0, 0);
 		profilePic.setIcon(new ImageIcon("C:\\Users\\Prit Patel\\git\\library-system"));
-		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(home, GroupLayout.PREFERRED_SIZE, 377, GroupLayout.PREFERRED_SIZE)
-							.addGap(2)
-							.addComponent(browse, GroupLayout.PREFERRED_SIZE, 367, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(account, GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-								.addComponent(profile, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(changePassword, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(logout, Alignment.LEADING)
-								.addComponent(payFee, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(materials, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(reservations, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGap(306)
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addComponent(name)
-										.addComponent(ID)
-										.addComponent(email)
-										.addComponent(username))
-									.addGap(47)
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addComponent(emailDisplay)
-										.addComponent(nameDisplay)
-										.addComponent(IDDisplay)
-										.addComponent(usernameDisplay)))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGap(112)
-									.addComponent(profilePic)))
-							.addGap(469)))
-					.addContainerGap())
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(home)
-						.addComponent(browse)
-						.addComponent(account))
-					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(profile)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-							.addComponent(name)
-							.addComponent(nameDisplay)))
-					.addGap(13)
-					.addComponent(changePassword)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(payFee)
-						.addComponent(profilePic))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(materials)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(reservations)
-					.addGap(41)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(ID)
-						.addComponent(IDDisplay))
-					.addGap(167)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(emailDisplay)
-						.addComponent(email))
-					.addPreferredGap(ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(username)
-						.addComponent(usernameDisplay))
-					.addGap(59)
-					.addComponent(logout)
-					.addContainerGap())
-		);
-		setLayout(groupLayout);
+		setLayout(null);
+		
+		//JButtons
+
+
+		JButton btnHome = new JButton("Home");
+		btnHome.setBounds(80, 20, 120, 30);
+		btnHome.setForeground(new Color(0, 0, 128));
+		add(btnHome);
+		
+		JButton btnReturned = new JButton("Returned");
+		btnReturned.setBounds(280, 20, 120, 30);
+		btnReturned.setForeground(new Color(0, 0, 128));
+		add(btnReturned);
+		
+		JButton btnBrowse = new JButton("Browse");
+		btnBrowse.setBounds(480, 20, 120, 30);
+		btnBrowse.setForeground(new Color(0, 0, 128));
+		add(btnBrowse);
+		
+		JButton btnReceived = new JButton("Received");
+		btnReceived.setBounds(680, 20, 120, 30);
+		btnReceived.setForeground(new Color(0, 0, 128));
+		add(btnReceived);
+		
+		JButton btnOrder = new JButton("Order");
+		btnOrder.setBounds(880, 20, 120, 30);
+		btnOrder.setForeground(new Color(0, 0, 128));
+		add(btnOrder);
+		
+		JButton btnAccount = new JButton("Account");
+		btnAccount.setBounds(1080, 20, 120, 30);
+		btnAccount.setForeground(new Color(0, 0, 128));
+		add(btnAccount);
+		
+		JButton btnProfile = new JButton("Profile");
+		btnProfile.setBounds(36, 131, 158, 60);
+		add(btnProfile);
+		
+		JButton btnChanPswrdLeft = new JButton("Change Password");
+		btnChanPswrdLeft.setBounds(36, 238, 158, 60);
+		add(btnChanPswrdLeft);
+		
+		JButton btnPayFees = new JButton("Pay Fees");
+		btnPayFees.setBounds(36, 334, 158, 60);
+		add(btnPayFees);
+		
+		JButton btnMaterials = new JButton("Materials");
+		btnMaterials.setBounds(36, 428, 158, 60);
+		add(btnMaterials);
+		
+		JButton btnReservations = new JButton("Reservations");
+		btnReservations.setBounds(36, 527, 158, 60);
+		add(btnReservations);
+		
+		JButton btnLogOut = new JButton("Logout");
+		btnLogOut.setBounds(97, 641, 110, 43);
+		add(btnLogOut);
+		
+		btnHome.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				librarySystem.updateGUI(new HomeGUI(librarySystem));
+			}
+		});
+		btnReturned.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//librarySystem.updateGUI(new ReturnedGUI(librarySystem));
+			}
+		});
+		
+		btnBrowse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				librarySystem.updateGUI(new BrowseGUI(librarySystem));
+			}
+		});
+		
+		btnReceived.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//librarySystem.updateGUI(new ReceiveGUI(librarySystem));
+			}
+		});
+		
+		btnOrder.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				librarySystem.updateGUI(new OrderGUI(librarySystem));
+			}
+		});
+		
+		btnAccount.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				librarySystem.updateGUI(new ProfileGUI(librarySystem));
+			}
+		});
+		
+		btnPayFees.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new PayGUI(librarySystem);
+			}
+		});
+		
+		btnChanPswrdLeft.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				librarySystem.updateGUI(new PasswordGUI(librarySystem));
+			}
+		});
+		btnMaterials.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				librarySystem.updateGUI(new MaterialsGUI(librarySystem));
+			}
+		});
+		
+		btnReservations.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				librarySystem.updateGUI(new ReservationsGUI(librarySystem));
+			}
+		});
+		btnLogOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//librarySystem.updateGUI(new LogOutGUI(librarySystem));
+			}
+		});
 
 		this.librarySystem.updateGUI(this);
+		add(ID);
+		add(email);
+		add(username);
+		add(emailDisplay);
+		add(IDDisplay);
+		add(usernameDisplay);
+		add(profilePic);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(272, 111, 1003, 604);
+		panel.setBackground(new Color(102, 153, 204));
+		add(panel);
+		panel.setLayout(null);
+		
+		JLabel name = new JLabel("Your Name:");
+		name.setBounds(237, 63, 73, 16);
+		panel.add(name);
+		
+		JLabel nameDisplay = new JLabel(user.getCurrentUser().getName());
+		nameDisplay.setBounds(361, 63, 73, 16);
+		panel.add(nameDisplay);
 	}
 }

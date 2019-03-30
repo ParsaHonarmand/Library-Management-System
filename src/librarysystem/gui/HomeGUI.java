@@ -1,28 +1,18 @@
 package librarysystem.gui;
 
-import javax.swing.JPanel;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.BoxLayout;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.Icon;
-import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import librarysystem.LibrarySystem;
 import librarysystem.users.User;
-
-import javax.swing.JLabel;
-import javax.swing.ImageIcon;
-
-import java.awt.CardLayout;
-import java.awt.Color;
-import javax.swing.JTextPane;
-import java.awt.Font;
-import javax.swing.JTextField;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Panel;
-import javax.swing.SwingConstants;
 
 public class HomeGUI extends JPanel {
 	private LibrarySystem librarySystem;
@@ -135,20 +125,19 @@ public class HomeGUI extends JPanel {
 		});
 		btnReturned.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//librarySystem.updateGUI(new ReturnedGUI(librarySystem));
-				librarySystem.updateGUI(new PasswordGUI(librarySystem));
+				librarySystem.updateGUI(new ReturnGUI(librarySystem));
 			}
 		});
 		
 		btnBrowse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				librarySystem.updateGUI(new BrowseGUI(librarySystem));
+				new BrowseGUI(librarySystem);
 			}
 		});
 		
 		btnReceived.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//librarySystem.updateGUI(new ReceiveGUI(librarySystem));
+				librarySystem.updateGUI(new ReceiveGUI(librarySystem));
 			}
 		});
 		
@@ -178,7 +167,6 @@ public class HomeGUI extends JPanel {
 		
 		
 		add(panel);
-		// JLabels
 		
 
 				
@@ -189,3 +177,4 @@ public class HomeGUI extends JPanel {
 
 	}
 }
+
