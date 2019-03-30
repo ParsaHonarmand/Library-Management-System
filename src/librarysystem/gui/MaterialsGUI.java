@@ -47,7 +47,11 @@ public class MaterialsGUI extends JPanel {
 	private JTable tableMaterials;
 	private JTable tableHold;
 	private List<Material> tableContents = new ArrayList<>();
+	private List<Material> holdContents = new ArrayList<>();
 	private Material selectedMaterial = null;
+	private JMenuItem returnMenuItem = new JMenuItem("Return"), borrowMenuItem = new JMenuItem("Borrow"), renewMenuItem = new JMenuItem("Renew"), cancelMenuItem = new JMenuItem("Cancel");
+	private JPopupMenu menu;
+	private int selectedRow = -1;
 
 	public MaterialsGUI(LibrarySystem librarySystem) {
 		this.librarySystem = librarySystem;
@@ -55,7 +59,7 @@ public class MaterialsGUI extends JPanel {
 		
 		JButton profile = new JButton("Profile");
 		profile.setHorizontalAlignment(SwingConstants.LEFT);
-		profile.setBounds(0,0,100,100);
+		profile.setBounds(6,51,84,29);
 		profile.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -64,6 +68,7 @@ public class MaterialsGUI extends JPanel {
 		});
 		
 		JButton changePassword = new JButton("Change Password");
+		changePassword.setBounds(6, 92, 154, 29);
 		changePassword.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -72,6 +77,7 @@ public class MaterialsGUI extends JPanel {
 		});
 		
 		JButton payFee = new JButton("Pay Fees");
+		payFee.setBounds(6, 133, 97, 29);
 		payFee.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -80,6 +86,7 @@ public class MaterialsGUI extends JPanel {
 		});
 		
 		JButton materials = new JButton("Materials");
+		materials.setBounds(6, 174, 101, 29);
 		materials.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -88,6 +95,7 @@ public class MaterialsGUI extends JPanel {
 		});
 		
 		JButton reservations = new JButton("Reservations");
+		reservations.setBounds(6, 215, 124, 29);
 		reservations.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -95,6 +103,7 @@ public class MaterialsGUI extends JPanel {
 		});
 		
 		JButton logout = new JButton("Logout");
+		logout.setBounds(6, 652, 88, 29);
 		logout.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -103,6 +112,7 @@ public class MaterialsGUI extends JPanel {
 		});
 		
 		JButton btnHome = new JButton("Home");
+		btnHome.setBounds(166, 0, 174, 45);
 		btnHome.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnHome.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnHome.addMouseListener(new MouseAdapter() {
@@ -113,6 +123,7 @@ public class MaterialsGUI extends JPanel {
 		});
 		
 		JButton btnReturned = new JButton("Returned");
+		btnReturned.setBounds(346, 0, 170, 45);
 		btnReturned.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnReturned.addMouseListener(new MouseAdapter() {
 			@Override
@@ -121,6 +132,7 @@ public class MaterialsGUI extends JPanel {
 		});
 		
 		JButton btnBrowse = new JButton("Browse");
+		btnBrowse.setBounds(522, 0, 170, 45);
 		btnBrowse.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnBrowse.setBackground(Color.WHITE);
 		btnBrowse.setBackground(SystemColor.activeCaption);
@@ -132,6 +144,7 @@ public class MaterialsGUI extends JPanel {
 		});
 		
 		JButton btnOrder = new JButton("Order");
+		btnOrder.setBounds(698, 0, 185, 45);
 		btnOrder.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnOrder.addMouseListener(new MouseAdapter() {
 			@Override
@@ -141,6 +154,7 @@ public class MaterialsGUI extends JPanel {
 		});
 		
 		JButton btnReceived = new JButton("Received");
+		btnReceived.setBounds(889, 0, 222, 45);
 		btnReceived.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnReceived.addMouseListener(new MouseAdapter() {
 			@Override
@@ -149,6 +163,7 @@ public class MaterialsGUI extends JPanel {
 		});
 		
 		JButton btnAccount = new JButton("Account");
+		btnAccount.setBounds(1117, 0, 174, 45);
 		btnAccount.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnAccount.addMouseListener(new MouseAdapter() {
 			@Override
@@ -158,6 +173,7 @@ public class MaterialsGUI extends JPanel {
 		});
 		
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(0, 115, 342, 545);
 		scrollPane.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -165,6 +181,7 @@ public class MaterialsGUI extends JPanel {
 		});
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(360, 115, 387, 545);
 		scrollPane_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -173,18 +190,27 @@ public class MaterialsGUI extends JPanel {
 		
 
 		JComboBox stringSortBox = new JComboBox();
+		stringSortBox.setBounds(771, 109, 404, 44);
 		stringSortBox.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		stringSortBox.setModel(new DefaultComboBoxModel(new String[] { "Title", "Author" }));
 
 		JComboBox materialTypeSortBox = new JComboBox();
+		materialTypeSortBox.setBounds(771, 171, 404, 44);
 		materialTypeSortBox.setToolTipText("Select Material Type");
 		materialTypeSortBox.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		materialTypeSortBox.setModel(new DefaultComboBoxModel(MaterialType.values()));		
 
 		JLabel lblSortBy = new JLabel("Sort by:");
+		lblSortBy.setBounds(960, 80, 50, 17);
 		lblSortBy.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
+		JLabel lblCurrentMaterials = new JLabel("Current items");		
+		lblCurrentMaterials.setBounds(119, 81, 86, 16);
+		JLabel lblItemsOnHold = new JLabel("Items on hold");
+		lblItemsOnHold.setBounds(518, 81, 87, 16);
+
 		JButton btnSort = new JButton("Sort");
+		btnSort.setBounds(953, 233, 75, 29);
 		btnSort.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnSort.addMouseListener(new MouseAdapter() {
 			@Override
@@ -197,126 +223,12 @@ public class MaterialsGUI extends JPanel {
 		});
 		
 		JPanel profilePanel = new JPanel();
-		
-
-		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(profile)
-						.addComponent(changePassword)
-						.addComponent(payFee)
-						.addComponent(materials)
-						.addComponent(reservations)
-						.addComponent(logout))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(btnHome, GroupLayout.PREFERRED_SIZE, 174, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnReturned, GroupLayout.PREFERRED_SIZE, 170, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnBrowse, GroupLayout.PREFERRED_SIZE, 170, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnOrder, GroupLayout.PREFERRED_SIZE, 185, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnReceived, GroupLayout.PREFERRED_SIZE, 222, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnAccount, GroupLayout.PREFERRED_SIZE, 174, GroupLayout.PREFERRED_SIZE))
-						.addComponent(profilePanel, GroupLayout.PREFERRED_SIZE, 1190, Short.MAX_VALUE))
-					.addContainerGap(9, Short.MAX_VALUE))
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnHome, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnReturned, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnBrowse, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnOrder, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnReceived, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnAccount, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(profilePanel, GroupLayout.PREFERRED_SIZE, 789, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap())
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(profile)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(changePassword)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(payFee)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(materials)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(reservations)
-							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(logout)
-							.addGap(165))))
-		);
+		profilePanel.setBounds(166, 51, 1190, 789);
 
 		
-
-
-
-		
-		
-		
-		GroupLayout gl_profilePanel = new GroupLayout(profilePanel);
-		gl_profilePanel.setHorizontalGroup(
-			gl_profilePanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_profilePanel.createSequentialGroup()
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 342, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 387, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addGroup(gl_profilePanel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_profilePanel.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED, 191, Short.MAX_VALUE)
-							.addComponent(lblSortBy)
-							.addGap(194))
-						.addGroup(gl_profilePanel.createSequentialGroup()
-							.addGap(6)
-							.addGroup(gl_profilePanel.createParallelGroup(Alignment.TRAILING)
-								.addGroup(gl_profilePanel.createSequentialGroup()
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(gl_profilePanel.createParallelGroup(Alignment.LEADING)
-										.addComponent(stringSortBox, GroupLayout.PREFERRED_SIZE, 404, GroupLayout.PREFERRED_SIZE)
-										.addComponent(materialTypeSortBox, GroupLayout.PREFERRED_SIZE, 404, GroupLayout.PREFERRED_SIZE))
-									.addContainerGap(21, Short.MAX_VALUE))
-								.addGroup(gl_profilePanel.createSequentialGroup()
-									.addGap(182)
-									.addComponent(btnSort, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)
-									.addGap(176))))))
-		);
-		gl_profilePanel.setVerticalGroup(
-			gl_profilePanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_profilePanel.createSequentialGroup()
-					.addGroup(gl_profilePanel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_profilePanel.createSequentialGroup()
-							.addGap(80)
-							.addComponent(lblSortBy)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(stringSortBox, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(materialTypeSortBox, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(btnSort))
-						.addGroup(gl_profilePanel.createSequentialGroup()
-							.addGap(115)
-							.addGroup(gl_profilePanel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 545, GroupLayout.PREFERRED_SIZE)
-								.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 545, GroupLayout.PREFERRED_SIZE))))
-					.addContainerGap(129, Short.MAX_VALUE))
-		);
-		
+	
 		String[] columnMaterials = { "icon", "Materials" };
 		DefaultTableModel model = new DefaultTableModel(new Object[][] {}, columnMaterials) {
-			//  Returning the Class of each column will allow different
-			//  renderers to be used based on Class
 			public Class getColumnClass(int column) {
 				if (column == 0)
 					return Icon.class;
@@ -329,7 +241,7 @@ public class MaterialsGUI extends JPanel {
 				return false;
 			}
 		};
-
+		
 		scrollPane.setColumnHeaderView(tableMaterials);
 		tableMaterials = new JTable(model);
 		scrollPane.setViewportView(tableMaterials);
@@ -337,25 +249,24 @@ public class MaterialsGUI extends JPanel {
 		this.tableMaterials.setPreferredScrollableViewportSize(tableMaterials.getPreferredSize());
 		this.tableMaterials.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		this.tableMaterials.getColumnModel().getColumn(0).setMaxWidth(100);
-		//sort("Title", MaterialType.ALL);
+		
 
-		tableMaterials.addMouseListener(new MouseAdapter() {
-		@Override
+		this.tableMaterials.addMouseListener(new MouseAdapter() {
+			@Override
 			public void mouseClicked(MouseEvent e) {
 				System.out.println("button: " + e.getButton());
 				if (e.getButton() == MouseEvent.BUTTON3) {
-					int row = tableMaterials.rowAtPoint(e.getPoint());
-					System.out.println("row: " + row);
-					
-					selectedMaterial = tableContents.get(row);
-					
-					JPopupMenu menu = new JPopupMenu();
-					menu.add(new JMenuItem("Return"));
-					menu.add(new JMenuItem("Renew"));
+					selectedRow = tableMaterials.rowAtPoint(e.getPoint());
+					System.out.println("row: " + selectedRow);
+					selectedMaterial = tableContents.get(selectedRow);
 					menu.show(tableMaterials, e.getX(), e.getY());
+				}
 			}
-		}
-	});
+		});
+		
+		
+		
+		
 		
 		String[] columnHolds = { "icon", "On Hold" };
 		DefaultTableModel model1 = new DefaultTableModel(new Object[][] {}, columnHolds) {
@@ -374,50 +285,124 @@ public class MaterialsGUI extends JPanel {
 			}
 		};
 		
-		tableHold = new JTable (model1);
-		tableHold.setPreferredScrollableViewportSize(new Dimension(150, 0));
-		tableHold.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		this.tableHold = new JTable (model1);
+		this.tableHold.setPreferredScrollableViewportSize(new Dimension(150, 0));
+		this.tableHold.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		scrollPane.setColumnHeaderView(tableHold);
 		scrollPane_1.setViewportView(tableHold);
 		
-		//scrollPane_1.setColumnHeaderView(tableHold);
 		this.tableHold.setPreferredScrollableViewportSize(tableHold.getPreferredSize());
 		this.tableHold.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		this.tableHold.getColumnModel().getColumn(0).setMaxWidth(100);
 		sort("Title", MaterialType.ALL);
 
-		tableHold.addMouseListener(new MouseAdapter() {
-		@Override
+		
+		this.tableHold.addMouseListener(new MouseAdapter() {
+			@Override
 			public void mouseClicked(MouseEvent e) {
 				System.out.println("button: " + e.getButton());
 				if (e.getButton() == MouseEvent.BUTTON3) {
-					int row = tableMaterials.rowAtPoint(e.getPoint());
-					System.out.println("row: " + row);
-					
-					selectedMaterial = tableContents.get(row);
-					
-					JPopupMenu menu = new JPopupMenu();
-					menu.add(new JMenuItem("Borrow"));
-					menu.add(new JMenuItem("Cancel"));
+					selectedRow = tableHold.rowAtPoint(e.getPoint());
+					System.out.println("row: " + selectedRow);
+					selectedMaterial = tableContents.get(selectedRow);
 					menu.show(tableHold, e.getX(), e.getY());
+				}
 			}
-		}
-	});
+		});
 		
+		sort("Title", MaterialType.ALL);
+		
+		this.menu = new JPopupMenu();
+		this.menu.add(this.returnMenuItem);
+		this.menu.add(this.renewMenuItem);
+		this.menu.add(this.cancelMenuItem);
+		this.menu.add(this.borrowMenuItem);
+		this.setupPopupMenu();
 
-		profilePanel.setLayout(gl_profilePanel);
-		setLayout(groupLayout);
+		
+		
+		profilePanel.setLayout(null);
+		profilePanel.add(scrollPane);
+		profilePanel.add(scrollPane_1);
+		profilePanel.add(lblCurrentMaterials);
+		profilePanel.add(lblItemsOnHold);
+		profilePanel.add(lblSortBy);
+		profilePanel.add(stringSortBox);
+		profilePanel.add(materialTypeSortBox);
+		profilePanel.add(btnSort);
+		setLayout(null);
+		add(profile);
+		add(changePassword);
+		add(payFee);
+		add(materials);
+		add(reservations);
+		add(logout);
+		add(btnHome);
+		add(btnReturned);
+		add(btnBrowse);
+		add(btnOrder);
+		add(btnReceived);
+		add(btnAccount);
+		add(profilePanel);
+		
 		this.librarySystem.updateGUI(this);
 	}
 	
+	public void setupPopupMenu() {
+		
+		this.returnMenuItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				librarySystem.getMaterialManager().returnMaterial(librarySystem.getUserManager().getCurrentUser(), selectedMaterial);
+				((DefaultTableModel) tableMaterials.getModel()).removeRow(selectedRow);
+				selectedRow = -1;
+				menu.hide();
+			}});
+
+		this.borrowMenuItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				librarySystem.getMaterialManager().borrowMaterial(librarySystem.getUserManager().getCurrentUser(), selectedMaterial);
+				((DefaultTableModel) tableHold.getModel()).removeRow(selectedRow);
+				selectedRow = -1;
+				menu.hide();
+			}
+		});
+		
+		this.renewMenuItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				librarySystem.getMaterialManager().putOnHold(librarySystem.getUserManager().getCurrentUser(), selectedMaterial);
+				((DefaultTableModel) tableMaterials.getModel()).removeRow(selectedRow);
+				selectedRow = -1;
+				menu.hide();
+			}
+		});
+		
+		this.cancelMenuItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				librarySystem.getMaterialManager().reshelveMaterial(selectedMaterial);
+				((DefaultTableModel) tableHold.getModel()).removeRow(selectedRow);
+				selectedRow = -1;
+				menu.hide();
+			}
+		});
+		
+	}
+
 	
 	public void sort(String stringSort, MaterialType materialType) {
 	this.tableContents.clear();
+	List<Material> userBorrowed = this.librarySystem.getUserManager().getCurrentUser().getOnHold();
+	this.tableContents = userBorrowed;
+	
 	if (materialType == MaterialType.ALL) {
 		this.tableContents = librarySystem.getMaterialManager().getUniqueMaterials(MaterialStatus.AVAILABLE);
 	} else {
 		this.tableContents = librarySystem.getMaterialManager().getUniqueMaterials(MaterialStatus.AVAILABLE, materialType);
 	}
-
+	
 	if (stringSort.equalsIgnoreCase("Title")) {
 		this.tableContents.sort(new TitleComparator());
 	} else if (stringSort.equalsIgnoreCase("Author")) {
@@ -430,6 +415,14 @@ public class MaterialsGUI extends JPanel {
 	}
 	for (int i = 0; i < this.tableContents.size(); i++) {
 		model.addRow(new Object[] { null, this.tableContents.get(i).getNiceName() });
+	}
+	
+	DefaultTableModel model1 = (DefaultTableModel) tableHold.getModel();
+	for (int i = model1.getRowCount() - 1; i >= 0; i--) {
+		model1.removeRow(i);
+	}
+	for (int i = 0; i < this.tableContents.size(); i++) {
+		model1.addRow(new Object[] { null, this.tableContents.get(i).getNiceName() });
 	}
 }
 }
