@@ -41,8 +41,14 @@ import java.awt.Font;
 import java.awt.Dimension;
 import javax.swing.UIManager;
 
+/**
+ * GUI class for users to manage their materials (renew, cancel, borrow, return)
+ * @author Parsa Honarmand
+ * @author Rory SKipper
+ */
 public class MaterialsGUI extends JPanel {
-
+	
+	//fields
 	private final LibrarySystem librarySystem;
 	
 	private JTable tableMaterials;
@@ -54,6 +60,11 @@ public class MaterialsGUI extends JPanel {
 	private JPopupMenu menu;
 	private int selectedRow = -1;
 
+	/**
+	 * Constructor that creates the GUI including buttons, Jtables, Jmenus, etc
+	 * @param librarySystem creates an instance of LibrarySystem
+	 * 
+	 */
 	public MaterialsGUI(LibrarySystem librarySystem) {
 		this.librarySystem = librarySystem;
 		this.setBounds(0, 0, 1365, 730);
@@ -339,6 +350,10 @@ public class MaterialsGUI extends JPanel {
 		this.librarySystem.updateGUI(this);
 	}
 	
+	/**
+	 * method to create all the options when a material is right-clicked
+	 * @return void
+	 */
 	public void setupPopupMenu() {
 		
 		this.returnMenuItem.addActionListener(new ActionListener() {
@@ -383,6 +398,11 @@ public class MaterialsGUI extends JPanel {
 	}
 
 	
+	/**
+	 * method to sort the materials based on title/author and material type
+	 * @param stringSort
+	 * @param materialType
+	 */
 	public void sort(String stringSort, MaterialType materialType) {
 	this.tableContents.clear();
 	List<Material> userBorrowed = this.librarySystem.getUserManager().getCurrentUser().getOnHold();
