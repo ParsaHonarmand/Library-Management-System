@@ -30,6 +30,13 @@ import java.awt.SystemColor;
 import java.awt.Color;
 import javax.swing.UIManager;
 
+
+/**
+ * This class displays information about books that are on order
+ * and allows the operator to select those books to update the status to available
+ * @author jadon
+ *
+ */
 public class ReceiveGUI extends JPanel {
 	private final LibrarySystem librarySystem;
 
@@ -38,7 +45,12 @@ public class ReceiveGUI extends JPanel {
 	private JTable table;
 
 	/**
-	 * Create the panel.
+	 * Constructor that creates jpanel and elements including:
+	 * @param LibrarySystem - object that contains setter, getters, and managers
+	 * navigation buttons 
+	 * table displaying book information and check box
+	 * button to receive selected material
+	 *  
 	 */
 	public ReceiveGUI(LibrarySystem librarySystem) {
 		this.librarySystem = librarySystem;
