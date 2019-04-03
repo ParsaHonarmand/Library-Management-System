@@ -100,16 +100,13 @@ public class ReturnGUI extends JPanel {
 				librarySystem.updateGUI(new ReturnGUI(librarySystem));
 			}
 		});
-		btnReturn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		btnReturn.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		
 		JButton btnBrowse = new JButton("Browse");
 		btnBrowse.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
+				new BrowseGUI(librarySystem);
 			}
 		});
 		btnBrowse.setFont(new Font("Tahoma", Font.PLAIN, 17));
@@ -158,5 +155,6 @@ public class ReturnGUI extends JPanel {
 		scrollPane.setRowHeaderView(scrollBar);
 		setLayout(groupLayout);
 
+		this. librarySystem.updateGUI(this);
 	}
 }

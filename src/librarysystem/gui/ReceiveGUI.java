@@ -40,8 +40,6 @@ public class ReceiveGUI extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	
-
 	public ReceiveGUI(LibrarySystem librarySystem) {
 		this.librarySystem = librarySystem;
 		
@@ -68,12 +66,8 @@ public class ReceiveGUI extends JPanel {
 			
 		};
 		
-
-		
-		
 		JScrollPane scrollPane = new JScrollPane();
 		
-
 		for (Material M : librarySystem.getMaterialManager().getMaterials(MaterialStatus.ON_ORDER)) {
 			model.addRow(new Object[] { null, M.getNiceName(), M.getId(), false});
 		}
@@ -81,11 +75,8 @@ public class ReceiveGUI extends JPanel {
 		this.table.setPreferredScrollableViewportSize(table.getPreferredSize());
 		this.table.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		this.table.getColumnModel().getColumn(0).setMaxWidth(100);
-
 		
 		scrollPane.setViewportView(this.table);
-		
-		this.librarySystem.updateGUI(this);
 		
 		JButton btnRecieveSelectedMaterials = new JButton("Recieve Selected Materials");
 		btnRecieveSelectedMaterials.addMouseListener(new MouseAdapter() {
@@ -109,7 +100,7 @@ public class ReceiveGUI extends JPanel {
 		btnHome.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				librarySystem.updateGUI(new HomeGUI(librarySystem));
+				new HomeGUI(librarySystem);
 			}
 		});
 		btnHome.setFont(new Font("Tahoma", Font.PLAIN, 17));
@@ -118,7 +109,7 @@ public class ReceiveGUI extends JPanel {
 		btnReturned.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				//librarySystem.updateGUI(new ReturnedGUI(librarySystem));
+				new ReturnGUI(librarySystem);
 			}
 		});
 		btnReturned.setFont(new Font("Tahoma", Font.PLAIN, 17));
@@ -127,7 +118,7 @@ public class ReceiveGUI extends JPanel {
 		btnBrowse.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				librarySystem.updateGUI(new BrowseGUI(librarySystem));
+				new BrowseGUI(librarySystem);
 			}
 		});
 		btnBrowse.setFont(new Font("Tahoma", Font.PLAIN, 17));
@@ -137,25 +128,19 @@ public class ReceiveGUI extends JPanel {
 		btnOrder.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				librarySystem.updateGUI(new OrderGUI(librarySystem));
+				new OrderGUI(librarySystem);
 			}
 		});
 		btnOrder.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		
 		JButton btnReceive = new JButton("Received");
-		btnReceive.setEnabled(false);
-		btnReceive.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-			}
-		});
 		btnReceive.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		
 		JButton btnAccount = new JButton("Account");
 		btnAccount.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				librarySystem.updateGUI(new AccountGUI(librarySystem));
+				new ProfileGUI(librarySystem);
 			}
 		});
 		btnAccount.setFont(new Font("Tahoma", Font.PLAIN, 17));
@@ -205,8 +190,6 @@ public class ReceiveGUI extends JPanel {
 		scrollPane.setRowHeaderView(scrollBar);
 		setLayout(groupLayout);
 		
-
-
-		
+		this.librarySystem.updateGUI(this);
 	}
 }

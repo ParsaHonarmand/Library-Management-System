@@ -31,10 +31,10 @@ import java.awt.SystemColor;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import librarysystem.materials.MaterialType;
+import librarysystem.searching.AuthorComparator;
+import librarysystem.searching.TitleComparator;
 import librarysystem.users.UserType;
 import librarysystem.users.faculty.Instructor;
-import searching.AuthorComparator;
-import searching.TitleComparator;
 
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
@@ -80,10 +80,7 @@ public class BrowseGUI extends JPanel {
 		btnReturned.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
-			}
-		});
-		btnReturned.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+				new ReturnGUI(librarySystem);
 			}
 		});
 
@@ -105,6 +102,7 @@ public class BrowseGUI extends JPanel {
 		btnReceived.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
+				new ReceiveGUI(librarySystem);
 			}
 		});
 
@@ -368,6 +366,16 @@ public class BrowseGUI extends JPanel {
 					selectedRow = table.rowAtPoint(e.getPoint());
 					System.out.println("row: " + selectedRow);
 					selectedMaterial = tableContents.get(selectedRow);
+					menu = new JPopupMenu();
+					menu.add(holdMenuItem);
+					menu.add(borrowMenuItem);
+					UserType userType = librarySystem.getUserManager().getCurrentUser().getUserType();
+					if (userType == UserType.INSTRUCTOR) {
+						menu.add(reserveMenuItem);
+					} else if (userType == UserType.LIBRARIAN) {
+						menu.add(orderMenuItem);
+					}
+
 					menu.show(table, e.getX(), e.getY());
 				}
 			}

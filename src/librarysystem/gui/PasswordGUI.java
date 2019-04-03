@@ -34,7 +34,9 @@ public class PasswordGUI extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public PasswordGUI() {
+	public PasswordGUI(LibrarySystem librarySystem) {
+		this.librarySystem = librarySystem;
+		
 		setBackground(new Color(255, 255, 255));
 		setForeground(Color.WHITE);;;;
 		setLayout(null);
@@ -234,78 +236,63 @@ public class PasswordGUI extends JPanel {
 		
 		btnHome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				librarySystem.updateGUI(new HomeGUI(librarySystem));
+				new HomeGUI(librarySystem);
 			}
 		});
 		btnReturned.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//librarySystem.updateGUI(new ReturnedGUI(librarySystem));
+				new ReturnGUI(librarySystem);
 			}
 		});
 		
 		btnBrowse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				librarySystem.updateGUI(new BrowseGUI(librarySystem));
+				new BrowseGUI(librarySystem);
 			}
 		});
 		
 		btnReceived.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//librarySystem.updateGUI(new ReceiveGUI(librarySystem));
+				new ReceiveGUI(librarySystem);
 			}
 		});
 		
 		btnOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				librarySystem.updateGUI(new OrderGUI(librarySystem));
+				new OrderGUI(librarySystem);
 			}
 		});
 		
 		btnAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				librarySystem.updateGUI(new ProfileGUI(librarySystem));
+				new ProfileGUI(librarySystem);
 			}
 		});
 		
 		btnPayFees.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				librarySystem.updateGUI(new PayGUI(librarySystem));
+				new PayGUI(librarySystem);
 			}
 		});
 		
-		btnChanPswrdLeft.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				librarySystem.updateGUI(new PasswordGUI(librarySystem));
-			}
-		});
 		btnMaterials.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				librarySystem.updateGUI(new MaterialsGUI(librarySystem));
+				new MaterialsGUI(librarySystem);
 			}
 		});
 		
 		btnReservations.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				librarySystem.updateGUI(new ReservationsGUI(librarySystem));
+				new ReservationsGUI(librarySystem);
 			}
 		});
 		btnLogOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//librarySystem.updateGUI(new LogOutGUI(librarySystem));
+				librarySystem.getUserManager().logout();
+				new LoginGUI(librarySystem);
 			}
 		});
-
-
-
-
 		
-
-	}
-	public PasswordGUI(LibrarySystem librarySystem) {
-		this();
-		this.librarySystem = librarySystem;
-		librarySystem.updateGUI(this);
-		
+		this.librarySystem.updateGUI(this);
 	}
 }

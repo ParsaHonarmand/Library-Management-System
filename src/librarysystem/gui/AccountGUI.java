@@ -29,29 +29,25 @@ import javax.swing.SwingConstants;
 import java.awt.Panel;
 
 public class AccountGUI extends JPanel {
-	
+
 	private LibrarySystem librarySystem;
 
 	/**
 	 * Create the panel.
 	 */
 	public AccountGUI(LibrarySystem librarySystem) {
-		this();
-		
 		this.librarySystem = librarySystem;
-		librarySystem.updateGUI(this);
-
-	}
-	
-	public AccountGUI()
-	{
+		
 		this.setBackground(Color.WHITE);
 		this.setBounds(0, 0, 1075, 747);
-		
+
+		/**
+		 * Setting buttons for further implementation
+		 */
 		JButton profile = new JButton("Profile");
 		profile.setHorizontalAlignment(SwingConstants.LEFT);
-		profile.setBounds(0,0,100,100);
-		
+		profile.setBounds(0, 0, 100, 100);
+
 		JButton changePassword = new JButton("Change Password");
 		changePassword.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -59,39 +55,49 @@ public class AccountGUI extends JPanel {
 			}
 		});
 		JButton payFee = new JButton("Pay Fees");
-		payFee.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		payFee.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				new PayGUI(librarySystem);
 			}
 		});
-		
+
 		JButton materials = new JButton("Materials");
-		materials.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		materials.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				new MaterialsGUI(librarySystem);
 			}
 		});
-		
+
 		JButton reservations = new JButton("Reservations");
-		
+
 		JButton logout = new JButton("Logout");
 		logout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
+		
+		/**
+		 * Setting panel characteristics via groupLayout
+		 */
+		JPanel profilePanel = new JPanel();
 		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-		)));
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
+		groupLayout
+				.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout
+								.createSequentialGroup().addContainerGap().addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addComponent(profile).addComponent(changePassword).addComponent(payFee)
+										.addComponent(materials).addComponent(reservations).addComponent(logout))
+								.addGap(58).addComponent(profilePanel, GroupLayout.DEFAULT_SIZE, 858, Short.MAX_VALUE).addContainerGap()));
+		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout.createSequentialGroup().addGap(50)
+				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addComponent(profilePanel, GroupLayout.DEFAULT_SIZE, 684, Short.MAX_VALUE)
+						.addGroup(groupLayout.createSequentialGroup().addComponent(profile).addPreferredGap(ComponentPlacement.UNRELATED).addComponent(changePassword).addPreferredGap(ComponentPlacement.UNRELATED)
+								.addComponent(payFee).addPreferredGap(ComponentPlacement.UNRELATED).addComponent(materials).addPreferredGap(ComponentPlacement.UNRELATED).addComponent(reservations)
+								.addPreferredGap(ComponentPlacement.RELATED, 482, Short.MAX_VALUE).addComponent(logout)))
+				.addContainerGap()));
 
-					.addContainerGap())
-		);
 		setLayout(groupLayout);
-		
-		
+
+		this.librarySystem.updateGUI(this);
 	}
 }

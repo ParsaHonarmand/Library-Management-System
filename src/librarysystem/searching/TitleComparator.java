@@ -1,4 +1,4 @@
-package searching;
+package librarysystem.searching;
 
 import java.util.Comparator;
 

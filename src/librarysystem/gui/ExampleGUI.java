@@ -11,19 +11,16 @@ public class ExampleGUI extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public ExampleGUI() {
+	
+	// Simply add the librarySystem as a parameter to the already generated constructor that winder builder makes for you
+	public ExampleGUI(LibrarySystem librarySystem) {
+		this.librarySystem = librarySystem;
 		
 		JButton btnNewButton = new JButton("s");
 		add(btnNewButton);
 
-	}
-	
-	public ExampleGUI(LibrarySystem librarySystem) {
-		this();
-		
-		this.librarySystem = librarySystem;
-		librarySystem.updateGUI(this);
-		
+		// update gui after setup
+		this.librarySystem.updateGUI(this);
 	}
 
 }

@@ -83,9 +83,6 @@ public class LoginGUI extends JPanel {
 		passwordField.setMinimumSize(dimension);
 		passwordField.setMaximumSize(dimension);
 		
-
-		
-		
 		JButton btnLogin = new JButton("Login");
 		btnLogin.setBounds(423, 220, 175, 46);
 		panel.add(btnLogin);
@@ -103,11 +100,12 @@ public class LoginGUI extends JPanel {
 		});
 		btnLogin.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		
-		
-		
 		JLabel bckgGifImg = new JLabel("");
 		bckgGifImg.setBounds(0, 0, 1280, 720);
 		add(bckgGifImg);
 		bckgGifImg.setIcon(new ImageIcon("resources/libwall.jpg"));
+		
+
+		this.librarySystem.updateGUI(this);
 	}
 }

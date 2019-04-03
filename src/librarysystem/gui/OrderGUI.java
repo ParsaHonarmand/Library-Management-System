@@ -30,40 +30,53 @@ import java.awt.Color;
 
 public class OrderGUI extends JPanel {
 	
-	private LibrarySystem LS;
+	private LibrarySystem librarySystem;
 	private JTextField txtIdWarning;
 
 	/**
 	 * Create the panel.
 	 */
-	public OrderGUI(LibrarySystem LS) {
-		this();
-		this.LS = LS;
-		LS.updateGUI(this);
-	}
-	public OrderGUI() {
+	public OrderGUI(LibrarySystem librarySystem) {
+		this.librarySystem = librarySystem;
 		
 		JButton btnHome = new JButton("Home");
+		btnHome.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				new HomeGUI(librarySystem);
+			}
+		});
 		
 		JButton btnReturn = new JButton("Return");
 		btnReturn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				new ReturnGUI(librarySystem);
 			}
 		});
 		
 		JButton btnBrowse = new JButton("Browse");
+		btnBrowse.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				new BrowseGUI(librarySystem);
+			}
+		});
 		
 		JButton btnOrder = new JButton("Order");
 		
 		JButton btnAccount = new JButton("Account");
-		btnAccount.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnAccount.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				new ProfileGUI(librarySystem);
 			}
 		});
 		
 		JButton btnReceived = new JButton("Received");
-		btnReceived.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		btnReceived.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				new ReceiveGUI(librarySystem);
 			}
 		});
 		
@@ -105,8 +118,8 @@ public class OrderGUI extends JPanel {
 					}
 					
 					
-					Material M = new Material(txtpnTitle.getText(), txtpnAuthor.getText(), txtpnId.getText(), intEdition, LS.getMaterialManager().getNextBarcode(), MaterialStatus.ON_ORDER, (MaterialType)comboBox.getSelectedItem(), -1L, -1L);
-					LS.getMaterialManager().addMaterial(M);
+					Material M = new Material(txtpnTitle.getText(), txtpnAuthor.getText(), txtpnId.getText(), intEdition, librarySystem.getMaterialManager().getNextBarcode(), MaterialStatus.ON_ORDER, (MaterialType)comboBox.getSelectedItem(), -1L, -1L);
+					librarySystem.getMaterialManager().addMaterial(M);
 					System.out.println("item ordered");
 				}
 			});
@@ -185,6 +198,7 @@ public class OrderGUI extends JPanel {
 					.addGap(292))
 		);
 		setLayout(groupLayout);
-
+		
+		this.librarySystem.updateGUI(this);
 	}
 }
