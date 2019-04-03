@@ -41,6 +41,9 @@ public class AccountGUI extends JPanel {
 		this.setBackground(Color.WHITE);
 		this.setBounds(0, 0, 1075, 747);
 
+		/**
+		 * Setting buttons for further implementation
+		 */
 		JButton profile = new JButton("Profile");
 		profile.setHorizontalAlignment(SwingConstants.LEFT);
 		profile.setBounds(0, 0, 100, 100);
@@ -74,7 +77,10 @@ public class AccountGUI extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-
+		
+		/**
+		 * Setting panel characteristics via groupLayout
+		 */
 		JPanel profilePanel = new JPanel();
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout
@@ -89,6 +95,7 @@ public class AccountGUI extends JPanel {
 								.addComponent(payFee).addPreferredGap(ComponentPlacement.UNRELATED).addComponent(materials).addPreferredGap(ComponentPlacement.UNRELATED).addComponent(reservations)
 								.addPreferredGap(ComponentPlacement.RELATED, 482, Short.MAX_VALUE).addComponent(logout)))
 				.addContainerGap()));
+
 		setLayout(groupLayout);
 
 		this.librarySystem.updateGUI(this);

@@ -17,6 +17,8 @@ import librarysystem.managers.UserManager;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+
 import javax.swing.JLabel;
 
 public class ProfileGUI extends JPanel {
@@ -31,7 +33,11 @@ public class ProfileGUI extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-
+	
+	/**
+	 * Providing user information about their own account eg: ID, Name, Username
+	 * @param librarySystem
+	 */
 	public ProfileGUI(LibrarySystem librarySystem) {
 		setForeground(new Color(51, 102, 153));
 		this.librarySystem = librarySystem;
@@ -41,9 +47,6 @@ public class ProfileGUI extends JPanel {
 		
 		UserManager user = librarySystem.getUserManager();
 		String id = "" + user.getCurrentUser().getId();
-		
-		JLabel ID = new JLabel("Your ID:");
-		ID.setBounds(466, 282, 51, 16);
 		
 		JLabel email = new JLabel("Your Email:");
 		email.setBounds(466, 465, 71, 16);
@@ -62,12 +65,12 @@ public class ProfileGUI extends JPanel {
 		
 		JLabel profilePic = new JLabel();
 		profilePic.setBounds(272, 130, 0, 0);
-		profilePic.setIcon(new ImageIcon("C:\\Users\\Prit Patel\\git\\library-system"));
+		profilePic.setIcon(new ImageIcon("resources/profile pic.jpg"));
 		setLayout(null);
 		
-		//JButtons
-
-
+		/**
+		 * Prop banner buttons for prototype use only + utility buttons that shall be implemented towards user stories 
+		 */
 		JButton btnHome = new JButton("Home");
 		btnHome.setBounds(80, 20, 120, 30);
 		btnHome.setForeground(new Color(0, 0, 128));
@@ -122,6 +125,9 @@ public class ProfileGUI extends JPanel {
 		btnLogOut.setBounds(97, 641, 110, 43);
 		add(btnLogOut);
 		
+		/**
+		 * Adding action listeners to the buttons above such that they redirect the user to a different panel
+		 */
 		btnHome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new HomeGUI(librarySystem);
@@ -185,8 +191,10 @@ public class ProfileGUI extends JPanel {
 				new LoginGUI(librarySystem);
 			}
 		});
-
-		add(ID);
+		
+		/**
+		 * Adding user info to the panel
+		 */
 		add(email);
 		add(username);
 		add(emailDisplay);
@@ -194,8 +202,11 @@ public class ProfileGUI extends JPanel {
 		add(usernameDisplay);
 		add(profilePic);
 		
+		/**
+		 * Setting JPanel characteristics 
+		 */
 		JPanel panel = new JPanel();
-		panel.setBounds(272, 111, 1003, 604);
+		panel.setBounds(235, 104, 1003, 604);
 		panel.setBackground(new Color(102, 153, 204));
 		add(panel);
 		panel.setLayout(null);
@@ -208,6 +219,11 @@ public class ProfileGUI extends JPanel {
 		nameDisplay.setBounds(361, 63, 73, 16);
 		panel.add(nameDisplay);
 		
+		JLabel ID = new JLabel("Your ID:");
+		ID.setBounds(241, 178, 51, 16);
+		panel.add(ID);
+		
 		this.librarySystem.updateGUI(this);
 	}
 }
+
