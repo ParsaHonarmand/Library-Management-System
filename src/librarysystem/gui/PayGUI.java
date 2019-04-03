@@ -46,7 +46,7 @@ public class PayGUI extends JPanel {
 	private JTextField cvcField;
 	private JTextField firstNameField;
 	private JTextField lastNameField;
-	private JLabel lblFeesToBePaid = new JLabel("");
+
 
 	/**
 	 * Constructor creates the panel, buttons, textfields, etc. 
@@ -171,14 +171,20 @@ public class PayGUI extends JPanel {
 		lastNameField.setColumns(10);
 
 		JLabel lblError = new JLabel("Please enter all your info");
-		lblError.setBounds(280, 365, 155, 16);
+		lblError.setBounds(280, 365, 195, 16);
 		lblError.setVisible(false);
-
+		
+		JLabel lblFeesToBePaid = new JLabel("");
+		lblFeesToBePaid.setBounds(338, 64, 150, 16);
+		
 		User currentUser = librarySystem.getUserManager().getCurrentUser();
 		double fee = currentUser.getOverdueFee();
-
+		String feeString = new Double(fee).toString();
+		
+		lblFeesToBePaid.setText(feeString);
+			
 		JButton btnPay = new JButton("Pay");
-		btnPay.setBounds(308, 318, 75, 29);
+		btnPay.setBounds(316, 312, 75, 29);
 		btnPay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -218,8 +224,6 @@ public class PayGUI extends JPanel {
 		profilePanel.add(lblExpiryDate);
 		profilePanel.add(lblCard);
 		profilePanel.add(lblOutstandingFees);
-		lblFeesToBePaid.setBounds(280, 64, 0, 0);
-		profilePanel.add(lblFeesToBePaid);
 		profilePanel.add(cardNumberField);
 		profilePanel.add(expiryDateField);
 		profilePanel.add(cvcField);
@@ -227,6 +231,7 @@ public class PayGUI extends JPanel {
 		profilePanel.add(lastNameField);
 		profilePanel.add(lblError);
 		profilePanel.add(btnPay);
+		profilePanel.add(lblFeesToBePaid);
 		add(btnHome);
 		add(btnBrowse);
 		add(btnAccount);

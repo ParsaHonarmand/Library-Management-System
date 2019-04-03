@@ -44,7 +44,7 @@ import javax.swing.UIManager;
 /**
  * GUI class for users to manage their materials (renew, cancel, borrow, return)
  * @author Parsa Honarmand
- * @author Rory SKipper
+ * @author Rory Skipper
  */
 public class MaterialsGUI extends JPanel {
 	
