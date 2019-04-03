@@ -45,13 +45,17 @@ public class HomeGUI extends JPanel {
 		int INFOS_W=70;
 		this.librarySystem = librarySystem;
 		
-	
+		/**
+		 * Setting panel characteristics 
+		 */
 		JPanel panel = new JPanel();
 		panel.setBounds(15, 220, 1250, 707);
 		panel.setBackground(new Color(255, 255, 255));
 		setBackground(new Color(220, 220, 220));
 		
-		
+		/**
+		 * Setting labels that display information as well as inserting pictures on to the panel
+		 */
 		JLabel lblHours = new JLabel("");
 		lblHours.setBounds(260, 270, 814, 78);
 		lblHours.setIcon(new ImageIcon("resources/picHours.png"));
@@ -83,6 +87,9 @@ public class HomeGUI extends JPanel {
 		lblAccountInfo.setBounds(650, 365, 239, 46);
 		add(lblAccountInfo); 
 		
+		/**
+		 * Label used to put accountInfo in
+		 */
 		JLabel accountInfo = new JLabel("");
 		accountInfo.setBounds(650, 420, 468, 78);
 		accountInfo.setHorizontalAlignment(SwingConstants.LEFT);
@@ -91,7 +98,9 @@ public class HomeGUI extends JPanel {
 		accountInfo.setText(accountInfoTxt);
 		add(accountInfo);
 		
-		//JButtons
+		/**
+		 * General buttons constant throughout all panels
+		 */
 		JButton btnHome = new JButton("Home");
 		btnHome.setBounds(80, 225, 120, 30);
 		btnHome.setForeground(new Color(0, 0, 128));
@@ -116,7 +125,9 @@ public class HomeGUI extends JPanel {
 		btnAccount.setBounds(1080, 225, 120, 30);
 		btnAccount.setForeground(new Color(0, 0, 128));
 		
-		// Buttons Action Listeners
+		/**
+		 * Action listeners to invoke any panel called 
+		 */
 		
 		btnHome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -152,6 +163,10 @@ public class HomeGUI extends JPanel {
 				librarySystem.updateGUI(new ProfileGUI(librarySystem));
 			}
 		});
+		
+		/**
+		 * Adding all components onto the panel
+		 */
 		add(lblHours);
 		add(lblEmail);
 		add(lblService);
@@ -164,7 +179,6 @@ public class HomeGUI extends JPanel {
 		add(lblContact);
 		add(lblGeneralInfo);
 		add(lblBanner);
-		
 		add(panel);
 		
 		librarySystem.updateGUI(this);

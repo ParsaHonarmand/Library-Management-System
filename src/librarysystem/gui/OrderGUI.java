@@ -39,6 +39,9 @@ public class OrderGUI extends JPanel {
 	public OrderGUI(LibrarySystem librarySystem) {
 		this.librarySystem = librarySystem;
 		
+		/**
+		 * Buttons consistent throughout all panels 
+		 */
 		JButton btnHome = new JButton("Home");
 		btnHome.addMouseListener(new MouseAdapter() {
 			@Override
@@ -80,6 +83,9 @@ public class OrderGUI extends JPanel {
 			}
 		});
 		
+		/**
+		 * TextFeilds for data input to track orders and users responsible for them
+		 */
 		JTextPane txtpnId = new JTextPane();
 		txtpnId.setText("ID");
 		
@@ -124,6 +130,9 @@ public class OrderGUI extends JPanel {
 				}
 			});
 		
+			/**
+			 * Setting panel characteristics 
+			 */
 		txtIdWarning = new JTextField();
 		txtIdWarning.setBackground(Color.RED);
 		txtIdWarning.setEnabled(false);
