@@ -1,13 +1,9 @@
 package librarysystem;
 
-import librarysystem.database.TextDatabase;
-import librarysystem.gui.HoldGUIScreen;
-import librarysystem.gui.LoginScreen;
-import librarysystem.gui.MenuGUI;
-import librarysystem.gui.StudentScreen;
-import librarysystem.gui.MenuGUI;
+import librarysystem.gui.LoginGUI;
 import librarysystem.managers.MaterialManager;
 import librarysystem.managers.UserManager;
+import librarysystem.users.faculty.Instructor;
 
 import javax.swing.*;
 
@@ -23,6 +19,8 @@ public class LibrarySystem {
 		this.materialManager = new MaterialManager(this);
 		this.userManager = new UserManager(this);
 		
+		//this.userManager.addUser(new Instructor("sohaib", "sohaib@mru.ca", "Sohaib", "password", 100));
+		
 		this.frame = new JFrame();
 		this.frame.setBounds(100, 100, WIDTH, HEIGHT);
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -31,10 +29,14 @@ public class LibrarySystem {
 	
 	public static void main(String args[]) {
 		LibrarySystem librarySystem = new LibrarySystem();
+		
+		new LoginGUI(librarySystem);
 	}
 	
 	public void updateGUI(JPanel panel) {
 		this.frame.setContentPane(panel);
+		this.frame.setVisible(true);
+		//LoginScreen.main(this);
 	}
 	
 	public UserManager getUserManager() {
@@ -43,6 +45,10 @@ public class LibrarySystem {
 	
 	public MaterialManager getMaterialManager() {
 		return materialManager;
+	}
+	
+	public JFrame getFrame() {
+		return this.frame;
 	}
 	
 }

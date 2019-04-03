@@ -1,11 +1,12 @@
 package librarysystem.materials;
 
-public class Material {
+public class Material implements Cloneable {
 	
 	private MaterialStatus materialStatus;
 	private final MaterialType materialType;
 	private final String title, author, id;
-	private final int edition, barcode;
+	private final int edition;
+	private int barcode;
 	private Long takeoutDate, renewDate;
 	
 	public Material(String title, String author, String id, int edition, int barcode, MaterialStatus materialStatus, MaterialType materialType) {
@@ -42,6 +43,10 @@ public class Material {
 	
 	public int getBarcode() {
 		return barcode;
+	}
+	
+	public void setBarcode(int barcode) {
+		this.barcode = barcode;
 	}
 	
 	public MaterialStatus getMaterialStatus() {
@@ -96,4 +101,16 @@ public class Material {
 	public String getNiceName() {
 		return this.getTitle() + " - " + this.getAuthor() + " (" + this.getId() + ")";
 	}
+	
+	@Override
+	public Material clone() {
+		try {
+			return (Material) super.clone();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 }

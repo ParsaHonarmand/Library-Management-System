@@ -4,9 +4,12 @@ import librarysystem.LibrarySystem;
 import librarysystem.database.TextDatabase;
 import librarysystem.materials.Material;
 import librarysystem.materials.MaterialStatus;
+import librarysystem.materials.MaterialType;
+import librarysystem.reservations.Reservation;
 import librarysystem.users.User;
+import librarysystem.users.faculty.Instructor;
 
-import javax.xml.soap.Text;
+//import javax.xml.soap.Text;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +22,7 @@ public class MaterialManager {
 	
 	public MaterialManager(LibrarySystem librarySystem) {
 		this.librarySystem = librarySystem;
+		
 		this.materialLists = TextDatabase.loadMaterials();
 	}
 	
@@ -30,23 +34,90 @@ public class MaterialManager {
 	}
 	
 	public List<Material> getMaterials(MaterialStatus materialStatus) {
+		System.out.append("ici********");
 		return this.materialLists.get(materialStatus);
+	}
+	
+	public List<Material> getUniqueMaterials(MaterialStatus materialStatus) {
+		List<Material> materials = new ArrayList<Material>(), loopMaterials = this.getMaterials(materialStatus);
+		for (Material material : loopMaterials) {
+				String id = material.getId();
+				boolean addMaterial = true;
+				for (Material loopMaterial : materials) {
+					if (loopMaterial.getId().equals(id)) {
+						addMaterial = false;
+						break;
+					}
+				}
+				if (addMaterial) {
+					materials.add(material);
+				}
+		}
+		
+		return materials;
+	}
+	
+	public List<Material> getUniqueMaterials(MaterialStatus materialStatus, MaterialType materialType) {
+		List<Material> materials = new ArrayList<Material>(), loopMaterials = this.getMaterials(materialStatus);
+		for (Material material : loopMaterials) {
+			if (material.getMaterialType() == materialType) {
+				String id = material.getId();
+				boolean addMaterial = true;
+				for (Material loopMaterial : materials) {
+					if (loopMaterial.getId().equals(id)) {
+						addMaterial = false;
+						break;
+					}
+				}
+				if (addMaterial) {
+					materials.add(material);
+				}
+			}
+		}
+		
+		return materials;
 	}
 	
 	public void putOnHold(User user, Material material) {
 		this.updateStatus(material, MaterialStatus.ON_HOLD);
 		user.addHold(material);
+		TextDatabase.updateUser(user);
 	}
 	
 	public void borrowMaterial(User user, Material material) {
+		material.setTakeoutDate(System.currentTimeMillis());
 		this.updateStatus(material, MaterialStatus.BORROWED);
 		user.addBorrowedMaterial(material);
+		TextDatabase.updateUser(user);
 	}
 	
 	public void returnMaterial(User user, Material material) {
+		material.setTakeoutDate(-1L);
+		material.setRenewDate(-1L);
+		this.updateStatus(material, MaterialStatus.RETURNED);
 		user.removeBorrowedMaterial(material);
 		user.removeHold(material);
-		this.updateStatus(material, MaterialStatus.RETURNED);
+		TextDatabase.updateUser(user);
+	}
+	
+	public void reserveMaterial(Instructor user, Material material, int amount) {
+		int loopAmount = 0;
+		String id = material.getId();
+		List<Material> toBeReserved = new ArrayList<Material>();
+		for (Material availableMaterial : this.getMaterials(MaterialStatus.AVAILABLE)) {
+			if (availableMaterial.getId().equals(id)) {
+				toBeReserved.add(availableMaterial);
+				if (++loopAmount == amount) {
+					break;
+				}
+			}
+		}
+		
+		user.addReservation(new Reservation(toBeReserved, true));
+		
+		for (Material reservationMaterial : toBeReserved) {
+			updateStatus(reservationMaterial, MaterialStatus.RESERVED);
+		}
 	}
 	
 	public Material getMaterial(String id) {
@@ -87,6 +158,16 @@ public class MaterialManager {
 		return null;
 	}
 	
+	public int getAmountAvailableForReservation(Material material) {
+		int amount = 0;
+		String id = material.getId();
+		for (Material availableMaterial : this.getMaterials(MaterialStatus.AVAILABLE)) {
+			if (availableMaterial.getId().equals(id)) {
+				amount++;
+			}
+		}
+		return amount;
+	}
 	
 	public HashMap<MaterialStatus, List<Material>> getMaterialLists() {
 		return materialLists;

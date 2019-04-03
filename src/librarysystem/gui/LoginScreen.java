@@ -52,15 +52,18 @@ public class LoginScreen {
 		this.frame.setBounds(100, 100, LibrarySystem.WIDTH, LibrarySystem.HEIGHT);
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		userName = new JTextField();
-		userName.setColumns(10);
+
 		
 		JLabel lblUsername = new JLabel("Username:");
+		JLabel lblPassword = new JLabel("Password:");
+		
+		userName = new JTextField();
+		userName.setColumns(10);
 		
 		pass = new JPasswordField();
 		pass.setColumns(10);
 		
-		JLabel lblPassword = new JLabel("Password:");
+
 		
 		JButton btnLogin = new JButton("Login");
 		btnLogin.addMouseListener(new MouseAdapter() {
@@ -72,10 +75,11 @@ public class LoginScreen {
 							"Username and password are not valid. Try again.");
 				} else if (user.getUserType() == UserType.LIBRARIAN) {
 					System.out.println("librarian");
-					LibrarianScreen.main(LS);
+					//LibrarianScreen.main(LS);
 					frame.setVisible(false);
 				} else if (user.getUserType() == UserType.STUDENT) {
-					StudentScreen.StudentGUI(LS);
+					//StudentScreen.StudentGUI(LS);
+					LS.updateGUI(new HomeGUI(LS));
 					frame.setVisible(false);
 				} else if (user.getUserType() == UserType.ADMINISTRATOR) {
 					//open administratorScreenSwing

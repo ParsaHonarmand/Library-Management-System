@@ -2,6 +2,7 @@ package librarysystem.materials;
 
 public enum MaterialType {
 	
+	ALL("All"),
 	BOOK("Book"),
 	CD("CD"),
 	DVD("DVD"),
