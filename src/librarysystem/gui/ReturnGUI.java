@@ -31,7 +31,7 @@ public class ReturnGUI extends JPanel {
 	public ReturnGUI(LibrarySystem librarySystem) {
 		this.librarySystem = librarySystem;
 		
-		String[] columnNames = { "Icon", "Material","ID", "Return" };
+		String[] columnNames = { "Icon", "Material","ID", "Barcode", "Return" };
 		
 		DefaultTableModel model = new DefaultTableModel(new Object[][] {}, columnNames) {
 			//  Returning the Class of each column will allow different
@@ -44,12 +44,14 @@ public class ReturnGUI extends JPanel {
 				if (column == 2)
 					return String.class;
 				if (column == 3)
+					return String.class;
+				if (column == 4)
 					return Boolean.class;
 				return String.class;
 			}
 
 			public boolean isCellEditable(int row, int column) {
-				return column == 3;
+				return column == 4;
 			}
 			
 		};
@@ -57,7 +59,7 @@ public class ReturnGUI extends JPanel {
 		
 
 		for (Material M : librarySystem.getUserManager().getCurrentUser().getBorrowed()) {
-			model.addRow(new Object[] { null, M.getNiceName(), M.getId(), false});
+			model.addRow(new Object[] { null, M.getNiceName(), M.getId(), M.getBarcode(), false});
 		}
 		this.table = new JTable(model);
 		this.table.setPreferredScrollableViewportSize(table.getPreferredSize());
@@ -75,8 +77,8 @@ public class ReturnGUI extends JPanel {
 			public void mousePressed(MouseEvent e) {
 				DefaultTableModel model = (DefaultTableModel) table.getModel();
 				for (int i = model.getRowCount() - 1; i >= 0; i--) {
-					if ((boolean) model.getValueAt(i, 3) == true){
-						librarySystem.getMaterialManager().updateStatus(librarySystem.getMaterialManager().getMaterial((String) model.getValueAt(i, 2)), MaterialStatus.RETURNED);
+					if ((boolean) model.getValueAt(i, 4) == true){
+						librarySystem.getMaterialManager().updateStatus(librarySystem.getMaterialManager().getMaterial((Integer) model.getValueAt(i, 3)), MaterialStatus.RETURNED);
 						model.removeRow(i);
 					}
 				}
