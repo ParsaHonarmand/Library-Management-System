@@ -97,6 +97,7 @@ public class ReceiveGUI extends JPanel {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				DefaultTableModel model = (DefaultTableModel) table.getModel();
+				System.out.println(model.getRowCount());
 				for (int i = model.getRowCount() - 1; i >= 0; i--) {
 					if ((boolean) model.getValueAt(i, 4) == true){
 						System.out.println("status changed");
