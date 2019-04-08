@@ -205,6 +205,7 @@ public class ReceiveGUI extends JPanel {
 		scrollPane.setRowHeaderView(scrollBar);
 		setLayout(groupLayout);
 		
+		
 		this.librarySystem.updateGUI(this);
 	}
 }

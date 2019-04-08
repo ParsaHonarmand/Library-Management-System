@@ -97,6 +97,8 @@ public class AccountGUI extends JPanel {
 				.addContainerGap()));
 
 		setLayout(groupLayout);
+		
+
 
 		this.librarySystem.updateGUI(this);
 	}
