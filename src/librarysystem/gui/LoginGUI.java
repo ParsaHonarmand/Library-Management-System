@@ -105,6 +105,8 @@ public class LoginGUI extends JPanel {
 				User user = librarySystem.getUserManager().login(usernameField.getText(), passwordField.getText());
 				if (user == null) {
 					JOptionPane.showMessageDialog(librarySystem.getFrame(), "Username and password are not valid. Try again.");
+				} if (user.getOverdueFee()>50) {
+					librarySystem.updateGUI(new overDueGIU(librarySystem));
 				} else {
 					librarySystem.updateGUI(new HomeGUI(librarySystem));
 				}
