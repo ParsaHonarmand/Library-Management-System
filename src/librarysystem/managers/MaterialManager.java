@@ -28,7 +28,8 @@ public class MaterialManager {
 	
 	/**
 	 * Updates the state of the material, you should not change the status (Material#setMaterialStatus) before using this method otherwise it wont work
-	 * @param material The material to update the status of
+	 *
+	 * @param material  The material to update the status of
 	 * @param newStatus The new status for the material
 	 */
 	public void updateStatus(Material material, MaterialStatus newStatus) {
@@ -40,6 +41,7 @@ public class MaterialManager {
 	
 	/**
 	 * Returns the list of materials that have a certain status
+	 *
 	 * @param materialStatus The status of materials you want
 	 * @return The list of materials that have a certain status
 	 */
@@ -49,28 +51,36 @@ public class MaterialManager {
 	
 	/**
 	 * Returns the list of unique materials of a specific status
+	 *
 	 * @param materialStatus The status of materials you want
 	 * @return The list of unique materials of a specific status
 	 */
 	public List<Material> getUniqueMaterials(MaterialStatus materialStatus) {
 		List<Material> materials = new ArrayList<Material>(), loopMaterials = this.getMaterials(materialStatus);
 		for (Material material : loopMaterials) {
-				String id = material.getId();
-				boolean addMaterial = true;
-				for (Material loopMaterial : materials) {
-					if (loopMaterial.getId().equals(id)) {
-						addMaterial = false;
-						break;
-					}
+			String id = material.getId();
+			boolean addMaterial = true;
+			for (Material loopMaterial : materials) {
+				if (loopMaterial.getId().equals(id)) {
+					addMaterial = false;
+					break;
 				}
-				if (addMaterial) {
-					materials.add(material);
-				}
+			}
+			if (addMaterial) {
+				materials.add(material);
+			}
 		}
 		
 		return materials;
 	}
 	
+	/**
+	 * Returns the list of unique materials of a specific status and type
+	 *
+	 * @param materialStatus The status of materials you want
+	 * @param materialType   The type of materials you want
+	 * @return The list of unique materials of a specific status and type
+	 */
 	public List<Material> getUniqueMaterials(MaterialStatus materialStatus, MaterialType materialType) {
 		List<Material> materials = new ArrayList<Material>(), loopMaterials = this.getMaterials(materialStatus);
 		for (Material material : loopMaterials) {
@@ -92,12 +102,24 @@ public class MaterialManager {
 		return materials;
 	}
 	
+	/**
+	 * Puts a specific material on hold for a user (don't update the status of the material, this method will do it for you)
+	 *
+	 * @param user     The user putting the material on hold
+	 * @param material The material that is being put on hold
+	 */
 	public void putOnHold(User user, Material material) {
 		this.updateStatus(material, MaterialStatus.ON_HOLD);
 		user.addHold(material);
 		TextDatabase.updateUser(user);
 	}
 	
+	/**
+	 * Borrows a specific material for a user (don't update the status of the material, this method will do it for you)
+	 *
+	 * @param user     The user taking out the material
+	 * @param material The material that is being borrowed
+	 */
 	public void borrowMaterial(User user, Material material) {
 		material.setTakeoutDate(System.currentTimeMillis());
 		this.updateStatus(material, MaterialStatus.BORROWED);
@@ -105,7 +127,21 @@ public class MaterialManager {
 		TextDatabase.updateUser(user);
 	}
 	
+	/**
+	 * Returns a specific material for a user (don't update the status of the material, this method will do it for you)
+	 *
+	 * @param user     The user returning the material
+	 * @param material The material that is being returned
+	 */
 	public void returnMaterial(User user, Material material) {
+		Long timeTakenOut = System.currentTimeMillis() - material.getTakeoutDate();
+		if (material.hasBeenRenewed()) {
+			timeTakenOut = System.currentTimeMillis() - material.getRenewDate();
+		}
+		if (timeTakenOut / 1000L > 60 * 60 * 24 * 7) {
+			double fee = (timeTakenOut / 1000L - (60 * 60 * 24 * 7)) / (60 * 60 * 24) * 5;
+			user.setOverdueFee(user.getOverdueFee() + fee);
+		}
 		material.setTakeoutDate(-1L);
 		material.setRenewDate(-1L);
 		this.updateStatus(material, MaterialStatus.RETURNED);
@@ -114,6 +150,13 @@ public class MaterialManager {
 		TextDatabase.updateUser(user);
 	}
 	
+	/**
+	 * Reserve a certain material
+	 *
+	 * @param user     The instructor that is reserving the material
+	 * @param material The material being reserved
+	 * @param amount   The amount of copies being reserved
+	 */
 	public void reserveMaterial(Instructor user, Material material, int amount) {
 		String id = material.getId();
 		Reservation reservation = null;
@@ -150,6 +193,12 @@ public class MaterialManager {
 		TextDatabase.updateUser(user);
 	}
 	
+	/**
+	 * Returns a material of a specific ID
+	 *
+	 * @param id The id of the material being searched for
+	 * @return The material matching the given id
+	 */
 	public Material getMaterial(String id) {
 		for (MaterialStatus materialStatus : MaterialStatus.values()) {
 			Material material = this.getMaterial(materialStatus, id);
@@ -160,6 +209,13 @@ public class MaterialManager {
 		return null;
 	}
 	
+	/**
+	 * Returns a material of a certain status and id
+	 *
+	 * @param materialStatus The status of the material
+	 * @param id             The id of the material
+	 * @return A material of a certain status and id
+	 */
 	public Material getMaterial(MaterialStatus materialStatus, String id) {
 		for (Material material : this.getMaterials(materialStatus)) {
 			if (material.getId().equals(id)) {
@@ -169,25 +225,29 @@ public class MaterialManager {
 		return null;
 	}
 	
+	/**
+	 * Returns the material of a specific barcode
+	 *
+	 * @param barcode The barcode of the material you''re looking for
+	 * @return Returns the material of a specific barcode
+	 */
 	public Material getMaterial(int barcode) {
 		for (MaterialStatus materialStatus : MaterialStatus.values()) {
-			Material material = this.getMaterial(materialStatus, barcode);
-			if (material != null) {
-				return material;
+			for (Material material : this.getMaterials(materialStatus)) {
+				if (material.getBarcode() == barcode) {
+					return material;
+				}
 			}
 		}
 		return null;
 	}
 	
-	public Material getMaterial(MaterialStatus materialStatus, int barcode) {
-		for (Material material : this.getMaterials(materialStatus)) {
-			if (material.getBarcode() == barcode) {
-				return material;
-			}
-		}
-		return null;
-	}
 	
+	/**
+	 * Returns the amount of of material available for reservation
+	 * @param material The material being reserved
+	 * @return Returns the amount of specific material available for reservation
+	 */
 	public int getAmountAvailableForReservation(Material material) {
 		int amount = 0;
 		String id = material.getId();
@@ -199,21 +259,28 @@ public class MaterialManager {
 		return amount;
 	}
 	
-	public HashMap<MaterialStatus, List<Material>> getMaterialLists() {
-		return materialLists;
-	}
-	
+	/**
+	 * Adds a material to the system
+	 * @param material material to be added
+	 */
 	public void addMaterial(Material material) {
 		this.getMaterials(material.getMaterialStatus()).add(material);
 		TextDatabase.addMaterial(material);
 	}
 	
+	/**
+	 * Reshelves all material
+	 */
 	public void reshelveMaterial() {
 		for (Material material : this.getMaterials(MaterialStatus.RETURNED)) {
 			this.reshelveMaterial(material);
 		}
 	}
 	
+	/**
+	 * Reshelves a specific material
+	 * @param material The material to be reshelved
+	 */
 	public void reshelveMaterial(Material material) {
 		this.updateStatus(material, MaterialStatus.AVAILABLE);
 	}
