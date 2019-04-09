@@ -40,6 +40,9 @@ public class LoginGUI extends JPanel {
 		this.librarySystem.updateGUI(this);
 		setLayout(null);
 		
+		/**
+		 * Setting panel characteristics 
+		 */
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(245, 245, 245));
 		panel.setBounds(259, 230, 724, 315);
@@ -52,6 +55,9 @@ public class LoginGUI extends JPanel {
 		setLayout(null); 
 		this.add(lblBanner);
 		
+		/**
+		 * Labels used to display information to user in order to notify of actions performed or data input requirments 
+		 */
 		JLabel lblUsername = new JLabel("Username:");
 		lblUsername.setBounds(110, 80, 105, 29);
 		panel.add(lblUsername);
@@ -70,6 +76,9 @@ public class LoginGUI extends JPanel {
 		lblRegister.setForeground(new Color(51, 102, 102));
 		lblRegister.setFont(new Font("Times New Roman", Font.PLAIN, 17));
 		
+		/**
+		 * Textfeilds that allow for input from user
+		 */
 		usernameField = new JTextField();
 		usernameField.setHorizontalAlignment(SwingConstants.CENTER);
 		usernameField.setForeground(new Color(51, 102, 102));
@@ -89,6 +98,9 @@ public class LoginGUI extends JPanel {
 		passwordField.setMinimumSize(dimension);
 		passwordField.setMaximumSize(dimension);
 		
+		/**
+		 * Used to login in to the system and verification validity of user
+		 */
 		JButton btnLogin = new JButton("Login");
 		btnLogin.setBounds(423, 220, 175, 46);
 		panel.add(btnLogin);
@@ -99,6 +111,8 @@ public class LoginGUI extends JPanel {
 				User user = librarySystem.getUserManager().login(usernameField.getText(), passwordField.getText());
 				if (user == null) {
 					JOptionPane.showMessageDialog(librarySystem.getFrame(), "Username and password are not valid. Try again.");
+				} if (user.getOverdueFee()>50) {
+					librarySystem.updateGUI(new overDueGIU(librarySystem));
 				} else {
 					librarySystem.updateGUI(new HomeGUI(librarySystem));
 				}
@@ -106,6 +120,9 @@ public class LoginGUI extends JPanel {
 		});
 		btnLogin.setFont(new Font("Times New Roman", Font.PLAIN, 20));
 		
+		/**
+		 * Used to insert image on to panel
+		 */
 		JLabel bckgGifImg = new JLabel("");
 		bckgGifImg.setBounds(0, 0, 1280, 720);
 		add(bckgGifImg);

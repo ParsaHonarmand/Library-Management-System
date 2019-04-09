@@ -88,6 +88,23 @@ public class AccountGUI extends JPanel {
 		 */
 		JPanel profilePanel = new JPanel();
 		profilePanel.setBounds(218, 50, 851, 691);
+		GroupLayout groupLayout = new GroupLayout(this);
+		groupLayout
+				.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout
+								.createSequentialGroup().addContainerGap().addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addComponent(profile).addComponent(changePassword).addComponent(payFee)
+										.addComponent(materials).addComponent(reservations).addComponent(logout))
+								.addGap(58).addComponent(profilePanel, GroupLayout.DEFAULT_SIZE, 858, Short.MAX_VALUE).addContainerGap()));
+		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout.createSequentialGroup().addGap(50)
+				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addComponent(profilePanel, GroupLayout.DEFAULT_SIZE, 684, Short.MAX_VALUE)
+						.addGroup(groupLayout.createSequentialGroup().addComponent(profile).addPreferredGap(ComponentPlacement.UNRELATED).addComponent(changePassword).addPreferredGap(ComponentPlacement.UNRELATED)
+								.addComponent(payFee).addPreferredGap(ComponentPlacement.UNRELATED).addComponent(materials).addPreferredGap(ComponentPlacement.UNRELATED).addComponent(reservations)
+								.addPreferredGap(ComponentPlacement.RELATED, 482, Short.MAX_VALUE).addComponent(logout)))
+				.addContainerGap()));
+
+		setLayout(groupLayout);
+		
+
 
 		this.librarySystem.updateGUI(this);
 		setLayout(null);

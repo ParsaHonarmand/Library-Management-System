@@ -59,6 +59,7 @@ public class BrowseGUI extends JPanel {
 	private JButton btnReserve, btnOrder_1;
 	private JLabel reserveLabel, orderLabel, infoLabel;
 	private JSpinner reservationSpinner, orderSpinner;
+	
 
 	/**
 	 * Create the panel.
@@ -332,6 +333,11 @@ public class BrowseGUI extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				librarySystem.getMaterialManager().borrowMaterial(librarySystem.getUserManager().getCurrentUser(), selectedMaterial);
 				((DefaultTableModel) table.getModel()).removeRow(selectedRow);
+				List<Material> onhold =new ArrayList<>();
+				onhold = librarySystem.getUserManager().getCurrentUser().getOnHold();
+				for (Material M: onhold) {
+					System.out.println(M.getNiceName() + M.getAuthor());
+				}
 				selectedRow = -1;
 				menu.hide();
 			}

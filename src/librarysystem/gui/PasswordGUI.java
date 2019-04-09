@@ -24,7 +24,9 @@ public class PasswordGUI extends JPanel {
 	private JTextField newPswrdTextField;
 	private JTextField confirmPswrdTextField;
 	private LibrarySystem librarySystem;
-	//Upper Tab Buttons Settings
+	/**
+	 * Upper Tab Buttons Settings
+	 */
 			int BUTTONS_Y=20;
 			int BUTTONS_W=120;
 			int BUTTONS_H=30;
@@ -48,7 +50,9 @@ public class PasswordGUI extends JPanel {
 		panel.setLayout(null);
 
 		
-		// JPasswordFields
+		/**
+		 * Setting Textfeild characteristics 
+		 */
 		
 
 		currPswrdTextField = new JPasswordField();
@@ -66,8 +70,9 @@ public class PasswordGUI extends JPanel {
 		panel.add(newPswrdTextField);
 		newPswrdTextField.setColumns(10);
 		
-		// Jlabels
-		
+		/**
+		 * JLabels to display outcomes of actions performed or to direct user to input data as needed 
+		 */
 		
 		JLabel lblNonMatchingPswrd = new JLabel("New password and confirm password do not match");
 		lblNonMatchingPswrd.setBounds(564, 295, 371, 15);
@@ -127,8 +132,10 @@ public class PasswordGUI extends JPanel {
 		lblUnchangedpswrd.setForeground(new Color(153, 0, 0));
 		lblUnchangedpswrd.setFont(new Font("Dialog", Font.BOLD, 12));
 		lblUnchangedpswrd.setVisible(false);		
-		//JButtons
-
+		
+		/**
+		 * JButtons that are consistent throughout all panels as well as specialized to this one
+		 */
 
 		JButton btnHome = new JButton("Home");
 		btnHome.setBounds(80 , BUTTONS_Y, BUTTONS_W, BUTTONS_H);
@@ -190,7 +197,9 @@ public class PasswordGUI extends JPanel {
 		btnChangePassword.setForeground(new Color(0, 0, 128));
 		btnChangePassword.setFont(new Font("Times New Roman", Font.PLAIN, 17));
 		
-		// Buttons Action Listeners
+		/**
+		 * Button action handlers to implement utility 
+		 */
 		
 		btnChangePassword.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -233,7 +242,9 @@ public class PasswordGUI extends JPanel {
 		});
 		
 		
-		
+		/**
+		 * Actionlisteners for all the buttons to invoke panel calls as needed
+		 */
 		btnHome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new HomeGUI(librarySystem);

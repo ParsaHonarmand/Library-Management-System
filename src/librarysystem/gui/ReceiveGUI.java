@@ -30,6 +30,13 @@ import java.awt.SystemColor;
 import java.awt.Color;
 import javax.swing.UIManager;
 
+
+/**
+ * This class displays information about books that are on order
+ * and allows the operator to select those books to update the status to available
+ * @author jadon
+ *
+ */
 public class ReceiveGUI extends JPanel {
 	private final LibrarySystem librarySystem;
 
@@ -38,12 +45,17 @@ public class ReceiveGUI extends JPanel {
 	private JTable table;
 
 	/**
-	 * Create the panel.
+	 * Constructor that creates jpanel and elements including:
+	 * @param LibrarySystem - object that contains setter, getters, and managers
+	 * navigation buttons 
+	 * table displaying book information and check box
+	 * button to receive selected material
+	 *  
 	 */
 	public ReceiveGUI(LibrarySystem librarySystem) {
 		this.librarySystem = librarySystem;
 		
-		String[] columnNames = { "Icon", "Material","ID", "Make Available" };
+		String[] columnNames = { "Icon", "Material","ID","Barcode", "Make Available" };
 		
 		DefaultTableModel model = new DefaultTableModel(new Object[][] {}, columnNames) {
 			//  Returning the Class of each column will allow different
@@ -56,12 +68,14 @@ public class ReceiveGUI extends JPanel {
 				if (column == 2)
 					return String.class;
 				if (column == 3)
+					return String.class;
+				if (column == 4)
 					return Boolean.class;
 				return String.class;
 			}
 
 			public boolean isCellEditable(int row, int column) {
-				return column == 3;
+				return column == 4;
 			}
 			
 		};
@@ -70,7 +84,7 @@ public class ReceiveGUI extends JPanel {
 		scrollPane.setBounds(6, 55, 818, 502);
 		
 		for (Material M : librarySystem.getMaterialManager().getMaterials(MaterialStatus.ON_ORDER)) {
-			model.addRow(new Object[] { null, M.getNiceName(), M.getId(), false});
+			model.addRow(new Object[] { null, M.getNiceName(), M.getId(), M.getBarcode(), false});
 		}
 		this.table = new JTable(model);
 		this.table.setPreferredScrollableViewportSize(table.getPreferredSize());
@@ -85,11 +99,12 @@ public class ReceiveGUI extends JPanel {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				DefaultTableModel model = (DefaultTableModel) table.getModel();
+				System.out.println(model.getRowCount());
 				for (int i = model.getRowCount() - 1; i >= 0; i--) {
-					if ((boolean) model.getValueAt(i, 3) == true){
+					if ((boolean) model.getValueAt(i, 4) == true){
 						System.out.println("status changed");
-						librarySystem.getMaterialManager().updateStatus(librarySystem.getMaterialManager().getMaterial((String)
-								model.getValueAt(i, 2)), MaterialStatus.AVAILABLE);					
+						librarySystem.getMaterialManager().updateStatus(librarySystem.getMaterialManager().getMaterial((Integer)
+								model.getValueAt(i, 3)), MaterialStatus.AVAILABLE);					
 						System.out.println(librarySystem.getMaterialManager().getMaterials(MaterialStatus.ON_ORDER).toString());
 						model.removeRow(i);
 					}
@@ -155,6 +170,7 @@ public class ReceiveGUI extends JPanel {
 		
 		JScrollBar scrollBar = new JScrollBar();
 		scrollPane.setRowHeaderView(scrollBar);
+		
 		
 		this.librarySystem.updateGUI(this);
 		setLayout(null);
