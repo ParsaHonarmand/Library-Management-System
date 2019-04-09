@@ -68,6 +68,7 @@ public class BrowseGUI extends JPanel {
 		this.librarySystem = librarySystem;
 
 		JButton home = new JButton("Home");
+		home.setBounds(0, 0, 174, 45);
 		home.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		home.addMouseListener(new MouseAdapter() {
 			@Override
@@ -77,6 +78,7 @@ public class BrowseGUI extends JPanel {
 		});
 
 		JButton btnReturned = new JButton("Returned");
+		btnReturned.setBounds(180, 0, 172, 45);
 		btnReturned.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnReturned.addMouseListener(new MouseAdapter() {
 			@Override
@@ -86,10 +88,12 @@ public class BrowseGUI extends JPanel {
 		});
 
 		JButton btnBrowse = new JButton("Browse");
+		btnBrowse.setBounds(358, 0, 172, 45);
 		btnBrowse.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnBrowse.setBackground(SystemColor.activeCaption);
 
 		JButton btnOrder = new JButton("Order");
+		btnOrder.setBounds(536, 0, 169, 45);
 		btnOrder.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnOrder.addMouseListener(new MouseAdapter() {
 			@Override
@@ -99,6 +103,7 @@ public class BrowseGUI extends JPanel {
 		});
 
 		JButton btnReceived = new JButton("Received");
+		btnReceived.setBounds(723, 0, 181, 45);
 		btnReceived.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnReceived.addMouseListener(new MouseAdapter() {
 			@Override
@@ -108,6 +113,7 @@ public class BrowseGUI extends JPanel {
 		});
 
 		JButton btnAccount = new JButton("Account");
+		btnAccount.setBounds(916, 0, 174, 45);
 		btnAccount.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnAccount.addMouseListener(new MouseAdapter() {
 			@Override
@@ -117,21 +123,26 @@ public class BrowseGUI extends JPanel {
 		});
 
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(6, 51, 699, 658);
 
 		JComboBox materialTypeSortBox = new JComboBox();
+		materialTypeSortBox.setBounds(723, 178, 363, 44);
 		materialTypeSortBox.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		materialTypeSortBox.setToolTipText("Select Material Type");
 		materialTypeSortBox.setModel(new DefaultComboBoxModel(MaterialType.values()));
 
 		JComboBox stringSortBox = new JComboBox();
+		stringSortBox.setBounds(723, 103, 363, 44);
 		stringSortBox.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		stringSortBox.setModel(new DefaultComboBoxModel(new String[] { "Title", "Author" }));
 
 		JLabel lblSortBy = new JLabel("Sort by:");
+		lblSortBy.setBounds(885, 68, 50, 17);
 		lblSortBy.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 
 		JButton btnSort = new JButton("Sort");
+		btnSort.setBounds(868, 240, 75, 29);
 		btnSort.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -144,6 +155,7 @@ public class BrowseGUI extends JPanel {
 		btnSort.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		
 		reservationSpinner = new JSpinner();
+		reservationSpinner.setBounds(968, 445, 40, 26);
 		reservationSpinner.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				int maxAmount = librarySystem.getMaterialManager().getAmountAvailableForReservation(selectedMaterial);
@@ -159,10 +171,12 @@ public class BrowseGUI extends JPanel {
 		reservationSpinner.setVisible(false);
 		
 		reserveLabel = new JLabel("How many would you like to reserve?");
+		reserveLabel.setBounds(733, 449, 229, 17);
 		reserveLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		reserveLabel.setVisible(false);
 		
 		btnReserve = new JButton("Reserve");
+		btnReserve.setBounds(832, 477, 92, 29);
 		btnReserve.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
@@ -181,18 +195,22 @@ public class BrowseGUI extends JPanel {
 		btnReserve.setVisible(false);
 		
 		orderLabel = new JLabel("How many would you like to order? ");
+		orderLabel.setBounds(732, 568, 222, 17);
 		orderLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		orderLabel.setVisible(false);
 		
 		orderSpinner = new JSpinner();
+		orderSpinner.setBounds(960, 564, 40, 26);
 		orderSpinner.setVisible(false);
 		
 		infoLabel = new JLabel("");
+		infoLabel.setBounds(733, 305, 333, 122);
 		infoLabel.setHorizontalTextPosition(SwingConstants.LEFT);
 		infoLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		infoLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		
 		btnOrder_1 = new JButton("Order");
+		btnOrder_1.setBounds(824, 596, 79, 29);
 		btnOrder_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				MaterialManager materialManager = librarySystem.getMaterialManager();
@@ -212,113 +230,6 @@ public class BrowseGUI extends JPanel {
 			}
 		});
 		btnOrder_1.setVisible(false);
-		
-		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(0)
-							.addComponent(home, GroupLayout.PREFERRED_SIZE, 174, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnReturned, GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnBrowse, GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnOrder, GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 699, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)))
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGap(18)
-									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-										.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-											.addGroup(groupLayout.createSequentialGroup()
-												.addComponent(btnReceived, GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
-												.addPreferredGap(ComponentPlacement.UNRELATED)
-												.addComponent(btnAccount, GroupLayout.PREFERRED_SIZE, 174, GroupLayout.PREFERRED_SIZE)
-												.addGap(2))
-											.addGroup(groupLayout.createSequentialGroup()
-												.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-													.addComponent(stringSortBox, Alignment.LEADING, 0, 343, Short.MAX_VALUE)
-													.addComponent(materialTypeSortBox, 0, 343, Short.MAX_VALUE))
-												.addContainerGap())
-											.addGroup(groupLayout.createSequentialGroup()
-												.addGap(10)
-												.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-													.addComponent(infoLabel, GroupLayout.PREFERRED_SIZE, 333, GroupLayout.PREFERRED_SIZE)
-													.addGroup(groupLayout.createSequentialGroup()
-														.addComponent(reserveLabel)
-														.addPreferredGap(ComponentPlacement.RELATED)
-														.addComponent(reservationSpinner, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)))
-												.addContainerGap()))
-										.addGroup(groupLayout.createSequentialGroup()
-											.addComponent(lblSortBy)
-											.addGap(157))))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGap(27)
-									.addComponent(orderLabel)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(orderSpinner, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-									.addContainerGap())
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGap(163)
-									.addComponent(btnSort)
-									.addGap(149)))
-							.addGroup(groupLayout.createSequentialGroup()
-								.addGap(127)
-								.addComponent(btnReserve)
-								.addContainerGap()))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(119)
-							.addComponent(btnOrder_1)
-							.addContainerGap())))
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-							.addComponent(home, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-							.addComponent(btnReturned, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
-						.addComponent(btnBrowse, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnOrder, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnReceived, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnAccount, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(23)
-							.addComponent(lblSortBy)
-							.addGap(18)
-							.addComponent(stringSortBox, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
-							.addGap(31)
-							.addComponent(materialTypeSortBox, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(btnSort)
-							.addGap(36)
-							.addComponent(infoLabel, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(reserveLabel)
-								.addComponent(reservationSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnReserve)
-							.addGap(58)
-							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(orderLabel)
-								.addComponent(orderSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnOrder_1))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 658, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap())
-		);
 
 		//Icon aboutIcon = new ImageIcon("about16.gif");
 
@@ -383,9 +294,27 @@ public class BrowseGUI extends JPanel {
 		});
 
 		scrollPane.setViewportView(this.table);
-		setLayout(groupLayout);
 
 		this.librarySystem.updateGUI(this);
+		setLayout(null);
+		add(home);
+		add(btnReturned);
+		add(btnBrowse);
+		add(btnOrder);
+		add(scrollPane);
+		add(btnReceived);
+		add(btnAccount);
+		add(stringSortBox);
+		add(materialTypeSortBox);
+		add(infoLabel);
+		add(reserveLabel);
+		add(reservationSpinner);
+		add(lblSortBy);
+		add(orderLabel);
+		add(orderSpinner);
+		add(btnSort);
+		add(btnReserve);
+		add(btnOrder_1);
 	}
 	
 	public void setupPopupMenu() {

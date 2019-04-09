@@ -46,15 +46,17 @@ public class AccountGUI extends JPanel {
 		 */
 		JButton profile = new JButton("Profile");
 		profile.setHorizontalAlignment(SwingConstants.LEFT);
-		profile.setBounds(0, 0, 100, 100);
+		profile.setBounds(6, 50, 84, 29);
 
 		JButton changePassword = new JButton("Change Password");
+		changePassword.setBounds(6, 91, 154, 29);
 		changePassword.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				librarySystem.updateGUI(new PasswordGUI(librarySystem));
 			}
 		});
 		JButton payFee = new JButton("Pay Fees");
+		payFee.setBounds(6, 132, 97, 29);
 		payFee.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -63,6 +65,7 @@ public class AccountGUI extends JPanel {
 		});
 
 		JButton materials = new JButton("Materials");
+		materials.setBounds(6, 173, 101, 29);
 		materials.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -71,8 +74,10 @@ public class AccountGUI extends JPanel {
 		});
 
 		JButton reservations = new JButton("Reservations");
+		reservations.setBounds(6, 214, 124, 29);
 
 		JButton logout = new JButton("Logout");
+		logout.setBounds(6, 712, 88, 29);
 		logout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -82,6 +87,7 @@ public class AccountGUI extends JPanel {
 		 * Setting panel characteristics via groupLayout
 		 */
 		JPanel profilePanel = new JPanel();
+		profilePanel.setBounds(218, 50, 851, 691);
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout
 				.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
@@ -101,5 +107,14 @@ public class AccountGUI extends JPanel {
 
 
 		this.librarySystem.updateGUI(this);
+		setLayout(null);
+		add(profile);
+		add(changePassword);
+		add(payFee);
+		add(materials);
+		add(reservations);
+		add(logout);
+		add(profilePanel);
+		profilePanel.setLayout(null);
 	}
 }
