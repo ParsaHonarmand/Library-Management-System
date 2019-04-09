@@ -26,6 +26,11 @@ public class MaterialManager {
 		this.materialLists = TextDatabase.loadMaterials();
 	}
 	
+	/**
+	 * Updates the state of the material, you should not change the status (Material#setMaterialStatus) before using this method otherwise it wont work
+	 * @param material The material to update the status of
+	 * @param newStatus The new status for the material
+	 */
 	public void updateStatus(Material material, MaterialStatus newStatus) {
 		this.getMaterials(material.getMaterialStatus()).remove(material);
 		this.getMaterials(newStatus).add(material);
@@ -33,10 +38,20 @@ public class MaterialManager {
 		TextDatabase.updateMaterial(material);
 	}
 	
+	/**
+	 * Returns the list of materials that have a certain status
+	 * @param materialStatus The status of materials you want
+	 * @return The list of materials that have a certain status
+	 */
 	public List<Material> getMaterials(MaterialStatus materialStatus) {
 		return this.materialLists.get(materialStatus);
 	}
 	
+	/**
+	 * Returns the list of unique materials of a specific status
+	 * @param materialStatus The status of materials you want
+	 * @return The list of unique materials of a specific status
+	 */
 	public List<Material> getUniqueMaterials(MaterialStatus materialStatus) {
 		List<Material> materials = new ArrayList<Material>(), loopMaterials = this.getMaterials(materialStatus);
 		for (Material material : loopMaterials) {
