@@ -285,16 +285,27 @@ public class MaterialManager {
 		this.updateStatus(material, MaterialStatus.AVAILABLE);
 	}
 	
+	/**
+	 * Receives all material thats on order
+	 */
 	public void receiveMaterial() {
 		for (Material material : this.getMaterials(MaterialStatus.ON_ORDER)) {
 			this.receiveMaterial(material);
 		}
 	}
 	
+	/**
+	 * Receives a certain material thats on order
+	 * @param material The material being received
+	 */
 	public void receiveMaterial(Material material) {
 		this.updateStatus(material, MaterialStatus.AVAILABLE);
 	}
 	
+	/**
+	 * Returns the next available barcode for the new material
+	 * @return Returns the next available barcode for the new material
+	 */
 	public int getNextBarcode() {
 		int barcode = 0;
 		for (List<Material> materials : this.materialLists.values()) {
@@ -307,6 +318,12 @@ public class MaterialManager {
 		return barcode;
 	}
 	
+	/**
+	 * Searches through material
+	 * @param searchStr The string to search with
+	 * @param materialStatus The status of the material you're looking for
+	 * @return The list of materials matching the searchStr and materialStatus
+	 */
 	public List<Material> search(String searchStr, MaterialStatus materialStatus) {
 		// TODO: Refine searching, right now search engine is weak
 		searchStr = searchStr.toLowerCase().trim();

@@ -20,6 +20,10 @@ import javax.swing.event.ChangeListener;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
+/**
+ * Credits to: http://esus.com/embedding-a-jspinner-inside-a-jtable-cell/
+ * @author Joris Van den Bogaert
+ */
 public class JSpinnerInTables {
     static String[] columnNames = {
         "Name","Value"
