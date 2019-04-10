@@ -2,26 +2,13 @@ package librarysystem.gui;
 
 import librarysystem.LibrarySystem;
 import librarysystem.users.User;
-<<<<<<< HEAD
 import librarysystem.users.UserType;
-import librarysystem.managers.*;
-
 import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionListener;
-=======
-
 import javax.swing.*;
 import java.awt.*;
->>>>>>> a70f6c4fd0f8046073891e0ee9eae14b52f6ed86
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+
 
 /**
  * GUI class for users to view their outstanding fees and pay them off
