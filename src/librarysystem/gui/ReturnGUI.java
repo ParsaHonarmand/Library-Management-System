@@ -56,6 +56,7 @@ public class ReturnGUI extends JPanel {
 			
 		};
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 51, 818, 502);
 		
 
 		for (Material M : librarySystem.getUserManager().getCurrentUser().getBorrowed()) {
@@ -87,6 +88,7 @@ public class ReturnGUI extends JPanel {
 		
 		
 		JButton btnHome = new JButton("Home");
+		btnHome.setBounds(0, 0, 174, 45);
 		btnHome.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent arg0) {
@@ -96,6 +98,7 @@ public class ReturnGUI extends JPanel {
 		btnHome.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		
 		JButton btnReturn = new JButton("Return");
+		btnReturn.setBounds(180, 0, 173, 45);
 		btnReturn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -105,6 +108,7 @@ public class ReturnGUI extends JPanel {
 		btnReturn.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		
 		JButton btnBrowse = new JButton("Browse");
+		btnBrowse.setBounds(359, 0, 173, 45);
 		btnBrowse.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -116,47 +120,20 @@ public class ReturnGUI extends JPanel {
 		
 		
 		JButton button_5 = new JButton("Return Selected Materials");
-		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(btnHome, GroupLayout.PREFERRED_SIZE, 174, GroupLayout.PREFERRED_SIZE)
-							.addGap(6)
-							.addComponent(btnReturn, GroupLayout.PREFERRED_SIZE, 173, GroupLayout.PREFERRED_SIZE)
-							.addGap(6)
-							.addComponent(btnBrowse, GroupLayout.PREFERRED_SIZE, 173, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(10)
-							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 818, GroupLayout.PREFERRED_SIZE)
-							.addGap(10)
-							.addComponent(button_5, GroupLayout.PREFERRED_SIZE, 161, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(47, Short.MAX_VALUE))
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnHome, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnReturn, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnBrowse, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
-					.addGap(6)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 502, GroupLayout.PREFERRED_SIZE)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(3)
-							.addComponent(button_5)))
-					.addContainerGap(290, Short.MAX_VALUE))
-		);
+		button_5.setBounds(838, 54, 161, 29);
 		
 		table = new JTable();
 		scrollPane.setColumnHeaderView(table);
 		
 		JScrollBar scrollBar = new JScrollBar();
 		scrollPane.setRowHeaderView(scrollBar);
-		setLayout(groupLayout);
 
 		this. librarySystem.updateGUI(this);
+		setLayout(null);
+		add(btnHome);
+		add(btnReturn);
+		add(btnBrowse);
+		add(scrollPane);
+		add(button_5);
 	}
 }

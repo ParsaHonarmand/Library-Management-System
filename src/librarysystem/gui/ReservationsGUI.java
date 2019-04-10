@@ -264,7 +264,7 @@ public class ReservationsGUI extends JPanel {
 	public class IconRenderer extends DefaultTableCellRenderer{
 	    public Component getTableCellRendererComponent(JTable table,Object obj,boolean isSelected,boolean hasFocus,int row,int column){
 	        if(obj instanceof ImageIcon)
-	            setIcon((ImageIcon) obj);
+	            setIcon(new ImageIcon("resources/book.png"));
 	        setBorder(UIManager.getBorder("TableHeader.cellBorder"));
 	        setHorizontalAlignment(JLabel.CENTER);
 	        return this;
