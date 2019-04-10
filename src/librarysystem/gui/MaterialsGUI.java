@@ -36,6 +36,7 @@ public class MaterialsGUI extends JPanel {
 	private JPopupMenu materialsMenu;
 	private JPopupMenu holdsMenu;
 	private int selectedRow = -1;
+	private JLabel lblConfirmation;
 
 	/**
 	 * Constructor that creates the GUI including buttons, Jtables, Jmenus, etc
@@ -220,7 +221,6 @@ public class MaterialsGUI extends JPanel {
 			public void mouseReleased(MouseEvent e) {
 				String stringSort = (String) stringSortBox.getSelectedItem();
 				MaterialType materialType = (MaterialType) materialTypeSortBox.getSelectedItem();
-
 				sort(stringSort, materialType);
 			}
 		});
@@ -350,6 +350,11 @@ public class MaterialsGUI extends JPanel {
 
 
 		add(profilePanel);
+		
+		lblConfirmation = new JLabel("Label");
+		lblConfirmation.setBounds(786, 213, 262, 16);
+		profilePanel.add(lblConfirmation);
+		lblConfirmation.setVisible(false);
 		sort("Title", MaterialType.ALL);
 		this.librarySystem.updateGUI(this);
 	}
@@ -366,6 +371,8 @@ public class MaterialsGUI extends JPanel {
 				((DefaultTableModel) tableMaterials.getModel()).removeRow(selectedRow);
 				selectedRow = -1;
 				materialsMenu.hide();
+				lblConfirmation.setText("Item returned successfully");
+				lblConfirmation.setVisible(true);
 			}});
 
 		this.borrowMenuItem.addActionListener(new ActionListener() {
@@ -375,15 +382,25 @@ public class MaterialsGUI extends JPanel {
 				((DefaultTableModel) tableHold.getModel()).removeRow(selectedRow);
 				selectedRow = -1;
 				holdsMenu.hide();
+				lblConfirmation.setText("Item borrowed successfully");
+				lblConfirmation.setVisible(true);
+
 			}
 		});
 		
 		this.renewMenuItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				librarySystem.getMaterialManager().putOnHold(librarySystem.getUserManager().getCurrentUser(), selectedMaterial);
-				((DefaultTableModel) tableMaterials.getModel()).removeRow(selectedRow);
-				//selectedRow = -1;
+				if (!selectedMaterial.hasBeenRenewed()) {
+					selectedMaterial.renew();
+					selectedRow = -1;
+					lblConfirmation.setText("Item renewed successfully");
+					lblConfirmation.setVisible(true);
+				}
+				else {
+					lblConfirmation.setText("You have already renewed this item once!");
+					lblConfirmation.setVisible(true);
+				}
 				materialsMenu.hide();
 			}
 		});
@@ -391,10 +408,12 @@ public class MaterialsGUI extends JPanel {
 		this.cancelMenuItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				librarySystem.getMaterialManager().reshelveMaterial(selectedMaterial);
+				librarySystem.getMaterialManager().returnMaterial(librarySystem.getUserManager().getCurrentUser(), selectedMaterial);
 				((DefaultTableModel) tableHold.getModel()).removeRow(selectedRow);
 				selectedRow = -1;
 				holdsMenu.hide();
+				lblConfirmation.setText("Item cancelled successfully");
+				lblConfirmation.setVisible(true);
 			}
 		});
 		
@@ -407,19 +426,27 @@ public class MaterialsGUI extends JPanel {
 	 * @param materialType The type of materials to filter for
 	 */
 	public void sort(String stringSort, MaterialType materialType) {
-		this.tableContents.clear();
-		this.holdContents.clear();
-	
-		//List<Material> userBorrowed = this.librarySystem.getUserManager().getCurrentUser().getOnHold();
-		//this.tableContents = userBorrowed;
-	
+
 		if (materialType == MaterialType.ALL) {
 			this.tableContents = this.librarySystem.getUserManager().getCurrentUser().getBorrowed();
 			this.holdContents = this.librarySystem.getUserManager().getCurrentUser().getOnHold();
 		} 
-		//else {
-		//	this.tableContents = librarySystem.getUserManager().getCurrentUser().getUniqueMaterials(MaterialStatus.AVAILABLE, materialType);
-		//}
+		else {
+		List<Material> tableContents = new ArrayList<>();
+		List<Material> holdContents = new ArrayList<>();
+		for (Material material : this.tableContents) {
+			if (material.getMaterialType() == materialType) {
+				tableContents.add(material);
+			}
+		}
+		for (Material material : this.holdContents) {
+			if (material.getMaterialType() == materialType) {
+				holdContents.add(material);
+			}
+		}
+		this.tableContents = tableContents;
+		this.holdContents = holdContents;
+		}
 	
 		if (stringSort.equalsIgnoreCase("Title")) {
 			this.tableContents.sort(new TitleComparator());
