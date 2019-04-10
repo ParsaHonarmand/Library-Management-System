@@ -7,6 +7,8 @@ import librarysystem.materials.MaterialStatus;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -62,8 +64,14 @@ public class ReceiveGUI extends JPanel {
 			
 		};
 		
+		JLabel lblBanner = new JLabel("");
+		lblBanner.setBounds(15, 15, 1250, 200);
+		lblBanner.setIcon(new ImageIcon("resources/banner_img.png"));
+		setLayout(null);
+		add(lblBanner);
+		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(6, 55, 818, 502);
+		scrollPane.setBounds(86, 304, 624, 325);
 		
 		for (Material M : librarySystem.getMaterialManager().getMaterials(MaterialStatus.ON_ORDER)) {
 			model.addRow(new Object[] { null, M.getNiceName(), M.getId(), M.getBarcode(), false});
@@ -76,7 +84,7 @@ public class ReceiveGUI extends JPanel {
 		scrollPane.setViewportView(this.table);
 		
 		JButton btnRecieveSelectedMaterials = new JButton("Recieve Selected Materials");
-		btnRecieveSelectedMaterials.setBounds(836, 51, 208, 29);
+		btnRecieveSelectedMaterials.setBounds(83, 667, 208, 29);
 		btnRecieveSelectedMaterials.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -95,60 +103,67 @@ public class ReceiveGUI extends JPanel {
 			}
 		});
 		
+		/**
+		 * General buttons constant throughout all panels
+		 */
 		JButton btnHome = new JButton("Home");
-		btnHome.setBounds(0, 0, 174, 45);
-		btnHome.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
+		btnHome.setBounds(80, 225, 120, 30);
+		btnHome.setForeground(new Color(0, 0, 128));
+		
+		JButton btnReturned = new JButton("Returned");
+		btnReturned.setBounds(280, 225, 120, 30);
+		btnReturned.setForeground(new Color(0, 0, 128));
+		
+		JButton btnBrowse = new JButton("Browse");
+		btnBrowse.setBounds(480, 225, 120, 30);
+		btnBrowse.setForeground(new Color(0, 0, 128));
+		
+		JButton btnReceived = new JButton("Received");
+		btnReceived.setBounds(1080, 225, 120, 30);
+		btnReceived.setForeground(new Color(0, 0, 128));
+		
+		JButton btnOrder = new JButton("Order");
+		btnOrder.setBounds(880, 225, 120, 30);
+		btnOrder.setForeground(new Color(0, 0, 128));
+		
+		JButton btnAccount = new JButton("Account");
+		btnAccount.setBounds(680, 225, 120, 30);
+		btnAccount.setForeground(new Color(0, 0, 128));
+		
+		btnHome.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				new HomeGUI(librarySystem);
 			}
 		});
-		btnHome.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		
-		JButton btnReturned = new JButton("Returned");
-		btnReturned.setBounds(180, 0, 173, 45);
-		btnReturned.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
+		btnReturned.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				new ReturnGUI(librarySystem);
 			}
 		});
-		btnReturned.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		
-		JButton btnBrowse = new JButton("Browse");
-		btnBrowse.setBounds(359, 0, 173, 45);
-		btnBrowse.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
+		btnBrowse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				new BrowseGUI(librarySystem);
 			}
 		});
-		btnBrowse.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		btnBrowse.setBackground(UIManager.getColor("Button.background"));
 		
-		JButton btnOrder = new JButton("Order");
-		btnOrder.setBounds(538, 0, 172, 45);
-		btnOrder.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
+		btnReceived.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new ReceiveGUI(librarySystem);
+			}
+		});
+		
+		btnOrder.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				new OrderGUI(librarySystem);
 			}
 		});
-		btnOrder.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		
-		JButton btnReceive = new JButton("Received");
-		btnReceive.setBounds(728, 0, 168, 45);
-		btnReceive.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		
-		JButton btnAccount = new JButton("Account");
-		btnAccount.setBounds(906, 0, 174, 45);
-		btnAccount.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
+		btnAccount.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				new ProfileGUI(librarySystem);
 			}
 		});
-		btnAccount.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		
 		JScrollBar scrollBar = new JScrollBar();
 		scrollPane.setRowHeaderView(scrollBar);
@@ -160,7 +175,7 @@ public class ReceiveGUI extends JPanel {
 		add(btnReturned);
 		add(btnBrowse);
 		add(btnOrder);
-		add(btnReceive);
+		add(btnReceived);
 		add(btnAccount);
 		add(scrollPane);
 		add(btnRecieveSelectedMaterials);

@@ -1,9 +1,7 @@
 package librarysystem.gui;
 import javax.swing.JPanel;
-import javax.swing.GroupLayout;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.table.DefaultTableModel;
 
 import librarysystem.LibrarySystem;
@@ -15,10 +13,8 @@ import javax.swing.JLabel;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.SystemColor;
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import java.awt.*;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -34,7 +30,7 @@ public class ReturnGUI extends JPanel {
 		this.librarySystem = librarySystem;
 		setBackground(new Color(0, 102, 153));
 		String[] columnNames = { "Icon", "Material","ID", "Barcode", "Return" };
-		
+
 		DefaultTableModel model = new DefaultTableModel(new Object[][] {}, columnNames) {
 			//  Returning the Class of each column will allow different
 			//  renderers to be used based on Class
@@ -55,7 +51,7 @@ public class ReturnGUI extends JPanel {
 			public boolean isCellEditable(int row, int column) {
 				return column == 4;
 			}
-			
+
 		};
 		JScrollPane scrollPane = new JScrollPane();
 
@@ -74,9 +70,9 @@ public class ReturnGUI extends JPanel {
 		this.table.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		this.table.getColumnModel().getColumn(0).setMaxWidth(100);
 
-		
+
 		scrollPane.setViewportView(this.table);
-		
+
 		JButton btnReturnSelectedMaterials = new JButton("Return Selected Materials");
 		btnReturnSelectedMaterials.addMouseListener(new MouseAdapter() {
 			@Override
@@ -84,7 +80,7 @@ public class ReturnGUI extends JPanel {
 				for (int i = model.getRowCount() - 1; i >= 0; i--) {
 					if ((boolean) model.getValueAt(i, 4) == true){
 						librarySystem.getMaterialManager().returnMaterial		
-							(librarySystem.getUserManager().getCurrentUser(), librarySystem.getMaterialManager().getMaterial(
+						(librarySystem.getUserManager().getCurrentUser(), librarySystem.getMaterialManager().getMaterial(
 								(Integer) model.getValueAt(i, 3)));
 						model.removeRow(i);		
 						System.out.println("returning material");
@@ -96,7 +92,7 @@ public class ReturnGUI extends JPanel {
 		add(btnReturnSelectedMaterials);
 
 		this.librarySystem.updateGUI(this);
-				
+
 		JButton btnHome = new JButton("Home");
 		btnHome.setBounds(80, 225, 120, 30);
 		btnHome.setForeground(new Color(0, 0, 128));
@@ -106,7 +102,7 @@ public class ReturnGUI extends JPanel {
 				librarySystem.updateGUI(new HomeGUI(librarySystem));
 			}
 		});
-		
+
 		JButton btnReturned = new JButton("Returned");
 		btnReturned.setBounds(280, 225, 120, 30);
 		btnReturned.setForeground(new Color(0, 0, 128));
@@ -116,7 +112,7 @@ public class ReturnGUI extends JPanel {
 				librarySystem.updateGUI(new ReturnGUI(librarySystem));
 			}
 		});
-		
+
 		JButton btnBrowse = new JButton("Browse");
 		btnBrowse.setBounds(480, 225, 120, 30);
 		btnBrowse.setForeground(new Color(0, 0, 128));
@@ -126,8 +122,8 @@ public class ReturnGUI extends JPanel {
 				new BrowseGUI(librarySystem);
 			}
 		});
-						
-		
+
+
 		JButton btnAccount = new JButton("Account");
 		btnAccount.setBounds(680, 225, 120, 30);
 		btnAccount.setForeground(new Color(0, 0, 128));
@@ -138,8 +134,8 @@ public class ReturnGUI extends JPanel {
 				new ProfileGUI(librarySystem);
 			}
 		});
-		
-		
+
+
 		JButton btnReceived = new JButton("Received");
 		btnReceived.setBounds(1080, 225, 120, 30);
 		btnReceived.setForeground(new Color(0, 0, 128));
@@ -150,8 +146,8 @@ public class ReturnGUI extends JPanel {
 				new ReceiveGUI(librarySystem);
 			}
 		});
-		
-		
+
+
 		JButton btnOrder = new JButton("Order");
 		btnOrder.setBounds(880, 225, 120, 30);
 		btnOrder.setForeground(new Color(0, 0, 128));
@@ -159,13 +155,13 @@ public class ReturnGUI extends JPanel {
 		btnOrder.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-			new OrderGUI(librarySystem);
+				new OrderGUI(librarySystem);
 			}
 		});
-		
+
 		table = new JTable();
 		scrollPane.setColumnHeaderView(table);
-		
+
 		JScrollBar scrollBar = new JScrollBar();
 		scrollPane.setRowHeaderView(scrollBar);
 
