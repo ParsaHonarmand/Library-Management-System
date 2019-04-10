@@ -49,6 +49,12 @@ public class LoginGUI extends JPanel {
 		add(panel);
 		panel.setLayout(null);
 		
+		JLabel lblBanner = new JLabel("");
+		lblBanner.setBounds(15, 0, 1250, 200);
+		lblBanner.setIcon(new ImageIcon("resources/banner_img.png"));
+		setLayout(null); 
+		this.add(lblBanner);
+		
 		/**
 		 * Labels used to display information to user in order to notify of actions performed or data input requirments 
 		 */
@@ -105,6 +111,8 @@ public class LoginGUI extends JPanel {
 				User user = librarySystem.getUserManager().login(usernameField.getText(), passwordField.getText());
 				if (user == null) {
 					JOptionPane.showMessageDialog(librarySystem.getFrame(), "Username and password are not valid. Try again.");
+				} if (user.getOverdueFee()>50) {
+					librarySystem.updateGUI(new overDueGIU(librarySystem));
 				} else {
 					librarySystem.updateGUI(new HomeGUI(librarySystem));
 				}

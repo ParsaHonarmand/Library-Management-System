@@ -8,6 +8,7 @@ import javax.swing.table.DefaultTableModel;
 import librarysystem.LibrarySystem;
 import librarysystem.materials.Material;
 import librarysystem.materials.MaterialStatus;
+import librarysystem.users.UserType;
 
 import javax.swing.JButton;
 import java.awt.Font;
@@ -20,6 +21,7 @@ import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollBar;
+import javax.swing.UIManager;
 
 public class ReturnGUI extends JPanel {
 	private JTable table;
@@ -56,7 +58,8 @@ public class ReturnGUI extends JPanel {
 			
 		};
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 51, 818, 502);
+
+		scrollPane.setBounds(10, 51, 818, 466);
 		
 
 		for (Material M : librarySystem.getUserManager().getCurrentUser().getBorrowed()) {
@@ -70,23 +73,24 @@ public class ReturnGUI extends JPanel {
 		
 		scrollPane.setViewportView(this.table);
 		
-		this.librarySystem.updateGUI(this);
-		
-		JButton btnRecieveSelectedMaterials = new JButton("Return Selected Materials");
-		btnRecieveSelectedMaterials.addMouseListener(new MouseAdapter() {
+		JButton btnReturnSelectedMaterials = new JButton("Return Selected Materials");
+		btnReturnSelectedMaterials.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				DefaultTableModel model = (DefaultTableModel) table.getModel();
 				for (int i = model.getRowCount() - 1; i >= 0; i--) {
 					if ((boolean) model.getValueAt(i, 4) == true){
-						librarySystem.getMaterialManager().updateStatus(librarySystem.getMaterialManager().getMaterial((Integer) model.getValueAt(i, 3)), MaterialStatus.RETURNED);
-						model.removeRow(i);
+						librarySystem.getMaterialManager().returnMaterial		
+							(librarySystem.getUserManager().getCurrentUser(), librarySystem.getMaterialManager().getMaterial(
+								(Integer) model.getValueAt(i, 3)));
+						model.removeRow(i);		
+						System.out.println("returning material");
 					}
 				}
 			}
 		});
 		
-		
+		this.librarySystem.updateGUI(this);
+				
 		JButton btnHome = new JButton("Home");
 		btnHome.setBounds(0, 0, 174, 45);
 		btnHome.addMouseListener(new MouseAdapter() {
@@ -118,10 +122,8 @@ public class ReturnGUI extends JPanel {
 		btnBrowse.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnBrowse.setBackground(SystemColor.menu);
 		
-		
-		JButton button_5 = new JButton("Return Selected Materials");
-		button_5.setBounds(838, 54, 161, 29);
-		
+		btnBrowse.setBackground(UIManager.getColor("Button.background"));
+				
 		table = new JTable();
 		scrollPane.setColumnHeaderView(table);
 		
@@ -134,6 +136,53 @@ public class ReturnGUI extends JPanel {
 		add(btnReturn);
 		add(btnBrowse);
 		add(scrollPane);
-		add(button_5);
+		
+
+		btnReturnSelectedMaterials.setBounds(30, 544, 253, 25);
+		add(btnReturnSelectedMaterials);
+		
+
+		
+		JButton btnAccount = new JButton("Account");
+		btnAccount.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				new ProfileGUI(librarySystem);
+			}
+		});
+		btnAccount.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		btnAccount.setBounds(910, 0, 174, 45);
+		add(btnAccount);
+		
+		JButton btnReceive = new JButton("Received");
+		btnReceive.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				new ReceiveGUI(librarySystem);
+			}
+		});
+		btnReceive.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		btnReceive.setBounds(732, 0, 168, 45);
+		add(btnReceive);
+		
+		JButton btnOrder = new JButton("Order");
+		btnOrder.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+			new OrderGUI(librarySystem);
+			}
+		});
+		/*
+		 * copy and paste me into your class and your button will be invisible too!!!!!!!
+		 */
+		if (librarySystem.getUserManager().getCurrentUser().getUserType() == UserType.STUDENT || librarySystem.getUserManager().getCurrentUser().getUserType() == UserType.INSTRUCTOR ) {
+			btnAccount.setVisible(false);
+			btnOrder.setVisible(false);
+			btnReceive.setVisible(false);
+		}
+		
+		btnOrder.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		btnOrder.setBounds(542, 0, 172, 45);
+		add(btnOrder);
 	}
 }

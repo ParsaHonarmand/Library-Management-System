@@ -1,0 +1,9 @@
+librarysystem
+librarysystem.database
+librarysystem.gui
+librarysystem.managers
+librarysystem.materials
+librarysystem.reservations
+librarysystem.searching
+librarysystem.users
+librarysystem.users.faculty

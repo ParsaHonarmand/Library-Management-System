@@ -207,7 +207,7 @@ public class ReservationsGUI extends JPanel {
 		});
 
 		
-		String[] columnNames = { "Icon", "Material","Amount" };
+		String[] columnNames = { "Icon", "Material","Amount"};
 
 		DefaultTableModel model = new DefaultTableModel(new Object[][][] {}, columnNames) {
 		};
@@ -222,7 +222,8 @@ public class ReservationsGUI extends JPanel {
 		for (Reservation reservation : instructor.getReservations()) {
 			System.out.println("reservation: " + reservation);
 			List<Material> materials = reservation.getMaterials();
-			data[row++] = new Object[] {bookImg, materials.get(0).getNiceName(), materials.size()};
+			data[row] = new Object[] {bookImg, materials.get(row).getNiceName(), materials.size()};
+			row++;
 			tableReservations.add(reservation);
 		}
 

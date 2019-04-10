@@ -1,9 +1,24 @@
+
 AVAILABLE|BOOK|1|ASTR-101|Astronomy 101 - 1st Edition|Mark Davis|1|-1|-1
 AVAILABLE|BOOK|2|ECON-101|Economy 101 - 2nd Edition|Liam Scott|2|-1|-1
 RESERVED|BOOK|3|JAVA-101|Java 101 - 3rd jEdition|Tyler Welty|3|-1|-1
 AVAILABLE|BOOK|2|ECON-101|Economy 101 - 2nd Edition|Liam Scott|2|-1|-1
+RETURNED|BOOK|1|ASTR-101|Astronomy 101 - 1st Edition|Mark Davis|1|1554762818280|-1
+RETURNED|BOOK|2|ECON-101|Economy 101 - 2nd Edition|Liam Scott|2|-1|-1
 RESERVED|BOOK|3|JAVA-101|Java 101 - 3rd Edition|Tyler Welty|3|-1|-1
-ON_ORDER|MAGAZINE|6|LIB-JNL|Library Journal|Library|5|-1|-1
+RETURNED|BOOK|2|ECON-101|Economy 101 - 2nd Edition|Liam Scott|2|-1|-1
+RESERVED|BOOK|3|JAVA-101|Java 101 - 3rd Edition|Tyler Welty|3|-1|-1
+BORROWED|MAGAZINE|6|LIB-JNL|Library Journal|Library|5|1554325512142|-1
 ON_ORDER|BOOK|8|ASTR-101|Astronomy 101 - 1st Edition|Mark Davis|1|-1|-1
 ON_ORDER|BOOK|9|ASTR-101|Astronomy 101 - 1st Edition|Mark Davis|1|-1|-1
 ON_ORDER|BOOK|10|ASTR-101|Astronomy 101 - 1st Edition|Mark Davis|1|-1|-1
+AVAILABLE|MAGAZINE|11|ID|Titlem|Author|0|-1|-1
+ON_ORDER|MAGAZINE|12|ID|Title|Author|0|-1|-1
+ON_ORDER|MAGAZINE|13|ID|Title|Author|7|-1|-1
+ON_ORDER|MAGAZINE|14|ID|Title|Author|7|-1|-1
+ON_ORDER|ALL|15|ID|Title|Author|0|-1|-1
+AVAILABLE|BOOK|16|newbook|book|Author|1|-1|-1
+RETURNED|BOOK|9|ASTR-101|Astronomy 101 - 1st Edition|Mark Davis|1|-1|-1
+AVAILABLE|BOOK|10|ASTR-101|Astronomy 101 - 1st Edition|Mark Davis|1|-1|-1
+ON_ORDER|BOOK|1|book1|Book|me|0|-1|-1
+ON_ORDER|BOOK|2|book1|Book|me|1|-1|-1
