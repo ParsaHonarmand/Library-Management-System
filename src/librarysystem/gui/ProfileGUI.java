@@ -1,26 +1,13 @@
 package librarysystem.gui;
 
-import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.GroupLayout;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.ImageIcon;
-import javax.swing.LayoutStyle.ComponentPlacement;
-
 import librarysystem.LibrarySystem;
 import librarysystem.managers.UserManager;
 import librarysystem.users.UserType;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.io.File;
-
-import javax.swing.JLabel;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class ProfileGUI extends JPanel {
 
@@ -37,7 +24,7 @@ public class ProfileGUI extends JPanel {
 	
 	/**
 	 * Providing user information about their own account eg: ID, Name, Username
-	 * @param librarySystem
+	 * @param librarySystem The system to base the GUI on
 	 */
 	public ProfileGUI(LibrarySystem librarySystem) {
 		setForeground(new Color(51, 102, 153));

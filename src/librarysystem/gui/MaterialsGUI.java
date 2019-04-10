@@ -1,46 +1,21 @@
 package librarysystem.gui;
 
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.GroupLayout;
-import javax.swing.Icon;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JButton;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableModel;
-
 import librarysystem.LibrarySystem;
 import librarysystem.materials.Material;
-import librarysystem.materials.MaterialStatus;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.SwingConstants;
-
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
-import java.awt.SystemColor;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
 import librarysystem.materials.MaterialType;
 import librarysystem.searching.AuthorComparator;
 import librarysystem.searching.TitleComparator;
 import librarysystem.users.UserType;
 
-import javax.swing.JLabel;
-import javax.swing.JMenuItem;
-
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Dimension;
-import javax.swing.UIManager;
-import javax.swing.JScrollBar;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * GUI class for users to manage their materials (renew, cancel, borrow, return)
@@ -64,7 +39,7 @@ public class MaterialsGUI extends JPanel {
 
 	/**
 	 * Constructor that creates the GUI including buttons, Jtables, Jmenus, etc
-	 * @param librarySystem creates an instance of LibrarySystem
+	 * @param librarySystem The system to base the GUI on
 	 * 
 	 */
 	public MaterialsGUI(LibrarySystem librarySystem) {
@@ -363,8 +338,7 @@ public class MaterialsGUI extends JPanel {
 	}
 	
 	/**
-	 * method to create all the options when a material is right-clicked
-	 * @return void
+	 * Method to create all the options when a material is right-clicked
 	 */
 	public void setupPopupMenu() {
 		
@@ -412,8 +386,8 @@ public class MaterialsGUI extends JPanel {
 	
 	/**
 	 * method to fill the Jtables and sort the materials based on title/author and material type
-	 * @param stringSort
-	 * @param materialType
+	 * @param stringSort The string to sort with
+	 * @param materialType The type of materials to filter for
 	 */
 	public void sort(String stringSort, MaterialType materialType) {
 		this.tableContents.clear();

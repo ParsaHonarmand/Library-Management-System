@@ -1,45 +1,24 @@
 package librarysystem.gui;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Font;
+import librarysystem.LibrarySystem;
+import librarysystem.gui.JSpinnerInTables.SpinnerEditor;
+import librarysystem.materials.Material;
+import librarysystem.reservations.Reservation;
+import librarysystem.users.UserType;
+import librarysystem.users.faculty.Instructor;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JPopupMenu;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.UIManager;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
-
-import librarysystem.LibrarySystem;
-import librarysystem.gui.JSpinnerInTables.SpinnerEditor;
-import librarysystem.materials.Material;
-import librarysystem.materials.MaterialStatus;
-import librarysystem.materials.MaterialType;
-import librarysystem.reservations.Reservation;
-import librarysystem.users.UserType;
-import librarysystem.users.faculty.Instructor;
-
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JComboBox;
-import javax.swing.JSlider;
-import javax.swing.JSpinner;
 
 public class ReservationsGUI extends JPanel {
 	private LibrarySystem librarySystem;
@@ -58,6 +37,7 @@ public class ReservationsGUI extends JPanel {
 
 	/**
 	 * Create the panel.
+	 * @param librarySystem The system to base the GUI on
 	 */
 	public ReservationsGUI(LibrarySystem librarySystem) {
 		this.librarySystem = librarySystem;

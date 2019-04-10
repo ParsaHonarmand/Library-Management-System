@@ -1,23 +1,11 @@
 package librarysystem.gui;
 
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.SwingConstants;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.LayoutStyle.ComponentPlacement;
-
 import librarysystem.LibrarySystem;
 
-import java.awt.event.ActionListener;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.SystemColor;
+import java.awt.event.ActionListener;
 
 public class PasswordGUI extends JPanel {
 	private JTextField currPswrdTextField;
@@ -35,6 +23,7 @@ public class PasswordGUI extends JPanel {
 
 	/**
 	 * Create the panel.
+	 * @param librarySystem The system to base the GUI on
 	 */
 	public PasswordGUI(LibrarySystem librarySystem) {
 		this.librarySystem = librarySystem;

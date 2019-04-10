@@ -1,50 +1,28 @@
 package librarysystem.gui;
 
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.GroupLayout;
-import javax.swing.Icon;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JButton;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableModel;
-
 import librarysystem.LibrarySystem;
 import librarysystem.managers.MaterialManager;
 import librarysystem.materials.Material;
 import librarysystem.materials.MaterialStatus;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JScrollPane;
-import javax.swing.JSlider;
-import javax.swing.JTable;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
-import java.awt.SystemColor;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
 import librarysystem.materials.MaterialType;
 import librarysystem.searching.AuthorComparator;
 import librarysystem.searching.TitleComparator;
 import librarysystem.users.UserType;
 import librarysystem.users.faculty.Instructor;
 
-import javax.swing.JLabel;
-import javax.swing.JMenuItem;
-
-import java.awt.Font;
-import javax.swing.JSpinner;
-import java.awt.ComponentOrientation;
-import javax.swing.SwingConstants;
-import javax.swing.event.ChangeListener;
+import javax.swing.*;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BrowseGUI extends JPanel {
 
@@ -63,6 +41,7 @@ public class BrowseGUI extends JPanel {
 
 	/**
 	 * Create the panel.
+	 * @param librarySystem The system to base the GUI on
 	 */
 	public BrowseGUI(LibrarySystem librarySystem) {
 		this.librarySystem = librarySystem;

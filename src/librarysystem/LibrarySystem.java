@@ -30,19 +30,35 @@ public class LibrarySystem {
 		new LoginGUI(librarySystem);
 	}
 	
+	/**
+	 * Updates the frame with a new JPanel
+	 * @param panel The new panel to be displayed
+	 */
 	public void updateGUI(JPanel panel) {
 		this.frame.setContentPane(panel);
 		this.frame.setVisible(true);
 	}
 	
+	/**
+	 * Returns the userManager
+	 * @return The userManager
+	 */
 	public UserManager getUserManager() {
 		return userManager;
 	}
 	
+	/**
+	 * Returns the materialManager
+	 * @return The materialManager
+	 */
 	public MaterialManager getMaterialManager() {
 		return materialManager;
 	}
 	
+	/**
+	 * Returns the frame
+	 * @return The frame
+	 */
 	public JFrame getFrame() {
 		return this.frame;
 	}
