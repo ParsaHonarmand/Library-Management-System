@@ -388,7 +388,7 @@ public class MaterialsGUI extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				librarySystem.getMaterialManager().putOnHold(librarySystem.getUserManager().getCurrentUser(), selectedMaterial);
 				((DefaultTableModel) tableMaterials.getModel()).removeRow(selectedRow);
-				selectedRow = -1;
+				//selectedRow = -1;
 				materialsMenu.hide();
 			}
 		});
