@@ -63,6 +63,12 @@ public class UserManager {
 		this.users.remove(user);
 	}
 	
+	/**
+	 * Attempts to login to the system using a username and password
+	 * @param username The username to login with
+	 * @param password The password to login with
+	 * @return Returns the user upon successful login, or null otherwise
+	 */
 	public  User login(String username, String password) {
 		for (User user : this.users) {
 			if ((user.getUsername().equalsIgnoreCase(username) || user.getEmail().equalsIgnoreCase(username)) && user.getPassword().equals(password)) {
@@ -74,6 +80,9 @@ public class UserManager {
 		return null;
 	}
 	
+	/**
+	 * Logs out the current user from the system
+	 */
 	public void logout() {
 		this.setCurrentUser(null);
 	}

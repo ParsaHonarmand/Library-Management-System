@@ -1,26 +1,19 @@
 package librarysystem.gui;
 
-import java.awt.Color;
-import java.awt.Font;
+import librarysystem.LibrarySystem;
+import librarysystem.users.UserType;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-
-import librarysystem.LibrarySystem;
-import librarysystem.users.User;
-import librarysystem.users.UserType;
 
 public class HomeGUI extends JPanel {
 	private LibrarySystem librarySystem;
 
 	/**
 	 * Create the panel.
+	 * @param librarySystem The system to base the GUI on
 	 */
 	public HomeGUI(LibrarySystem librarySystem) {
 		setForeground(new Color(0, 0, 102));

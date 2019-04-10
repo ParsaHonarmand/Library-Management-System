@@ -1,34 +1,16 @@
 package librarysystem.gui;
 
-import javax.swing.JPanel;
-import javax.swing.GroupLayout;
-import javax.swing.Icon;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JButton;
-import javax.swing.JScrollPane;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JTable;
-import javax.swing.table.TableModel;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.DefaultComboBoxModel;
-
-
 import librarysystem.LibrarySystem;
 import librarysystem.materials.Material;
 import librarysystem.materials.MaterialStatus;
-import librarysystem.users.User;
 
-import java.awt.Font;
-import java.util.ArrayList;
-import java.util.List;
-import java.awt.Dimension;
-import javax.swing.JScrollBar;
-import javax.swing.JCheckBox;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.SystemColor;
-import java.awt.Color;
-import javax.swing.UIManager;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -46,7 +28,7 @@ public class ReceiveGUI extends JPanel {
 
 	/**
 	 * Constructor that creates jpanel and elements including:
-	 * @param LibrarySystem - object that contains setter, getters, and managers
+	 * @param librarySystem - object that contains setter, getters, and managers
 	 * navigation buttons 
 	 * table displaying book information and check box
 	 * button to receive selected material

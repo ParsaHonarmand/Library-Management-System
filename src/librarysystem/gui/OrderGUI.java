@@ -1,33 +1,16 @@
 package librarysystem.gui;
 
-import javax.swing.JPanel;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.GroupLayout;
-import javax.swing.ImageIcon;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JPopupMenu;
-
-import java.awt.Component;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import javax.swing.JToolBar;
-import javax.swing.JMenu;
-import javax.swing.JScrollPane;
-import javax.swing.JButton;
-
-import javax.swing.LayoutStyle.ComponentPlacement;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JTextPane;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-
 import librarysystem.LibrarySystem;
 import librarysystem.materials.Material;
 import librarysystem.materials.MaterialStatus;
 import librarysystem.materials.MaterialType;
-import javax.swing.JTextField;
-import java.awt.Color;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 
 public class OrderGUI extends JPanel {
@@ -37,6 +20,7 @@ public class OrderGUI extends JPanel {
 
 	/**
 	 * Create the panel.
+	 * @param librarySystem The system to base the GUI on
 	 */
 	public OrderGUI(LibrarySystem librarySystem) {
 		this.librarySystem = librarySystem;

@@ -1,24 +1,8 @@
 package librarysystem.gui;
 
-import javax.swing.JPanel;
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.Rectangle;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
-import javax.swing.DefaultListModel;
-import javax.swing.GroupLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-
 import librarysystem.LibrarySystem;
 import librarysystem.users.User;
+<<<<<<< HEAD
 import librarysystem.users.UserType;
 import librarysystem.managers.*;
 
@@ -29,10 +13,15 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionListener;
+=======
+
+import javax.swing.*;
+import java.awt.*;
+>>>>>>> a70f6c4fd0f8046073891e0ee9eae14b52f6ed86
 import java.awt.event.ActionEvent;
-import javax.swing.SwingConstants;
-import java.awt.Panel;
-import javax.swing.JToolBar;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * GUI class for users to view their outstanding fees and pay them off
@@ -51,7 +40,7 @@ public class PayGUI extends JPanel {
 
 	/**
 	 * Constructor creates the panel, buttons, textfields, etc. 
-	 * @param librarySystem creates an instance of librarySystem
+	 * @param librarySystem The system to base the GUI on
 	 */
 	public PayGUI(LibrarySystem librarySystem) {
 		User currentUser = librarySystem.getUserManager().getCurrentUser();

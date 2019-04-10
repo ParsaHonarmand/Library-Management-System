@@ -8,7 +8,6 @@ import javax.swing.table.DefaultTableModel;
 
 import librarysystem.LibrarySystem;
 import librarysystem.materials.Material;
-import librarysystem.materials.MaterialStatus;
 import librarysystem.users.UserType;
 
 import javax.swing.JButton;
@@ -17,15 +16,11 @@ import javax.swing.JLabel;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.SystemColor;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JScrollBar;
-import javax.swing.UIManager;
 
 public class ReturnGUI extends JPanel {
 	private JTable table;
@@ -33,6 +28,7 @@ public class ReturnGUI extends JPanel {
 
 	/**
 	 * Create the panel.
+	 * @param librarySystem The system to base the GUI on
 	 */
 	public ReturnGUI(LibrarySystem librarySystem) {
 		this.librarySystem = librarySystem;
