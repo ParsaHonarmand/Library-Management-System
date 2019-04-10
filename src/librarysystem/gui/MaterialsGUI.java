@@ -40,6 +40,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Dimension;
 import javax.swing.UIManager;
+import javax.swing.JScrollBar;
 
 /**
  * GUI class for users to manage their materials (renew, cancel, borrow, return)
@@ -57,7 +58,8 @@ public class MaterialsGUI extends JPanel {
 	private List<Material> holdContents = new ArrayList<>();
 	private Material selectedMaterial = null;
 	private JMenuItem returnMenuItem = new JMenuItem("Return"), borrowMenuItem = new JMenuItem("Borrow"), renewMenuItem = new JMenuItem("Renew"), cancelMenuItem = new JMenuItem("Cancel");
-	private JPopupMenu menu;
+	private JPopupMenu materialsMenu;
+	private JPopupMenu holdsMenu;
 	private int selectedRow = -1;
 
 	/**
@@ -264,11 +266,10 @@ public class MaterialsGUI extends JPanel {
 					selectedRow = tableMaterials.rowAtPoint(e.getPoint());
 					System.out.println("row: " + selectedRow);
 					selectedMaterial = tableContents.get(selectedRow);
-					menu.show(tableMaterials, e.getX(), e.getY());
+					materialsMenu.show(tableMaterials, e.getX(), e.getY());
 				}
 			}
 		});
-		
 		
 		
 		
@@ -296,9 +297,7 @@ public class MaterialsGUI extends JPanel {
 		scrollPane_1.setViewportView(tableHold);
 		
 		this.tableHold.getColumnModel().getColumn(0).setMaxWidth(100);
-		sort("Title", MaterialType.ALL);
 
-		
 		this.tableHold.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -306,26 +305,35 @@ public class MaterialsGUI extends JPanel {
 				if (e.getButton() == MouseEvent.BUTTON3) {
 					selectedRow = tableHold.rowAtPoint(e.getPoint());
 					System.out.println("row: " + selectedRow);
-					selectedMaterial = tableContents.get(selectedRow);
-					menu.show(tableHold, e.getX(), e.getY());
+					selectedMaterial = holdContents.get(selectedRow);
+					holdsMenu.show(tableHold, e.getX(), e.getY());
 				}
 			}
 		});
 		
-		sort("Title", MaterialType.ALL);
 		
-		this.menu = new JPopupMenu();
-		this.menu.add(this.returnMenuItem);
-		this.menu.add(this.renewMenuItem);
-		this.menu.add(this.cancelMenuItem);
-		this.menu.add(this.borrowMenuItem);
+		this.materialsMenu = new JPopupMenu();
+		this.materialsMenu.add(this.returnMenuItem);
+		this.materialsMenu.add(this.renewMenuItem);
+		
+		this.holdsMenu = new JPopupMenu();
+		this.holdsMenu.add(this.borrowMenuItem);
+		this.holdsMenu.add(this.cancelMenuItem);
+		
 		this.setupPopupMenu();
 
 		
 		
 		profilePanel.setLayout(null);
 		profilePanel.add(scrollPane);
+		
+		JScrollBar contentScroll = new JScrollBar();
+		scrollPane.setRowHeaderView(contentScroll);
 		profilePanel.add(scrollPane_1);
+		
+		JScrollBar holdScroll = new JScrollBar();
+		scrollPane_1.setRowHeaderView(holdScroll);
+		
 		profilePanel.add(lblCurrentMaterials);
 		profilePanel.add(lblItemsOnHold);
 		profilePanel.add(lblSortBy);
@@ -346,7 +354,7 @@ public class MaterialsGUI extends JPanel {
 		add(btnReceived);
 		add(btnAccount);
 		add(profilePanel);
-		
+		sort("Title", MaterialType.ALL);
 		this.librarySystem.updateGUI(this);
 	}
 	
@@ -362,7 +370,7 @@ public class MaterialsGUI extends JPanel {
 				librarySystem.getMaterialManager().returnMaterial(librarySystem.getUserManager().getCurrentUser(), selectedMaterial);
 				((DefaultTableModel) tableMaterials.getModel()).removeRow(selectedRow);
 				selectedRow = -1;
-				menu.hide();
+				materialsMenu.hide();
 			}});
 
 		this.borrowMenuItem.addActionListener(new ActionListener() {
@@ -371,7 +379,7 @@ public class MaterialsGUI extends JPanel {
 				librarySystem.getMaterialManager().borrowMaterial(librarySystem.getUserManager().getCurrentUser(), selectedMaterial);
 				((DefaultTableModel) tableHold.getModel()).removeRow(selectedRow);
 				selectedRow = -1;
-				menu.hide();
+				holdsMenu.hide();
 			}
 		});
 		
@@ -381,7 +389,7 @@ public class MaterialsGUI extends JPanel {
 				librarySystem.getMaterialManager().putOnHold(librarySystem.getUserManager().getCurrentUser(), selectedMaterial);
 				((DefaultTableModel) tableMaterials.getModel()).removeRow(selectedRow);
 				selectedRow = -1;
-				menu.hide();
+				materialsMenu.hide();
 			}
 		});
 		
@@ -391,7 +399,7 @@ public class MaterialsGUI extends JPanel {
 				librarySystem.getMaterialManager().reshelveMaterial(selectedMaterial);
 				((DefaultTableModel) tableHold.getModel()).removeRow(selectedRow);
 				selectedRow = -1;
-				menu.hide();
+				holdsMenu.hide();
 			}
 		});
 		
@@ -399,42 +407,49 @@ public class MaterialsGUI extends JPanel {
 
 	
 	/**
-	 * method to sort the materials based on title/author and material type
+	 * method to fill the Jtables and sort the materials based on title/author and material type
 	 * @param stringSort
 	 * @param materialType
 	 */
 	public void sort(String stringSort, MaterialType materialType) {
-	this.tableContents.clear();
-	List<Material> userBorrowed = this.librarySystem.getUserManager().getCurrentUser().getOnHold();
-	this.tableContents = userBorrowed;
+		this.tableContents.clear();
+		this.holdContents.clear();
 	
-	if (materialType == MaterialType.ALL) {
-		this.tableContents = librarySystem.getMaterialManager().getUniqueMaterials(MaterialStatus.AVAILABLE);
-	} else {
-		this.tableContents = librarySystem.getMaterialManager().getUniqueMaterials(MaterialStatus.AVAILABLE, materialType);
-	}
+		//List<Material> userBorrowed = this.librarySystem.getUserManager().getCurrentUser().getOnHold();
+		//this.tableContents = userBorrowed;
 	
-	if (stringSort.equalsIgnoreCase("Title")) {
-		this.tableContents.sort(new TitleComparator());
-	} else if (stringSort.equalsIgnoreCase("Author")) {
-		this.tableContents.sort(new AuthorComparator());
-	}
+		if (materialType == MaterialType.ALL) {
+			this.tableContents = this.librarySystem.getUserManager().getCurrentUser().getBorrowed();
+			this.holdContents = this.librarySystem.getUserManager().getCurrentUser().getOnHold();
+		} 
+		//else {
+		//	this.tableContents = librarySystem.getUserManager().getCurrentUser().getUniqueMaterials(MaterialStatus.AVAILABLE, materialType);
+		//}
+	
+		if (stringSort.equalsIgnoreCase("Title")) {
+			this.tableContents.sort(new TitleComparator());
+			this.holdContents.sort(new TitleComparator());
+		} 
+		else if (stringSort.equalsIgnoreCase("Author")) {
+			this.tableContents.sort(new AuthorComparator());
+			this.holdContents.sort(new AuthorComparator());
+		}
 
-	DefaultTableModel model = (DefaultTableModel) tableMaterials.getModel();
-	for (int i = model.getRowCount() - 1; i >= 0; i--) {
-		model.removeRow(i);
+		DefaultTableModel model = (DefaultTableModel) tableMaterials.getModel();
+		for (int i = model.getRowCount() - 1; i >= 0; i--) {
+			model.removeRow(i);
+		}
+		for (int i = 0; i < this.tableContents.size(); i++) {
+			model.addRow(new Object[] { null, this.tableContents.get(i).getNiceName() });
+		}
+
+		DefaultTableModel model1 = (DefaultTableModel) tableHold.getModel();
+		for (int i = model1.getRowCount() - 1; i >= 0; i--) {
+			model1.removeRow(i);
+		}
+		for (int i = 0; i < this.holdContents.size(); i++) {
+			model1.addRow(new Object[] { null, this.holdContents.get(i).getNiceName() });
+		}
 	}
-	for (int i = 0; i < this.tableContents.size(); i++) {
-		model.addRow(new Object[] { null, this.tableContents.get(i).getNiceName() });
-	}
-	
-	DefaultTableModel model1 = (DefaultTableModel) tableHold.getModel();
-	for (int i = model1.getRowCount() - 1; i >= 0; i--) {
-		model1.removeRow(i);
-	}
-	for (int i = 0; i < this.tableContents.size(); i++) {
-		model1.addRow(new Object[] { null, this.tableContents.get(i).getNiceName() });
-	}
-}
 }
 
