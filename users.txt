@@ -1,6 +1,6 @@
 STUDENT|1|johnsmith1|johnsmith1@mru.ca|John Smith|password|false|0.0|NONE|NONE
-LIBRARIAN|1|johnsmith2|johnsmith2@mru.ca|John Smith|password|false|0.0|NONE|NONE
-STUDENT|1|haj|haj@mru.ca|haj|h|false|0.0|6|NONE
-LIBRARIAN|1|johnsmith2|johnsmith2@mru.ca|John Smith|password|false|0.0|1|NONE
-STUDENT|1|haj|haj@mru.ca|haj|h|false|0.0|NONE|NONE
+LIBRARIAN|1|johnsmith2|johnsmith2@mru.ca|John Smith|password|false|0.0|1,2,14|2,2,14
+STUDENT|1|haj|haj@mru.ca|haj|h|false|0.0|1,8|1,1,2,13
+LIBRARIAN|1|johnsmith2|johnsmith2@mru.ca|John Smith|password|false|0.0|1,2,14|2,2,14
+STUDENT|1|haj|haj@mru.ca|haj|h|false|0.0|1,8|1,1,2,13
 INSTRUCTOR|100|sohaib|sohaib@mru.ca|Sohaib|password|false|0.0|NONE|NONE|3+true

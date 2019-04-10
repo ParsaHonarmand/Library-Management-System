@@ -1,37 +1,24 @@
 package librarysystem.gui;
 
-import java.awt.Color;
-import java.awt.Font;
+import librarysystem.LibrarySystem;
+import librarysystem.users.UserType;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-
-import librarysystem.LibrarySystem;
-import librarysystem.users.User;
 
 public class HomeGUI extends JPanel {
 	private LibrarySystem librarySystem;
 
 	/**
 	 * Create the panel.
+	 * @param librarySystem The system to base the GUI on
 	 */
 	public HomeGUI(LibrarySystem librarySystem) {
-		setForeground(new Color(0, 0, 102));
-		//Upper Tab Buttons Settings
-		int BUTTONS_Y=225;
-		int BUTTONS_W=120;
-		int BUTTONS_H=30;
-		int BUTTONS_D=BUTTONS_W+80;
-		
-		int INFOS_W=70;
+
 		this.librarySystem = librarySystem;
-		
+		this.setBounds(0, 0, librarySystem.WIDTH, librarySystem.HEIGHT);
 		/**
 		 * Setting panel characteristics 
 		 */
@@ -148,7 +135,7 @@ public class HomeGUI extends JPanel {
 		btnBrowse.setForeground(new Color(0, 0, 128));
 		
 		JButton btnReceived = new JButton("Received");
-		btnReceived.setBounds(680, 225, 120, 30);
+		btnReceived.setBounds(1080, 225, 120, 30);
 		btnReceived.setForeground(new Color(0, 0, 128));
 		
 		JButton btnOrder = new JButton("Order");
@@ -156,7 +143,7 @@ public class HomeGUI extends JPanel {
 		btnOrder.setForeground(new Color(0, 0, 128));
 		
 		JButton btnAccount = new JButton("Account");
-		btnAccount.setBounds(1080, 225, 120, 30);
+		btnAccount.setBounds(680, 225, 120, 30);
 		btnAccount.setForeground(new Color(0, 0, 128));
 		
 		/**
@@ -216,6 +203,11 @@ public class HomeGUI extends JPanel {
 		add(panel);
 		
 		librarySystem.updateGUI(this);
+		
+		if (librarySystem.getUserManager().getCurrentUser().getUserType() == UserType.STUDENT || librarySystem.getUserManager().getCurrentUser().getUserType() == UserType.INSTRUCTOR ) {
+			btnOrder.setVisible(false);
+			btnReceived.setVisible(false);
+		}
 
 	}
 }

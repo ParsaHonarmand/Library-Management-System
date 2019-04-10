@@ -1,27 +1,12 @@
 package librarysystem.gui;
 
-import javax.swing.JPanel;
-import javax.swing.GroupLayout;
-import javax.swing.ImageIcon;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JButton;
-
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.SystemColor;
-import javax.swing.LayoutStyle.ComponentPlacement;
-
 import librarysystem.LibrarySystem;
 import librarysystem.users.User;
 
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.JPasswordField;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.Color;
-import javax.swing.SwingConstants;
 
 public class LoginGUI extends JPanel {
 	
@@ -32,6 +17,7 @@ public class LoginGUI extends JPanel {
 
 	/**
 	 * Create the panel.
+	 * @param librarySystem The system to base the GUI on
 	 */
 	public LoginGUI(LibrarySystem librarySystem) {
 		this.librarySystem = librarySystem;
@@ -112,7 +98,7 @@ public class LoginGUI extends JPanel {
 				if (user == null) {
 					JOptionPane.showMessageDialog(librarySystem.getFrame(), "Username and password are not valid. Try again.");
 				} if (user.getOverdueFee()>50) {
-					librarySystem.updateGUI(new overDueGIU(librarySystem));
+					librarySystem.updateGUI(new OverdueGUI(librarySystem));
 				} else {
 					librarySystem.updateGUI(new HomeGUI(librarySystem));
 				}
@@ -124,7 +110,7 @@ public class LoginGUI extends JPanel {
 		 * Used to insert image on to panel
 		 */
 		JLabel bckgGifImg = new JLabel("");
-		bckgGifImg.setBounds(0, 0, 1280, 720);
+		bckgGifImg.setBounds(0, 0, librarySystem.WIDTH, librarySystem.HEIGHT);
 		add(bckgGifImg);
 		bckgGifImg.setIcon(new ImageIcon("resources/libwall.jpg"));
 		

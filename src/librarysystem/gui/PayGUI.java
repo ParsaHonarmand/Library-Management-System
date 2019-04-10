@@ -1,37 +1,14 @@
 package librarysystem.gui;
 
-import javax.swing.JPanel;
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.Rectangle;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
-import javax.swing.DefaultListModel;
-import javax.swing.GroupLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-
 import librarysystem.LibrarySystem;
 import librarysystem.users.User;
-import librarysystem.managers.*;
-
+import librarysystem.users.UserType;
 import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionListener;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
-import javax.swing.SwingConstants;
-import java.awt.Panel;
-import javax.swing.JToolBar;
+
 
 /**
  * GUI class for users to view their outstanding fees and pay them off
@@ -50,88 +27,34 @@ public class PayGUI extends JPanel {
 
 	/**
 	 * Constructor creates the panel, buttons, textfields, etc. 
-	 * @param librarySystem creates an instance of librarySystem
+	 * @param librarySystem The system to base the GUI on
 	 */
 	public PayGUI(LibrarySystem librarySystem) {
-		this.librarySystem = librarySystem;
+		User currentUser = librarySystem.getUserManager().getCurrentUser();
+		double fee = currentUser.getOverdueFee();
+		String feeString = new Double(fee).toString();
 		
-		this.setBackground(new Color(204, 204, 204));
-		this.setBounds(0, 0, 1075, 747);
-
-		JButton profile = new JButton("Profile");
-		profile.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				new ProfileGUI(librarySystem);
-			}
-		});
-		profile.setHorizontalAlignment(SwingConstants.LEFT);
-		profile.setBounds(6, 47, 154, 29);
-
-		JButton changePassword = new JButton("Change Password");
-		changePassword.setBounds(6, 89, 154, 29);
-		changePassword.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				new PasswordGUI(librarySystem);
-			}
-		});
-
-		JButton payFee = new JButton("Pay Fees");
-		payFee.setBounds(6, 130, 154, 29);
-
-		JButton materials = new JButton("Materials");
-		materials.setBounds(6, 171, 154, 29);
-		materials.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				new MaterialsGUI(librarySystem);
-			}
-		});
-
-		JButton reservations = new JButton("Reservations");
-		reservations.setBounds(6, 212, 154, 29);
-		reservations.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				new ReservationsGUI(librarySystem);
-			}
-		});
-
-		JButton logout = new JButton("Logout");
-		logout.setBounds(6, 712, 88, 29);
-		logout.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				new LoginGUI(librarySystem);
-			}
-		});
-
+		this.librarySystem = librarySystem;
+		this.setBounds(0, 0, librarySystem.WIDTH, librarySystem.HEIGHT);
+		this.setBackground(Color.WHITE);
+		
 		JPanel profilePanel = new JPanel();
-		profilePanel.setBounds(218, 47, 851, 694);
-		profilePanel.setBackground(new Color(102, 153, 204));
-
-		JButton btnHome = new JButton("Home");
-		btnHome.setBounds(6, 0, 377, 29);
-		btnHome.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				new HomeGUI(librarySystem);
-			}
-		});
-
-		JButton btnBrowse = new JButton("Browse");
-		btnBrowse.setBounds(385, 0, 367, 29);
-		btnBrowse.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				new BrowseGUI(librarySystem);
-			}
-		});
-
-		JButton btnAccount = new JButton("Account");
-		btnAccount.setBounds(758, 0, 311, 29);
-
+		profilePanel.setBounds(211, 270, 1054, 720);
+		profilePanel.setBackground(new Color(0, 102, 153));
+		librarySystem.setTheme(profilePanel);
+		
+		JLabel profilePic = new JLabel();
+		profilePic.setBounds(50, 281, 150, 150);
+		profilePic.setIcon(new ImageIcon("resources/profile.png"));
+		setLayout(null);
+		add(profilePic);
+		
+		
+		JLabel lblBanner = new JLabel("");
+		lblBanner.setBounds(15, 15, 1250, 200);
+		lblBanner.setIcon(new ImageIcon("resources/banner_img.png"));
+		setLayout(null);
+		add(lblBanner);
 		JLabel lblOutstandingFees = new JLabel("Outstanding Fees:");
 		lblOutstandingFees.setBounds(90, 64, 114, 16);
 
@@ -149,7 +72,15 @@ public class PayGUI extends JPanel {
 
 		JLabel lblLastName = new JLabel("Last name:");
 		lblLastName.setBounds(90, 279, 68, 16);
-
+		
+		JLabel lblError = new JLabel("Please enter all your info");
+		lblError.setBounds(280, 365, 195, 16);
+		lblError.setVisible(false);
+		
+		JLabel lblFeesToBePaid = new JLabel(String.valueOf(librarySystem.getUserManager().getCurrentUser().getOverdueFee()));
+		lblFeesToBePaid.setBounds(338, 64, 150, 16);
+		lblFeesToBePaid.setText(feeString);
+		
 		cardNumberField = new JTextField();
 		cardNumberField.setBounds(280, 98, 155, 26);
 		cardNumberField.setColumns(10);
@@ -170,19 +101,8 @@ public class PayGUI extends JPanel {
 		lastNameField.setBounds(280, 274, 155, 26);
 		lastNameField.setColumns(10);
 
-		JLabel lblError = new JLabel("Please enter all your info");
-		lblError.setBounds(280, 365, 195, 16);
-		lblError.setVisible(false);
 		
-		JLabel lblFeesToBePaid = new JLabel("");
-		lblFeesToBePaid.setBounds(338, 64, 150, 16);
 		
-		User currentUser = librarySystem.getUserManager().getCurrentUser();
-		double fee = currentUser.getOverdueFee();
-		String feeString = new Double(fee).toString();
-		
-		lblFeesToBePaid.setText(feeString);
-			
 		JButton btnPay = new JButton("Pay");
 		btnPay.setBounds(316, 312, 75, 29);
 		btnPay.addActionListener(new ActionListener() {
@@ -206,16 +126,136 @@ public class PayGUI extends JPanel {
 				}
 			}
 		});
+		
+		/**
+		 * General buttons constant throughout all panels
+		 */
+		JButton btnHome = new JButton("Home");
+		btnHome.setBounds(80, 225, 120, 30);
+		btnHome.setForeground(new Color(0, 0, 128));
+		
+		JButton btnReturned = new JButton("Returned");
+		btnReturned.setBounds(280, 225, 120, 30);
+		btnReturned.setForeground(new Color(0, 0, 128));
+		
+		JButton btnBrowse = new JButton("Browse");
+		btnBrowse.setBounds(480, 225, 120, 30);
+		btnBrowse.setForeground(new Color(0, 0, 128));
+		
+		JButton btnReceived = new JButton("Received");
+		btnReceived.setBounds(1080, 225, 120, 30);
+		btnReceived.setForeground(new Color(0, 0, 128));
+		
+		JButton btnOrder = new JButton("Order");
+		btnOrder.setBounds(880, 225, 120, 30);
+		btnOrder.setForeground(new Color(0, 0, 128));
+		
+		JButton btnAccount = new JButton("Account");
+		btnAccount.setBounds(680, 225, 120, 30);
+		btnAccount.setForeground(new Color(0, 0, 128));
+		
+		JButton btnChanPswrdLeft = new JButton("Change Password");
+		btnChanPswrdLeft.setBounds(50, 450, 158, 60);
+		add(btnChanPswrdLeft);
+		
+		JButton btnPayFees = new JButton("Pay Fees");
+		btnPayFees.setBounds(50, 508, 158, 60);
+		add(btnPayFees);
+		
+		JButton btnMaterials = new JButton("Materials");
+		btnMaterials.setBounds(50, 564, 158, 60);
+		add(btnMaterials);
+		
+		JButton btnReservations = new JButton("Reservations");
+		btnReservations.setBounds(50, 621, 158, 60);
+		if(librarySystem.getUserManager().getCurrentUser().getUserType()==UserType.INSTRUCTOR) {
+			add(btnReservations);
+		}
+		
+		JButton btnLogOut = new JButton("Logout");
+		btnLogOut.setBounds(98, 685, 110, 43);
+		add(btnLogOut);
+		
+		/**
+		 * Adding action listeners to the buttons above such that they redirect the user to a different panel
+		 */
+		btnHome.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new HomeGUI(librarySystem);
+			}
+		});
+		btnReturned.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new ReturnGUI(librarySystem);
+			}
+		});
+		
+		btnBrowse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new BrowseGUI(librarySystem);
+			}
+		});
+		
+		btnReceived.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new ReceiveGUI(librarySystem);
+			}
+		});
+		
+		btnOrder.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new OrderGUI(librarySystem);
+			}
+		});
+		
+		btnAccount.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new ProfileGUI(librarySystem);
+			}
+		});
+		
+		btnPayFees.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new PayGUI(librarySystem);
+			}
+		});
+		
+		btnChanPswrdLeft.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new PasswordGUI(librarySystem);
+			}
+		});
+		btnMaterials.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new MaterialsGUI(librarySystem);
+			}
+		});
+		
+		btnReservations.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new ReservationsGUI(librarySystem);
+			}
+		});
+		btnLogOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				librarySystem.getUserManager().logout();
+				new LoginGUI(librarySystem);
+			}
+		});
 
+		if (librarySystem.getUserManager().getCurrentUser().getUserType() == UserType.STUDENT || librarySystem.getUserManager().getCurrentUser().getUserType() == UserType.INSTRUCTOR ) {
+			btnOrder.setVisible(false);
+			btnReceived.setVisible(false);
+		}
 		this.librarySystem.updateGUI(this);
 		
 		setLayout(null);
-		add(changePassword);
-		add(logout);
-		add(profile);
-		add(payFee);
-		add(materials);
-		add(reservations);
+		add(btnHome);
+		add(btnReturned);
+		add(btnBrowse);
+		add(btnReceived);
+		add(btnOrder);
+		add(btnAccount);
 		add(profilePanel);
 		profilePanel.setLayout(null);
 		profilePanel.add(lblLastName);
@@ -232,8 +272,6 @@ public class PayGUI extends JPanel {
 		profilePanel.add(lblError);
 		profilePanel.add(btnPay);
 		profilePanel.add(lblFeesToBePaid);
-		add(btnHome);
-		add(btnBrowse);
-		add(btnAccount);
+	
 	}
 }

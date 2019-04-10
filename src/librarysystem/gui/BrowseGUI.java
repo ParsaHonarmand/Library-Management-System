@@ -1,50 +1,29 @@
 package librarysystem.gui;
 
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.GroupLayout;
-import javax.swing.Icon;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JButton;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableModel;
-
 import librarysystem.LibrarySystem;
 import librarysystem.managers.MaterialManager;
 import librarysystem.materials.Material;
 import librarysystem.materials.MaterialStatus;
+import librarysystem.materials.MaterialType;
+import librarysystem.searching.AuthorComparator;
+import librarysystem.searching.TitleComparator;
+import librarysystem.users.User;
+import librarysystem.users.UserType;
+import librarysystem.users.faculty.Instructor;
 
-import java.awt.event.ActionListener;
+import javax.swing.*;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
-import javax.swing.JScrollPane;
-import javax.swing.JSlider;
-import javax.swing.JTable;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
-import java.awt.SystemColor;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import librarysystem.materials.MaterialType;
-import librarysystem.searching.AuthorComparator;
-import librarysystem.searching.TitleComparator;
-import librarysystem.users.UserType;
-import librarysystem.users.faculty.Instructor;
-
-import javax.swing.JLabel;
-import javax.swing.JMenuItem;
-
-import java.awt.Font;
-import javax.swing.JSpinner;
-import java.awt.ComponentOrientation;
-import javax.swing.SwingConstants;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.ChangeEvent;
 
 public class BrowseGUI extends JPanel {
 
@@ -63,12 +42,18 @@ public class BrowseGUI extends JPanel {
 
 	/**
 	 * Create the panel.
+	 * @param librarySystem The system to base the GUI on
 	 */
 	public BrowseGUI(LibrarySystem librarySystem) {
+	
+		User currUser=librarySystem.getUserManager().getCurrentUser();
+		
+		
 		this.librarySystem = librarySystem;
+		this.setBounds(0, 0, librarySystem.WIDTH, librarySystem.HEIGHT);
+		librarySystem.setTheme(this);
 
 		JButton home = new JButton("Home");
-		home.setBounds(0, 0, 174, 45);
 		home.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		home.addMouseListener(new MouseAdapter() {
 			@Override
@@ -78,7 +63,6 @@ public class BrowseGUI extends JPanel {
 		});
 
 		JButton btnReturned = new JButton("Returned");
-		btnReturned.setBounds(180, 0, 172, 45);
 		btnReturned.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnReturned.addMouseListener(new MouseAdapter() {
 			@Override
@@ -88,12 +72,10 @@ public class BrowseGUI extends JPanel {
 		});
 
 		JButton btnBrowse = new JButton("Browse");
-		btnBrowse.setBounds(358, 0, 172, 45);
 		btnBrowse.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnBrowse.setBackground(SystemColor.activeCaption);
 
 		JButton btnOrder = new JButton("Order");
-		btnOrder.setBounds(536, 0, 169, 45);
 		btnOrder.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnOrder.addMouseListener(new MouseAdapter() {
 			@Override
@@ -103,7 +85,6 @@ public class BrowseGUI extends JPanel {
 		});
 
 		JButton btnReceived = new JButton("Received");
-		btnReceived.setBounds(723, 0, 181, 45);
 		btnReceived.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnReceived.addMouseListener(new MouseAdapter() {
 			@Override
@@ -113,7 +94,6 @@ public class BrowseGUI extends JPanel {
 		});
 
 		JButton btnAccount = new JButton("Account");
-		btnAccount.setBounds(916, 0, 174, 45);
 		btnAccount.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnAccount.addMouseListener(new MouseAdapter() {
 			@Override
@@ -123,26 +103,22 @@ public class BrowseGUI extends JPanel {
 		});
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(6, 51, 699, 658);
 
 		JComboBox materialTypeSortBox = new JComboBox();
-		materialTypeSortBox.setBounds(723, 178, 363, 44);
 		materialTypeSortBox.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		materialTypeSortBox.setToolTipText("Select Material Type");
 		materialTypeSortBox.setModel(new DefaultComboBoxModel(MaterialType.values()));
 
 		JComboBox stringSortBox = new JComboBox();
-		stringSortBox.setBounds(723, 103, 363, 44);
 		stringSortBox.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		stringSortBox.setModel(new DefaultComboBoxModel(new String[] { "Title", "Author" }));
 
 		JLabel lblSortBy = new JLabel("Sort by:");
-		lblSortBy.setBounds(885, 68, 50, 17);
+		lblSortBy.setForeground(Color.WHITE);
 		lblSortBy.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 
 		JButton btnSort = new JButton("Sort");
-		btnSort.setBounds(868, 240, 75, 29);
 		btnSort.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -155,7 +131,6 @@ public class BrowseGUI extends JPanel {
 		btnSort.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		
 		reservationSpinner = new JSpinner();
-		reservationSpinner.setBounds(968, 445, 40, 26);
 		reservationSpinner.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				int maxAmount = librarySystem.getMaterialManager().getAmountAvailableForReservation(selectedMaterial);
@@ -171,17 +146,16 @@ public class BrowseGUI extends JPanel {
 		reservationSpinner.setVisible(false);
 		
 		reserveLabel = new JLabel("How many would you like to reserve?");
-		reserveLabel.setBounds(733, 449, 229, 17);
+		reserveLabel.setBackground(new Color(255, 255, 255));
 		reserveLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		reserveLabel.setVisible(false);
 		
 		btnReserve = new JButton("Reserve");
-		btnReserve.setBounds(832, 477, 92, 29);
 		btnReserve.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
 				int amount = (Integer) reservationSpinner.getValue();
-				librarySystem.getMaterialManager().reserveMaterial((Instructor) librarySystem.getUserManager().getCurrentUser(), selectedMaterial, amount);
+				librarySystem.getMaterialManager().reserveMaterial((Instructor) currUser, selectedMaterial, amount);
 				sort((String) stringSortBox.getSelectedItem(), (MaterialType) materialTypeSortBox.getSelectedItem());
 				infoLabel.setText("Reserved " + amount + " " + selectedMaterial.getMaterialType().getNiceName() + "s successfully");
 				reserveLabel.setVisible(false);
@@ -195,22 +169,20 @@ public class BrowseGUI extends JPanel {
 		btnReserve.setVisible(false);
 		
 		orderLabel = new JLabel("How many would you like to order? ");
-		orderLabel.setBounds(732, 568, 222, 17);
+		orderLabel.setForeground(Color.WHITE);
+		orderLabel.setBackground(new Color(255, 255, 255));
 		orderLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		orderLabel.setVisible(false);
 		
 		orderSpinner = new JSpinner();
-		orderSpinner.setBounds(960, 564, 40, 26);
 		orderSpinner.setVisible(false);
 		
 		infoLabel = new JLabel("");
-		infoLabel.setBounds(733, 305, 333, 122);
 		infoLabel.setHorizontalTextPosition(SwingConstants.LEFT);
 		infoLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		infoLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		
 		btnOrder_1 = new JButton("Order");
-		btnOrder_1.setBounds(824, 596, 79, 29);
 		btnOrder_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				MaterialManager materialManager = librarySystem.getMaterialManager();
@@ -230,6 +202,120 @@ public class BrowseGUI extends JPanel {
 			}
 		});
 		btnOrder_1.setVisible(false);
+		/*
+		 * Make order and received functionality accessible to only the librarian 
+		 */
+		if (currUser.getUserType() == UserType.STUDENT || currUser.getUserType() == UserType.INSTRUCTOR ) {
+			btnOrder.setVisible(false);
+			btnReceived.setVisible(false);
+		}
+		GroupLayout groupLayout = new GroupLayout(this);
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(0)
+							.addComponent(home, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnReturned, GroupLayout.PREFERRED_SIZE, 12, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnBrowse, GroupLayout.PREFERRED_SIZE, 52, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnOrder, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 699, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)))
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(18)
+									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+										.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+											.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+												.addComponent(btnReceived, GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
+												.addGap(12)
+												.addComponent(btnAccount, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
+												.addGap(2))
+											.addGroup(groupLayout.createSequentialGroup()
+												.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+													.addComponent(stringSortBox, Alignment.LEADING, 0, 455, Short.MAX_VALUE)
+													.addComponent(materialTypeSortBox, 0, 455, Short.MAX_VALUE))
+												.addContainerGap())
+											.addGroup(groupLayout.createSequentialGroup()
+												.addGap(10)
+												.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+													.addComponent(infoLabel, GroupLayout.PREFERRED_SIZE, 333, GroupLayout.PREFERRED_SIZE)
+													.addGroup(groupLayout.createSequentialGroup()
+														.addComponent(reserveLabel)
+														.addPreferredGap(ComponentPlacement.RELATED)
+														.addComponent(reservationSpinner, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)))
+												.addContainerGap()))
+										.addGroup(groupLayout.createSequentialGroup()
+											.addComponent(lblSortBy)
+											.addGap(157))))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(27)
+									.addComponent(orderLabel)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(orderSpinner, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+									.addContainerGap())
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(163)
+									.addComponent(btnSort)
+									.addGap(149)))
+							.addGroup(groupLayout.createSequentialGroup()
+								.addGap(127)
+								.addComponent(btnReserve)
+								.addContainerGap()))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(119)
+							.addComponent(btnOrder_1)
+							.addContainerGap())))
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(home, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnReturned, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
+							.addComponent(btnBrowse, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+							.addComponent(btnOrder, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+							.addComponent(btnAccount, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
+						.addComponent(btnReceived, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(23)
+							.addComponent(lblSortBy)
+							.addGap(18)
+							.addComponent(stringSortBox, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
+							.addGap(31)
+							.addComponent(materialTypeSortBox, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(btnSort)
+							.addGap(36)
+							.addComponent(infoLabel, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(reserveLabel)
+								.addComponent(reservationSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnReserve)
+							.addGap(58)
+							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(orderLabel)
+								.addComponent(orderSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnOrder_1))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 658, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap())
+		);
 
 		//Icon aboutIcon = new ImageIcon("about16.gif");
 
@@ -261,7 +347,7 @@ public class BrowseGUI extends JPanel {
 		this.menu = new JPopupMenu();
 		this.menu.add(this.holdMenuItem);
 		this.menu.add(this.borrowMenuItem);
-		UserType userType = this.librarySystem.getUserManager().getCurrentUser().getUserType();
+		UserType userType = currUser.getUserType();
 		if (userType == UserType.INSTRUCTOR) {
 			this.menu.add(this.reserveMenuItem);
 		} else if (userType == UserType.LIBRARIAN) {
@@ -294,27 +380,9 @@ public class BrowseGUI extends JPanel {
 		});
 
 		scrollPane.setViewportView(this.table);
+		setLayout(groupLayout);
 
 		this.librarySystem.updateGUI(this);
-		setLayout(null);
-		add(home);
-		add(btnReturned);
-		add(btnBrowse);
-		add(btnOrder);
-		add(scrollPane);
-		add(btnReceived);
-		add(btnAccount);
-		add(stringSortBox);
-		add(materialTypeSortBox);
-		add(infoLabel);
-		add(reserveLabel);
-		add(reservationSpinner);
-		add(lblSortBy);
-		add(orderLabel);
-		add(orderSpinner);
-		add(btnSort);
-		add(btnReserve);
-		add(btnOrder_1);
 	}
 	
 	public void setupPopupMenu() {
@@ -387,4 +455,3 @@ public class BrowseGUI extends JPanel {
 
 	}
 }
-
