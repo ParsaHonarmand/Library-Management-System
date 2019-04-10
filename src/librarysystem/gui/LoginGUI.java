@@ -124,7 +124,7 @@ public class LoginGUI extends JPanel {
 		 * Used to insert image on to panel
 		 */
 		JLabel bckgGifImg = new JLabel("");
-		bckgGifImg.setBounds(0, 0, 1280, 720);
+		bckgGifImg.setBounds(0, 0, librarySystem.WIDTH, librarySystem.HEIGHT);
 		add(bckgGifImg);
 		bckgGifImg.setIcon(new ImageIcon("resources/libwall.jpg"));
 		

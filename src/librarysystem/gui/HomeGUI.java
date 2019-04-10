@@ -24,13 +24,7 @@ public class HomeGUI extends JPanel {
 	 */
 	public HomeGUI(LibrarySystem librarySystem) {
 		setForeground(new Color(0, 0, 102));
-		//Upper Tab Buttons Settings
-		int BUTTONS_Y=225;
-		int BUTTONS_W=120;
-		int BUTTONS_H=30;
-		int BUTTONS_D=BUTTONS_W+80;
-		
-		int INFOS_W=70;
+
 		this.librarySystem = librarySystem;
 		
 		/**
@@ -149,7 +143,7 @@ public class HomeGUI extends JPanel {
 		btnBrowse.setForeground(new Color(0, 0, 128));
 		
 		JButton btnReceived = new JButton("Received");
-		btnReceived.setBounds(680, 225, 120, 30);
+		btnReceived.setBounds(1080, 225, 120, 30);
 		btnReceived.setForeground(new Color(0, 0, 128));
 		
 		JButton btnOrder = new JButton("Order");
@@ -157,7 +151,7 @@ public class HomeGUI extends JPanel {
 		btnOrder.setForeground(new Color(0, 0, 128));
 		
 		JButton btnAccount = new JButton("Account");
-		btnAccount.setBounds(1080, 225, 120, 30);
+		btnAccount.setBounds(680, 225, 120, 30);
 		btnAccount.setForeground(new Color(0, 0, 128));
 		
 		/**

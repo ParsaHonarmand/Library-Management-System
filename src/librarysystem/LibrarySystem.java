@@ -8,7 +8,7 @@ import javax.swing.*;
 
 public class LibrarySystem {
 	
-	public final static int WIDTH = 1280, HEIGHT = 720;
+	public final static int WIDTH = 1280, HEIGHT = 750;
 	
 	private MaterialManager materialManager;
 	private UserManager userManager;
@@ -19,7 +19,7 @@ public class LibrarySystem {
 		this.userManager = new UserManager(this);
 		
 		this.frame = new JFrame();
-		this.frame.setBounds(100, 100, WIDTH, HEIGHT);
+		this.frame.setBounds(50, 50, WIDTH, HEIGHT);
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.frame.setVisible(false);
 	}

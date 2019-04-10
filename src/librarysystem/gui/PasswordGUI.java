@@ -3,6 +3,7 @@ package librarysystem.gui;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -12,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import librarysystem.LibrarySystem;
+import librarysystem.users.UserType;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -24,28 +26,21 @@ public class PasswordGUI extends JPanel {
 	private JTextField newPswrdTextField;
 	private JTextField confirmPswrdTextField;
 	private LibrarySystem librarySystem;
-	/**
-	 * Upper Tab Buttons Settings
-	 */
-			int BUTTONS_Y=20;
-			int BUTTONS_W=120;
-			int BUTTONS_H=30;
-			int BUTTONS_D=BUTTONS_W+80;
+
 
 
 	/**
 	 * Create the panel.
 	 */
 	public PasswordGUI(LibrarySystem librarySystem) {
-		this.librarySystem = librarySystem;
 		
-		setBackground(new Color(255, 255, 255));
-		setForeground(Color.WHITE);;;;
+		this.librarySystem = librarySystem;
+		setBackground(Color.WHITE);
 		setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(102, 153, 204));
-		panel.setBounds(219, 66, 1185, 781);
+		panel.setBackground(new Color(0, 102, 153));
+		panel.setBounds(212, 291, 1192, 556);
 		add(panel);
 		panel.setLayout(null);
 
@@ -133,62 +128,66 @@ public class PasswordGUI extends JPanel {
 		lblUnchangedpswrd.setFont(new Font("Dialog", Font.BOLD, 12));
 		lblUnchangedpswrd.setVisible(false);		
 		
+		JLabel profilePic = new JLabel();
+		profilePic.setBounds(50, 281, 150, 150);
+		profilePic.setIcon(new ImageIcon("resources/profile.png"));
+		setLayout(null);
+		add(profilePic);
+		
+		
+		JLabel lblBanner = new JLabel("");
+		lblBanner.setBounds(15, 15, 1250, 200);
+		lblBanner.setIcon(new ImageIcon("resources/banner_img.png"));
+		setLayout(null);
+		add(lblBanner);
+		
 		/**
-		 * JButtons that are consistent throughout all panels as well as specialized to this one
+		 * General buttons constant throughout all panels
 		 */
-
 		JButton btnHome = new JButton("Home");
-		btnHome.setBounds(80 , BUTTONS_Y, BUTTONS_W, BUTTONS_H);
+		btnHome.setBounds(80, 225, 120, 30);
 		btnHome.setForeground(new Color(0, 0, 128));
-		add(btnHome);
 		
 		JButton btnReturned = new JButton("Returned");
-		btnReturned.setBounds(80+BUTTONS_D, BUTTONS_Y, BUTTONS_W, BUTTONS_H);
+		btnReturned.setBounds(280, 225, 120, 30);
 		btnReturned.setForeground(new Color(0, 0, 128));
-		add(btnReturned);
 		
 		JButton btnBrowse = new JButton("Browse");
-		btnBrowse.setBounds(80+BUTTONS_D*2, BUTTONS_Y, BUTTONS_W, BUTTONS_H);
+		btnBrowse.setBounds(480, 225, 120, 30);
 		btnBrowse.setForeground(new Color(0, 0, 128));
-		add(btnBrowse);
 		
 		JButton btnReceived = new JButton("Received");
-		btnReceived.setBounds(80+BUTTONS_D*3, BUTTONS_Y, BUTTONS_W, BUTTONS_H);
+		btnReceived.setBounds(1080, 225, 120, 30);
 		btnReceived.setForeground(new Color(0, 0, 128));
-		add(btnReceived);
 		
 		JButton btnOrder = new JButton("Order");
-		btnOrder.setBounds(80+BUTTONS_D*4, BUTTONS_Y, BUTTONS_W, BUTTONS_H);
+		btnOrder.setBounds(880, 225, 120, 30);
 		btnOrder.setForeground(new Color(0, 0, 128));
-		add(btnOrder);
 		
 		JButton btnAccount = new JButton("Account");
-		btnAccount.setBounds(80+BUTTONS_D*5, BUTTONS_Y, BUTTONS_W, BUTTONS_H);
+		btnAccount.setBounds(680, 225, 120, 30);
 		btnAccount.setForeground(new Color(0, 0, 128));
-		add(btnAccount);
-		
-		JButton btnProfile = new JButton("Profile");
-		btnProfile.setBounds(36, 139, 158, 60);
-		add(btnProfile);
 		
 		JButton btnChanPswrdLeft = new JButton("Change Password");
-		btnChanPswrdLeft.setBounds(36, 238, 158, 60);
+		btnChanPswrdLeft.setBounds(49, 487, 158, 60);
 		add(btnChanPswrdLeft);
 		
 		JButton btnPayFees = new JButton("Pay Fees");
-		btnPayFees.setBounds(36, 336, 158, 60);
+		btnPayFees.setBounds(49, 544, 158, 60);
 		add(btnPayFees);
 		
 		JButton btnMaterials = new JButton("Materials");
-		btnMaterials.setBounds(36, 427, 158, 60);
+		btnMaterials.setBounds(49, 600, 158, 60);
 		add(btnMaterials);
 		
 		JButton btnReservations = new JButton("Reservations");
-		btnReservations.setBounds(36, 527, 158, 60);
-		add(btnReservations);
+		btnReservations.setBounds(50, 621, 158, 60);
+		if(librarySystem.getUserManager().getCurrentUser().getUserType()==UserType.INSTRUCTOR) {
+			add(btnReservations);
+		}
 		
 		JButton btnLogOut = new JButton("Logout");
-		btnLogOut.setBounds(97, 641, 110, 43);
+		btnLogOut.setBounds(98, 685, 110, 43);
 		add(btnLogOut);
 		
 		JButton btnChangePassword = new JButton("Change Password");
@@ -303,7 +302,16 @@ public class PasswordGUI extends JPanel {
 				new LoginGUI(librarySystem);
 			}
 		});
-		
+		add(btnHome);
+		add(btnReturned);
+		add(btnBrowse);
+		add(btnReceived);
+		add(btnOrder);
+		add(btnAccount);
 		this.librarySystem.updateGUI(this);
+		if (librarySystem.getUserManager().getCurrentUser().getUserType() == UserType.STUDENT || librarySystem.getUserManager().getCurrentUser().getUserType() == UserType.INSTRUCTOR ) {
+			btnOrder.setVisible(false);
+			btnReceived.setVisible(false);
+		}
 	}
 }
