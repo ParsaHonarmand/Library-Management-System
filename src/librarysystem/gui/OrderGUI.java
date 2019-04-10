@@ -3,6 +3,7 @@ package librarysystem.gui;
 import javax.swing.JPanel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JPopupMenu;
 
@@ -19,6 +20,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextPane;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 
 import librarysystem.LibrarySystem;
 import librarysystem.materials.Material;
@@ -39,175 +41,165 @@ public class OrderGUI extends JPanel {
 	public OrderGUI(LibrarySystem librarySystem) {
 		this.librarySystem = librarySystem;
 		
+		
+		JLabel lblBanner = new JLabel("");
+		lblBanner.setBounds(15, 15, 1250, 200);
+		lblBanner.setIcon(new ImageIcon("resources/banner_img.png"));
+		setLayout(null);
+		
+		
 		/**
 		 * Buttons consistent throughout all panels 
 		 */
-		JButton btnHome = new JButton("Home");
-		btnHome.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent arg0) {
-				new HomeGUI(librarySystem);
-			}
-		});
 		
-		JButton btnReturn = new JButton("Return");
-		btnReturn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				new ReturnGUI(librarySystem);
-			}
-		});
+		/**
+		 * General buttons constant throughout all panels
+		 */
+		JButton btnHome = new JButton("Home");
+		btnHome.setBounds(80, 225, 120, 30);
+		btnHome.setForeground(new Color(0, 0, 128));
+		
+		JButton btnReturned = new JButton("Returned");
+		btnReturned.setBounds(280, 225, 120, 30);
+		btnReturned.setForeground(new Color(0, 0, 128));
 		
 		JButton btnBrowse = new JButton("Browse");
-		btnBrowse.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent arg0) {
-				new BrowseGUI(librarySystem);
-			}
-		});
-		
-		JButton btnOrder = new JButton("Order");
-		
-		JButton btnAccount = new JButton("Account");
-		btnAccount.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent arg0) {
-				new ProfileGUI(librarySystem);
-			}
-		});
+		btnBrowse.setBounds(480, 225, 120, 30);
+		btnBrowse.setForeground(new Color(0, 0, 128));
 		
 		JButton btnReceived = new JButton("Received");
-		btnReceived.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent arg0) {
-				new ReceiveGUI(librarySystem);
-			}
-		});
+		btnReceived.setBounds(680, 225, 120, 30);
+		btnReceived.setForeground(new Color(0, 0, 128));
+		
+		JButton btnOrder = new JButton("Order");
+		btnOrder.setBounds(880, 225, 120, 30);
+		btnOrder.setForeground(new Color(0, 0, 128));
+		
+		JButton btnAccount = new JButton("Account");
+		btnAccount.setBounds(1080, 225, 120, 30);
+		btnAccount.setForeground(new Color(0, 0, 128));
+		
+		
 		
 		/**
 		 * TextFeilds for data input to track orders and users responsible for them
 		 */
 		JTextPane txtpnId = new JTextPane();
+		txtpnId.setBounds(201, 374, 223, 41);
 		txtpnId.setText("ID");
 		
 		JTextPane txtpnAuthor = new JTextPane();
+		txtpnAuthor.setBounds(201, 468, 223, 41);
 		txtpnAuthor.setText("Author");
 		
 		JTextPane txtpnTitle = new JTextPane();
+		txtpnTitle.setBounds(201, 283, 223, 37);
 		txtpnTitle.setText("Title");
 		
 		JTextPane txtpnEdition = new JTextPane();
+		txtpnEdition.setBounds(201, 563, 223, 41);
 		txtpnEdition.setText("Edition");
 		
 		JComboBox<MaterialType> comboBox = new JComboBox<MaterialType>();
+		comboBox.setBounds(730, 303, 223, 41);
 		   comboBox.setModel(new DefaultComboBoxModel<MaterialType > (MaterialType.values()));
 		
-			JButton btnPlaceOrder = new JButton("Place Order");
-			btnPlaceOrder.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-				}
-			});
-			btnPlaceOrder.addMouseListener(new MouseAdapter() {
-				@Override
-				
-				public void mousePressed(MouseEvent e) {
-					int intEdition = 0;	
-					try
-					{
-					    intEdition = Integer.parseInt(txtpnEdition.getText());
-					    txtIdWarning.setVisible(false);
-
-					}
-					catch (NumberFormatException exept)
-					{
-						txtIdWarning.setVisible(true);
-					    System.out.println("Edition must be a number");
-					}
-					
-					
-					Material M = new Material(txtpnTitle.getText(), txtpnAuthor.getText(), txtpnId.getText(), intEdition, librarySystem.getMaterialManager().getNextBarcode(), MaterialStatus.ON_ORDER, (MaterialType)comboBox.getSelectedItem(), -1L, -1L);
-					librarySystem.getMaterialManager().addMaterial(M);
-					System.out.println("item ordered");
-				}
-			});
+		JButton btnPlaceOrder = new JButton("Place Order");
+		btnPlaceOrder.setBounds(838, 356, 115, 41);
+		btnPlaceOrder.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		
-			/**
-			 * Setting panel characteristics 
-			 */
+		/**
+		 * Action listeners to invoke any panel called 
+		 */
+		
+		btnHome.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				librarySystem.updateGUI(new HomeGUI(librarySystem));
+			}
+		});
+		btnReturned.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				librarySystem.updateGUI(new ReturnGUI(librarySystem));
+			}
+		});
+		
+		btnBrowse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new BrowseGUI(librarySystem);
+			}
+		});
+		
+		btnReceived.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				librarySystem.updateGUI(new ReceiveGUI(librarySystem));
+			}
+		});
+		
+		btnOrder.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				librarySystem.updateGUI(new OrderGUI(librarySystem));
+			}
+		});
+		
+		btnAccount.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				librarySystem.updateGUI(new ProfileGUI(librarySystem));
+			}
+		});
+		btnPlaceOrder.addMouseListener(new MouseAdapter() {
+			@Override
+			
+			public void mousePressed(MouseEvent e) {
+				int intEdition = 0;	
+				try
+				{
+				    intEdition = Integer.parseInt(txtpnEdition.getText());
+				    txtIdWarning.setVisible(false);
+
+				}
+				catch (NumberFormatException exept)
+				{
+					txtIdWarning.setVisible(true);
+				    System.out.println("Edition must be a number");
+				}
+				
+				
+				Material M = new Material(txtpnTitle.getText(), txtpnAuthor.getText(), txtpnId.getText(), intEdition, librarySystem.getMaterialManager().getNextBarcode(), MaterialStatus.ON_ORDER, (MaterialType)comboBox.getSelectedItem(), -1L, -1L);
+				librarySystem.getMaterialManager().addMaterial(M);
+				System.out.println("item ordered");
+			}
+		});
+		
+	/**
+	 * Setting panel characteristics 
+	 */
 		txtIdWarning = new JTextField();
+		txtIdWarning.setBounds(477, 578, 225, 26);
 		txtIdWarning.setBackground(Color.RED);
 		txtIdWarning.setEnabled(false);
 		txtIdWarning.setEditable(false);
 		txtIdWarning.setVisible(false);
 		txtIdWarning.setText("Warning: Edition must be a number");
 		txtIdWarning.setColumns(10);
-		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(188)
-							.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 223, GroupLayout.PREFERRED_SIZE)
-							.addGap(10)
-							.addComponent(btnPlaceOrder))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(188)
-							.addComponent(txtpnTitle, GroupLayout.PREFERRED_SIZE, 223, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(188)
-							.addComponent(txtpnAuthor, GroupLayout.PREFERRED_SIZE, 223, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(188)
-							.addComponent(txtpnEdition, GroupLayout.PREFERRED_SIZE, 223, GroupLayout.PREFERRED_SIZE)
-							.addGap(51)
-							.addComponent(txtIdWarning, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGap(188)
-									.addComponent(txtpnId, GroupLayout.PREFERRED_SIZE, 223, GroupLayout.PREFERRED_SIZE))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(btnHome, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE)
-									.addGap(6)
-									.addComponent(btnReturn, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE)
-									.addGap(6)
-									.addComponent(btnBrowse, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE)
-									.addGap(6)
-									.addComponent(btnOrder, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-									.addGap(6)
-									.addComponent(btnReceived, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)))
-							.addGap(6)
-							.addComponent(btnAccount, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(45, Short.MAX_VALUE))
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnHome)
-						.addComponent(btnReturn)
-						.addComponent(btnBrowse)
-						.addComponent(btnOrder)
-						.addComponent(btnReceived)
-						.addComponent(btnAccount))
-					.addGap(94)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnPlaceOrder, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-					.addComponent(txtpnTitle, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-					.addGap(6)
-					.addComponent(txtpnAuthor, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-					.addGap(6)
-					.addComponent(txtpnId, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-					.addGap(6)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(txtpnEdition, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-						.addComponent(txtIdWarning, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(292))
-		);
-		setLayout(groupLayout);
 		
 		this.librarySystem.updateGUI(this);
+		setLayout(null);
+		add(comboBox);
+		add(btnPlaceOrder);
+		add(txtpnTitle);
+		add(txtpnAuthor);
+		add(txtpnEdition);
+		add(txtIdWarning);
+		add(txtpnId);
+		add(btnHome);
+		add(btnReturned);
+		add(btnBrowse);
+		add(btnOrder);
+		add(btnReceived);
+		add(btnAccount);
+		add(lblBanner);
 	}
 }

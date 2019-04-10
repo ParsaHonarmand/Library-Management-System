@@ -14,6 +14,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 import librarysystem.LibrarySystem;
 import librarysystem.managers.UserManager;
+import librarysystem.users.UserType;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -119,7 +120,10 @@ public class ProfileGUI extends JPanel {
 		
 		JButton btnReservations = new JButton("Reservations");
 		btnReservations.setBounds(36, 527, 158, 60);
-		add(btnReservations);
+		//System.out.println(librarySystem.getUserManager().getCurrentUser().getUserType());
+		if(librarySystem.getUserManager().getCurrentUser().getUserType()==UserType.INSTRUCTOR) {
+			add(btnReservations);
+		}
 		
 		JButton btnLogOut = new JButton("Logout");
 		btnLogOut.setBounds(97, 641, 110, 43);

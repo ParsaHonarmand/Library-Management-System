@@ -49,6 +49,12 @@ public class LoginGUI extends JPanel {
 		add(panel);
 		panel.setLayout(null);
 		
+		JLabel lblBanner = new JLabel("");
+		lblBanner.setBounds(15, 0, 1250, 200);
+		lblBanner.setIcon(new ImageIcon("resources/banner_img.png"));
+		setLayout(null); 
+		this.add(lblBanner);
+		
 		/**
 		 * Labels used to display information to user in order to notify of actions performed or data input requirments 
 		 */

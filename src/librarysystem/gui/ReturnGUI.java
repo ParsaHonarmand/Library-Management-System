@@ -58,6 +58,7 @@ public class ReturnGUI extends JPanel {
 			
 		};
 		JScrollPane scrollPane = new JScrollPane();
+
 		scrollPane.setBounds(10, 51, 818, 466);
 		
 
@@ -119,6 +120,8 @@ public class ReturnGUI extends JPanel {
 			}
 		});
 		btnBrowse.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		btnBrowse.setBackground(SystemColor.menu);
+		
 		btnBrowse.setBackground(UIManager.getColor("Button.background"));
 				
 		table = new JTable();
@@ -144,7 +147,7 @@ public class ReturnGUI extends JPanel {
 		btnAccount.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				new AccountGUI(librarySystem);
+				new ProfileGUI(librarySystem);
 			}
 		});
 		btnAccount.setFont(new Font("Tahoma", Font.PLAIN, 17));

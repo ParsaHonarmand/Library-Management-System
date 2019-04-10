@@ -81,6 +81,7 @@ public class ReceiveGUI extends JPanel {
 		};
 		
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(6, 55, 818, 502);
 		
 		for (Material M : librarySystem.getMaterialManager().getMaterials(MaterialStatus.ON_ORDER)) {
 			model.addRow(new Object[] { null, M.getNiceName(), M.getId(), M.getBarcode(), false});
@@ -93,6 +94,7 @@ public class ReceiveGUI extends JPanel {
 		scrollPane.setViewportView(this.table);
 		
 		JButton btnRecieveSelectedMaterials = new JButton("Recieve Selected Materials");
+		btnRecieveSelectedMaterials.setBounds(836, 51, 208, 29);
 		btnRecieveSelectedMaterials.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -112,6 +114,7 @@ public class ReceiveGUI extends JPanel {
 		});
 		
 		JButton btnHome = new JButton("Home");
+		btnHome.setBounds(0, 0, 174, 45);
 		btnHome.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -121,6 +124,7 @@ public class ReceiveGUI extends JPanel {
 		btnHome.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		
 		JButton btnReturned = new JButton("Returned");
+		btnReturned.setBounds(180, 0, 173, 45);
 		btnReturned.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -130,6 +134,7 @@ public class ReceiveGUI extends JPanel {
 		btnReturned.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		
 		JButton btnBrowse = new JButton("Browse");
+		btnBrowse.setBounds(359, 0, 173, 45);
 		btnBrowse.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -140,6 +145,7 @@ public class ReceiveGUI extends JPanel {
 		btnBrowse.setBackground(UIManager.getColor("Button.background"));
 		
 		JButton btnOrder = new JButton("Order");
+		btnOrder.setBounds(538, 0, 172, 45);
 		btnOrder.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -149,9 +155,11 @@ public class ReceiveGUI extends JPanel {
 		btnOrder.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		
 		JButton btnReceive = new JButton("Received");
+		btnReceive.setBounds(728, 0, 168, 45);
 		btnReceive.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		
 		JButton btnAccount = new JButton("Account");
+		btnAccount.setBounds(906, 0, 174, 45);
 		btnAccount.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -160,52 +168,19 @@ public class ReceiveGUI extends JPanel {
 		});
 		btnAccount.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		
-		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(btnHome, GroupLayout.PREFERRED_SIZE, 174, GroupLayout.PREFERRED_SIZE)
-							.addGap(6)
-							.addComponent(btnReturned, GroupLayout.PREFERRED_SIZE, 173, GroupLayout.PREFERRED_SIZE)
-							.addGap(6)
-							.addComponent(btnBrowse, GroupLayout.PREFERRED_SIZE, 173, GroupLayout.PREFERRED_SIZE)
-							.addGap(6)
-							.addComponent(btnOrder, GroupLayout.PREFERRED_SIZE, 172, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(btnReceive, GroupLayout.PREFERRED_SIZE, 168, GroupLayout.PREFERRED_SIZE)
-							.addGap(10)
-							.addComponent(btnAccount, GroupLayout.PREFERRED_SIZE, 174, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 818, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(btnRecieveSelectedMaterials)))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnHome, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnReturned, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnBrowse, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnOrder, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnReceive, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnAccount, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 502, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnRecieveSelectedMaterials))
-					.addContainerGap(331, Short.MAX_VALUE))
-		);
-		
 		JScrollBar scrollBar = new JScrollBar();
 		scrollPane.setRowHeaderView(scrollBar);
-		setLayout(groupLayout);
 		
 		
 		this.librarySystem.updateGUI(this);
+		setLayout(null);
+		add(btnHome);
+		add(btnReturned);
+		add(btnBrowse);
+		add(btnOrder);
+		add(btnReceive);
+		add(btnAccount);
+		add(scrollPane);
+		add(btnRecieveSelectedMaterials);
 	}
 }
