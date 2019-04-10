@@ -48,8 +48,9 @@ AVAILABLE|BOOK|46|ECON-101|Economy 101 - 2nd Edition|Liam Scott|2|-1|-1
 AVAILABLE|BOOK|47|ECON-101|Economy 101 - 2nd Edition|Liam Scott|2|-1|-1
 AVAILABLE|BOOK|48|ECON-101|Economy 101 - 2nd Edition|Liam Scott|2|-1|-1
 AVAILABLE|EBOOK|49|ID|book|Author|1|-1|-1
-AVAILABLE|EBOOK|50|newbook|book|me|1|-1|-1
+RESERVED|EBOOK|50|newbook|book|me|1|-1|-1
 AVAILABLE|BOOK|51|ECON-101|Economy 101 - 2nd Edition|Liam Scott|2|-1|-1
 AVAILABLE|BOOK|52|ECON-101|Economy 101 - 2nd Edition|Liam Scott|2|-1|-1
 AVAILABLE|BOOK|53|ECON-101|Economy 101 - 2nd Edition|Liam Scott|2|-1|-1
 AVAILABLE|EBOOK|54|newebook|ebook|sohaib|1|-1|-1
+AVAILABLE|MAGAZINE|55|SICK-MAGAZINE|Super Sick Magazine|Magazine author|1|-1|-1
