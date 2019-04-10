@@ -44,6 +44,7 @@ public class BrowseGUI extends JPanel {
 	 * @param librarySystem The system to base the GUI on
 	 */
 	public BrowseGUI(LibrarySystem librarySystem) {
+		setBackground(new Color(0, 51, 102));
 		this.librarySystem = librarySystem;
 
 		JButton home = new JButton("Home");
@@ -138,6 +139,7 @@ public class BrowseGUI extends JPanel {
 		reservationSpinner.setVisible(false);
 		
 		reserveLabel = new JLabel("How many would you like to reserve?");
+		reserveLabel.setBackground(new Color(255, 255, 255));
 		reserveLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		reserveLabel.setVisible(false);
 		
@@ -160,6 +162,7 @@ public class BrowseGUI extends JPanel {
 		btnReserve.setVisible(false);
 		
 		orderLabel = new JLabel("How many would you like to order? ");
+		orderLabel.setBackground(new Color(255, 255, 255));
 		orderLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		orderLabel.setVisible(false);
 		
@@ -202,13 +205,13 @@ public class BrowseGUI extends JPanel {
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(0)
-							.addComponent(home, GroupLayout.PREFERRED_SIZE, 174, GroupLayout.PREFERRED_SIZE)
+							.addComponent(home, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnReturned, GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
+							.addComponent(btnReturned, GroupLayout.PREFERRED_SIZE, 12, Short.MAX_VALUE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnBrowse, GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
+							.addComponent(btnBrowse, GroupLayout.PREFERRED_SIZE, 52, Short.MAX_VALUE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnOrder, GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE))
+							.addComponent(btnOrder, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addContainerGap()
 							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 699, GroupLayout.PREFERRED_SIZE)
@@ -220,15 +223,15 @@ public class BrowseGUI extends JPanel {
 									.addGap(18)
 									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 										.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-											.addGroup(groupLayout.createSequentialGroup()
-												.addComponent(btnReceived, GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
-												.addPreferredGap(ComponentPlacement.UNRELATED)
-												.addComponent(btnAccount, GroupLayout.PREFERRED_SIZE, 174, GroupLayout.PREFERRED_SIZE)
+											.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+												.addComponent(btnReceived, GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
+												.addGap(12)
+												.addComponent(btnAccount, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
 												.addGap(2))
 											.addGroup(groupLayout.createSequentialGroup()
 												.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-													.addComponent(stringSortBox, Alignment.LEADING, 0, 343, Short.MAX_VALUE)
-													.addComponent(materialTypeSortBox, 0, 343, Short.MAX_VALUE))
+													.addComponent(stringSortBox, Alignment.LEADING, 0, 455, Short.MAX_VALUE)
+													.addComponent(materialTypeSortBox, 0, 455, Short.MAX_VALUE))
 												.addContainerGap())
 											.addGroup(groupLayout.createSequentialGroup()
 												.addGap(10)
@@ -264,14 +267,15 @@ public class BrowseGUI extends JPanel {
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-							.addComponent(home, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-							.addComponent(btnReturned, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
-						.addComponent(btnBrowse, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnOrder, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnReceived, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnAccount, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(home, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnReturned, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
+							.addComponent(btnBrowse, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+							.addComponent(btnOrder, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+							.addComponent(btnAccount, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
+						.addComponent(btnReceived, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(23)

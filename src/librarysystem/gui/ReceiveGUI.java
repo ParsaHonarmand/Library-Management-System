@@ -37,6 +37,7 @@ public class ReceiveGUI extends JPanel {
 	 *  
 	 */
 	public ReceiveGUI(LibrarySystem librarySystem) {
+		setBackground(Color.WHITE);
 		this.librarySystem = librarySystem;
 		
 		String[] columnNames = { "Icon", "Material","ID","Barcode", "Make Available" };

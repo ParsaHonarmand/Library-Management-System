@@ -28,7 +28,7 @@ public class ReturnGUI extends JPanel {
 	 */
 	public ReturnGUI(LibrarySystem librarySystem) {
 		this.librarySystem = librarySystem;
-		setBackground(new Color(0, 102, 153));
+		setBackground(Color.WHITE);
 		String[] columnNames = { "Icon", "Material","ID", "Barcode", "Return" };
 
 		DefaultTableModel model = new DefaultTableModel(new Object[][] {}, columnNames) {
