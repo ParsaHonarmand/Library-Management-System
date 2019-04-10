@@ -206,7 +206,10 @@ public class ReservationsGUI extends JPanel {
 			}
 		});
 
-		
+		if (librarySystem.getUserManager().getCurrentUser().getUserType() == UserType.STUDENT || librarySystem.getUserManager().getCurrentUser().getUserType() == UserType.INSTRUCTOR ) {
+			btnOrder.setVisible(false);
+			btnReceived.setVisible(false);
+		}
 		String[] columnNames = { "Icon", "Material","Amount"};
 
 		DefaultTableModel model = new DefaultTableModel(new Object[][][] {}, columnNames) {

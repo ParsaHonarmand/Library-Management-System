@@ -49,73 +49,59 @@ public class ProfileGUI extends JPanel {
 		UserManager user = librarySystem.getUserManager();
 		String id = "" + user.getCurrentUser().getId();
 		
-		JLabel email = new JLabel("Your Email:");
-		email.setBounds(466, 465, 71, 16);
-		
-		JLabel emailDisplay = new JLabel(user.getCurrentUser().getEmail());
-		emailDisplay.setBounds(612, 465, 73, 16);
-		
-		JLabel IDDisplay = new JLabel(id);
-		IDDisplay.setBounds(612, 282, 8, 16);
-		
-		JLabel username = new JLabel("Your Username:");
-		username.setBounds(466, 610, 99, 16);
-		
-		JLabel usernameDisplay = new JLabel(user.getCurrentUser().getUsername());
-		usernameDisplay.setBounds(612, 610, 73, 16);
-		
 		JLabel profilePic = new JLabel();
-		profilePic.setBounds(272, 130, 0, 0);
-		profilePic.setIcon(new ImageIcon("resources/profile pic.jpg"));
+		profilePic.setBounds(50, 281, 150, 150);
+		profilePic.setIcon(new ImageIcon("resources/profile.png"));
 		setLayout(null);
+		add(profilePic);
+		JLabel lblBanner = new JLabel("");
+		lblBanner.setBounds(15, 15, 1250, 200);
+		lblBanner.setIcon(new ImageIcon("resources/banner_img.png"));
+		setLayout(null);
+		add(lblBanner);
 		
 		/**
-		 * Prop banner buttons for prototype use only + utility buttons that shall be implemented towards user stories 
+		 * General buttons constant throughout all panels
 		 */
 		JButton btnHome = new JButton("Home");
-		btnHome.setBounds(80, 20, 120, 30);
+		btnHome.setBounds(80, 225, 120, 30);
 		btnHome.setForeground(new Color(0, 0, 128));
 		add(btnHome);
-		
 		JButton btnReturned = new JButton("Returned");
-		btnReturned.setBounds(280, 20, 120, 30);
+		btnReturned.setBounds(280, 225, 120, 30);
 		btnReturned.setForeground(new Color(0, 0, 128));
 		add(btnReturned);
-		
 		JButton btnBrowse = new JButton("Browse");
-		btnBrowse.setBounds(480, 20, 120, 30);
+		btnBrowse.setBounds(480, 225, 120, 30);
 		btnBrowse.setForeground(new Color(0, 0, 128));
 		add(btnBrowse);
-		
 		JButton btnReceived = new JButton("Received");
-		btnReceived.setBounds(680, 20, 120, 30);
+		btnReceived.setBounds(680, 225, 120, 30);
 		btnReceived.setForeground(new Color(0, 0, 128));
 		add(btnReceived);
-		
 		JButton btnOrder = new JButton("Order");
-		btnOrder.setBounds(880, 20, 120, 30);
+		btnOrder.setBounds(880, 225, 120, 30);
 		btnOrder.setForeground(new Color(0, 0, 128));
 		add(btnOrder);
-		
 		JButton btnAccount = new JButton("Account");
-		btnAccount.setBounds(1080, 20, 120, 30);
+		btnAccount.setBounds(1080, 225, 120, 30);
 		btnAccount.setForeground(new Color(0, 0, 128));
 		add(btnAccount);
 		
 		JButton btnProfile = new JButton("Profile");
-		btnProfile.setBounds(36, 131, 158, 60);
+		btnProfile.setBounds(49, 429, 158, 60);
 		add(btnProfile);
 		
 		JButton btnChanPswrdLeft = new JButton("Change Password");
-		btnChanPswrdLeft.setBounds(36, 238, 158, 60);
+		btnChanPswrdLeft.setBounds(49, 487, 158, 60);
 		add(btnChanPswrdLeft);
 		
 		JButton btnPayFees = new JButton("Pay Fees");
-		btnPayFees.setBounds(36, 334, 158, 60);
+		btnPayFees.setBounds(49, 544, 158, 60);
 		add(btnPayFees);
 		
 		JButton btnMaterials = new JButton("Materials");
-		btnMaterials.setBounds(36, 428, 158, 60);
+		btnMaterials.setBounds(49, 600, 158, 60);
 		add(btnMaterials);
 		
 		JButton btnReservations = new JButton("Reservations");
@@ -126,7 +112,7 @@ public class ProfileGUI extends JPanel {
 		}
 		
 		JButton btnLogOut = new JButton("Logout");
-		btnLogOut.setBounds(97, 641, 110, 43);
+		btnLogOut.setBounds(97, 658, 110, 43);
 		add(btnLogOut);
 		
 		/**
@@ -195,37 +181,53 @@ public class ProfileGUI extends JPanel {
 				new LoginGUI(librarySystem);
 			}
 		});
-		
-		/**
-		 * Adding user info to the panel
-		 */
-		add(email);
-		add(username);
-		add(emailDisplay);
-		add(IDDisplay);
-		add(usernameDisplay);
 		add(profilePic);
 		
 		/**
 		 * Setting JPanel characteristics 
 		 */
 		JPanel panel = new JPanel();
-		panel.setBounds(235, 104, 1003, 604);
+		panel.setBounds(243, 281, 957, 406);
 		panel.setBackground(new Color(102, 153, 204));
 		add(panel);
 		panel.setLayout(null);
 		
 		JLabel name = new JLabel("Your Name:");
-		name.setBounds(237, 63, 73, 16);
+		name.setBounds(221, 130, 73, 16);
 		panel.add(name);
 		
 		JLabel nameDisplay = new JLabel(user.getCurrentUser().getName());
-		nameDisplay.setBounds(361, 63, 73, 16);
+		nameDisplay.setBounds(331, 124, 151, 29);
 		panel.add(nameDisplay);
 		
 		JLabel ID = new JLabel("Your ID:");
-		ID.setBounds(241, 178, 51, 16);
+		ID.setBounds(237, 246, 51, 16);
 		panel.add(ID);
+		
+		JLabel username = new JLabel("Your Username:");
+		username.setBounds(201, 186, 99, 16);
+		panel.add(username);
+		
+		JLabel usernameDisplay = new JLabel(user.getCurrentUser().getUsername());
+		usernameDisplay.setBounds(324, 179, 139, 30);
+		panel.add(usernameDisplay);
+		
+		JLabel email = new JLabel("Your Email:");
+		email.setBounds(223, 300, 71, 16);
+		panel.add(email);
+		
+		JLabel emailDisplay = new JLabel(user.getCurrentUser().getEmail());
+		emailDisplay.setBounds(331, 293, 172, 30);
+		panel.add(emailDisplay);
+		
+		JLabel IDDisplay = new JLabel(id);
+		IDDisplay.setBounds(331, 246, 92, 16);
+		panel.add(IDDisplay);
+		
+		if (librarySystem.getUserManager().getCurrentUser().getUserType() == UserType.STUDENT || librarySystem.getUserManager().getCurrentUser().getUserType() == UserType.INSTRUCTOR ) {
+			btnOrder.setVisible(false);
+			btnReceived.setVisible(false);
+		}
 		
 		this.librarySystem.updateGUI(this);
 	}

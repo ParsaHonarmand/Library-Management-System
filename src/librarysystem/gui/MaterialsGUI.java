@@ -333,6 +333,10 @@ public class MaterialsGUI extends JPanel {
 		
 		JScrollBar holdScroll = new JScrollBar();
 		scrollPane_1.setRowHeaderView(holdScroll);
+		if (librarySystem.getUserManager().getCurrentUser().getUserType() == UserType.STUDENT || librarySystem.getUserManager().getCurrentUser().getUserType() == UserType.INSTRUCTOR ) {
+			btnOrder.setVisible(false);
+			btnReceived.setVisible(false);
+		}
 		
 		profilePanel.add(lblCurrentMaterials);
 		profilePanel.add(lblItemsOnHold);

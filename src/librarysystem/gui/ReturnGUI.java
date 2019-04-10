@@ -176,7 +176,6 @@ public class ReturnGUI extends JPanel {
 		 * copy and paste me into your class and your button will be invisible too!!!!!!!
 		 */
 		if (librarySystem.getUserManager().getCurrentUser().getUserType() == UserType.STUDENT || librarySystem.getUserManager().getCurrentUser().getUserType() == UserType.INSTRUCTOR ) {
-			btnAccount.setVisible(false);
 			btnOrder.setVisible(false);
 			btnReceive.setVisible(false);
 		}

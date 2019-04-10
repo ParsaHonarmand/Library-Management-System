@@ -14,6 +14,7 @@ import javax.swing.SwingConstants;
 
 import librarysystem.LibrarySystem;
 import librarysystem.users.User;
+import librarysystem.users.UserType;
 
 public class HomeGUI extends JPanel {
 	private LibrarySystem librarySystem;
@@ -216,6 +217,11 @@ public class HomeGUI extends JPanel {
 		add(panel);
 		
 		librarySystem.updateGUI(this);
+		
+		if (librarySystem.getUserManager().getCurrentUser().getUserType() == UserType.STUDENT || librarySystem.getUserManager().getCurrentUser().getUserType() == UserType.INSTRUCTOR ) {
+			btnOrder.setVisible(false);
+			btnReceived.setVisible(false);
+		}
 
 	}
 }
