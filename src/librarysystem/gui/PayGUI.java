@@ -35,8 +35,13 @@ public class PayGUI extends JPanel {
 		String feeString = new Double(fee).toString();
 		
 		this.librarySystem = librarySystem;
+		this.setBounds(0, 0, librarySystem.WIDTH, librarySystem.HEIGHT);
 		this.setBackground(Color.WHITE);
-		this.setBounds(0, 0, 1075, 747);
+		
+		JPanel profilePanel = new JPanel();
+		profilePanel.setBounds(211, 270, 1054, 720);
+		profilePanel.setBackground(new Color(0, 102, 153));
+		librarySystem.setTheme(profilePanel);
 		
 		JLabel profilePic = new JLabel();
 		profilePic.setBounds(50, 281, 150, 150);
@@ -96,10 +101,7 @@ public class PayGUI extends JPanel {
 		lastNameField.setBounds(280, 274, 155, 26);
 		lastNameField.setColumns(10);
 
-		JPanel profilePanel = new JPanel();
-		profilePanel.setBounds(224, 281, 1257, 480);
-		profilePanel.setBackground(new Color(0, 102, 153));
-
+		
 		
 		JButton btnPay = new JButton("Pay");
 		btnPay.setBounds(316, 312, 75, 29);

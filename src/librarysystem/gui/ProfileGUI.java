@@ -23,11 +23,16 @@ public class ProfileGUI extends JPanel {
 	 * @param librarySystem The system to base the GUI on
 	 */
 	public ProfileGUI(LibrarySystem librarySystem) {
-		setForeground(new Color(51, 102, 153));
-		this.librarySystem = librarySystem;
 		
-		this.setBackground(new Color(255, 255, 255));
-		this.setBounds(0, 0, 1281, 721);
+		this.librarySystem = librarySystem;
+		this.setBounds(0, 0, librarySystem.WIDTH, librarySystem.HEIGHT);
+		librarySystem.setTheme(this);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(211, 270, 1054, 720);
+		librarySystem.setTheme(panel);
+		add(panel);
+		panel.setLayout(null);
 		
 		UserManager user = librarySystem.getUserManager();
 		String id = "" + user.getCurrentUser().getId();
@@ -172,11 +177,7 @@ public class ProfileGUI extends JPanel {
 		/**
 		 * Setting JPanel characteristics 
 		 */
-		JPanel panel = new JPanel();
-		panel.setBounds(243, 281, 957, 406);
-		panel.setBackground(new Color(0, 102, 153));
-		add(panel);
-		panel.setLayout(null);
+		
 		
 		JLabel name = new JLabel("Your Name:");
 		name.setForeground(new Color(255, 255, 255));
@@ -218,6 +219,9 @@ public class ProfileGUI extends JPanel {
 		IDDisplay.setBounds(324, 246, 92, 16);
 		panel.add(IDDisplay);
 		
+		/*
+		 * Make order and received functionality accessible to only the librarian 
+		 */
 		if (librarySystem.getUserManager().getCurrentUser().getUserType() == UserType.STUDENT || librarySystem.getUserManager().getCurrentUser().getUserType() == UserType.INSTRUCTOR ) {
 			btnOrder.setVisible(false);
 			btnReceived.setVisible(false);

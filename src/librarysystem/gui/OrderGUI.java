@@ -24,7 +24,8 @@ public class OrderGUI extends JPanel {
 	 */
 	public OrderGUI(LibrarySystem librarySystem) {
 		this.librarySystem = librarySystem;
-		
+		this.setBounds(0, 0, librarySystem.WIDTH, librarySystem.HEIGHT);
+		librarySystem.setTheme(this);
 		
 		JLabel lblBanner = new JLabel("");
 		lblBanner.setBounds(15, 15, 1250, 200);

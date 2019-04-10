@@ -37,9 +37,9 @@ public class ReceiveGUI extends JPanel {
 	 *  
 	 */
 	public ReceiveGUI(LibrarySystem librarySystem) {
-		setBackground(Color.WHITE);
 		this.librarySystem = librarySystem;
-		
+		this.setBounds(0, 0, librarySystem.WIDTH, librarySystem.HEIGHT);
+		librarySystem.setTheme(this);
 		String[] columnNames = { "Icon", "Material","ID","Barcode", "Make Available" };
 		
 		DefaultTableModel model = new DefaultTableModel(new Object[][] {}, columnNames) {

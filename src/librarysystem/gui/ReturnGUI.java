@@ -28,7 +28,10 @@ public class ReturnGUI extends JPanel {
 	 */
 	public ReturnGUI(LibrarySystem librarySystem) {
 		this.librarySystem = librarySystem;
-		setBackground(Color.WHITE);
+		this.setBounds(0, 0, librarySystem.WIDTH, librarySystem.HEIGHT);
+		librarySystem.setTheme(this);
+		
+
 		String[] columnNames = { "Icon", "Material","ID", "Barcode", "Return" };
 
 		DefaultTableModel model = new DefaultTableModel(new Object[][] {}, columnNames) {
@@ -171,8 +174,10 @@ public class ReturnGUI extends JPanel {
 		add(btnReturned);
 		add(btnBrowse);
 		add(scrollPane);
+		
+		
 		/*
-		 * copy and paste me into your class and your button will be invisible too!!!!!!!
+		 * Make order and received functionality accessible to only the librarian 
 		 */
 		if (librarySystem.getUserManager().getCurrentUser().getUserType() == UserType.STUDENT || librarySystem.getUserManager().getCurrentUser().getUserType() == UserType.INSTRUCTOR ) {
 			btnOrder.setVisible(false);

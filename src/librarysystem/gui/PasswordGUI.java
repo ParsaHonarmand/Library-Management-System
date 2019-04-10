@@ -33,10 +33,11 @@ public class PasswordGUI extends JPanel {
 		this.librarySystem = librarySystem;
 		setBackground(Color.WHITE);
 		setLayout(null);
+		this.setBounds(0, 0, librarySystem.WIDTH, librarySystem.HEIGHT);
 
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(0, 102, 153));
-		panel.setBounds(212, 291, 1192, 556);
+		librarySystem.setTheme(panel);
+		panel.setBounds(211, 270, 1054, 720);
 		add(panel);
 		panel.setLayout(null);
 
@@ -47,17 +48,17 @@ public class PasswordGUI extends JPanel {
 
 
 		currPswrdTextField = new JPasswordField();
-		currPswrdTextField.setBounds(560, 151, 187, 38);
+		currPswrdTextField.setBounds(469, 82, 187, 38);
 		panel.add(currPswrdTextField);
 		currPswrdTextField.setColumns(10);
 
 		confirmPswrdTextField = new JPasswordField();
-		confirmPswrdTextField.setBounds(560, 237, 187, 38);
+		confirmPswrdTextField.setBounds(469, 158, 187, 38);
 		panel.add(confirmPswrdTextField);
 		confirmPswrdTextField.setColumns(10);
 
 		newPswrdTextField = new JPasswordField();
-		newPswrdTextField.setBounds(560, 322, 187, 38);
+		newPswrdTextField.setBounds(469, 235, 187, 38);
 		panel.add(newPswrdTextField);
 		newPswrdTextField.setColumns(10);
 
@@ -66,14 +67,14 @@ public class PasswordGUI extends JPanel {
 		 */
 
 		JLabel lblNonMatchingPswrd = new JLabel("New password and confirm password do not match");
-		lblNonMatchingPswrd.setBounds(564, 295, 371, 15);
+		lblNonMatchingPswrd.setBounds(469, 208, 371, 15);
 		panel.add(lblNonMatchingPswrd);
 		lblNonMatchingPswrd.setForeground(new Color(153, 0, 0));
 		lblNonMatchingPswrd.setFont(new Font("Dialog", Font.BOLD, 12));
 		lblNonMatchingPswrd.setVisible(false);
 
 		JLabel lblIncorrectPswrd = new JLabel("Incorrect Password");
-		lblIncorrectPswrd.setBounds(560, 132, 158, 16);
+		lblIncorrectPswrd.setBounds(469, 130, 158, 16);
 		panel.add(lblIncorrectPswrd);
 		lblIncorrectPswrd.setFont(new Font("Dialog", Font.BOLD, 12));
 		lblIncorrectPswrd.setForeground(new Color(153, 0, 0));
@@ -81,7 +82,7 @@ public class PasswordGUI extends JPanel {
 
 		JLabel btnChangePswrd = new JLabel("Current Password *");
 		btnChangePswrd.setHorizontalAlignment(SwingConstants.RIGHT);
-		btnChangePswrd.setBounds(305, 158, 158, 21);
+		btnChangePswrd.setBounds(246, 79, 158, 21);
 		panel.add(btnChangePswrd);
 		btnChangePswrd.setForeground(new Color(0, 0, 128));
 		btnChangePswrd.setFont(new Font("Times New Roman", Font.PLAIN, 17));
@@ -89,14 +90,14 @@ public class PasswordGUI extends JPanel {
 
 		JLabel lblNewPswrd = new JLabel("New Password*");
 		lblNewPswrd.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewPswrd.setBounds(338, 245, 125, 21);
+		lblNewPswrd.setBounds(276, 154, 125, 21);
 		panel.add(lblNewPswrd);
 		lblNewPswrd.setForeground(new Color(0, 0, 128));
 		lblNewPswrd.setFont(new Font("Times New Roman", Font.PLAIN, 17));
 
 		JLabel lblConfirmPswrd = new JLabel("Confirm Password*");
 		lblConfirmPswrd.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblConfirmPswrd.setBounds(305, 330, 157, 21);
+		lblConfirmPswrd.setBounds(247, 243, 157, 21);
 		panel.add(lblConfirmPswrd);
 		lblConfirmPswrd.setForeground(new Color(0, 0, 128));
 		lblConfirmPswrd.setFont(new Font("Times New Roman", Font.PLAIN, 17));
@@ -110,15 +111,15 @@ public class PasswordGUI extends JPanel {
 
 
 		JLabel lblSucessChangePswrd = new JLabel("Your Password has been changed succcessfully");
-		lblSucessChangePswrd.setForeground(new Color(204, 255, 204));
+		lblSucessChangePswrd.setForeground(new Color(153, 204, 0));
 		lblSucessChangePswrd.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
 		lblSucessChangePswrd.setToolTipText("yug");
-		lblSucessChangePswrd.setBounds(147, 453, 463, 50);
+		lblSucessChangePswrd.setBounds(40, 314, 463, 50);
 		panel.add(lblSucessChangePswrd);
 		lblSucessChangePswrd.setVisible(false);
 
 		JLabel lblUnchangedpswrd = new JLabel("Please enter a new password");
-		lblUnchangedpswrd.setBounds(564, 108, 183, 31);
+		lblUnchangedpswrd.setBounds(469, 42, 183, 31);
 		panel.add(lblUnchangedpswrd);
 		lblUnchangedpswrd.setForeground(new Color(153, 0, 0));
 		lblUnchangedpswrd.setFont(new Font("Dialog", Font.BOLD, 12));
@@ -165,29 +166,29 @@ public class PasswordGUI extends JPanel {
 		btnAccount.setForeground(new Color(0, 0, 128));
 
 		JButton btnChanPswrdLeft = new JButton("Change Password");
-		btnChanPswrdLeft.setBounds(49, 487, 158, 60);
+		btnChanPswrdLeft.setBounds(50, 450, 158, 60);
 		add(btnChanPswrdLeft);
-
+		
 		JButton btnPayFees = new JButton("Pay Fees");
-		btnPayFees.setBounds(49, 544, 158, 60);
+		btnPayFees.setBounds(50, 508, 158, 60);
 		add(btnPayFees);
-
+		
 		JButton btnMaterials = new JButton("Materials");
-		btnMaterials.setBounds(49, 600, 158, 60);
+		btnMaterials.setBounds(50, 564, 158, 60);
 		add(btnMaterials);
-
+		
 		JButton btnReservations = new JButton("Reservations");
 		btnReservations.setBounds(50, 621, 158, 60);
 		if(librarySystem.getUserManager().getCurrentUser().getUserType()==UserType.INSTRUCTOR) {
 			add(btnReservations);
 		}
-
+		
 		JButton btnLogOut = new JButton("Logout");
 		btnLogOut.setBounds(98, 685, 110, 43);
 		add(btnLogOut);
-
+		
 		JButton btnChangePassword = new JButton("Change Password");
-		btnChangePassword.setBounds(713, 410, 167, 43);
+		btnChangePassword.setBounds(491, 319, 167, 43);
 		panel.add(btnChangePassword);
 		btnChangePassword.setForeground(new Color(0, 0, 128));
 		btnChangePassword.setFont(new Font("Times New Roman", Font.PLAIN, 17));

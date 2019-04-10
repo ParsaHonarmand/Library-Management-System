@@ -7,6 +7,7 @@ import librarysystem.materials.MaterialStatus;
 import librarysystem.materials.MaterialType;
 import librarysystem.searching.AuthorComparator;
 import librarysystem.searching.TitleComparator;
+import librarysystem.users.User;
 import librarysystem.users.UserType;
 import librarysystem.users.faculty.Instructor;
 
@@ -44,8 +45,13 @@ public class BrowseGUI extends JPanel {
 	 * @param librarySystem The system to base the GUI on
 	 */
 	public BrowseGUI(LibrarySystem librarySystem) {
-		setBackground(new Color(0, 51, 102));
+	
+		User currUser=librarySystem.getUserManager().getCurrentUser();
+		
+		
 		this.librarySystem = librarySystem;
+		this.setBounds(0, 0, librarySystem.WIDTH, librarySystem.HEIGHT);
+		librarySystem.setTheme(this);
 
 		JButton home = new JButton("Home");
 		home.setFont(new Font("Tahoma", Font.PLAIN, 17));
@@ -108,6 +114,7 @@ public class BrowseGUI extends JPanel {
 		stringSortBox.setModel(new DefaultComboBoxModel(new String[] { "Title", "Author" }));
 
 		JLabel lblSortBy = new JLabel("Sort by:");
+		lblSortBy.setForeground(Color.WHITE);
 		lblSortBy.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 
@@ -148,7 +155,7 @@ public class BrowseGUI extends JPanel {
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
 				int amount = (Integer) reservationSpinner.getValue();
-				librarySystem.getMaterialManager().reserveMaterial((Instructor) librarySystem.getUserManager().getCurrentUser(), selectedMaterial, amount);
+				librarySystem.getMaterialManager().reserveMaterial((Instructor) currUser, selectedMaterial, amount);
 				sort((String) stringSortBox.getSelectedItem(), (MaterialType) materialTypeSortBox.getSelectedItem());
 				infoLabel.setText("Reserved " + amount + " " + selectedMaterial.getMaterialType().getNiceName() + "s successfully");
 				reserveLabel.setVisible(false);
@@ -162,6 +169,7 @@ public class BrowseGUI extends JPanel {
 		btnReserve.setVisible(false);
 		
 		orderLabel = new JLabel("How many would you like to order? ");
+		orderLabel.setForeground(Color.WHITE);
 		orderLabel.setBackground(new Color(255, 255, 255));
 		orderLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		orderLabel.setVisible(false);
@@ -194,7 +202,10 @@ public class BrowseGUI extends JPanel {
 			}
 		});
 		btnOrder_1.setVisible(false);
-		if (librarySystem.getUserManager().getCurrentUser().getUserType() == UserType.STUDENT || librarySystem.getUserManager().getCurrentUser().getUserType() == UserType.INSTRUCTOR ) {
+		/*
+		 * Make order and received functionality accessible to only the librarian 
+		 */
+		if (currUser.getUserType() == UserType.STUDENT || currUser.getUserType() == UserType.INSTRUCTOR ) {
 			btnOrder.setVisible(false);
 			btnReceived.setVisible(false);
 		}
@@ -336,7 +347,7 @@ public class BrowseGUI extends JPanel {
 		this.menu = new JPopupMenu();
 		this.menu.add(this.holdMenuItem);
 		this.menu.add(this.borrowMenuItem);
-		UserType userType = this.librarySystem.getUserManager().getCurrentUser().getUserType();
+		UserType userType = currUser.getUserType();
 		if (userType == UserType.INSTRUCTOR) {
 			this.menu.add(this.reserveMenuItem);
 		} else if (userType == UserType.LIBRARIAN) {

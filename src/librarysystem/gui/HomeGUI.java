@@ -16,10 +16,9 @@ public class HomeGUI extends JPanel {
 	 * @param librarySystem The system to base the GUI on
 	 */
 	public HomeGUI(LibrarySystem librarySystem) {
-		setForeground(new Color(0, 0, 102));
 
 		this.librarySystem = librarySystem;
-		
+		this.setBounds(0, 0, librarySystem.WIDTH, librarySystem.HEIGHT);
 		/**
 		 * Setting panel characteristics 
 		 */

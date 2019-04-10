@@ -3,12 +3,20 @@ package librarysystem;
 import librarysystem.gui.LoginGUI;
 import librarysystem.managers.MaterialManager;
 import librarysystem.managers.UserManager;
+import librarysystem.users.User;
+import librarysystem.users.UserType;
+
+import java.awt.Color;
+import java.awt.Panel;
 
 import javax.swing.*;
 
 public class LibrarySystem {
 	
 	public final static int WIDTH = 1280, HEIGHT = 750;
+	public final static Color studentThemeColor=new Color(0, 102, 153);
+	public final static Color librarianThemeColor=new Color(0, 153, 153);
+	public final static Color instructorThemeColor=new Color(204, 0, 153);
 	
 	private MaterialManager materialManager;
 	private UserManager userManager;
@@ -62,5 +70,17 @@ public class LibrarySystem {
 	public JFrame getFrame() {
 		return this.frame;
 	}
+	public void setTheme( JPanel p) {
+		User currUser=this.getUserManager().getCurrentUser();
+		if (currUser.getUserType() == UserType.STUDENT )
+			p.setBackground(studentThemeColor);
+		if ( currUser.getUserType() == UserType.INSTRUCTOR ) 
+			p.setBackground(instructorThemeColor);
+		if ( currUser.getUserType() == UserType.LIBRARIAN ) 
+			p.setBackground(librarianThemeColor);
+	    	
+			
+	}
 	
-}
+	}
+
