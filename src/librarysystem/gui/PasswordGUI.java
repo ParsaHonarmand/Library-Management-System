@@ -84,7 +84,7 @@ public class PasswordGUI extends JPanel {
 		btnChangePswrd.setHorizontalAlignment(SwingConstants.RIGHT);
 		btnChangePswrd.setBounds(246, 79, 158, 21);
 		panel.add(btnChangePswrd);
-		btnChangePswrd.setForeground(new Color(0, 0, 128));
+		btnChangePswrd.setForeground(new Color(0, 0, 0));
 		btnChangePswrd.setFont(new Font("Times New Roman", Font.PLAIN, 17));
 
 
@@ -92,14 +92,14 @@ public class PasswordGUI extends JPanel {
 		lblNewPswrd.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewPswrd.setBounds(276, 154, 125, 21);
 		panel.add(lblNewPswrd);
-		lblNewPswrd.setForeground(new Color(0, 0, 128));
+		lblNewPswrd.setForeground(new Color(0, 0, 0));
 		lblNewPswrd.setFont(new Font("Times New Roman", Font.PLAIN, 17));
 
 		JLabel lblConfirmPswrd = new JLabel("Confirm Password*");
 		lblConfirmPswrd.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblConfirmPswrd.setBounds(247, 243, 157, 21);
 		panel.add(lblConfirmPswrd);
-		lblConfirmPswrd.setForeground(new Color(0, 0, 128));
+		lblConfirmPswrd.setForeground(new Color(0, 0, 0));
 		lblConfirmPswrd.setFont(new Font("Times New Roman", Font.PLAIN, 17));
 
 		JLabel lblMissingPswrd = new JLabel("Failed, please fill in all required fields*");
@@ -190,7 +190,7 @@ public class PasswordGUI extends JPanel {
 		JButton btnChangePassword = new JButton("Change Password");
 		btnChangePassword.setBounds(491, 319, 167, 43);
 		panel.add(btnChangePassword);
-		btnChangePassword.setForeground(new Color(0, 0, 128));
+		btnChangePassword.setForeground(new Color(0, 0, 0));
 		btnChangePassword.setFont(new Font("Times New Roman", Font.PLAIN, 17));
 
 		/**
