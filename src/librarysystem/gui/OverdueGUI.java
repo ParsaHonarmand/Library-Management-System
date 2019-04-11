@@ -28,9 +28,9 @@ public class OverdueGUI extends JPanel {
 		setLayout(null);
 		this.setBounds(0, 0, librarySystem.WIDTH, librarySystem.HEIGHT);
 		
-		JLabel lblYouHaveBeen = new JLabel(" YOU HAVE BEEN BLACKLISTED !!!!!!!!!. PLEASE PAY YOUR FEES TO CONTINUE USING THE LIBRARY SERVICES. ");
+		JLabel lblYouHaveBeen = new JLabel(" YOU HAVE BEEN BLACKLISTED !!!!!!!!! PLEASE PAY YOUR FEES TO CONTINUE USING THE LIBRARY SERVICES. ");
 		lblYouHaveBeen.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblYouHaveBeen.setForeground(new Color(255, 102, 0));
+		lblYouHaveBeen.setForeground(new Color(255, 255, 255));
 		lblYouHaveBeen.setBounds(84, 593, 1114, 55);
 		add(lblYouHaveBeen);
 		
