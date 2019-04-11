@@ -25,6 +25,11 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 
+ * @author Rory Skipper
+ *
+ */
 public class BrowseGUI extends JPanel {
 
 	private final LibrarySystem librarySystem;
@@ -399,13 +404,16 @@ public class BrowseGUI extends JPanel {
 		this.borrowMenuItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				int borrowedSize = librarySystem.getUserManager().getCurrentUser().getBorrowed().size();
+				if (borrowedSize >= 5) {
+					infoLabel.setVisible(true);
+					infoLabel.setText("You already have " + borrowedSize + " materials taken out!");
+				} else {
+					infoLabel.setVisible(true);
+					infoLabel.setText(selectedMaterial.getMaterialType().getNiceName() + " taken out successfully");
+				}
 				librarySystem.getMaterialManager().borrowMaterial(librarySystem.getUserManager().getCurrentUser(), selectedMaterial);
 				((DefaultTableModel) table.getModel()).removeRow(selectedRow);
-				List<Material> onhold =new ArrayList<>();
-				onhold = librarySystem.getUserManager().getCurrentUser().getOnHold();
-				for (Material M: onhold) {
-					System.out.println(M.getNiceName() + M.getAuthor());
-				}
 				selectedRow = -1;
 				menu.hide();
 			}
@@ -431,6 +439,11 @@ public class BrowseGUI extends JPanel {
 		});
 		}
 
+	/**
+	 * Sorts the table by a material type and by author or title
+	 * @param stringSort A string representing title or author
+	 * @param materialType Then type of materials to look for
+	 */
 	public void sort(String stringSort, MaterialType materialType) {
 		this.tableContents.clear();
 		if (materialType == MaterialType.ALL) {

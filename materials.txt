@@ -11,20 +11,20 @@ ON_HOLD|BOOK|2|ECON-101|Economy 101 - 2nd Edition|Liam Scott|2|-1|-1
 RESERVED|BOOK|3|JAVA-101|Java 101 - 3rd Edition|Tyler Welty|3|-1|-1
 RETURNED|MAGAZINE|6|LIB-JNL|Library Journal|Library|5|-1|-1
 BORROWED|BOOK|8|ASTR-101|Astronomy 101 - 1st Edition|Mark Davis|1|1554879961356|-1
-AVAILABLE|BOOK|9|ASTR-101|Astronomy 101 - 1st Edition|Mark Davis|1|-1|-1
-AVAILABLE|BOOK|10|ASTR-101|Astronomy 101 - 1st Edition|Mark Davis|1|-1|-1
+RETURNED|BOOK|9|ASTR-101|Astronomy 101 - 1st Edition|Mark Davis|1|-1|-1
+BORROWED|BOOK|10|ASTR-101|Astronomy 101 - 1st Edition|Mark Davis|1|1554928766358|-1
 RETURNED|MAGAZINE|11|ID|Titlem|Author|0|-1|-1
 RETURNED|MAGAZINE|12|ID|Title|Author|0|-1|-1
 ON_HOLD|MAGAZINE|13|ID|Title|Author|7|-1|-1
 ON_HOLD|MAGAZINE|14|ID|Title|Author|7|1554879986613|-1
 ON_ORDER|ALL|15|ID|Title|Author|0|-1|-1
 RETURNED|BOOK|16|newbook|book|Author|1|-1|-1
-AVAILABLE|BOOK|9|ASTR-101|Astronomy 101 - 1st Edition|Mark Davis|1|-1|-1
-AVAILABLE|BOOK|10|ASTR-101|Astronomy 101 - 1st Edition|Mark Davis|1|-1|-1
+RETURNED|BOOK|9|ASTR-101|Astronomy 101 - 1st Edition|Mark Davis|1|-1|-1
+BORROWED|BOOK|10|ASTR-101|Astronomy 101 - 1st Edition|Mark Davis|1|1554928766358|-1
 RETURNED|BOOK|1|ASTR-101|Astronomy 101 - 1st Edition|Mark Davis|1|-1|-1
 ON_HOLD|BOOK|2|ECON-101|Economy 101 - 2nd Edition|Liam Scott|2|-1|-1
-AVAILABLE|BOOK|23|ASTR-101|Astronomy 101 - 1st Edition|Mark Davis|1|-1|-1
-AVAILABLE|BOOK|24|ASTR-101|Astronomy 101 - 1st Edition|Mark Davis|1|-1|-1
+BORROWED|BOOK|23|ASTR-101|Astronomy 101 - 1st Edition|Mark Davis|1|1554928895847|-1
+BORROWED|BOOK|24|ASTR-101|Astronomy 101 - 1st Edition|Mark Davis|1|1554929065332|-1
 AVAILABLE|BOOK|25|ASTR-101|Astronomy 101 - 1st Edition|Mark Davis|1|-1|-1
 AVAILABLE|BOOK|26|ASTR-101|Astronomy 101 - 1st Edition|Mark Davis|1|-1|-1
 RETURNED|MAGAZINE|27|ID|Title|Author|0|-1|-1
@@ -41,15 +41,16 @@ AVAILABLE|MAGAZINE|39|ID|Title|Author|7|-1|-1
 AVAILABLE|MAGAZINE|40|ID|Title|Author|7|-1|-1
 AVAILABLE|MAGAZINE|41|ID|Title|Author|7|-1|-1
 AVAILABLE|MAGAZINE|42|ID|Title|Author|7|-1|-1
-AVAILABLE|BOOK|43|ECON-101|Economy 101 - 2nd Edition|Liam Scott|2|-1|-1
-AVAILABLE|BOOK|44|ECON-101|Economy 101 - 2nd Edition|Liam Scott|2|-1|-1
-AVAILABLE|BOOK|45|ECON-101|Economy 101 - 2nd Edition|Liam Scott|2|-1|-1
-AVAILABLE|BOOK|46|ECON-101|Economy 101 - 2nd Edition|Liam Scott|2|-1|-1
+RETURNED|BOOK|43|ECON-101|Economy 101 - 2nd Edition|Liam Scott|2|-1|-1
+RETURNED|BOOK|44|ECON-101|Economy 101 - 2nd Edition|Liam Scott|2|-1|-1
+ON_HOLD|BOOK|45|ECON-101|Economy 101 - 2nd Edition|Liam Scott|2|-1|-1
+RETURNED|BOOK|46|ECON-101|Economy 101 - 2nd Edition|Liam Scott|2|-1|-1
 AVAILABLE|BOOK|47|ECON-101|Economy 101 - 2nd Edition|Liam Scott|2|-1|-1
 AVAILABLE|BOOK|48|ECON-101|Economy 101 - 2nd Edition|Liam Scott|2|-1|-1
 AVAILABLE|EBOOK|49|ID|book|Author|1|-1|-1
-AVAILABLE|EBOOK|50|newbook|book|me|1|-1|-1
+RESERVED|EBOOK|50|newbook|book|me|1|-1|-1
 AVAILABLE|BOOK|51|ECON-101|Economy 101 - 2nd Edition|Liam Scott|2|-1|-1
 AVAILABLE|BOOK|52|ECON-101|Economy 101 - 2nd Edition|Liam Scott|2|-1|-1
 AVAILABLE|BOOK|53|ECON-101|Economy 101 - 2nd Edition|Liam Scott|2|-1|-1
 AVAILABLE|EBOOK|54|newebook|ebook|sohaib|1|-1|-1
+AVAILABLE|MAGAZINE|55|SICK-MAGAZINE|Super Sick Magazine|Magazine author|1|-1|-1
