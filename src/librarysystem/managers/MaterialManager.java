@@ -224,6 +224,23 @@ public class MaterialManager {
 		}
 		return null;
 	}
+
+	/**
+	 * Returns a list of materials of a certain status and id
+	 *
+	 * @param materialStatus The status of the material
+	 * @param id             The id of the material
+	 * @return A list of materials of a certain status and id
+	 */
+	public List<Material> getMaterials(MaterialStatus materialStatus, String id) {
+		List<Material> materials = new ArrayList<>();
+		for (Material material : this.getMaterials(materialStatus)) {
+			if (material.getId().equals(id)) {
+				materials.add(material);
+			}
+		}
+		return materials;
+	}
 	
 	/**
 	 * Returns the material of a specific barcode

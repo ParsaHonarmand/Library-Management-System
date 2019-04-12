@@ -184,7 +184,8 @@ public class TextDatabase {
 					material = new eBook(title, author, id, edition, barcode, materialStatus, takeoutDate, renewDate);
 				else if (materialType == MaterialType.MAGAZINE)
 					material = new Magazine(title, author, id, edition, barcode, materialStatus, takeoutDate, renewDate);
-
+				else if (materialType == MaterialType.TEXTBOOK)
+					material = new Textbook(title, author, id, edition, barcode, materialStatus, takeoutDate, renewDate);
 				if (material != null) {
 					materialMap.get(materialStatus).add(material);
 				}

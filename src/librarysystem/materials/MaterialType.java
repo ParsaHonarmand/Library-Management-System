@@ -7,7 +7,8 @@ public enum MaterialType {
 	CD("CD"),
 	DVD("DVD"),
 	EBOOK("eBook"),
-	MAGAZINE("Magazine");
+	MAGAZINE("Magazine"),
+	TEXTBOOK("Textbook");
 	
 	private final String niceName;
 	

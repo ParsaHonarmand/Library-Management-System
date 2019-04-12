@@ -6,6 +6,7 @@ import javax.swing.table.DefaultTableModel;
 
 import librarysystem.LibrarySystem;
 import librarysystem.materials.Material;
+import librarysystem.materials.MaterialStatus;
 import librarysystem.users.UserType;
 
 import javax.swing.JButton;
@@ -65,7 +66,7 @@ public class ReturnGUI extends JPanel {
 		setLayout(null);
 		add(lblBanner);
 
-		for (Material M : librarySystem.getUserManager().getCurrentUser().getBorrowed()) {
+		for (Material M : librarySystem.getMaterialManager().getMaterials(MaterialStatus.RETURNED)) {
 			model.addRow(new Object[] { null, M.getNiceName(), M.getId(), M.getBarcode(), false});
 		}
 		this.table = new JTable(model);
@@ -76,17 +77,16 @@ public class ReturnGUI extends JPanel {
 
 		scrollPane.setViewportView(this.table);
 
-		JButton btnReturnSelectedMaterials = new JButton("Return Selected Materials");
+		JButton btnReturnSelectedMaterials = new JButton("Reshelve Selected Materials");
 		btnReturnSelectedMaterials.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				for (int i = model.getRowCount() - 1; i >= 0; i--) {
 					if ((boolean) model.getValueAt(i, 4) == true){
-						librarySystem.getMaterialManager().returnMaterial		
-						(librarySystem.getUserManager().getCurrentUser(), librarySystem.getMaterialManager().getMaterial(
+						librarySystem.getMaterialManager().reshelveMaterial(librarySystem.getMaterialManager().getMaterial(
 								(Integer) model.getValueAt(i, 3)));
-						model.removeRow(i);		
-						System.out.println("returning material");
+						model.removeRow(i);
+						System.out.println("reshelving material");
 					}
 				}
 			}
