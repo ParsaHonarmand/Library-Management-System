@@ -411,9 +411,9 @@ public class BrowseGUI extends JPanel {
 				} else {
 					infoLabel.setVisible(true);
 					infoLabel.setText(selectedMaterial.getMaterialType().getNiceName() + " taken out successfully");
+					librarySystem.getMaterialManager().borrowMaterial(librarySystem.getUserManager().getCurrentUser(), selectedMaterial);
+					((DefaultTableModel) table.getModel()).removeRow(selectedRow);
 				}
-				librarySystem.getMaterialManager().borrowMaterial(librarySystem.getUserManager().getCurrentUser(), selectedMaterial);
-				((DefaultTableModel) table.getModel()).removeRow(selectedRow);
 				selectedRow = -1;
 				menu.hide();
 			}

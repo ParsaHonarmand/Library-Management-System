@@ -224,9 +224,6 @@ public class MaterialsGUI extends JPanel {
 				sort(stringSort, materialType);
 			}
 		});
-		
-		
-		
 	
 		String[] columnMaterials = { "icon", "Materials" };
 		DefaultTableModel model = new DefaultTableModel(new Object[][] {}, columnMaterials) {
@@ -250,7 +247,6 @@ public class MaterialsGUI extends JPanel {
 		this.tableMaterials.setPreferredScrollableViewportSize(tableMaterials.getPreferredSize());
 		this.tableMaterials.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		this.tableMaterials.getColumnModel().getColumn(0).setMaxWidth(100);
-		
 
 		this.tableMaterials.addMouseListener(new MouseAdapter() {
 			@Override
@@ -260,13 +256,13 @@ public class MaterialsGUI extends JPanel {
 					selectedRow = tableMaterials.rowAtPoint(e.getPoint());
 					System.out.println("row: " + selectedRow);
 					selectedMaterial = tableContents.get(selectedRow);
+					materialsMenu = new JPopupMenu();
+					materialsMenu.add(returnMenuItem);
+					materialsMenu.add(renewMenuItem);
 					materialsMenu.show(tableMaterials, e.getX(), e.getY());
 				}
 			}
 		});
-		
-		
-		
 		
 		String[] columnHolds = { "icon", "On Hold" };
 		DefaultTableModel model1 = new DefaultTableModel(new Object[][] {}, columnHolds) {
@@ -300,6 +296,10 @@ public class MaterialsGUI extends JPanel {
 					selectedRow = tableHold.rowAtPoint(e.getPoint());
 					System.out.println("row: " + selectedRow);
 					selectedMaterial = holdContents.get(selectedRow);
+					
+					holdsMenu = new JPopupMenu();
+					holdsMenu.add(borrowMenuItem);
+					holdsMenu.add(cancelMenuItem);
 					holdsMenu.show(tableHold, e.getX(), e.getY());
 				}
 			}
@@ -369,7 +369,6 @@ public class MaterialsGUI extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				librarySystem.getMaterialManager().returnMaterial(librarySystem.getUserManager().getCurrentUser(), selectedMaterial);
 				((DefaultTableModel) tableMaterials.getModel()).removeRow(selectedRow);
-				selectedRow = -1;
 				materialsMenu.hide();
 				lblConfirmation.setText("Item returned successfully");
 				lblConfirmation.setVisible(true);
@@ -380,6 +379,10 @@ public class MaterialsGUI extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				librarySystem.getMaterialManager().borrowMaterial(librarySystem.getUserManager().getCurrentUser(), selectedMaterial);
 				((DefaultTableModel) tableHold.getModel()).removeRow(selectedRow);
+				((DefaultTableModel) tableMaterials.getModel()).addRow(new Object[] { null, selectedMaterial.getNiceName()});
+				holdContents.remove(selectedRow);
+				tableContents.add(selectedMaterial);
+				
 				selectedRow = -1;
 				holdsMenu.hide();
 				lblConfirmation.setText("Item borrowed successfully");
@@ -393,7 +396,6 @@ public class MaterialsGUI extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				if (!selectedMaterial.hasBeenRenewed()) {
 					selectedMaterial.renew();
-					selectedRow = -1;
 					lblConfirmation.setText("Item renewed successfully");
 					lblConfirmation.setVisible(true);
 				}
@@ -401,6 +403,7 @@ public class MaterialsGUI extends JPanel {
 					lblConfirmation.setText("You have already renewed this item once!");
 					lblConfirmation.setVisible(true);
 				}
+				selectedRow = -1;
 				materialsMenu.hide();
 			}
 		});
@@ -410,6 +413,7 @@ public class MaterialsGUI extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				librarySystem.getMaterialManager().returnMaterial(librarySystem.getUserManager().getCurrentUser(), selectedMaterial);
 				((DefaultTableModel) tableHold.getModel()).removeRow(selectedRow);
+				holdContents.remove(selectedRow);
 				selectedRow = -1;
 				holdsMenu.hide();
 				lblConfirmation.setText("Item cancelled successfully");
