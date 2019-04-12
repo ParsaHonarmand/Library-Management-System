@@ -27,3 +27,5 @@
 	- Only librarians can access the order tab to order new books
 	- Only librarians can access the received tab to shelve ordered books
 	- Only instructors can reserve materials (Right click in browse menu and click Reserve)
+	
+Git repository: https://gitlab.com/seng-300/library-system
