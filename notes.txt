@@ -1,3 +1,0 @@
-STUDENT|1|johnsmith1|johnsmith1@mru.ca|John Smith|password|false|0.0|NONE|NONE
-LIBRARIAN|1|johnsmith2|johnsmith2@mru.ca|John Smith|password|false|0.0|NONE|NONE
-STUDENT|1|j|johnsmith1@mru.ca|John Smith|j|false|0.0|NONE|NONE
