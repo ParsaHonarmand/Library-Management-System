@@ -1,45 +1,24 @@
 package librarysystem.gui;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Font;
+import librarysystem.LibrarySystem;
+import librarysystem.gui.JSpinnerInTables.SpinnerEditor;
+import librarysystem.materials.Material;
+import librarysystem.reservations.Reservation;
+import librarysystem.users.UserType;
+import librarysystem.users.faculty.Instructor;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JPopupMenu;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.UIManager;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
-
-import librarysystem.LibrarySystem;
-import librarysystem.gui.JSpinnerInTables.SpinnerEditor;
-import librarysystem.materials.Material;
-import librarysystem.materials.MaterialStatus;
-import librarysystem.materials.MaterialType;
-import librarysystem.reservations.Reservation;
-import librarysystem.users.UserType;
-import librarysystem.users.faculty.Instructor;
-
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JComboBox;
-import javax.swing.JSlider;
-import javax.swing.JSpinner;
 
 public class ReservationsGUI extends JPanel {
 	private LibrarySystem librarySystem;
@@ -58,82 +37,97 @@ public class ReservationsGUI extends JPanel {
 
 	/**
 	 * Create the panel.
+	 * @param librarySystem The system to base the GUI on
 	 */
 	public ReservationsGUI(LibrarySystem librarySystem) {
 		this.librarySystem = librarySystem;
+		this.setBounds(0, 0, librarySystem.WIDTH, librarySystem.HEIGHT);
+		
 		
 		setBackground(new Color(255, 255, 255));
 		setForeground(Color.WHITE);;;;
 		setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(102, 153, 204));
-		panel.setBounds(219, 66, 1185, 781);
+		librarySystem.setTheme(panel);
+		panel.setBounds(211, 270, 1054, 720);
 		add(panel);
 		panel.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(131, 109, 570, 375);
+		scrollPane.setBounds(85, 61, 570, 375);
 		panel.add(scrollPane);
-		//JButtons
-
-
+		JLabel profilePic = new JLabel();
+		profilePic.setBounds(50, 281, 150, 150);
+		profilePic.setIcon(new ImageIcon("resources/profile.png"));
+		setLayout(null);
+		add(profilePic);
+		
+		
+		JLabel lblBanner = new JLabel("");
+		lblBanner.setBounds(15, 15, 1250, 200);
+		lblBanner.setIcon(new ImageIcon("resources/banner_img.png"));
+		setLayout(null);
+		add(lblBanner);
+		
+		/**
+		 * General buttons constant throughout all panels
+		 */
 		JButton btnHome = new JButton("Home");
-		btnHome.setBounds(80 , BUTTONS_Y, BUTTONS_W, BUTTONS_H);
+		btnHome.setBounds(80, 225, 120, 30);
 		btnHome.setForeground(new Color(0, 0, 128));
 		add(btnHome);
 		
 		JButton btnReturned = new JButton("Returned");
-		btnReturned.setBounds(80+BUTTONS_D, BUTTONS_Y, BUTTONS_W, BUTTONS_H);
+		btnReturned.setBounds(280, 225, 120, 30);
 		btnReturned.setForeground(new Color(0, 0, 128));
 		add(btnReturned);
 		
 		JButton btnBrowse = new JButton("Browse");
-		btnBrowse.setBounds(80+BUTTONS_D*2, BUTTONS_Y, BUTTONS_W, BUTTONS_H);
+		btnBrowse.setBounds(480, 225, 120, 30);
 		btnBrowse.setForeground(new Color(0, 0, 128));
 		add(btnBrowse);
 		
 		JButton btnReceived = new JButton("Received");
-		btnReceived.setBounds(80+BUTTONS_D*3, BUTTONS_Y, BUTTONS_W, BUTTONS_H);
+		btnReceived.setBounds(1080, 225, 120, 30);
 		btnReceived.setForeground(new Color(0, 0, 128));
 		add(btnReceived);
 		
 		JButton btnOrder = new JButton("Order");
-		btnOrder.setBounds(80+BUTTONS_D*4, BUTTONS_Y, BUTTONS_W, BUTTONS_H);
+		btnOrder.setBounds(880, 225, 120, 30);
 		btnOrder.setForeground(new Color(0, 0, 128));
 		add(btnOrder);
 		
 		JButton btnAccount = new JButton("Account");
-		btnAccount.setBounds(80+BUTTONS_D*5, BUTTONS_Y, BUTTONS_W, BUTTONS_H);
+		btnAccount.setBounds(680, 225, 120, 30);
 		btnAccount.setForeground(new Color(0, 0, 128));
 		add(btnAccount);
 		
-		JButton btnProfile = new JButton("Profile");
-		btnProfile.setBounds(36, 139, 158, 60);
-		add(btnProfile);
 		
 		JButton btnChanPswrdLeft = new JButton("Change Password");
-		btnChanPswrdLeft.setBounds(36, 238, 158, 60);
+		btnChanPswrdLeft.setBounds(50, 450, 158, 60);
 		add(btnChanPswrdLeft);
 		
 		JButton btnPayFees = new JButton("Pay Fees");
-		btnPayFees.setBounds(36, 336, 158, 60);
+		btnPayFees.setBounds(50, 508, 158, 60);
 		add(btnPayFees);
 		
 		JButton btnMaterials = new JButton("Materials");
-		btnMaterials.setBounds(36, 427, 158, 60);
+		btnMaterials.setBounds(50, 564, 158, 60);
 		add(btnMaterials);
 		
 		JButton btnReservations = new JButton("Reservations");
-		btnReservations.setBounds(36, 527, 158, 60);
-		add(btnReservations);
+		btnReservations.setBounds(50, 621, 158, 60);
+		if(librarySystem.getUserManager().getCurrentUser().getUserType()==UserType.INSTRUCTOR) {
+			add(btnReservations);
+		}
 		
 		JButton btnLogOut = new JButton("Logout");
-		btnLogOut.setBounds(97, 641, 110, 43);
+		btnLogOut.setBounds(98, 685, 110, 43);
 		add(btnLogOut);
 		
 		JButton btnCancel = new JButton("Cancel");
-		btnCancel.setBounds(584, 544, 117, 29);
+		btnCancel.setBounds(715, 405, 117, 29);
 		panel.add(btnCancel);
 
 		
@@ -172,14 +166,16 @@ public class ReservationsGUI extends JPanel {
 			}
 		});
 		
-		btnProfile.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				new ProfileGUI(librarySystem);
-			}
-		}); 
+		
 		btnPayFees.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new PayGUI(librarySystem);
+			}
+		});
+		
+		btnAccount.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				librarySystem.updateGUI(new ProfileGUI(librarySystem));
 			}
 		});
 		
@@ -206,8 +202,11 @@ public class ReservationsGUI extends JPanel {
 			}
 		});
 
-		
-		String[] columnNames = { "Icon", "Material","Amount" };
+		if (librarySystem.getUserManager().getCurrentUser().getUserType() == UserType.STUDENT || librarySystem.getUserManager().getCurrentUser().getUserType() == UserType.INSTRUCTOR ) {
+			btnOrder.setVisible(false);
+			btnReceived.setVisible(false);
+		}
+		String[] columnNames = { "Icon", "Material","Amount"};
 
 		DefaultTableModel model = new DefaultTableModel(new Object[][][] {}, columnNames) {
 		};
@@ -222,7 +221,8 @@ public class ReservationsGUI extends JPanel {
 		for (Reservation reservation : instructor.getReservations()) {
 			System.out.println("reservation: " + reservation);
 			List<Material> materials = reservation.getMaterials();
-			data[row++] = new Object[] {bookImg, materials.get(0).getNiceName(), materials.size()};
+			data[row] = new Object[] {bookImg, materials.get(row).getNiceName(), materials.size()};
+			row++;
 			tableReservations.add(reservation);
 		}
 
@@ -264,7 +264,7 @@ public class ReservationsGUI extends JPanel {
 	public class IconRenderer extends DefaultTableCellRenderer{
 	    public Component getTableCellRendererComponent(JTable table,Object obj,boolean isSelected,boolean hasFocus,int row,int column){
 	        if(obj instanceof ImageIcon)
-	            setIcon((ImageIcon) obj);
+	            setIcon(new ImageIcon("resources/book.png"));
 	        setBorder(UIManager.getBorder("TableHeader.cellBorder"));
 	        setHorizontalAlignment(JLabel.CENTER);
 	        return this;

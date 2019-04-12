@@ -1,127 +1,114 @@
 package librarysystem.gui;
 
-import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.GroupLayout;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.ImageIcon;
-import javax.swing.LayoutStyle.ComponentPlacement;
-
 import librarysystem.LibrarySystem;
 import librarysystem.managers.UserManager;
+import librarysystem.users.UserType;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import javax.swing.JLabel;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class ProfileGUI extends JPanel {
 
 	private LibrarySystem librarySystem;
-	//Upper Tab Buttons Settings
-	int BUTTONS_Y=20;
-	int BUTTONS_W=120;
-	int BUTTONS_H=30;
-	int BUTTONS_D=BUTTONS_W+80;
+
 
 	/**
 	 * Create the panel.
 	 */
-
+	
+	/**
+	 * Providing user information about their own account eg: ID, Name, Username
+	 * @param librarySystem The system to base the GUI on
+	 */
 	public ProfileGUI(LibrarySystem librarySystem) {
-		setForeground(new Color(51, 102, 153));
-		this.librarySystem = librarySystem;
 		
-		this.setBackground(new Color(255, 255, 255));
-		this.setBounds(0, 0, 1281, 721);
+		this.librarySystem = librarySystem;
+		this.setBounds(0, 0, librarySystem.WIDTH, librarySystem.HEIGHT);
+		librarySystem.setTheme(this);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(211, 270, 1054, 720);
+		librarySystem.setTheme(panel);
+		add(panel);
+		panel.setLayout(null);
 		
 		UserManager user = librarySystem.getUserManager();
 		String id = "" + user.getCurrentUser().getId();
 		
-		JLabel ID = new JLabel("Your ID:");
-		ID.setBounds(466, 282, 51, 16);
-		
-		JLabel email = new JLabel("Your Email:");
-		email.setBounds(466, 465, 71, 16);
-		
-		JLabel emailDisplay = new JLabel(user.getCurrentUser().getEmail());
-		emailDisplay.setBounds(612, 465, 73, 16);
-		
-		JLabel IDDisplay = new JLabel(id);
-		IDDisplay.setBounds(612, 282, 8, 16);
-		
-		JLabel username = new JLabel("Your Username:");
-		username.setBounds(466, 610, 99, 16);
-		
-		JLabel usernameDisplay = new JLabel(user.getCurrentUser().getUsername());
-		usernameDisplay.setBounds(612, 610, 73, 16);
-		
 		JLabel profilePic = new JLabel();
-		profilePic.setBounds(272, 130, 0, 0);
-		profilePic.setIcon(new ImageIcon("C:\\Users\\Prit Patel\\git\\library-system"));
+		profilePic.setBounds(50, 281, 150, 150);
+		profilePic.setIcon(new ImageIcon("resources/profile.png"));
 		setLayout(null);
+		add(profilePic);
 		
-		//JButtons
-
-
+		
+		JLabel lblBanner = new JLabel("");
+		lblBanner.setBounds(15, 15, 1250, 200);
+		lblBanner.setIcon(new ImageIcon("resources/banner_img.png"));
+		setLayout(null);
+		add(lblBanner);
+		
+		/**
+		 * General buttons constant throughout all panels
+		 */
 		JButton btnHome = new JButton("Home");
-		btnHome.setBounds(80, 20, 120, 30);
+		btnHome.setBounds(80, 225, 120, 30);
 		btnHome.setForeground(new Color(0, 0, 128));
 		add(btnHome);
 		
 		JButton btnReturned = new JButton("Returned");
-		btnReturned.setBounds(280, 20, 120, 30);
+		btnReturned.setBounds(280, 225, 120, 30);
 		btnReturned.setForeground(new Color(0, 0, 128));
 		add(btnReturned);
 		
 		JButton btnBrowse = new JButton("Browse");
-		btnBrowse.setBounds(480, 20, 120, 30);
+		btnBrowse.setBounds(480, 225, 120, 30);
 		btnBrowse.setForeground(new Color(0, 0, 128));
 		add(btnBrowse);
 		
 		JButton btnReceived = new JButton("Received");
-		btnReceived.setBounds(680, 20, 120, 30);
+		btnReceived.setBounds(1080, 225, 120, 30);
 		btnReceived.setForeground(new Color(0, 0, 128));
 		add(btnReceived);
 		
 		JButton btnOrder = new JButton("Order");
-		btnOrder.setBounds(880, 20, 120, 30);
+		btnOrder.setBounds(880, 225, 120, 30);
 		btnOrder.setForeground(new Color(0, 0, 128));
 		add(btnOrder);
 		
 		JButton btnAccount = new JButton("Account");
-		btnAccount.setBounds(1080, 20, 120, 30);
+		btnAccount.setBounds(680, 225, 120, 30);
 		btnAccount.setForeground(new Color(0, 0, 128));
 		add(btnAccount);
 		
-		JButton btnProfile = new JButton("Profile");
-		btnProfile.setBounds(36, 131, 158, 60);
-		add(btnProfile);
 		
 		JButton btnChanPswrdLeft = new JButton("Change Password");
-		btnChanPswrdLeft.setBounds(36, 238, 158, 60);
+		btnChanPswrdLeft.setBounds(50, 450, 158, 60);
 		add(btnChanPswrdLeft);
 		
 		JButton btnPayFees = new JButton("Pay Fees");
-		btnPayFees.setBounds(36, 334, 158, 60);
+		btnPayFees.setBounds(50, 508, 158, 60);
 		add(btnPayFees);
 		
 		JButton btnMaterials = new JButton("Materials");
-		btnMaterials.setBounds(36, 428, 158, 60);
+		btnMaterials.setBounds(50, 564, 158, 60);
 		add(btnMaterials);
 		
 		JButton btnReservations = new JButton("Reservations");
-		btnReservations.setBounds(36, 527, 158, 60);
-		add(btnReservations);
+		btnReservations.setBounds(50, 621, 158, 60);
+		if(librarySystem.getUserManager().getCurrentUser().getUserType()==UserType.INSTRUCTOR) {
+			add(btnReservations);
+		}
 		
 		JButton btnLogOut = new JButton("Logout");
-		btnLogOut.setBounds(97, 641, 110, 43);
+		btnLogOut.setBounds(98, 685, 110, 43);
 		add(btnLogOut);
 		
+		/**
+		 * Adding action listeners to the buttons above such that they redirect the user to a different panel
+		 */
 		btnHome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new HomeGUI(librarySystem);
@@ -185,29 +172,62 @@ public class ProfileGUI extends JPanel {
 				new LoginGUI(librarySystem);
 			}
 		});
-
-		add(ID);
-		add(email);
-		add(username);
-		add(emailDisplay);
-		add(IDDisplay);
-		add(usernameDisplay);
-		add(profilePic);
 		
-		JPanel panel = new JPanel();
-		panel.setBounds(272, 111, 1003, 604);
-		panel.setBackground(new Color(102, 153, 204));
-		add(panel);
-		panel.setLayout(null);
+		
+		/**
+		 * Setting JPanel characteristics 
+		 */
+		
 		
 		JLabel name = new JLabel("Your Name:");
-		name.setBounds(237, 63, 73, 16);
+		name.setForeground(new Color(255, 255, 255));
+		name.setBounds(221, 130, 73, 16);
 		panel.add(name);
 		
 		JLabel nameDisplay = new JLabel(user.getCurrentUser().getName());
-		nameDisplay.setBounds(361, 63, 73, 16);
+		nameDisplay.setForeground(new Color(255, 255, 255));
+		nameDisplay.setBounds(324, 124, 151, 29);
 		panel.add(nameDisplay);
+		
+		JLabel ID = new JLabel("Your ID:");
+		ID.setForeground(new Color(255, 255, 255));
+		ID.setBounds(243, 246, 51, 16);
+		panel.add(ID);
+		
+		JLabel username = new JLabel("Your Username:");
+		username.setForeground(new Color(255, 255, 255));
+		username.setBounds(201, 186, 99, 16);
+		panel.add(username);
+		
+		JLabel usernameDisplay = new JLabel(user.getCurrentUser().getUsername());
+		usernameDisplay.setForeground(new Color(255, 255, 255));
+		usernameDisplay.setBounds(324, 179, 139, 30);
+		panel.add(usernameDisplay);
+		
+		JLabel email = new JLabel("Your Email:");
+		email.setForeground(new Color(255, 255, 255));
+		email.setBounds(223, 300, 71, 16);
+		panel.add(email);
+		
+		JLabel emailDisplay = new JLabel(user.getCurrentUser().getEmail());
+		emailDisplay.setForeground(new Color(255, 255, 255));
+		emailDisplay.setBounds(319, 293, 172, 30);
+		panel.add(emailDisplay);
+		
+		JLabel IDDisplay = new JLabel(String.valueOf(user.getCurrentUser().getId()));
+		IDDisplay.setForeground(new Color(255, 255, 255));
+		IDDisplay.setBounds(324, 246, 92, 16);
+		panel.add(IDDisplay);
+		
+		/*
+		 * Make order and received functionality accessible to only the librarian 
+		 */
+		if (librarySystem.getUserManager().getCurrentUser().getUserType() == UserType.STUDENT || librarySystem.getUserManager().getCurrentUser().getUserType() == UserType.INSTRUCTOR ) {
+			btnOrder.setVisible(false);
+			btnReceived.setVisible(false);
+		}
 		
 		this.librarySystem.updateGUI(this);
 	}
 }
+

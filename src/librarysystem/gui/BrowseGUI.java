@@ -1,52 +1,36 @@
 package librarysystem.gui;
 
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.GroupLayout;
-import javax.swing.Icon;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JButton;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableModel;
-
 import librarysystem.LibrarySystem;
 import librarysystem.managers.MaterialManager;
 import librarysystem.managers.UserManager;
 import librarysystem.materials.Material;
 import librarysystem.materials.MaterialStatus;
+import librarysystem.materials.MaterialType;
+import librarysystem.searching.AuthorComparator;
+import librarysystem.searching.TitleComparator;
+import librarysystem.users.User;
+import librarysystem.users.UserType;
+import librarysystem.users.faculty.Instructor;
 
-import java.awt.event.ActionListener;
+import javax.swing.*;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
-import javax.swing.JScrollPane;
-import javax.swing.JSlider;
-import javax.swing.JTable;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
-import java.awt.SystemColor;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import librarysystem.materials.MaterialType;
-import librarysystem.searching.AuthorComparator;
-import librarysystem.searching.TitleComparator;
-import librarysystem.users.UserType;
-import librarysystem.users.faculty.Instructor;
 
-import javax.swing.JLabel;
-import javax.swing.JMenuItem;
-
-import java.awt.Font;
-import javax.swing.JSpinner;
-import java.awt.ComponentOrientation;
-import javax.swing.SwingConstants;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.ChangeEvent;
-
+/**
+ * 
+ * @author Rory Skipper
+ *
+ */
 public class BrowseGUI extends JPanel {
 
 	private final LibrarySystem librarySystem;
@@ -62,14 +46,21 @@ public class BrowseGUI extends JPanel {
 	private JButton btnReserve, btnOrder_1;
 	private JLabel reserveLabel, orderLabel, infoLabel;
 	private JSpinner reservationSpinner, orderSpinner;
+	
 
 	/**
 	 * Create the panel.
+	 * @param librarySystem The system to base the GUI on
 	 */
 	public BrowseGUI(LibrarySystem librarySystem) {
+	
+		User currUser=librarySystem.getUserManager().getCurrentUser();
+		
 		this.librarySystem = librarySystem;
 		this.materialManager = librarySystem.getMaterialManager();
 		this.userManager = librarySystem.getUserManager();
+		this.setBounds(0, 0, librarySystem.WIDTH, librarySystem.HEIGHT);
+		librarySystem.updateGUI(this);
 
 		JButton home = new JButton("Home");
 		home.setFont(new Font("Tahoma", Font.PLAIN, 17));
@@ -132,6 +123,7 @@ public class BrowseGUI extends JPanel {
 		stringSortBox.setModel(new DefaultComboBoxModel(new String[] { "Title", "Author" }));
 
 		JLabel lblSortBy = new JLabel("Sort by:");
+		lblSortBy.setForeground(Color.WHITE);
 		lblSortBy.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 		JButton btnSort = new JButton("Sort");
@@ -162,6 +154,7 @@ public class BrowseGUI extends JPanel {
 		reservationSpinner.setVisible(false);
 
 		reserveLabel = new JLabel("How many would you like to reserve?");
+		reserveLabel.setBackground(new Color(255, 255, 255));
 		reserveLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		reserveLabel.setVisible(false);
 
@@ -170,7 +163,7 @@ public class BrowseGUI extends JPanel {
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
 				int amount = (Integer) reservationSpinner.getValue();
-				materialManager.reserveMaterial((Instructor) userManager.getCurrentUser(), selectedMaterial, amount);
+				librarySystem.getMaterialManager().reserveMaterial((Instructor) currUser, selectedMaterial, amount);
 				sort((String) stringSortBox.getSelectedItem(), (MaterialType) materialTypeSortBox.getSelectedItem());
 				infoLabel.setText("Reserved " + amount + " " + selectedMaterial.getMaterialType().getNiceName() + "s successfully");
 				reserveLabel.setVisible(false);
@@ -184,6 +177,8 @@ public class BrowseGUI extends JPanel {
 		btnReserve.setVisible(false);
 
 		orderLabel = new JLabel("How many would you like to order? ");
+		orderLabel.setForeground(Color.WHITE);
+		orderLabel.setBackground(new Color(255, 255, 255));
 		orderLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		orderLabel.setVisible(false);
 
@@ -215,70 +210,122 @@ public class BrowseGUI extends JPanel {
 		});
 		btnOrder_1.setVisible(false);
 
+		/*
+		 * Make order and received functionality accessible to only the librarian 
+		 */
+		if (currUser.getUserType() == UserType.STUDENT || currUser.getUserType() == UserType.INSTRUCTOR ) {
+			btnOrder.setVisible(false);
+			btnReceived.setVisible(false);
+		}
 		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout
-				.setHorizontalGroup(
-						groupLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(
-										groupLayout.createSequentialGroup()
-												.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-														.addGroup(groupLayout.createSequentialGroup().addGap(0).addComponent(home, GroupLayout.PREFERRED_SIZE, 174, GroupLayout.PREFERRED_SIZE)
-																.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnReturned, GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
-																.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnBrowse, GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
-																.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnOrder, GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE))
-														.addGroup(
-																groupLayout.createSequentialGroup().addContainerGap()
-																		.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 699,
-																				GroupLayout.PREFERRED_SIZE)
-																		.addPreferredGap(
-																				ComponentPlacement.RELATED)))
-												.addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
-														.createParallelGroup(
-																Alignment.LEADING)
-														.addGroup(
-																groupLayout.createParallelGroup(Alignment.LEADING)
-																		.addGroup(groupLayout.createSequentialGroup().addGap(18).addGroup(groupLayout.createParallelGroup(Alignment.TRAILING).addGroup(groupLayout
-																				.createParallelGroup(Alignment.LEADING).addGroup(
-																						groupLayout.createSequentialGroup().addComponent(btnReceived, GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
-																								.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(btnAccount, GroupLayout.PREFERRED_SIZE, 174,
-																										GroupLayout.PREFERRED_SIZE)
-																								.addGap(2))
-																				.addGroup(groupLayout.createSequentialGroup()
-																						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-																								.addComponent(stringSortBox, Alignment.LEADING, 0, 343, Short.MAX_VALUE).addComponent(materialTypeSortBox, 0, 343,
-																										Short.MAX_VALUE))
-																						.addContainerGap())
-																				.addGroup(groupLayout.createSequentialGroup().addGap(10)
-																						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-																								.addComponent(infoLabel, GroupLayout.PREFERRED_SIZE, 333, GroupLayout.PREFERRED_SIZE)
-																								.addGroup(groupLayout.createSequentialGroup().addComponent(reserveLabel).addPreferredGap(ComponentPlacement.RELATED)
-																										.addComponent(reservationSpinner, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)))
-																						.addContainerGap()))
-																				.addGroup(groupLayout.createSequentialGroup().addComponent(lblSortBy).addGap(157))))
-																		.addGroup(groupLayout.createSequentialGroup().addGap(27).addComponent(orderLabel).addPreferredGap(ComponentPlacement.RELATED)
-																				.addComponent(orderSpinner, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE).addContainerGap())
-																		.addGroup(groupLayout.createSequentialGroup().addGap(163).addComponent(btnSort).addGap(149)))
-														.addGroup(groupLayout.createSequentialGroup().addGap(127).addComponent(btnReserve).addContainerGap()))
-														.addGroup(groupLayout.createSequentialGroup().addGap(119).addComponent(btnOrder_1).addContainerGap()))));
-		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(0)
+							.addComponent(home, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnReturned, GroupLayout.PREFERRED_SIZE, 12, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnBrowse, GroupLayout.PREFERRED_SIZE, 52, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnOrder, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 699, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)))
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(home, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE).addComponent(btnReturned,
-										GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
-								.addComponent(btnBrowse, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE).addComponent(btnOrder, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnReceived, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE).addComponent(btnAccount, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(18)
+									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+										.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+											.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+												.addComponent(btnReceived, GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
+												.addGap(12)
+												.addComponent(btnAccount, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
+												.addGap(2))
+											.addGroup(groupLayout.createSequentialGroup()
+												.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+													.addComponent(stringSortBox, Alignment.LEADING, 0, 455, Short.MAX_VALUE)
+													.addComponent(materialTypeSortBox, 0, 455, Short.MAX_VALUE))
+												.addContainerGap())
+											.addGroup(groupLayout.createSequentialGroup()
+												.addGap(10)
+												.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+													.addComponent(infoLabel, GroupLayout.PREFERRED_SIZE, 333, GroupLayout.PREFERRED_SIZE)
+													.addGroup(groupLayout.createSequentialGroup()
+														.addComponent(reserveLabel)
+														.addPreferredGap(ComponentPlacement.RELATED)
+														.addComponent(reservationSpinner, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)))
+												.addContainerGap()))
+										.addGroup(groupLayout.createSequentialGroup()
+											.addComponent(lblSortBy)
+											.addGap(157))))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(27)
+									.addComponent(orderLabel)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(orderSpinner, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+									.addContainerGap())
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(163)
+									.addComponent(btnSort)
+									.addGap(149)))
+							.addGroup(groupLayout.createSequentialGroup()
+								.addGap(127)
+								.addComponent(btnReserve)
+								.addContainerGap()))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(119)
+							.addComponent(btnOrder_1)
+							.addContainerGap())))
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createSequentialGroup().addGap(23).addComponent(lblSortBy).addGap(18).addComponent(stringSortBox, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
-										.addGap(31).addComponent(materialTypeSortBox, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE).addGap(18).addComponent(btnSort).addGap(36)
-										.addComponent(infoLabel, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE).addGap(18)
-										.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(reserveLabel).addComponent(reservationSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-												GroupLayout.PREFERRED_SIZE))
-										.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnReserve).addGap(58)
-										.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(orderLabel).addComponent(orderSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-												GroupLayout.PREFERRED_SIZE))
-										.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnOrder_1))
-								.addGroup(groupLayout.createSequentialGroup().addPreferredGap(ComponentPlacement.RELATED).addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 658, GroupLayout.PREFERRED_SIZE)))
-						.addContainerGap()));
+							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(home, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnReturned, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
+							.addComponent(btnBrowse, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+							.addComponent(btnOrder, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+							.addComponent(btnAccount, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
+						.addComponent(btnReceived, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(23)
+							.addComponent(lblSortBy)
+							.addGap(18)
+							.addComponent(stringSortBox, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
+							.addGap(31)
+							.addComponent(materialTypeSortBox, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(btnSort)
+							.addGap(36)
+							.addComponent(infoLabel, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(reserveLabel)
+								.addComponent(reservationSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnReserve)
+							.addGap(58)
+							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(orderLabel)
+								.addComponent(orderSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnOrder_1))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 658, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap())
+		);
+
+
 
 		//Icon aboutIcon = new ImageIcon("about16.gif");
 
@@ -310,7 +357,8 @@ public class BrowseGUI extends JPanel {
 		this.menu = new JPopupMenu();
 		this.menu.add(this.holdMenuItem);
 		this.menu.add(this.borrowMenuItem);
-		UserType userType = this.userManager.getCurrentUser().getUserType();
+
+		UserType userType = currUser.getUserType();
 		if (userType == UserType.INSTRUCTOR) {
 			this.menu.add(this.reserveMenuItem);
 		} else if (userType == UserType.LIBRARIAN) {
@@ -371,16 +419,23 @@ public class BrowseGUI extends JPanel {
 		this.borrowMenuItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				materialManager.borrowMaterial(userManager.getCurrentUser(), selectedMaterial);
-				((DefaultTableModel) table.getModel()).removeRow(selectedRow);
-				tableContents.remove(selectedRow);
+				int borrowedSize = librarySystem.getUserManager().getCurrentUser().getBorrowed().size();
+				if (borrowedSize >= 5) {
+					infoLabel.setVisible(true);
+					infoLabel.setText("You already have " + borrowedSize + " materials taken out!");
+				} else {
+					infoLabel.setVisible(true);
+					infoLabel.setText(selectedMaterial.getMaterialType().getNiceName() + " taken out successfully");
+					materialManager.borrowMaterial(userManager.getCurrentUser(), selectedMaterial);
+					((DefaultTableModel) table.getModel()).removeRow(selectedRow);
+					tableContents.remove(selectedRow);
 
-				Material replacementMaterial = materialManager.getMaterial(MaterialStatus.AVAILABLE, selectedMaterial.getId());
-				if (replacementMaterial != null) {
-					((DefaultTableModel) table.getModel()).insertRow(selectedRow, new Object[] { null, replacementMaterial.getNiceName() });
-					tableContents.add(selectedRow, replacementMaterial);
+					Material replacementMaterial = materialManager.getMaterial(MaterialStatus.AVAILABLE, selectedMaterial.getId());
+					if (replacementMaterial != null) {
+						((DefaultTableModel) table.getModel()).insertRow(selectedRow, new Object[] { null, replacementMaterial.getNiceName() });
+						tableContents.add(selectedRow, replacementMaterial);
+					}
 				}
-
 				selectedRow = -1;
 				menu.hide();
 			}
@@ -406,6 +461,11 @@ public class BrowseGUI extends JPanel {
 		});
 	}
 
+	/**
+	 * Sorts the table by a material type and by author or title
+	 * @param stringSort A string representing title or author
+	 * @param materialType Then type of materials to look for
+	 */
 	public void sort(String stringSort, MaterialType materialType) {
 		this.tableContents.clear();
 		if (materialType == MaterialType.ALL) {

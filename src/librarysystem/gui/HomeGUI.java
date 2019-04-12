@@ -1,57 +1,35 @@
 package librarysystem.gui;
 
-import java.awt.Color;
-import java.awt.Font;
+import librarysystem.LibrarySystem;
+import librarysystem.users.UserType;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-
-import librarysystem.LibrarySystem;
-import librarysystem.users.User;
-
 public class HomeGUI extends JPanel {
 	private LibrarySystem librarySystem;
-	//private CardLayout cardLayout;
-	
-	/*
-	void initImage() {
-		String[] fileName = {"pic1.png", "pic2.png", "pic3.png"};
-		for (String s : fileName) {
-			Icon icon = new ImageIcon("src/resources/"+s);
-			JLabel label = new JLabel(icon);
-			panel.add(label);
-		}
-		cardLayout = new CardLayout();
-		panel.setLayout(cardLayout);
-		// https://www.youtube.com/watch?v=MVlQnHMV5w8
-	}
 
 	/**
 	 * Create the panel.
+	 * @param librarySystem The system to base the GUI on
 	 */
 	public HomeGUI(LibrarySystem librarySystem) {
-		setForeground(new Color(0, 0, 102));
-		//Upper Tab Buttons Settings
-		int BUTTONS_Y=225;
-		int BUTTONS_W=120;
-		int BUTTONS_H=30;
-		int BUTTONS_D=BUTTONS_W+80;
-		
-		int INFOS_W=70;
+
 		this.librarySystem = librarySystem;
-		
-	
+		this.setBounds(0, 0, librarySystem.WIDTH, librarySystem.HEIGHT);
+		/**
+		 * Setting panel characteristics 
+		 */
 		JPanel panel = new JPanel();
 		panel.setBounds(15, 220, 1250, 707);
 		panel.setBackground(new Color(255, 255, 255));
 		setBackground(new Color(220, 220, 220));
 		
-		
+		/**
+		 * Setting labels that display information as well as inserting pictures on to the panel
+		 */
 		JLabel lblHours = new JLabel("");
 		lblHours.setBounds(260, 270, 814, 78);
 		lblHours.setIcon(new ImageIcon("resources/picHours.png"));
@@ -79,19 +57,71 @@ public class HomeGUI extends JPanel {
 		lblPicture.setIcon(new ImageIcon("resources/pic1.png"));
 		add(lblPicture);
 		
-		JLabel lblAccountInfo = new JLabel("Account Informations");
-		lblAccountInfo.setBounds(650, 365, 239, 46);
+		JLabel lblAccountInfo = new JLabel("Account Information");
+		lblAccountInfo.setFont(new Font("Times New Roman", Font.BOLD, 24));
+		lblAccountInfo.setBounds(650, 350, 239, 46);
 		add(lblAccountInfo); 
 		
-		JLabel accountInfo = new JLabel("");
-		accountInfo.setBounds(650, 420, 468, 78);
-		accountInfo.setHorizontalAlignment(SwingConstants.LEFT);
-		User CurrentUser=librarySystem.getUserManager().getCurrentUser();
-		String accountInfoTxt=CurrentUser.toString();
-		accountInfo.setText(accountInfoTxt);
-		add(accountInfo);
+		JLabel accountInfoWelcome = new JLabel("Welcome Back");
+		accountInfoWelcome.setFont(new Font("Times New Roman", Font.BOLD, 20));
+		JLabel accountName = new JLabel("");
+		accountName.setFont(new Font("Times New Roman", Font.BOLD, 20));
+		accountInfoWelcome.setHorizontalAlignment(SwingConstants.LEFT);
+		accountName.setHorizontalAlignment(SwingConstants.LEFT);
+		String CurrentUserName = librarySystem.getUserManager().getCurrentUser().getName();
+		accountName.setText(CurrentUserName);
+		accountName.setBounds(790, 375, 468, 78);
+		accountInfoWelcome.setBounds(650, 375, 468, 78);
 		
-		//JButtons
+		JLabel idNum = new JLabel("ID Number:");
+		idNum.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+		JLabel accountID = new JLabel("");
+		accountID.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+		idNum.setHorizontalAlignment(SwingConstants.LEFT);
+		accountID.setHorizontalAlignment(SwingConstants.LEFT);
+		int CurrentUserID = librarySystem.getUserManager().getCurrentUser().getId();
+		String currID = Integer.toString(CurrentUserID);
+		accountID.setText(currID);
+		idNum.setBounds(650, 400, 468, 78);
+		accountID.setBounds(790, 400, 468, 78);
+		
+		JLabel overdueFee = new JLabel("Overdue Fee:");
+		overdueFee.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+		JLabel accountFee = new JLabel("");
+		accountFee.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+		overdueFee.setHorizontalAlignment(SwingConstants.LEFT);
+		accountFee.setHorizontalAlignment(SwingConstants.LEFT);
+		double CurrentUserFee = librarySystem.getUserManager().getCurrentUser().getOverdueFee();
+		String currFee = String.valueOf(CurrentUserFee);
+		accountFee.setText(currFee);
+		overdueFee.setBounds(650, 425, 468, 78);
+		accountFee.setBounds(790, 425, 468, 78);
+		/*
+		JLabel borrowItems = new JLabel("Overdue Fee:");
+		borrowItems.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+		JLabel accountBorrow = new JLabel("");
+		accountBorrow.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+		borrowItems.setHorizontalAlignment(SwingConstants.LEFT);
+		accountBorrow.setHorizontalAlignment(SwingConstants.LEFT);
+		ArrayList<Material> CurrentUserBorrow = (ArrayList<Material>) librarySystem.getUserManager().getCurrentUser().getBorrowed();
+		String currBorrow = String.valueOf(CurrentUserBorrow);
+		accountFee.setText(currBorrow);
+		overdueFee.setBounds(650, 450, 468, 78);
+		accountFee.setBounds(790, 450, 468, 78);
+		*/
+		//add(borrowItems);
+		//add(accountBorrow);
+		add(overdueFee);
+		add(accountFee);
+		add(accountInfoWelcome);
+		add(accountName);
+		add(idNum);
+		add(accountID);
+		
+		
+		/**
+		 * General buttons constant throughout all panels
+		 */
 		JButton btnHome = new JButton("Home");
 		btnHome.setBounds(80, 225, 120, 30);
 		btnHome.setForeground(new Color(0, 0, 128));
@@ -105,7 +135,7 @@ public class HomeGUI extends JPanel {
 		btnBrowse.setForeground(new Color(0, 0, 128));
 		
 		JButton btnReceived = new JButton("Received");
-		btnReceived.setBounds(680, 225, 120, 30);
+		btnReceived.setBounds(1080, 225, 120, 30);
 		btnReceived.setForeground(new Color(0, 0, 128));
 		
 		JButton btnOrder = new JButton("Order");
@@ -113,10 +143,12 @@ public class HomeGUI extends JPanel {
 		btnOrder.setForeground(new Color(0, 0, 128));
 		
 		JButton btnAccount = new JButton("Account");
-		btnAccount.setBounds(1080, 225, 120, 30);
+		btnAccount.setBounds(680, 225, 120, 30);
 		btnAccount.setForeground(new Color(0, 0, 128));
 		
-		// Buttons Action Listeners
+		/**
+		 * Action listeners to invoke any panel called 
+		 */
 		
 		btnHome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -152,6 +184,10 @@ public class HomeGUI extends JPanel {
 				librarySystem.updateGUI(new ProfileGUI(librarySystem));
 			}
 		});
+		
+		/**
+		 * Adding all components onto the panel
+		 */
 		add(lblHours);
 		add(lblEmail);
 		add(lblService);
@@ -164,10 +200,14 @@ public class HomeGUI extends JPanel {
 		add(lblContact);
 		add(lblGeneralInfo);
 		add(lblBanner);
-		
 		add(panel);
 		
 		librarySystem.updateGUI(this);
+		
+		if (librarySystem.getUserManager().getCurrentUser().getUserType() == UserType.STUDENT || librarySystem.getUserManager().getCurrentUser().getUserType() == UserType.INSTRUCTOR ) {
+			btnOrder.setVisible(false);
+			btnReceived.setVisible(false);
+		}
 
 	}
 }

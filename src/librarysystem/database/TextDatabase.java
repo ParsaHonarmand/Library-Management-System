@@ -16,7 +16,12 @@ import java.util.List;
 public class TextDatabase {
 
 	private static File usersFile = new File("users.txt"), materialsFile = new File("materials.txt");
-
+	
+	/**
+	 * Returns a list of all users from the users.txt file
+	 * @param materialManager The material manager to get material information from
+	 * @return A list of all users from the users.txt file
+	 */
 	public static List<User> loadUsers(MaterialManager materialManager) {
 		List<User> users = new ArrayList<User>();
 		TextDatabase.checkFileExistence(TextDatabase.getUsersFile());
@@ -64,7 +69,7 @@ public class TextDatabase {
 							String[] reservationValues = reservationInfo[i].split("\\+");
 							List<Material> materials = new ArrayList<>();
 							for (String barcode : reservationValues[0].split(",")) {
-								materials.add(materialManager.getMaterial(MaterialStatus.RESERVED, Integer.valueOf(barcode)));
+								materials.add(materialManager.getMaterial(Integer.valueOf(barcode)));
 							}
 							Reservation reservation = new Reservation(materials, Boolean.valueOf(reservationValues[1]));
 							reservations.add(reservation);
@@ -95,7 +100,11 @@ public class TextDatabase {
 		}
 		return users;
 	}
-
+	
+	/**
+	 * Saves all the users to the users.txt file
+	 * @param users The list of users to be saved
+	 */
 	public static void saveUsers(List<User> users) {
 		TextDatabase.checkFileExistence(TextDatabase.getUsersFile());
 		try {
@@ -115,7 +124,11 @@ public class TextDatabase {
 			e.printStackTrace();
 		}
 	}
-
+	
+	/**
+	 * Adds a user to the users.txt file
+	 * @param user The user to be saved
+	 */
 	public static void addUser(User user) {
 		TextDatabase.checkFileExistence(TextDatabase.getUsersFile());
 		try {
@@ -133,7 +146,11 @@ public class TextDatabase {
 			e.printStackTrace();
 		}
 	}
-
+	
+	/**
+	 * Loads all the materials from the materials.txt file
+	 * @return The list of all materials loaded from the materials.txt file
+	 */
 	public static HashMap<MaterialStatus, List<Material>> loadMaterials() {
 		HashMap<MaterialStatus, List<Material>> materialMap = new HashMap<>();
 		for (MaterialStatus materialStatus : MaterialStatus.values()) {
@@ -178,7 +195,11 @@ public class TextDatabase {
 
 		return materialMap;
 	}
-
+	
+	/**
+	 * Save all materials to the materials.txt file
+	 * @param materialMap The materials to be saved to the materials.txt file
+	 */
 	public static void saveMaterials(HashMap<MaterialStatus, List<Material>> materialMap) {
 		TextDatabase.checkFileExistence(TextDatabase.getMaterialsFile());
 
@@ -196,7 +217,11 @@ public class TextDatabase {
 			e.printStackTrace();
 		}
 	}
-
+	
+	/**
+	 * Adds a material to the materials.txt file
+	 * @param material The material to be added
+	 */
 	public static void addMaterial(Material material) {
 		TextDatabase.checkFileExistence(TextDatabase.getMaterialsFile());
 		System.out.println("adding material:" + material.toString());
@@ -235,7 +260,11 @@ public class TextDatabase {
 			e.printStackTrace();
 		}
 	}
-
+	
+	/**
+	 * Saves the user information to the users.txt file - replacing old info if already existing
+	 * @param user The user to be updated
+	 */
 	public static void updateUser(User user) {
 		String username = user.getUsername();
 		TextDatabase.checkFileExistence(TextDatabase.getUsersFile());
@@ -262,15 +291,27 @@ public class TextDatabase {
 			e.printStackTrace();
 		}
 	}
-
+	
+	/**
+	 * Returns the user file
+	 * @return The user file
+	 */
 	public static File getUsersFile() {
 		return TextDatabase.usersFile;
 	}
-
+	
+	/**
+	 * Returns the materials file
+	 * @return The materials file
+	 */
 	public static File getMaterialsFile() {
 		return TextDatabase.materialsFile;
 	}
-
+	
+	/**
+	 * Checks if a certain file object exists, and if not, it creates it
+	 * @param file The file to check for existence
+	 */
 	private static void checkFileExistence(File file) {
 		if (!file.exists()) {
 			try {

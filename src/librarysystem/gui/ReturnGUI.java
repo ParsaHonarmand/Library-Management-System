@@ -1,25 +1,22 @@
 package librarysystem.gui;
 import javax.swing.JPanel;
-import javax.swing.GroupLayout;
 import javax.swing.Icon;
-import javax.swing.GroupLayout.Alignment;
+import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
 import librarysystem.LibrarySystem;
 import librarysystem.materials.Material;
-import librarysystem.materials.MaterialStatus;
+import librarysystem.users.UserType;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
+
+import java.awt.Color;
 import java.awt.Font;
-import java.awt.SystemColor;
+import javax.swing.*;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JScrollBar;
 
 public class ReturnGUI extends JPanel {
 	private JTable table;
@@ -27,12 +24,16 @@ public class ReturnGUI extends JPanel {
 
 	/**
 	 * Create the panel.
+	 * @param librarySystem The system to base the GUI on
 	 */
 	public ReturnGUI(LibrarySystem librarySystem) {
 		this.librarySystem = librarySystem;
+		this.setBounds(0, 0, librarySystem.WIDTH, librarySystem.HEIGHT);
+		librarySystem.setTheme(this);
 		
-		String[] columnNames = { "Icon", "Material","ID", "Return" };
-		
+
+		String[] columnNames = { "Icon", "Material","ID", "Barcode", "Return" };
+
 		DefaultTableModel model = new DefaultTableModel(new Object[][] {}, columnNames) {
 			//  Returning the Class of each column will allow different
 			//  renderers to be used based on Class
@@ -44,117 +45,143 @@ public class ReturnGUI extends JPanel {
 				if (column == 2)
 					return String.class;
 				if (column == 3)
+					return String.class;
+				if (column == 4)
 					return Boolean.class;
 				return String.class;
 			}
 
 			public boolean isCellEditable(int row, int column) {
-				return column == 3;
+				return column == 4;
 			}
-			
+
 		};
 		JScrollPane scrollPane = new JScrollPane();
-		
+
+		scrollPane.setBounds(32, 289, 671, 336);
+		JLabel lblBanner = new JLabel("");
+		lblBanner.setBounds(15, 15, 1250, 200);
+		lblBanner.setIcon(new ImageIcon("resources/banner_img.png"));
+		setLayout(null);
+		add(lblBanner);
 
 		for (Material M : librarySystem.getUserManager().getCurrentUser().getBorrowed()) {
-			model.addRow(new Object[] { null, M.getNiceName(), M.getId(), false});
+			model.addRow(new Object[] { null, M.getNiceName(), M.getId(), M.getBarcode(), false});
 		}
 		this.table = new JTable(model);
 		this.table.setPreferredScrollableViewportSize(table.getPreferredSize());
 		this.table.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		this.table.getColumnModel().getColumn(0).setMaxWidth(100);
 
-		
+
 		scrollPane.setViewportView(this.table);
-		
-		this.librarySystem.updateGUI(this);
-		
-		JButton btnRecieveSelectedMaterials = new JButton("Return Selected Materials");
-		btnRecieveSelectedMaterials.addMouseListener(new MouseAdapter() {
+
+		JButton btnReturnSelectedMaterials = new JButton("Return Selected Materials");
+		btnReturnSelectedMaterials.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				DefaultTableModel model = (DefaultTableModel) table.getModel();
 				for (int i = model.getRowCount() - 1; i >= 0; i--) {
-					if ((boolean) model.getValueAt(i, 3) == true){
-						librarySystem.getMaterialManager().updateStatus(librarySystem.getMaterialManager().getMaterial((String) model.getValueAt(i, 2)), MaterialStatus.RETURNED);
-						model.removeRow(i);
+					if ((boolean) model.getValueAt(i, 4) == true){
+						librarySystem.getMaterialManager().returnMaterial		
+						(librarySystem.getUserManager().getCurrentUser(), librarySystem.getMaterialManager().getMaterial(
+								(Integer) model.getValueAt(i, 3)));
+						model.removeRow(i);		
+						System.out.println("returning material");
 					}
 				}
 			}
 		});
-		
-		
+		btnReturnSelectedMaterials.setBounds(32, 647, 253, 25);
+		add(btnReturnSelectedMaterials);
+
+		this.librarySystem.updateGUI(this);
+
 		JButton btnHome = new JButton("Home");
+		btnHome.setBounds(80, 225, 120, 30);
+		btnHome.setForeground(new Color(0, 0, 128));
 		btnHome.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent arg0) {
 				librarySystem.updateGUI(new HomeGUI(librarySystem));
 			}
 		});
-		btnHome.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		
-		JButton btnReturn = new JButton("Return");
-		btnReturn.addMouseListener(new MouseAdapter() {
+
+		JButton btnReturned = new JButton("Returned");
+		btnReturned.setBounds(280, 225, 120, 30);
+		btnReturned.setForeground(new Color(0, 0, 128));
+		btnReturned.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				librarySystem.updateGUI(new ReturnGUI(librarySystem));
 			}
 		});
-		btnReturn.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		
+
 		JButton btnBrowse = new JButton("Browse");
+		btnBrowse.setBounds(480, 225, 120, 30);
+		btnBrowse.setForeground(new Color(0, 0, 128));
 		btnBrowse.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				new BrowseGUI(librarySystem);
 			}
 		});
-		btnBrowse.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		btnBrowse.setBackground(SystemColor.menu);
-		
-		
-		JButton button_5 = new JButton("Return Selected Materials");
-		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(btnHome, GroupLayout.PREFERRED_SIZE, 174, GroupLayout.PREFERRED_SIZE)
-							.addGap(6)
-							.addComponent(btnReturn, GroupLayout.PREFERRED_SIZE, 173, GroupLayout.PREFERRED_SIZE)
-							.addGap(6)
-							.addComponent(btnBrowse, GroupLayout.PREFERRED_SIZE, 173, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(10)
-							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 818, GroupLayout.PREFERRED_SIZE)
-							.addGap(10)
-							.addComponent(button_5, GroupLayout.PREFERRED_SIZE, 161, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(47, Short.MAX_VALUE))
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnHome, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnReturn, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnBrowse, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
-					.addGap(6)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 502, GroupLayout.PREFERRED_SIZE)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(3)
-							.addComponent(button_5)))
-					.addContainerGap(290, Short.MAX_VALUE))
-		);
-		
+
+
+		JButton btnAccount = new JButton("Account");
+		btnAccount.setBounds(680, 225, 120, 30);
+		btnAccount.setForeground(new Color(0, 0, 128));
+		add(btnAccount);
+		btnAccount.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				new ProfileGUI(librarySystem);
+			}
+		});
+
+
+		JButton btnReceived = new JButton("Received");
+		btnReceived.setBounds(1080, 225, 120, 30);
+		btnReceived.setForeground(new Color(0, 0, 128));
+		add(btnReceived);
+		btnReceived.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				new ReceiveGUI(librarySystem);
+			}
+		});
+
+
+		JButton btnOrder = new JButton("Order");
+		btnOrder.setBounds(880, 225, 120, 30);
+		btnOrder.setForeground(new Color(0, 0, 128));
+		add(btnOrder);
+		btnOrder.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				new OrderGUI(librarySystem);
+			}
+		});
+
 		table = new JTable();
 		scrollPane.setColumnHeaderView(table);
-		
+
 		JScrollBar scrollBar = new JScrollBar();
 		scrollPane.setRowHeaderView(scrollBar);
-		setLayout(groupLayout);
 
 		this. librarySystem.updateGUI(this);
+		setLayout(null);
+		add(btnHome);
+		add(btnReturned);
+		add(btnBrowse);
+		add(scrollPane);
+		
+		
+		/*
+		 * Make order and received functionality accessible to only the librarian 
+		 */
+		if (librarySystem.getUserManager().getCurrentUser().getUserType() == UserType.STUDENT || librarySystem.getUserManager().getCurrentUser().getUserType() == UserType.INSTRUCTOR ) {
+			btnOrder.setVisible(false);
+			btnReceived.setVisible(false);
+		}
 	}
 }
