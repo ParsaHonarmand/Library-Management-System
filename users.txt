@@ -1,4 +1,4 @@
-STUDENT|1|johnsmith1|johnsmith1@mru.ca|John Smith|password|false|0.0|NONE|NONE
+STUDENT|1|johnsmith1|johnsmith1@mru.ca|John Smith|password|false|0.0|2,1|NONE
 LIBRARIAN|1|johnsmith2|johnsmith2@mru.ca|John Smith|password|false|0.0|NONE|NONE
 STUDENT|1|haj|haj@mru.ca|haj|h|false|0.0|NONE|NONE
 INSTRUCTOR|100|sohaib|sohaib@mru.ca|Sohaib|password|false|0.0|NONE|NONE|3+true
