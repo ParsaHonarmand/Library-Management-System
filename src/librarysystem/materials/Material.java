@@ -164,6 +164,7 @@ public class Material implements Cloneable {
 	}
 	/**
 	 * Calculates the time left the user has to return this material and converts it to a string
+	 * @return A string representing the time left the user has to return this material
 	 */
 	public String getTimeLeftToReturn() {
 		Long timeTakenOut = System.currentTimeMillis() - this.getTakeoutDate();

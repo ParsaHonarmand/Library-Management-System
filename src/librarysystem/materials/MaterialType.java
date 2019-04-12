@@ -1,8 +1,7 @@
 package librarysystem.materials;
 
+import javax.swing.*;
 import java.io.File;
-
-import javax.swing.ImageIcon;
 
 public enum MaterialType {
 	
@@ -13,7 +12,7 @@ public enum MaterialType {
 	 * CD icon: https://www.shareicon.net/bluray-cd-dvd-disk-86786
 	 * DVD icon: https://www.iconfinder.com/icons/905549/disk_dvd_multimedia_storage_icon
 	 * eBook icon: https://www.iconfinder.com/icons/1666237/book_ebook_pdf_preview_icon_icon
-	 * Magazine icon: <div>Icons made by <a href="https://www.freepik.com/" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" 			    title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" 			    title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+	 * Magazine icon: https://www.flaticon.com/free-icon/magazine_1035857
 	 * Textbook Icon: http://www.panindiagoodbooks.com/
 	 */
 	

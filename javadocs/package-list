@@ -5,5 +5,7 @@ librarysystem.managers
 librarysystem.materials
 librarysystem.reservations
 librarysystem.searching
+librarysystem.testing
 librarysystem.users
 librarysystem.users.faculty
+librarysystem.util
