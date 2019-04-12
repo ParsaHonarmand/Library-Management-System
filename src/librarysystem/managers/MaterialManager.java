@@ -109,6 +109,7 @@ public class MaterialManager {
 	 * @param material The material that is being put on hold
 	 */
 	public void putOnHold(User user, Material material) {
+		material.setTakeoutDate(System.currentTimeMillis());
 		this.updateStatus(material, MaterialStatus.ON_HOLD);
 		user.addHold(material);
 		TextDatabase.updateUser(user);

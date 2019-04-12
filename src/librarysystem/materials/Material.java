@@ -1,5 +1,7 @@
 package librarysystem.materials;
 
+import librarysystem.util.TimeUtil;
+
 public class Material implements Cloneable {
 	
 	private MaterialStatus materialStatus;
@@ -159,6 +161,23 @@ public class Material implements Cloneable {
 				+ this.getEdition() + "|"
 				+ this.getTakeoutDate() + "|"
 				+ this.getRenewDate();
+	}
+	/**
+	 * Calculates the time left the user has to return this material and converts it to a string
+	 */
+	public String getTimeLeftToReturn() {
+		Long timeTakenOut = System.currentTimeMillis() - this.getTakeoutDate();
+		if (this.hasBeenRenewed()) {
+			timeTakenOut = System.currentTimeMillis() - this.getRenewDate();
+		}
+		timeTakenOut = timeTakenOut/1000L;
+		System.out.println("timeTakenOut: " + timeTakenOut);
+		
+		Long week = 60 * 60 * 24 * 7L;
+		Long timeLeft = Math.max(0, week - timeTakenOut);
+		System.out.println("timeLeft: " + timeLeft);
+		
+		return TimeUtil.getNiceTime(timeLeft);
 	}
 	
 	/**

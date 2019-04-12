@@ -1,7 +1,7 @@
 RESERVED|BOOK|3|JAVA-101|Java 101 - 3rd Edition|Tyler Welty|3|-1|-1
 AVAILABLE|MAGAZINE|6|LIB-JNL|Library Journal|Library|5|-1|-1
 BORROWED|BOOK|8|ASTR-101|Astronomy 101 - 1st Edition|Mark Davis|1|1554879961356|-1
-BORROWED|BOOK|9|ASTR-101|Astronomy 101 - 1st Edition|Mark Davis|1|1555090002397|-1
+AVAILABLE|BOOK|9|ASTR-101|Astronomy 101 - 1st Edition|Mark Davis|1|-1|-1
 BORROWED|BOOK|10|ASTR-101|Astronomy 101 - 1st Edition|Mark Davis|1|1555090001151|-1
 AVAILABLE|MAGAZINE|11|ID|Titlem|Author|0|-1|-1
 AVAILABLE|MAGAZINE|12|ID|Title|Author|0|-1|-1
@@ -9,7 +9,7 @@ ON_HOLD|MAGAZINE|13|ID|Title|Author|7|-1|-1
 AVAILABLE|MAGAZINE|14|ID|Title|Author|7|-1|-1
 ON_ORDER|ALL|15|ID|Title|Author|0|-1|-1
 AVAILABLE|BOOK|16|newbook|book|Author|1|-1|-1
-BORROWED|BOOK|9|ASTR-101|Astronomy 101 - 1st Edition|Mark Davis|1|1555090002397|-1
+AVAILABLE|BOOK|9|ASTR-101|Astronomy 101 - 1st Edition|Mark Davis|1|-1|-1
 BORROWED|BOOK|10|ASTR-101|Astronomy 101 - 1st Edition|Mark Davis|1|1555090001151|-1
 AVAILABLE|BOOK|1|ASTR-101|Astronomy 101 - 1st Edition|Mark Davis|1|-1|-1
 BORROWED|BOOK|2|ECON-101|Economy 101 - 2nd Edition|Liam Scott|2|1555090003716|-1
@@ -44,3 +44,4 @@ AVAILABLE|BOOK|52|ECON-101|Economy 101 - 2nd Edition|Liam Scott|2|-1|-1
 AVAILABLE|BOOK|53|ECON-101|Economy 101 - 2nd Edition|Liam Scott|2|-1|-1
 AVAILABLE|EBOOK|54|newebook|ebook|sohaib|1|-1|-1
 AVAILABLE|MAGAZINE|55|SICK-MAGAZINE|Super Sick Magazine|Magazine author|1|-1|-1
+ON_ORDER|CD|56|COOL-CD|New CD bruh|That one guy|1|-1|-1

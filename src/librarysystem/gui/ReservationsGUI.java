@@ -205,14 +205,25 @@ public class ReservationsGUI extends JPanel {
 		if (librarySystem.getUserManager().getCurrentUser().getUserType() == UserType.STUDENT || librarySystem.getUserManager().getCurrentUser().getUserType() == UserType.INSTRUCTOR ) {
 			btnOrder.setVisible(false);
 			btnReceived.setVisible(false);
+			btnReturned.setVisible(false);
 		}
 		String[] columnNames = { "Icon", "Material","Amount"};
 
 		DefaultTableModel model = new DefaultTableModel(new Object[][][] {}, columnNames) {
-		};
+			//  Returning the Class of each column will allow different
+			//  renderers to be used based on Class
+			public Class getColumnClass(int column) {
+				if (column == 0)
+					return Icon.class;
+				if (column == 1)
+					return String.class;
+				return String.class;
+			}
 
-		JLabel bookImg = new JLabel("");
-		bookImg.setIcon(new ImageIcon("resources/book.png"));
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
 
 		Instructor instructor = (Instructor) librarySystem.getUserManager().getCurrentUser();
 		List<Reservation> reservations = instructor.getReservations();
@@ -221,7 +232,7 @@ public class ReservationsGUI extends JPanel {
 		for (Reservation reservation : instructor.getReservations()) {
 			System.out.println("reservation: " + reservation);
 			List<Material> materials = reservation.getMaterials();
-			data[row] = new Object[] {bookImg, materials.get(row).getNiceName(), materials.size()};
+			data[row] = new Object[] {materials.get(row).getMaterialType().getIcon(), materials.get(row).getNiceName(), materials.size()};
 			row++;
 			tableReservations.add(reservation);
 		}
@@ -234,8 +245,13 @@ public class ReservationsGUI extends JPanel {
 		
 		this.table.setPreferredScrollableViewportSize(table.getPreferredSize());
 		this.table.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		this.table.getColumnModel().getColumn(0).setMaxWidth(100);
-		this.table.getColumnModel().getColumn(2).setMaxWidth(200);
+		this.table.getColumnModel().getColumn(0).setMaxWidth(50);
+		this.table.getColumnModel().getColumn(2).setMaxWidth(100);
+		this.table.setRowHeight(50);
+		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+		centerRenderer.setHorizontalAlignment( JLabel.CENTER );
+		this.table.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
+
 
 
 		table.addMouseListener(new MouseAdapter() {

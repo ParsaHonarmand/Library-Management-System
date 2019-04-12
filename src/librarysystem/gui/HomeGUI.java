@@ -207,6 +207,7 @@ public class HomeGUI extends JPanel {
 		if (librarySystem.getUserManager().getCurrentUser().getUserType() == UserType.STUDENT || librarySystem.getUserManager().getCurrentUser().getUserType() == UserType.INSTRUCTOR ) {
 			btnOrder.setVisible(false);
 			btnReceived.setVisible(false);
+			btnReturned.setVisible(false);
 		}
 
 	}

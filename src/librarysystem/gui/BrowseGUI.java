@@ -17,12 +17,14 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +38,8 @@ public class BrowseGUI extends JPanel {
 	private final LibrarySystem librarySystem;
 	private final MaterialManager materialManager;
 	private final UserManager userManager;
+	
+	private final ImageIcon bookIcon = new ImageIcon("resources" + File.separator + "book-small.png");
 
 	private JTable table;
 	private List<Material> tableContents = new ArrayList<>();
@@ -218,6 +222,7 @@ public class BrowseGUI extends JPanel {
 		if (currUser.getUserType() == UserType.STUDENT || currUser.getUserType() == UserType.INSTRUCTOR) {
 			btnOrder.setVisible(false);
 			btnReceived.setVisible(false);
+			btnReturned.setVisible(false);
 		}
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout
@@ -283,7 +288,7 @@ public class BrowseGUI extends JPanel {
 														GroupLayout.PREFERRED_SIZE)))
 										.addContainerGap()));
 
-		//Icon aboutIcon = new ImageIcon("about16.gif");
+		Icon bookIcon = new ImageIcon("resources" + File.separator + "book-small.png");
 
 		String[] columnNames = { "Icon", "Material", "Amount"};
 
@@ -306,8 +311,12 @@ public class BrowseGUI extends JPanel {
 		this.table = new JTable(model);
 		this.table.setPreferredScrollableViewportSize(table.getPreferredSize());
 		this.table.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		this.table.getColumnModel().getColumn(0).setMaxWidth(100);
+		this.table.getColumnModel().getColumn(0).setMaxWidth(50);
 		this.table.getColumnModel().getColumn(2).setMaxWidth(60);
+		this.table.setRowHeight(50);
+		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+		centerRenderer.setHorizontalAlignment( JLabel.CENTER );
+		this.table.setDefaultRenderer(String.class, centerRenderer);
 
 		sort("Title", MaterialType.ALL);
 
@@ -370,7 +379,7 @@ public class BrowseGUI extends JPanel {
 
 					Material replacementMaterial = materialManager.getMaterial(MaterialStatus.AVAILABLE, selectedMaterial.getId());
 					if (replacementMaterial != null) {
-						((DefaultTableModel) table.getModel()).insertRow(selectedRow, new Object[] { null, replacementMaterial.getNiceName(), materialManager.getMaterials(MaterialStatus.AVAILABLE, selectedMaterial.getId()).size() });
+						((DefaultTableModel) table.getModel()).insertRow(selectedRow, new Object[] { replacementMaterial.getMaterialType().getIcon(), replacementMaterial.getNiceName(), materialManager.getMaterials(MaterialStatus.AVAILABLE, selectedMaterial.getId()).size() });
 						tableContents.add(selectedRow, replacementMaterial);
 					}
 				}
@@ -397,7 +406,7 @@ public class BrowseGUI extends JPanel {
 
 					Material replacementMaterial = materialManager.getMaterial(MaterialStatus.AVAILABLE, selectedMaterial.getId());
 					if (replacementMaterial != null) {
-						((DefaultTableModel) table.getModel()).insertRow(selectedRow, new Object[] { null, replacementMaterial.getNiceName(), materialManager.getMaterials(MaterialStatus.AVAILABLE, selectedMaterial.getId()).size() });
+						((DefaultTableModel) table.getModel()).insertRow(selectedRow, new Object[] { replacementMaterial.getMaterialType().getIcon(), replacementMaterial.getNiceName(), materialManager.getMaterials(MaterialStatus.AVAILABLE, selectedMaterial.getId()).size() });
 						tableContents.add(selectedRow, replacementMaterial);
 					}
 				}
@@ -453,7 +462,8 @@ public class BrowseGUI extends JPanel {
 			model.removeRow(i);
 		}
 		for (int i = 0; i < this.tableContents.size(); i++) {
-			model.addRow(new Object[] { null, this.tableContents.get(i).getNiceName(), materialManager.getMaterials(MaterialStatus.AVAILABLE, tableContents.get(i).getId()).size() });
+			Material material = this.tableContents.get(i);
+			model.addRow(new Object[] {material.getMaterialType().getIcon(), material.getNiceName(), materialManager.getMaterials(MaterialStatus.AVAILABLE, material.getId()).size() });
 		}
 
 	}

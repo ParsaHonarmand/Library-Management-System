@@ -8,6 +8,7 @@ import librarysystem.searching.TitleComparator;
 import librarysystem.users.UserType;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -225,7 +226,7 @@ public class MaterialsGUI extends JPanel {
 			}
 		});
 	
-		String[] columnMaterials = { "icon", "Materials" };
+		String[] columnMaterials = { "Icon", "Materials", "Due Date" };
 		DefaultTableModel model = new DefaultTableModel(new Object[][] {}, columnMaterials) {
 			public Class getColumnClass(int column) {
 				if (column == 0)
@@ -246,7 +247,12 @@ public class MaterialsGUI extends JPanel {
 
 		this.tableMaterials.setPreferredScrollableViewportSize(tableMaterials.getPreferredSize());
 		this.tableMaterials.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		this.tableMaterials.getColumnModel().getColumn(0).setMaxWidth(100);
+		this.tableMaterials.getColumnModel().getColumn(0).setMaxWidth(50);
+		this.tableMaterials.getColumnModel().getColumn(2).setMaxWidth(65);
+		this.tableMaterials.setRowHeight(50);
+		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+		centerRenderer.setHorizontalAlignment( JLabel.CENTER );
+		this.tableMaterials.setDefaultRenderer(String.class, centerRenderer);
 
 		this.tableMaterials.addMouseListener(new MouseAdapter() {
 			@Override
@@ -264,7 +270,7 @@ public class MaterialsGUI extends JPanel {
 			}
 		});
 		
-		String[] columnHolds = { "icon", "On Hold" };
+		String[] columnHolds = { "Icon", "On Hold" , "Due Date"};
 		DefaultTableModel model1 = new DefaultTableModel(new Object[][] {}, columnHolds) {
 			//  Returning the Class of each column will allow different
 			//  renderers to be used based on Class
@@ -286,7 +292,10 @@ public class MaterialsGUI extends JPanel {
 		this.tableHold.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		scrollPane_1.setViewportView(tableHold);
 		
-		this.tableHold.getColumnModel().getColumn(0).setMaxWidth(100);
+		this.tableHold.getColumnModel().getColumn(0).setMaxWidth(50);
+		this.tableHold.getColumnModel().getColumn(2).setMaxWidth(65);
+		this.tableHold.setRowHeight(50);
+		this.tableHold.setDefaultRenderer(String.class, centerRenderer);
 
 		this.tableHold.addMouseListener(new MouseAdapter() {
 			@Override
@@ -379,7 +388,7 @@ public class MaterialsGUI extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				librarySystem.getMaterialManager().borrowMaterial(librarySystem.getUserManager().getCurrentUser(), selectedMaterial);
 				((DefaultTableModel) tableHold.getModel()).removeRow(selectedRow);
-				((DefaultTableModel) tableMaterials.getModel()).addRow(new Object[] { null, selectedMaterial.getNiceName()});
+				((DefaultTableModel) tableMaterials.getModel()).addRow(new Object[] { selectedMaterial.getMaterialType().getIcon(), selectedMaterial.getNiceName(), selectedMaterial.getTimeLeftToReturn()});
 				holdContents.remove(selectedRow);
 				tableContents.add(selectedMaterial);
 				
@@ -466,7 +475,8 @@ public class MaterialsGUI extends JPanel {
 			model.removeRow(i);
 		}
 		for (int i = 0; i < this.tableContents.size(); i++) {
-			model.addRow(new Object[] { null, this.tableContents.get(i).getNiceName() });
+			Material mat = this.tableContents.get(i);
+			model.addRow(new Object[] {mat.getMaterialType().getIcon(), mat.getNiceName(), mat.getTimeLeftToReturn() });
 		}
 
 		DefaultTableModel model1 = (DefaultTableModel) tableHold.getModel();
@@ -474,7 +484,8 @@ public class MaterialsGUI extends JPanel {
 			model1.removeRow(i);
 		}
 		for (int i = 0; i < this.holdContents.size(); i++) {
-			model1.addRow(new Object[] { null, this.holdContents.get(i).getNiceName() });
+			Material mat = this.holdContents.get(i);
+			model1.addRow(new Object[] {mat.getMaterialType().getIcon(), mat.getNiceName(), mat.getTimeLeftToReturn() });
 		}
 		
 	}

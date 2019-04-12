@@ -5,6 +5,7 @@ import librarysystem.materials.Material;
 import librarysystem.materials.MaterialStatus;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -40,7 +41,7 @@ public class ReceiveGUI extends JPanel {
 		this.librarySystem = librarySystem;
 		this.setBounds(0, 0, librarySystem.WIDTH, librarySystem.HEIGHT);
 		librarySystem.setTheme(this);
-		String[] columnNames = { "Icon", "Material","ID","Barcode", "Make Available" };
+		String[] columnNames = { "Icon", "Material","ID","Barcode", "Receive" };
 		
 		DefaultTableModel model = new DefaultTableModel(new Object[][] {}, columnNames) {
 			//  Returning the Class of each column will allow different
@@ -75,12 +76,19 @@ public class ReceiveGUI extends JPanel {
 		scrollPane.setBounds(86, 304, 624, 325);
 		
 		for (Material M : librarySystem.getMaterialManager().getMaterials(MaterialStatus.ON_ORDER)) {
-			model.addRow(new Object[] { null, M.getNiceName(), M.getId(), M.getBarcode(), false});
+			model.addRow(new Object[] { M.getMaterialType().getIcon(), M.getNiceName(), M.getId(), M.getBarcode(), false});
 		}
 		this.table = new JTable(model);
 		this.table.setPreferredScrollableViewportSize(table.getPreferredSize());
 		this.table.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		this.table.getColumnModel().getColumn(0).setMaxWidth(100);
+		this.table.getColumnModel().getColumn(0).setMaxWidth(50);
+		this.table.getColumnModel().getColumn(2).setMaxWidth(100);
+		this.table.getColumnModel().getColumn(3).setMaxWidth(55);
+		this.table.getColumnModel().getColumn(4).setMaxWidth(55);
+		this.table.setRowHeight(50);
+		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+		centerRenderer.setHorizontalAlignment( JLabel.CENTER );
+		this.table.setDefaultRenderer(String.class, centerRenderer);
 		
 		scrollPane.setViewportView(this.table);
 		
