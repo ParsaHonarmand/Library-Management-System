@@ -1,8 +1,8 @@
 1. To put the project together, Create a new Java Project in eclipse called library-system
-2. NOTE: You must use Java 8+ SO pick a JavaSE-1.8 for execution environment JRE
+2. NOTE: You must use Java 8+ SO pick JavaSE-1.8 for execution environment JRE
 	- If you absolutely must use Java 7, email me back I can create a Java 7 version for you quickly enough
 3. Navigate to the project folder on your computer
-4. Extract the javadocs, library-system, resources and src folders and the materials.txt + users.txt files
+4. Extract the javadocs, resources and src folders and the materials.txt + users.txt files
 5. IMPORTANT: Do not extract the .project and .classpath files, keep your own files
 6. Refresh your project in eclipse (Select and press F5)
 7. For the JUnit tests there will be an error, hover over the error and add JUnit 4 to your build path.
