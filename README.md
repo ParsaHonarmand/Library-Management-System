@@ -29,3 +29,18 @@
 	- Only instructors can reserve materials (Right click in browse menu and click Reserve)
 	
 Git repository: https://gitlab.com/seng-300/library-system
+
+Image references:
+banner_img:
+pic1.png: Photoshop by Zobia including image https://www.ubishops.ca/wp-content/uploads/job-search-workshops.png
+picHours.png (Made by Zobia)
+profile.png: https://www.flaticon.com/free-icon/man-user_74472#term=avatar&page=1&position=3
+mru.png: https://www.mtroyal.ca/AboutMountRoyal/MarketingCommunications/OurLogo/index.htm
+libwall.jpg: http://www.myconfinedspace.com/2017/08/23/swimming-pool-library/swimming-pool-library-jpg/
+library.jpg: https://unsplash.com/photos/McX3XuJRsUM
+book.png: http://freeiconshop.com/icon/book-icon-flat/
+cd.png: https://www.shareicon.net/bluray-cd-dvd-disk-86786
+dvd.png: https://www.iconfinder.com/icons/905549/disk_dvd_multimedia_storage_icon
+ebook.png: https://www.iconfinder.com/icons/1666237/book_ebook_pdf_preview_icon_icon
+magazine.png: https://www.flaticon.com/free-icon/magazine_1035857
+textbook.png: http://www.panindiagoodbooks.com/images/slider/img-1.png
