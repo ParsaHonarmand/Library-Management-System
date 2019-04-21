@@ -13,7 +13,7 @@ public enum MaterialType {
 	 * DVD icon: https://www.iconfinder.com/icons/905549/disk_dvd_multimedia_storage_icon
 	 * eBook icon: https://www.iconfinder.com/icons/1666237/book_ebook_pdf_preview_icon_icon
 	 * Magazine icon: https://www.flaticon.com/free-icon/magazine_1035857
-	 * Textbook Icon: http://www.panindiagoodbooks.com/
+	 * Textbook Icon: http://www.panindiagoodbooks.com/images/slider/img-1.png
 	 */
 	
 	ALL("All", null),
