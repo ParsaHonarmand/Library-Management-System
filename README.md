@@ -31,7 +31,7 @@
 Git repository: https://gitlab.com/seng-300/library-system
 
 Image references:
-banner_img:
+banner_img: Photoshop by Hajer inclduing mru.png and https://www.google.ca/imgres?imgurl=https://www.bluepixel.com.au/wp-content/uploads/2018/03/Blue-Pixel-Call-To-Action-Banner-Background.jpg&imgrefurl=https://www.bluepixel.com.au/web-design/blue-pixel-call-to-action-banner-background/&docid=X6Vds0gAZVguTM&tbnid=_YoRRQWp71oHPM:&vet=1&w=1920&h=500&source=sh/x/im and https://www.adazing.com/wp-content/uploads/2019/02/stacked-book-clipart-09-300x300.png
 pic1.png: Photoshop by Zobia including image https://www.ubishops.ca/wp-content/uploads/job-search-workshops.png
 picHours.png (Made by Zobia)
 profile.png: https://www.flaticon.com/free-icon/man-user_74472#term=avatar&page=1&position=3
